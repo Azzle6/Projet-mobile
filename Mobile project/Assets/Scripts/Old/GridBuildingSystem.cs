@@ -17,7 +17,7 @@ public class GridBuildingSystem : MonoBehaviour
 
     private static Dictionary<TileType, TileBase> tileBases = new Dictionary<TileType, TileBase>();
 
-    private Building temp;
+    private OldBuilding temp;
     private Vector3 prevPos;
     private BoundsInt prevArea;
 
@@ -56,7 +56,7 @@ public class GridBuildingSystem : MonoBehaviour
             if (!temp.Placed)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Physics.Raycast(ray);
+                //Physics.Raycast(ray);
                 if (Physics.Raycast(ray, out RaycastHit raycastHit))
                 {
                     Vector3 touchPos = raycastHit.point;
@@ -82,7 +82,7 @@ public class GridBuildingSystem : MonoBehaviour
     #region Building Placement
     public void InitializeWithBuilding(GameObject building)
     {
-        temp = Instantiate(building, Vector3.zero, quaternion.identity).GetComponent<Building>();
+        temp = Instantiate(building, Vector3.zero, quaternion.identity).GetComponent<OldBuilding>();
         FollowBuilding();
     }
 
@@ -111,6 +111,7 @@ public class GridBuildingSystem : MonoBehaviour
             if (baseArray[i] == tileBases[TileType.White])
             {
                 tileArray[i] = tileBases[TileType.Green];
+                Debug.Log("oui");
             }
             else
             {
@@ -118,6 +119,8 @@ public class GridBuildingSystem : MonoBehaviour
                 break;
             }
         }
+
+        
         
         TempTilemap.SetTilesBlock(buildingArea, tileArray);
         prevArea = buildingArea;
