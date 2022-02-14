@@ -5,10 +5,10 @@ using UnityEditor;
 using UnityEngine;
 
 
-[CustomEditor(typeof(Building))]
+[CustomEditor(typeof(BuildingSO))]
 public class BuildingEditor : Editor
 {
-    private Building script;
+    private BuildingSO script;
     private SerializedObject targetObject;
     private int width;
     private int height;
@@ -17,18 +17,19 @@ public class BuildingEditor : Editor
 
     private void OnEnable()
     {
-        script = (Building) target;
+        
+        script = (BuildingSO) target;
         targetObject = new SerializedObject(script);
-        if (script.area != null)
+        DebugScriptValue();
+        if (script.buildingArea != null)
         {
-            width = script.area.GetLength(0);
-            height = script.area.GetLength(1);
-            area = script.area;
+            width = script.buildingArea.GetLength(0);
+            height = script.buildingArea.GetLength(1);
+            area = script.buildingArea;
         }
         else
         {
-            Debug.Log("ici");
-            script.area = new bool[2, 3];
+            script.buildingArea = new bool[2, 3];
         }
         
     }
@@ -36,7 +37,7 @@ public class BuildingEditor : Editor
     public override void OnInspectorGUI()
     {
         targetObject.Update();
-        area = script.area;
+        area = script.buildingArea;
         width = EditorGUILayout.IntField(width);
         height = EditorGUILayout.IntField(height);
 
@@ -44,7 +45,7 @@ public class BuildingEditor : Editor
         {
             Debug.Log("reset");
             area = new bool[width, height];
-            script.area = area;
+            script.buildingArea = area;
         }
 
         for (int i = 0; i < width; i++)
@@ -59,7 +60,7 @@ public class BuildingEditor : Editor
         
             EditorGUILayout.EndHorizontal();
         }
-        script.area = area;
+        script.buildingArea = area;
         if(GUILayout.Button("oui"))
         {
             DebugScriptValue();
@@ -71,7 +72,7 @@ public class BuildingEditor : Editor
     
     private void DebugScriptValue()
     {
-        Debug.Log(script.area.GetLength(0));
-        Debug.Log(script.area.GetLength(1));
+        Debug.Log(script.buildingArea.GetLength(0));
+        Debug.Log(script.buildingArea.GetLength(1));
     }
 }
