@@ -168,6 +168,7 @@ public class TileInfos
 {
     public TileBase TileB;
     public bool isPlaced = false;
+    public int IslandIndex = 0;
 
     public TileInfos(TileBase tileB)
     {
