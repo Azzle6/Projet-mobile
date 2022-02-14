@@ -48,7 +48,7 @@ public class BuildingSystem : MonoBehaviour
                 {
                     currentBuilding.transform.localPosition = gridLayout.CellToLocalInterpolated(cellPos + new Vector3(0.5f,0.5f,0));
                     
-                    canPlaceBuilding = EmplacementCheck(cellPos, currentBuilding.GetComponent<Building>().area);
+                    canPlaceBuilding = EmplacementCheck(cellPos, currentBuilding.GetComponent<Building>().BuildingScriptable.buildingArea);
                     
                     prevPos = cellPos;
                 }

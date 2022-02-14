@@ -6,13 +6,13 @@ using Random = UnityEngine.Random;
 
 public class Building : MonoBehaviour
 {
-    public bool[,] area = new bool[2,2];
+    public BuildingSO BuildingScriptable;
     public GameObject Visual;
     public int UpgradeTier;
     public float PlacementSound;
     public bool Activated;
 
-    private void Start()
+    /*private void Start()
     {
         for (int i = 0; i < area.GetLength(0); i++)
         {
@@ -24,5 +24,5 @@ public class Building : MonoBehaviour
                 else area[i, j] = false;
             }
         }//ça c'est juste pour exemple
-    }
+    }*/
 }
