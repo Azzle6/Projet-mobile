@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Building_LAC : MonoBehaviour
 {
     [SerializeField] GameObject visualPrefab;
-    [SerializeField] int level;
+    [SerializeField] protected int level;
     [SerializeField] int soundCost;
     bool fonctional;
 
