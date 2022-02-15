@@ -5,45 +5,57 @@ using UnityEditor;
 using UnityEngine;
 
 
-[CustomEditor(typeof(BuildingSO))]
+/*[CustomEditor(typeof(BuildingSO))]
 public class BuildingEditor : Editor
 {
     private BuildingSO script;
     private SerializedObject targetObject;
     private int width;
     private int height;
-    private bool[,] area;
+    private bool[,] area = new bool[2,3];
     
 
     private void OnEnable()
     {
-        
+        Debug.Log("oui");
         script = (BuildingSO) target;
         targetObject = new SerializedObject(script);
-        DebugScriptValue();
-        if (script.buildingArea != null)
+        
+        width = script.buildingArea.GetLength(0);
+        height = script.buildingArea.GetLength(1);
+        
+        
+        /*if (script.buildingArea != null)
         {
             width = script.buildingArea.GetLength(0);
             height = script.buildingArea.GetLength(1);
-            area = script.buildingArea;
+            //area = script.buildingArea;
         }
         else
         {
-            script.buildingArea = new bool[2, 3];
+            Debug.Log("ici");
+            script.buildingArea = new bool[2,2];
         }
         
     }
 
     public override void OnInspectorGUI()
     {
-        targetObject.Update();
+        
+        
+        
+        //targetObject.Update();
+
+        DrawDefaultInspector();
+        
         area = script.buildingArea;
-        width = EditorGUILayout.IntField(width);
-        height = EditorGUILayout.IntField(height);
+        width = script.width;
+        height = script.height;
 
         if (width != area.GetLength(0) || height != area.GetLength(1))
         {
-            Debug.Log("reset");
+            DebugScriptValue();
+            Debug.Log("reset because width = " + area.GetLength(0) +" != "+ width +" & height = " + area.GetLength(1) + " != " + height);
             area = new bool[width, height];
             script.buildingArea = area;
         }
@@ -55,18 +67,26 @@ public class BuildingEditor : Editor
             for (int j = 0; j < height; j++)
             {
                 area[i,j] = EditorGUILayout.Toggle("", area[i,j]);
-                
             }
         
             EditorGUILayout.EndHorizontal();
         }
-        script.buildingArea = area;
+        
+        for (int i = 0; i < script.buildingArea.GetLength(0); i++)
+        {
+            for (int j = 0; j < script.buildingArea.GetLength(1); j++)
+            {
+                script.buildingArea[i, j] = area[i, j];
+            }
+        }
+        
+        
         if(GUILayout.Button("oui"))
         {
             DebugScriptValue();
         }
         
-        targetObject.ApplyModifiedProperties();
+        //targetObject.ApplyModifiedProperties();
     }
 
     
@@ -75,4 +95,4 @@ public class BuildingEditor : Editor
         Debug.Log(script.buildingArea.GetLength(0));
         Debug.Log(script.buildingArea.GetLength(1));
     }
-}
+}*/
