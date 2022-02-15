@@ -9,9 +9,11 @@ public class Extractor_LAC : Building
     [SerializeField] [Range(0, 1)] float peopleMultiplicator;
     public int people;
 
+    public enum ProductType { MATERIAL,KNOWLEDGE}
+    delegate float RessourceDelegate(RessourceManager_LAC ressource);
 
     [Header("Product")]
-    public RessourceManager_LAC.RessourceType ressourceType;
+    public ProductType productType;
     [SerializeField] float[] productLevel;
     public float productCapacity;
     float productCoolDown;
@@ -51,9 +53,19 @@ public class Extractor_LAC : Building
         productCapacity =  productLevel[UpgradeTier] * (1 + (people-1) * peopleMultiplicator);   
     }
 
+    float RessourceType()
+    {
+        if (productType == ProductType.MATERIAL)
+            return RessourceManager_LAC.instance.material;
+
+        if (productType == ProductType.KNOWLEDGE)
+            return RessourceManager_LAC.instance.knowledge;
+
+        return 0;
+    }
     public void ProductRessource()
     {
-            RessourceManager_LAC.instance.AddGold((int)productCapacity);
+            RessourceManager_LAC.instance.AddRessource(productCapacity,productType);
     }
 
     [ContextMenu("Regulation Loop")]

@@ -5,9 +5,7 @@ using UnityEngine;
 public class RessourceManager_LAC : MonoBehaviour
 {
     public static RessourceManager_LAC instance { get; private set; }
-    public enum RessourceType { GOLD, KNOWLEDGE }
-
-    public float gold; 
+    public float material, knowledge; 
 
     public ExtractorData extractorData = new ExtractorData();
 
@@ -23,22 +21,28 @@ public class RessourceManager_LAC : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void AddGold(int value)
+    public void AddRessource(float value, Extractor_LAC.ProductType type)
     {
-        gold += value;
-        extractorData.UpdateStock();
-        
+        if (type == Extractor_LAC.ProductType.MATERIAL)
+            instance.material += value;
+
+        if (type == Extractor_LAC.ProductType.KNOWLEDGE)
+            instance.knowledge += value;
+
+        extractorData.UpdateStock();   
     }
     [System.Serializable]
     public struct ExtractorData
     {
         public List<Extractor_LAC> extractors;
         public float globalProduct;
+        public float ressource;
 
         public ExtractorData(float globalProduct = 0)
         {
             extractors = new List<Extractor_LAC>();
             this.globalProduct = globalProduct;
+            ressource = 0;
         }
 
         public void AddExtractor(Extractor_LAC extractor)
@@ -50,7 +54,12 @@ public class RessourceManager_LAC : MonoBehaviour
             {
                 extractors.Add(extractor);
                 globalProduct += extractor.productCapacity;
-                instance.gold += extractor.stock;
+
+                if(extractor.productType == Extractor_LAC.ProductType.MATERIAL)
+                     instance.material += extractor.stock;
+
+                if (extractor.productType == Extractor_LAC.ProductType.KNOWLEDGE)
+                    instance.knowledge += extractor.stock;
             }
         }
 
@@ -60,7 +69,12 @@ public class RessourceManager_LAC : MonoBehaviour
             {
                 extractors.Remove(extractor);
                 globalProduct -= extractor.productCapacity;
-                instance.gold -= extractor.stock;
+
+                if (extractor.productType == Extractor_LAC.ProductType.MATERIAL)
+                    instance.material -= extractor.stock;
+
+                if (extractor.productType == Extractor_LAC.ProductType.KNOWLEDGE)
+                    instance.knowledge -= extractor.stock;
             }
         }
 
@@ -74,7 +88,7 @@ public class RessourceManager_LAC : MonoBehaviour
         public void UpdateStock()
         {
             for (int i = 0; i < extractors.Count; i++)
-                extractors[i].stock = instance.gold*extractors[i].productCapacity / globalProduct;
+                extractors[i].stock = instance.material*extractors[i].productCapacity / globalProduct;
         }
 
     }
