@@ -11,6 +11,7 @@ public class Building : MonoBehaviour
     public int UpgradeTier;
     public float PlacementSound;
     public bool Activated;
+    public BuildingSystem.Rotation curRotation = BuildingSystem.Rotation.Face;
 
     /*private void Start()
     {

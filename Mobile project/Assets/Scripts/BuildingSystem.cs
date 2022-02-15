@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class BuildingSystem : MonoBehaviour
 {
@@ -14,15 +15,27 @@ public class BuildingSystem : MonoBehaviour
     public Tilemap MainTilemap;
     public Tilemap TempTilemap;
     public List<Vector3Int> tilesInf = new List<Vector3Int>(); // pour le débug
+    public GameObject ConfirmBuildButtons;
+
 
     public Dictionary<Vector3Int, TileInfos> globalCellsInfos = new Dictionary<Vector3Int, TileInfos>();
 
+    public enum Rotation
+    {
+        Face,
+        Back,
+        Right,
+        Left
+    }
 
+    private Rotation currentBuildingRotation;
     private Vector3Int prevPos;
     private Vector3Int[] prevAreaPositions = Array.Empty<Vector3Int>();
     private Vector3Int[] currentAreaPositions = Array.Empty<Vector3Int>();
     private bool canPlaceBuilding = false;
     private bool isOutOfGrid;
+    [SerializeField]private bool isMovingBuilding;
+    private Coroutine DisplaceCoroutine;
 
     private void Awake()
     {
@@ -33,12 +46,11 @@ public class BuildingSystem : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
+    private IEnumerator DisplaceBuilding()
     {
-        //Déplacer un bâtiment snap sur grid
-        if (currentBuilding != null)
+        while (isMovingBuilding)
         {
-
+            Debug.Log("isMoving");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit rayHit))
             {
@@ -47,19 +59,63 @@ public class BuildingSystem : MonoBehaviour
                 if (prevPos != cellPos)
                 {
                     currentBuilding.transform.localPosition = gridLayout.CellToLocalInterpolated(cellPos + new Vector3(0.5f,0.5f,0));
-                    
+
+                    currentBuildingRotation = currentBuilding.GetComponent<Building>().curRotation;
                     canPlaceBuilding = EmplacementCheck(cellPos, currentBuilding.GetComponent<Building>().BuildingScriptable.buildingArea);
                     
+                    
+                    
                     prevPos = cellPos;
+                    
                 }
             }
 
-            if (Input.GetMouseButtonDown(0) && canPlaceBuilding)
+            if (Input.GetMouseButtonDown(0))
             {
-                PlaceBuilding();
-                currentBuilding = null;
+                isMovingBuilding = false;
+                yield return null;
             }
+            yield return null;
         }
+
+        while (!isMovingBuilding)
+        {
+            Debug.Log("isNotMoving");
+            Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            if (Physics.Raycast(ray2, out RaycastHit rayHit2) && Input.GetMouseButtonDown(0))
+            {
+                Vector3Int cellPos = gridLayout.LocalToCell(rayHit2.point);
+                foreach (var pos in currentAreaPositions)
+                {
+                    if (cellPos == pos) isMovingBuilding = true;
+                }
+            }
+            yield return null;
+        }
+
+        DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        
+    }
+
+    public void ConfirmBuild(bool result)
+    {
+        StopCoroutine(DisplaceCoroutine);
+        if (result)
+        {
+            PlaceBuilding();
+            currentBuilding = null;
+        }
+        else
+        {
+            Destroy(currentBuilding);
+            ChangeColor(currentAreaPositions, Color.white);
+            currentBuilding = null;
+        }
+        
+        isMovingBuilding = false;
+        ConfirmBuildButtons.SetActive(false);
+        
     }
 
     private void PlaceBuilding()
@@ -68,7 +124,8 @@ public class BuildingSystem : MonoBehaviour
         {
             globalCellsInfos[vect].isPlaced = true;
         }
-        ChangeColor(currentAreaPositions, Color.white);
+        
+        ChangeColor(currentAreaPositions, Color.black);
     }
 
     private Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
@@ -82,7 +139,8 @@ public class BuildingSystem : MonoBehaviour
             {
                 if(!buildingArea[i,j]) continue;
 
-                Vector3Int emplacement = new Vector3Int(pos.x + i, pos.y + j, pos.z);
+                
+                Vector3Int emplacement = new Vector3Int(pos.x + i, pos.y - j, pos.z);
 
                 if (globalCellsInfos.ContainsKey(emplacement))
                 {
@@ -101,6 +159,7 @@ public class BuildingSystem : MonoBehaviour
         return vectList.ToArray();
     }
 
+    //Check si l'emplacement est libre
     private bool EmplacementCheck(Vector3Int pos, bool[,] buildingArea)
     {
         prevAreaPositions = currentAreaPositions;
@@ -130,10 +189,13 @@ public class BuildingSystem : MonoBehaviour
         return canPlace;
     }
 
-    private void ChangeColor(Vector3Int[] area, Color color)
+    private void ChangeColor(Vector3Int[] area, Color color, bool OverrideBlack = false)
     {
         foreach (var vect in area)
         {
+            if (MainTilemap.GetColor(vect) == Color.black && !OverrideBlack) continue; //seulement pour éviter que ça override les bâtiments déjà placés
+            
+            
             MainTilemap.SetTileFlags(vect, TileFlags.None);
             MainTilemap.SetColor(vect, color);
             MainTilemap.SetTileFlags(vect, TileFlags.LockColor);
@@ -159,7 +221,36 @@ public class BuildingSystem : MonoBehaviour
     public void SpawnBuilding(GameObject build)
     {
         if (currentBuilding == null) currentBuilding = Instantiate(build, Vector3.zero, quaternion.identity);
-        else Debug.Log("Building already selected");
+        else
+        {
+            Debug.Log("Building already selected");
+            return;
+        }
+        
+        isMovingBuilding = true;
+        ConfirmBuildButtons.SetActive(true);
+        DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        
+    }
+
+    public void Rotate()
+    {
+        switch (currentBuilding.GetComponent<Building>().curRotation)
+        {
+            case Rotation.Back :
+                
+                break;
+            case Rotation.Face :
+
+                break;
+            case Rotation.Left :
+
+                break;
+            case Rotation.Right :
+
+                break;
+            
+        }
     }
 }
 
