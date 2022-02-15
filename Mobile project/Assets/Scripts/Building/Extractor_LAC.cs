@@ -9,9 +9,9 @@ public class Extractor_LAC : Building
     [SerializeField] [Range(0, 1)] float peopleMultiplicator;
     public int people;
 
-    public enum RessourceType { GOLD, KNOWLEDGE }
+
     [Header("Product")]
-    public RessourceType ressourceType;
+    public RessourceManager_LAC.RessourceType ressourceType;
     [SerializeField] float[] productLevel;
     public float productCapacity;
     float productCoolDown;
@@ -22,9 +22,7 @@ public class Extractor_LAC : Building
 
     private void Start()
     {
-        if (ressourceType == RessourceType.GOLD)
-            RessourceManager_LAC.instance.extractor_G.Add(this);
-
+        RessourceManager_LAC.instance.extractorData.AddExtractor(this);
         UpdateProductCapacity();
     }
 
@@ -55,26 +53,18 @@ public class Extractor_LAC : Building
 
     public void ProductRessource()
     {
-        if(ressourceType == RessourceType.GOLD)
             RessourceManager_LAC.instance.AddGold((int)productCapacity);
-
-        if (ressourceType == RessourceType.KNOWLEDGE)
-            RessourceManager_LAC.instance.AddKnowledge(productCapacity);
     }
 
     [ContextMenu("Regulation Loop")]
     public void RegulationLoop()
     {
         if (fonctional)
-        {
-            RessourceManager_LAC.instance.extractor_G.Remove(this);
-        }
+            RessourceManager_LAC.instance.extractorData.RemoveExtractor(this);
 
         else if (!fonctional)
-        {
-            RessourceManager_LAC.instance.extractor_G.Add(this);
+            RessourceManager_LAC.instance.extractorData.AddExtractor(this);
 
-        }
         fonctional = !fonctional;
 
     }

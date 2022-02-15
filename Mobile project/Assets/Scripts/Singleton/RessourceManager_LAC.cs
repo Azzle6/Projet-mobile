@@ -5,10 +5,11 @@ using UnityEngine;
 public class RessourceManager_LAC : MonoBehaviour
 {
     public static RessourceManager_LAC instance { get; private set; }
-    public int gold; 
-    public float knowledge;
+    public enum RessourceType { GOLD, KNOWLEDGE }
 
-    public List<Extractor_LAC> extractor_G, extractor_K;
+    public float gold; 
+
+    public ExtractorData extractorData = new ExtractorData();
 
     private void Awake()
     {
@@ -25,26 +26,57 @@ public class RessourceManager_LAC : MonoBehaviour
     public void AddGold(int value)
     {
         gold += value;
-        float globalProduct = 0;
-
-        for(int i = 0; i < extractor_G.Count; i++)
-            globalProduct += extractor_G[i].productCapacity;
-
-        for (int i = 0; i < extractor_G.Count; i++) 
-            extractor_G[i].stock +=  (float)value * extractor_G[i].productCapacity/globalProduct;
+        extractorData.UpdateStock();
         
     }
-
-    public void AddKnowledge(float value)
+    [System.Serializable]
+    public struct ExtractorData
     {
-        knowledge += value;
-        float globalProduct = 0;
+        public List<Extractor_LAC> extractors;
+        public float globalProduct;
 
-        for (int i = 0; i < extractor_K.Count; i++)
-            globalProduct += extractor_K[i].productCapacity;
+        public ExtractorData(float globalProduct = 0)
+        {
+            extractors = new List<Extractor_LAC>();
+            this.globalProduct = globalProduct;
+        }
 
-        for (int i = 0; i < extractor_K.Count; i++)
-            extractor_K[i].stock += value * extractor_K[i].productCapacity / globalProduct;
+        public void AddExtractor(Extractor_LAC extractor)
+        {
+            if (extractors == null)
+                extractors = new List<Extractor_LAC>();
+
+            if (!extractors.Contains(extractor))
+            {
+                extractors.Add(extractor);
+                globalProduct += extractor.productCapacity;
+                instance.gold += extractor.stock;
+            }
+        }
+
+        public void RemoveExtractor(Extractor_LAC extractor)
+        {
+            if (extractors.Contains(extractor))
+            {
+                extractors.Remove(extractor);
+                globalProduct -= extractor.productCapacity;
+                instance.gold -= extractor.stock;
+            }
+        }
+
+        public void UpdateGlobalProduct()
+        {
+            globalProduct = 0;
+            for (int i = 0; i < extractors.Count; i++)
+                globalProduct += extractors[i].productCapacity;
+        }
+
+        public void UpdateStock()
+        {
+            for (int i = 0; i < extractors.Count; i++)
+                extractors[i].stock = instance.gold*extractors[i].productCapacity / globalProduct;
+        }
+
     }
 
 }
