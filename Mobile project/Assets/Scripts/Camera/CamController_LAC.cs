@@ -55,17 +55,17 @@ class CamController_LAC : MonoBehaviour
             if (zoom == 0 || zoom > 10)
                 return;
 
-
             //Move cam amount the mid ray
             Vector3 newCamPos = Vector3.LerpUnclamped(pos1, camera.transform.position, 1 / zoom);
 
             // clamp cam zoom
-            if (plane.GetDistanceToPoint(newCamPos) < 10 && plane.GetDistanceToPoint(newCamPos)>1)
+            if (plane.GetDistanceToPoint(newCamPos) < clampArea.y*2 && plane.GetDistanceToPoint(newCamPos)>1)
                 camera.transform.position = newCamPos;
 
             if (rotate && pos2b != pos2)
                 camera.transform.RotateAround(pos1, plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
+
         // clamp
         if (camera.transform.position.x > clampArea.x)
             camera.transform.position = new Vector3(clampArea.x, camera.transform.position.y, camera.transform.position.z);
@@ -99,6 +99,7 @@ class CamController_LAC : MonoBehaviour
         return Vector3.zero;
     }
 
+
     protected Vector3 PlanePosition(Vector2 screenPos)
     {
         //position
@@ -113,7 +114,7 @@ class CamController_LAC : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
 
-        Gizmos.DrawWireCube(transform.position, clampArea * 2);
+        Gizmos.DrawWireCube(transform.position + Vector3.up * (clampArea.y+1), clampArea * 2);
     }
 
 }
