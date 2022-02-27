@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -562,7 +562,7 @@ MonoBehaviour:
   maxPeople: 0300000005000000
   peopleMultiplicator: 0.2
   people: 3
-  ressourceType: 0
+  productType: 0
   productLevel:
   - 2
   - 4
@@ -620,7 +620,7 @@ MonoBehaviour:
   maxPeople: 0300000005000000
   peopleMultiplicator: 0.2
   people: 3
-  ressourceType: 0
+  productType: 0
   productLevel:
   - 2
   - 4
@@ -672,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 943404541}
   rotate: 1
+  clampArea: {x: 10, y: 10, z: 10}
 --- !u!4 &1247911864
 Transform:
   m_ObjectHideFlags: 0
@@ -723,7 +724,7 @@ MonoBehaviour:
   maxPeople: 0300000005000000
   peopleMultiplicator: 0.2
   people: 2
-  ressourceType: 0
+  productType: 0
   productLevel:
   - 2
   - 4
@@ -787,10 +788,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99085245f6f2d543be477d0d9b66137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 0
+  material: 0
   knowledge: 0
-  extractor_G: []
-  extractor_K: []
+  extractorData:
+    extractors: []
+    globalProduct: 0
+    ressource: 0
 --- !u!1 &1940522094
 GameObject:
   m_ObjectHideFlags: 0

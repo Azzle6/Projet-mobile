@@ -14,7 +14,7 @@ class CamController_LAC : MonoBehaviour
     public bool rotate;
     
     protected Plane plane;
-
+    public Vector3 clampArea;
     private void Awake()
     {
         if (camera == null)
@@ -66,6 +66,20 @@ class CamController_LAC : MonoBehaviour
             if (rotate && pos2b != pos2)
                 camera.transform.RotateAround(pos1, plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
+        // clamp
+        if (camera.transform.position.x > clampArea.x)
+            camera.transform.position = new Vector3(clampArea.x, camera.transform.position.y, camera.transform.position.z);
+
+        if (camera.transform.position.x < -clampArea.x)
+            camera.transform.position = new Vector3(-clampArea.x, camera.transform.position.y, camera.transform.position.z);
+
+        if (camera.transform.position.z < -clampArea.z)
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, -clampArea.z);
+
+        if (camera.transform.position.z > clampArea.z)
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, clampArea.z);
+
+
 
     }
 
@@ -98,6 +112,8 @@ class CamController_LAC : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
+
+        Gizmos.DrawWireCube(transform.position, clampArea * 2);
     }
 
 }
