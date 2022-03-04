@@ -9,7 +9,8 @@ using UnityEngine.UIElements;
 public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem instance;
-    
+
+    public bool PhoneController;
     public GameObject currentBuilding;
     public GridLayout gridLayout;
     public Tilemap MainTilemap;
@@ -40,6 +41,7 @@ public class BuildingSystem : MonoBehaviour
     private void Awake()
     {
         InitializeAllTiles(MainTilemap);
+        InputsManager.PhoneInputs = PhoneController;
         if (instance != null) return;
 
         
@@ -51,7 +53,7 @@ public class BuildingSystem : MonoBehaviour
         while (isMovingBuilding)
         {
             Debug.Log("isMoving");
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(/*Input.mousePosition*/InputsManager.GetPosition());
             if (Physics.Raycast(ray, out RaycastHit rayHit))
             {
                 Vector3Int cellPos = gridLayout.LocalToCell(rayHit.point);
@@ -70,7 +72,7 @@ public class BuildingSystem : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (InputsManager.Release())
             {
                 isMovingBuilding = false;
                 yield return null;
@@ -81,16 +83,20 @@ public class BuildingSystem : MonoBehaviour
         while (!isMovingBuilding)
         {
             Debug.Log("isNotMoving");
-            Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
             
-            if (Physics.Raycast(ray2, out RaycastHit rayHit2) && Input.GetMouseButtonDown(0))
+            if (InputsManager.Click())
             {
-                Vector3Int cellPos = gridLayout.LocalToCell(rayHit2.point);
-                foreach (var pos in currentAreaPositions)
+                Ray ray2 = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
+                if (Physics.Raycast(ray2, out RaycastHit rayHit2))
                 {
-                    if (cellPos == pos) isMovingBuilding = true;
+                    Vector3Int cellPos = gridLayout.LocalToCell(rayHit2.point);
+                    foreach (var pos in currentAreaPositions)
+                    {
+                        if (cellPos == pos) isMovingBuilding = true;
+                    }
                 }
             }
+            
             yield return null;
         }
 
