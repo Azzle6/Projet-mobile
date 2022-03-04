@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class RessourceManager_LAC : MonoBehaviour
 {
+    
     public static RessourceManager_LAC instance { get; private set; }
+    [Header("Ressources")]
     public float material, knowledge; 
 
     public ExtractorData extractorData = new ExtractorData();
-
+    [Header("Select Extractor")]
+    public LayerMask selectLayer;
+    public Extractor_LAC selectedExtractor;
     private void Awake()
     {
         // if the singleton hasn't been initialized yet
@@ -19,6 +23,24 @@ public class RessourceManager_LAC : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void Update()
+    {
+        // select extractor
+        if(Input.touchCount >= 1)
+        {
+            Touch select = Input.GetTouch(0);
+            if(select.phase == TouchPhase.Began)
+            {
+                RaycastHit hit;
+                var ray = Camera.main.ScreenPointToRay(select.position);
+                if(Physics.Raycast(ray, out hit,selectLayer))
+                {
+                    selectedExtractor = hit.transform.GetComponent<Extractor_LAC>();
+                }
+            }
+        }
     }
 
     public void AddRessource(float value, Extractor_LAC.ProductType type)
@@ -77,14 +99,12 @@ public class RessourceManager_LAC : MonoBehaviour
                     instance.knowledge -= extractor.stock;
             }
         }
-
         public void UpdateGlobalProduct()
         {
             globalProduct = 0;
             for (int i = 0; i < extractors.Count; i++)
                 globalProduct += extractors[i].productCapacity;
         }
-
         public void UpdateStock()
         {
             for (int i = 0; i < extractors.Count; i++)
