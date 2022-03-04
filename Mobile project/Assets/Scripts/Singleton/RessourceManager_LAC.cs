@@ -7,9 +7,10 @@ public class RessourceManager_LAC : MonoBehaviour
     
     public static RessourceManager_LAC instance { get; private set; }
     [Header("Ressources")]
-    public float material, knowledge; 
-
+    public float ressource;
+    public float knowledge;
     public ExtractorData extractorData = new ExtractorData();
+    //Dictionary<Extractor_LAC,ExtractorData> extractorRegister = new Dictionary<Extractor_LAC, ExtractorData>();
     [Header("Select Extractor")]
     public LayerMask selectLayer;
     public Extractor_LAC selectedExtractor;
@@ -43,10 +44,29 @@ public class RessourceManager_LAC : MonoBehaviour
         }
     }
 
+    public void AddPeople()
+    {
+        if (selectedExtractor != null)
+        {
+            selectedExtractor.ChangePeople(1);
+            extractorData.UpdateGlobalProduct();
+        }
+        
+    }
+
+    public void RemovePeople()
+    {
+        if (selectedExtractor != null)
+        {
+            selectedExtractor.ChangePeople(-1);
+            extractorData.UpdateGlobalProduct();
+        }
+
+    }
     public void AddRessource(float value, Extractor_LAC.ProductType type)
     {
         if (type == Extractor_LAC.ProductType.MATERIAL)
-            instance.material += value;
+            instance.ressource += value;
 
         if (type == Extractor_LAC.ProductType.KNOWLEDGE)
             instance.knowledge += value;
@@ -78,7 +98,7 @@ public class RessourceManager_LAC : MonoBehaviour
                 globalProduct += extractor.productCapacity;
 
                 if(extractor.productType == Extractor_LAC.ProductType.MATERIAL)
-                     instance.material += extractor.stock;
+                     instance.ressource += extractor.stock;
 
                 if (extractor.productType == Extractor_LAC.ProductType.KNOWLEDGE)
                     instance.knowledge += extractor.stock;
@@ -93,7 +113,7 @@ public class RessourceManager_LAC : MonoBehaviour
                 globalProduct -= extractor.productCapacity;
 
                 if (extractor.productType == Extractor_LAC.ProductType.MATERIAL)
-                    instance.material -= extractor.stock;
+                    instance.ressource -= extractor.stock;
 
                 if (extractor.productType == Extractor_LAC.ProductType.KNOWLEDGE)
                     instance.knowledge -= extractor.stock;
@@ -108,7 +128,7 @@ public class RessourceManager_LAC : MonoBehaviour
         public void UpdateStock()
         {
             for (int i = 0; i < extractors.Count; i++)
-                extractors[i].stock = instance.material*extractors[i].productCapacity / globalProduct;
+                extractors[i].stock = instance.ressource*extractors[i].productCapacity / globalProduct;
         }
 
     }

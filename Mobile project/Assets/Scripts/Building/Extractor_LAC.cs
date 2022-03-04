@@ -41,7 +41,7 @@ public class Extractor_LAC : Building
 
  
 
-    public void AddPeople( int people)
+    public void ChangePeople( int people)
     {
         int maxPeople = this.maxPeople[Mathf.Clamp(UpgradeTier, 0, this.maxPeople.Length)];
         this.people = Mathf.Clamp(this.people + people, 1, maxPeople);
@@ -56,7 +56,7 @@ public class Extractor_LAC : Building
     float RessourceType()
     {
         if (productType == ProductType.MATERIAL)
-            return RessourceManager_LAC.instance.material;
+            return RessourceManager_LAC.instance.ressource;
 
         if (productType == ProductType.KNOWLEDGE)
             return RessourceManager_LAC.instance.knowledge;
