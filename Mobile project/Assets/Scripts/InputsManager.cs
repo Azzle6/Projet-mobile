@@ -8,14 +8,19 @@ public static class InputsManager
 
     public static Vector3 GetPosition()
     {
-        if (PhoneInputs) return Input.GetTouch(0).position;
-        else return Input.mousePosition;
+        if (PhoneInputs && Input.touchCount != 0) return Input.GetTouch(0).position;
+        else if(!PhoneInputs) return Input.mousePosition;
+
+        Debug.Log("GetPosition impossible");
+        return Vector3.zero;
     }
 
     public static bool Click()
     {
-        if (PhoneInputs) return Input.GetTouch(0).phase == TouchPhase.Began;
-        else return Input.GetMouseButtonDown(0);
+        if (PhoneInputs && Input.touchCount != 0) return Input.GetTouch(0).phase == TouchPhase.Began;
+        else if(!PhoneInputs) return Input.GetMouseButtonDown(0);
+
+        return false;
     }
 
     public static bool IsDown()
