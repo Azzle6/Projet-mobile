@@ -24,6 +24,7 @@ public class Extractor_LAC : Building
 
     private void Start()
     {
+        people = 1;
         RessourceManager_LAC.instance.extractorData.AddExtractor(this);
         UpdateProductCapacity();
     }
@@ -40,11 +41,9 @@ public class Extractor_LAC : Building
     }
 
  
-
-    public void ChangePeople( int people)
+    public int MaxPeople()
     {
-        int maxPeople = this.maxPeople[Mathf.Clamp(UpgradeTier, 0, this.maxPeople.Length)];
-        this.people = Mathf.Clamp(this.people + people, 1, maxPeople);
+        return maxPeople[Mathf.Clamp(UpgradeTier, 0, this.maxPeople.Length)];
     }
 
     [ContextMenu("Update product")]

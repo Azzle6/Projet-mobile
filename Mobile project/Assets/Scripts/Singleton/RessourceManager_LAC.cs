@@ -9,6 +9,7 @@ public class RessourceManager_LAC : MonoBehaviour
     [Header("Ressources")]
     public float ressource;
     public float knowledge;
+    public float population;
     public ExtractorData extractorData = new ExtractorData();
     //Dictionary<Extractor_LAC,ExtractorData> extractorRegister = new Dictionary<Extractor_LAC, ExtractorData>();
     [Header("Select Extractor")]
@@ -46,22 +47,27 @@ public class RessourceManager_LAC : MonoBehaviour
 
     public void AddPeople()
     {
-        if (selectedExtractor != null)
+        if (selectedExtractor != null && population > 1)
         {
-            selectedExtractor.ChangePeople(1);
-            extractorData.UpdateGlobalProduct();
-        }
-        
+            if (selectedExtractor.people < selectedExtractor.MaxPeople())
+            {
+                selectedExtractor.people ++;
+                population --;
+                extractorData.UpdateGlobalProduct();
+            }     
+        } 
     }
-
     public void RemovePeople()
     {
         if (selectedExtractor != null)
         {
-            selectedExtractor.ChangePeople(-1);
-            extractorData.UpdateGlobalProduct();
+            if(selectedExtractor.people > 1)
+            {
+                selectedExtractor.people--;
+                population ++;
+                extractorData.UpdateGlobalProduct();
+            }
         }
-
     }
     public void AddRessource(float value, Extractor_LAC.ProductType type)
     {
@@ -104,7 +110,6 @@ public class RessourceManager_LAC : MonoBehaviour
                     instance.knowledge += extractor.stock;
             }
         }
-
         public void RemoveExtractor(Extractor_LAC extractor)
         {
             if (extractors.Contains(extractor))
