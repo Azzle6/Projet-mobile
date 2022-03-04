@@ -17,6 +17,7 @@ public class BuildingSystem : MonoBehaviour
     public Tilemap TempTilemap;
     public List<Vector3Int> tilesInf = new List<Vector3Int>(); // pour le débug
     public GameObject ConfirmBuildButtons;
+    public GameObject BuildingsButton;
 
 
     public Dictionary<Vector3Int, TileInfos> globalCellsInfos = new Dictionary<Vector3Int, TileInfos>();
@@ -121,6 +122,7 @@ public class BuildingSystem : MonoBehaviour
         
         isMovingBuilding = false;
         ConfirmBuildButtons.SetActive(false);
+        BuildingsButton.SetActive(true);
         
     }
 
@@ -235,6 +237,7 @@ public class BuildingSystem : MonoBehaviour
         
         isMovingBuilding = true;
         ConfirmBuildButtons.SetActive(true);
+        BuildingsButton.SetActive(false);
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
         
     }
