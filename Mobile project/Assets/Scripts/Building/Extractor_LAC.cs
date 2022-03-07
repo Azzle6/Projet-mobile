@@ -4,28 +4,19 @@ using UnityEngine;
 
 public class Extractor_LAC : Building
 {
-    [Header("People")]
-    [SerializeField] int[] maxPeople;
-    [SerializeField] [Range(0, 1)] float peopleMultiplicator;
+    [Header("Extractor")]
+    public RessourceManager_LAC.RessourceType ressourceType;
+    public ExtractorSO_LAC stats;
     public int people;
-
-    public enum ProductType { MATERIAL,KNOWLEDGE}
-    delegate float RessourceDelegate(RessourceManager_LAC ressource);
-
-    [Header("Product")]
-    public ProductType productType;
-    [SerializeField] float[] productLevel;
-    public float productCapacity;
     float productCoolDown;
 
-    [Header("Stock")]
+    
     public bool fonctional = true;
-    public float stock;
-
+    
+    public float stock = 0;
     private void Start()
     {
-        RessourceManager_LAC.instance.extractorData.AddExtractor(this);
-        UpdateProductCapacity();
+        RessourceManager_LAC.instance.AddExtractor(this);
     }
 
     private void Update()
@@ -34,48 +25,25 @@ public class Extractor_LAC : Building
         if (productCoolDown < 0)
         {
             productCoolDown = 1;
-            ProductRessource();
+            RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
         }
         
     }
 
- 
-
-    public void ChangePeople( int people)
+    public float ProductCapacity()
     {
-        int maxPeople = this.maxPeople[Mathf.Clamp(UpgradeTier, 0, this.maxPeople.Length)];
-        this.people = Mathf.Clamp(this.people + people, 1, maxPeople);
+       return  stats.production * (1 + (people-1) * stats.peopleGain);   
     }
 
-    [ContextMenu("Update product")]
-    public void UpdateProductCapacity()
-    {
-        productCapacity =  productLevel[UpgradeTier] * (1 + (people-1) * peopleMultiplicator);   
-    }
-
-    float RessourceType()
-    {
-        if (productType == ProductType.MATERIAL)
-            return RessourceManager_LAC.instance.ressource;
-
-        if (productType == ProductType.KNOWLEDGE)
-            return RessourceManager_LAC.instance.knowledge;
-
-        return 0;
-    }
-    public void ProductRessource()
-    {
-            RessourceManager_LAC.instance.AddRessource(productCapacity,productType);
-    }
 
     [ContextMenu("Regulation Loop")]
     public void RegulationLoop()
     {
         if (fonctional)
-            RessourceManager_LAC.instance.extractorData.RemoveExtractor(this);
+            RessourceManager_LAC.instance.RemoveExtractor(this);
 
         else if (!fonctional)
-            RessourceManager_LAC.instance.extractorData.AddExtractor(this);
+            RessourceManager_LAC.instance.AddExtractor(this);
 
         fonctional = !fonctional;
 

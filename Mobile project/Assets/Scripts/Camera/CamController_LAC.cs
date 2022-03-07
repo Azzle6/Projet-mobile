@@ -14,7 +14,10 @@ class CamController_LAC : MonoBehaviour
     public bool rotate;
     
     protected Plane plane;
-    public Vector3 clampArea;
+
+    public float maxZoom = 5;
+    public float clampRadius = 3;
+
     private void Awake()
     {
         if (camera == null)
@@ -32,11 +35,17 @@ class CamController_LAC : MonoBehaviour
         var Delta2 = Vector3.zero;
 
         //Scroll
-        if (Input.touchCount >= 1)
+        if (Input.touchCount == 1)
         {
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                camera.transform.Translate(Delta1, Space.World);
+            {
+                Vector3 camDelta1 = lookPos() +Delta1;
+                if (Vector3.Distance(camDelta1, transform.position) > clampRadius)
+                    Delta1 = Vector3.zero;
+
+                camera.transform.position += Delta1;
+            }
         }
 
         //Pinch
@@ -55,34 +64,25 @@ class CamController_LAC : MonoBehaviour
             if (zoom == 0 || zoom > 10)
                 return;
 
-            //Move cam amount the mid ray
-            Vector3 newCamPos = Vector3.LerpUnclamped(pos1, camera.transform.position, 1 / zoom);
 
+            //Move cam amount the mid ray
+            float t = Mathf.Clamp(1 / zoom, 0.2f, maxZoom / Vector3.Distance(lookPos(), camera.transform.position));
+            Vector3 newCamPos = Vector3.LerpUnclamped(lookPos(), camera.transform.position,t );
+            Debug.Log("Cam dist : " + Vector3.Distance(lookPos(), camera.transform.position));
             // clamp cam zoom
-            if (plane.GetDistanceToPoint(newCamPos) < clampArea.y*2 && plane.GetDistanceToPoint(newCamPos)>1)
+            if (plane.GetDistanceToPoint(camera.transform.position) > 1) 
                 camera.transform.position = newCamPos;
 
             if (rotate && pos2b != pos2)
-                camera.transform.RotateAround(pos1, plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
+                camera.transform.RotateAround(lookPos(), plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
-
-        // clamp
-        if (camera.transform.position.x > clampArea.x)
-            camera.transform.position = new Vector3(clampArea.x, camera.transform.position.y, camera.transform.position.z);
-
-        if (camera.transform.position.x < -clampArea.x)
-            camera.transform.position = new Vector3(-clampArea.x, camera.transform.position.y, camera.transform.position.z);
-
-        if (camera.transform.position.z < -clampArea.z)
-            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, -clampArea.z);
-
-        if (camera.transform.position.z > clampArea.z)
-            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, clampArea.z);
-
-
 
     }
 
+    protected Vector3 lookPos()
+    {
+        return PlanePosition(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
+    }
     protected Vector3 PlanePositionDelta(Touch touch)
     {
         //not moved
@@ -99,7 +99,6 @@ class CamController_LAC : MonoBehaviour
         return Vector3.zero;
     }
 
-
     protected Vector3 PlanePosition(Vector2 screenPos)
     {
         //position
@@ -110,11 +109,23 @@ class CamController_LAC : MonoBehaviour
         return Vector3.zero;
     }
 
+    
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
 
-        Gizmos.DrawWireCube(transform.position + Vector3.up * (clampArea.y+1), clampArea * 2);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(lookPos(), (camera.transform.position - lookPos()).normalized * maxZoom);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(lookPos(),0.2f);
+        Gizmos.DrawLine(camera.transform.position, lookPos());
+        Gizmos.DrawWireSphere(transform.position, clampRadius);
+
+        
+
+
     }
 
 }
