@@ -13,6 +13,11 @@ public class Building : MonoBehaviour
     public bool Activated;
     public BuildingSystem.Rotation curRotation = BuildingSystem.Rotation.Face;
 
+    private void Awake()
+    {
+        if (Visual)
+            Instantiate(Visual, transform);
+    }
     /*private void Start()
     {
         for (int i = 0; i < area.GetLength(0); i++)
