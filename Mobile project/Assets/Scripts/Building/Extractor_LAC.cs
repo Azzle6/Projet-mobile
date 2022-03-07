@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Extractor_LAC : Building
 {
+    [Header("Extractor")]
     public RessourceManager_LAC.RessourceType ressourceType;
     public ExtractorSO_LAC stats;
     public int people;
     float productCoolDown;
 
-    [Header("Stock")]
+    
     public bool fonctional = true;
     
     public float stock = 0;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -248,7 +248,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 1125265871}
   - component: {fileID: 1125265870}
   m_Layer: 0
-  m_Name: Extractor
+  m_Name: Extractor_K
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,12 +555,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
-  Visual: {fileID: 0}
+  Visual: {fileID: 7393119220524161010, guid: 0f3629327cf89db4980f74bff16362b6, type: 3}
   UpgradeTier: 0
   PlacementSound: 0
   Activated: 0
   curRotation: 0
-  ressourceType: 0
+  ressourceType: 1
   stats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
   people: 1
   fonctional: 1
@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 1262549752}
   - component: {fileID: 1262549751}
   m_Layer: 0
-  m_Name: Extractor (1)
+  m_Name: Extractor_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
-  Visual: {fileID: 0}
+  Visual: {fileID: 464669590326285805, guid: 6b75703179f47d64aabefebd04fdd568, type: 3}
   UpgradeTier: 0
   PlacementSound: 0
   Activated: 0
