@@ -236,7 +236,7 @@ public class BuildingSystem : MonoBehaviour
         }
         
         isMovingBuilding = true;
-        UIManager_LAC.instance.DisplayBuildingConfirMenu();
+        UIManager_LAC.instance.DisplayBuildingConfirmMenu();
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
         
     }
