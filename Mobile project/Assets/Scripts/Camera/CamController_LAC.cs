@@ -13,7 +13,7 @@ class CamController_LAC : MonoBehaviour
     public Camera camera;
     public bool rotate;
     
-    protected Plane plane;
+    public Plane plane;
 
     public float maxZoom = 5;
     public float clampRadius = 3;
@@ -68,9 +68,9 @@ class CamController_LAC : MonoBehaviour
             //Move cam amount the mid ray
             float t = Mathf.Clamp(1 / zoom, 0.2f, maxZoom / Vector3.Distance(lookPos(), camera.transform.position));
             Vector3 newCamPos = Vector3.LerpUnclamped(lookPos(), camera.transform.position,t );
-            Debug.Log("Cam dist : " + Vector3.Distance(lookPos(), camera.transform.position));
+            //Debug.Log("Cam dist : " + Vector3.Distance(lookPos(), camera.transform.position));
             // clamp cam zoom
-            if (plane.GetDistanceToPoint(camera.transform.position) > 1) 
+            if (plane.GetDistanceToPoint(newCamPos) >= 1)
                 camera.transform.position = newCamPos;
 
             if (rotate && pos2b != pos2)
@@ -114,17 +114,15 @@ class CamController_LAC : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
+        Vector3 lookPosG = (lookPos() == Vector3.zero) ? transform.position : lookPos();
 
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(lookPos(), (camera.transform.position - lookPos()).normalized * maxZoom);
+        Gizmos.DrawRay(lookPosG, (camera.transform.position - lookPosG).normalized * maxZoom);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(lookPos(),0.2f);
-        Gizmos.DrawLine(camera.transform.position, lookPos());
+        Gizmos.DrawSphere(lookPosG,0.2f);
+        Gizmos.DrawLine(camera.transform.position, lookPosG);
         Gizmos.DrawWireSphere(transform.position, clampRadius);
-
-        
-
 
     }
 

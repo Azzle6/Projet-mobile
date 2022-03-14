@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class UIManager_LAC : MonoBehaviour
@@ -14,6 +15,7 @@ public class UIManager_LAC : MonoBehaviour
     [Header("Ressource")]
     
     public LayerMask BuildingsLayer;
+    public LayerMask UILayerMask;
     public GameObject CurrentSelectedBuilding;
     
     [Header("Références")]
@@ -46,18 +48,41 @@ public class UIManager_LAC : MonoBehaviour
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
         {
-            Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
-            if (Physics.Raycast(ray, out RaycastHit rayHit,100, BuildingsLayer))
+            bool canSwitchSelected = true;
+            
+            //Pour déterminer si le joueur clique sur l'UI
+            PointerEventData pointer = new PointerEventData(EventSystem.current);
+            List<RaycastResult> raycastResult = new List<RaycastResult>();
+            pointer.position = InputsManager.GetPosition();
+            EventSystem.current.RaycastAll(pointer, raycastResult);
+            
+            foreach (RaycastResult result in raycastResult)
             {
-                CurrentSelectedBuilding = rayHit.collider.gameObject;
-                Debug.Log("oui");
-                DisplayBuildingInfos();
+                if (result.gameObject.layer == 5)
+                {
+                    canSwitchSelected = false;
+                }
             }
-            else
-            {
-                CurrentSelectedBuilding = null;
-                DisplayBasicUI();
-            }
+            if(canSwitchSelected) SelectBuilding();
+            
+             
+            
+        }
+    }
+
+    public void SelectBuilding()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
+        if (Physics.Raycast(ray, out RaycastHit rayHit, 100, BuildingsLayer))
+        {
+            CurrentSelectedBuilding = rayHit.collider.gameObject;
+            
+            DisplayBuildingInfos();
+        }
+        else
+        {
+            CurrentSelectedBuilding = null;
+            DisplayBasicUI();
         }
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -585,7 +585,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 454698251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125265870}
+        m_TargetAssemblyTypeName: Extractor_LAC, Assembly-CSharp
+        m_MethodName: RemovePop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &454698251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,7 +788,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -787,7 +799,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: '-'
 --- !u!222 &488993964
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1012,7 +1024,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &735397360
 GameObject:
@@ -1321,11 +1333,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943404539}
   m_LocalRotation: {x: 0.28425345, y: -0, z: -0, w: 0.9587492}
-  m_LocalPosition: {x: 0, y: 5.98, z: -9.83}
+  m_LocalPosition: {x: -0.6, y: 9.1, z: -14.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1247911864}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33.028, y: 0, z: 0}
 --- !u!114 &943404543
 MonoBehaviour:
@@ -1390,8 +1402,9 @@ Transform:
   - {fileID: 32828134}
   - {fileID: 1125265871}
   - {fileID: 1262549752}
+  - {fileID: 1309228550}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1096345219
 GameObject:
@@ -1692,12 +1705,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
   Visual: {fileID: 7393119220524161010, guid: 0f3629327cf89db4980f74bff16362b6, type: 3}
-  UpgradeTier: 0
+  level: 0
   PlacementSound: 0
   Activated: 0
   curRotation: 0
   ressourceType: 1
-  stats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
+  stats:
+  - {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
+  - {fileID: 11400000, guid: 48aaefec02c5c914d892c1e3dcd2045e, type: 2}
+  - {fileID: 11400000, guid: 12ac8f2fceabf204282b2002a82f5a9c, type: 2}
   people: 1
   fonctional: 1
   stock: 0
@@ -1954,7 +1970,7 @@ MonoBehaviour:
   camera: {fileID: 943404541}
   rotate: 1
   maxZoom: 20
-  clampRadius: 3
+  clampRadius: 5.74
 --- !u!4 &1247911864
 Transform:
   m_ObjectHideFlags: 0
@@ -1963,11 +1979,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247911862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.03, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 943404542}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249951072
 GameObject:
@@ -2051,7 +2068,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1249951075}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1856487541}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: AddPop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1249951075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,12 +2150,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
   Visual: {fileID: 464669590326285805, guid: 6b75703179f47d64aabefebd04fdd568, type: 3}
-  UpgradeTier: 0
+  level: 0
   PlacementSound: 0
   Activated: 0
   curRotation: 0
   ressourceType: 0
-  stats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
+  stats:
+  - {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
   people: 2
   fonctional: 1
   stock: 0
@@ -2144,6 +2174,60 @@ Transform:
   m_Father: {fileID: 1017840592}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1309228549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1309228550}
+  - component: {fileID: 1309228551}
+  m_Layer: 0
+  m_Name: House
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1309228550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309228549}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1017840592}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1309228551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309228549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30729bf714eee64a842c3fd08ee2f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
+  Visual: {fileID: 0}
+  level: 0
+  PlacementSound: 0
+  Activated: 0
+  curRotation: 0
+  stats:
+  - {fileID: 11400000, guid: 9a3622205b95836478645efaad8fa0bd, type: 2}
+  - {fileID: 11400000, guid: ee371c2252e928b419c787c51bb84ada, type: 2}
+  - {fileID: 11400000, guid: 31c5250c6eec24445ae5a5c4fd9981c9, type: 2}
+  currentPeople: 0
 --- !u!1 &1593905712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,7 +2323,7 @@ RectTransform:
   - {fileID: 442970699}
   - {fileID: 9063378}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2276,7 +2360,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1856487540
 MonoBehaviour:
@@ -2463,7 +2547,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2474,7 +2558,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: +
 --- !u!222 &1961708968
 CanvasRenderer:
   m_ObjectHideFlags: 0
