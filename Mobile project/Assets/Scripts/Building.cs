@@ -8,7 +8,8 @@ public class Building : MonoBehaviour
 {
     public BuildingSO BuildingScriptable;
     public GameObject Visual;
-    public int UpgradeTier;
+    //[HideInInspector]
+    public int level;
     public float PlacementSound;
     public bool Activated;
     public BuildingSystem.Rotation curRotation = BuildingSystem.Rotation.Face;
@@ -18,6 +19,10 @@ public class Building : MonoBehaviour
         if (Visual)
             Instantiate(Visual, transform);
     }
+
+    public virtual void Upgrade() { }
+ 
+
     /*private void Start()
     {
         for (int i = 0; i < area.GetLength(0); i++)
