@@ -72,4 +72,24 @@ public class RessourceManager_LAC : MonoBehaviour
         
     }
 
+    public void AddPop()
+    {
+        Debug.Log("Add pop");
+        if (population > 0)
+        {
+            UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.AddPop();
+            
+        }
+    }
+    
+    public void RemovePop()
+    {
+        Debug.Log("Remove pop");
+        if (population > 0)
+        {
+            UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.RemovePop();
+            
+        }
+    }
+
 }
