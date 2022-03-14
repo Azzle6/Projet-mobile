@@ -14,6 +14,8 @@ public class UIManager_LAC : MonoBehaviour
     [Header("Ressource")]
     public TextMeshProUGUI matter;
     public TextMeshProUGUI knowledge;
+    public LayerMask BuildingsLayer;
+    public GameObject CurrentSelectedBuilding;
     [SerializeField]
     private GameObject BuildMenu;
     [SerializeField]
@@ -31,35 +33,56 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Start()
     {
-        DisplayBuildMenu();
+        DisplayBasicUI();
     }
 
     private void Update()
     {
+        Debug.Log(StateManager.CurrentState);
         matter.text = (Mathf.Ceil(ressourceM.matter)).ToString();
         knowledge.text = (Mathf.Ceil(ressourceM.knowledge)).ToString();
+
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
+        {
+            Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
+            if (Physics.Raycast(ray, out RaycastHit rayHit,100, BuildingsLayer))
+            {
+                CurrentSelectedBuilding = rayHit.collider.gameObject;
+                Debug.Log("oui");
+                DisplayBuildingInfos();
+            }
+            else
+            {
+                CurrentSelectedBuilding = null;
+                DisplayBasicUI();
+            }
+        }
     }
 
-    public void DisplayBuildMenu()
+    public void DisplayBasicUI()
     {
+        StateManager.CurrentState = StateManager.State.Free;
         BuildMenu.SetActive(true);
         BuildingInfos.SetActive(false);
     }
 
-    public void DisplayBuildingConfirMenu()
+    public void DisplayBuildingConfirmMenu()
     {
+        StateManager.CurrentState = StateManager.State.DisplaceBuilding;
         BuildingConfirmMenu.SetActive(true);
         BuildingChoiceMenu.SetActive(false);
     }
     
     public void DisplayBuildingChoiceMenu()
     {
+        StateManager.CurrentState = StateManager.State.ChooseBuilding;
         BuildingConfirmMenu.SetActive(false);
         BuildingChoiceMenu.SetActive(true);
     }
 
     public void DisplayBuildingInfos()
     {
+        StateManager.CurrentState = StateManager.State.SelectBuilding;
         BuildMenu.SetActive(false);
         BuildingInfos.SetActive(true);
     }

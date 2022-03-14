@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class CurrentState
+public static class StateManager
 {
     public enum State
     {
-        BuildingMode,
         DisplaceBuilding,
+        ChooseBuilding,
         SelectBuilding,
         Free
     }
+
+    public static State CurrentState = State.Free;
 }
