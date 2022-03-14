@@ -121,8 +121,7 @@ public class BuildingSystem : MonoBehaviour
         }
         
         isMovingBuilding = false;
-        ConfirmBuildButtons.SetActive(false);
-        BuildingsButton.SetActive(true);
+        UIManager_LAC.instance.DisplayBuildingChoiceMenu();
         
     }
 
@@ -237,8 +236,7 @@ public class BuildingSystem : MonoBehaviour
         }
         
         isMovingBuilding = true;
-        ConfirmBuildButtons.SetActive(true);
-        BuildingsButton.SetActive(false);
+        UIManager_LAC.instance.DisplayBuildingConfirMenu();
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
         
     }
