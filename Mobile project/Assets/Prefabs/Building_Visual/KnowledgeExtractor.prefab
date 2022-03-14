@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9202421133720878772}
   - component: {fileID: 306982510469096655}
   - component: {fileID: 6028070427913111938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2466399475323418516}
   - component: {fileID: 7764790750727551358}
   - component: {fileID: 2691924240554709501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,8 +200,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3412804940829909132}
-  m_Layer: 0
-  m_Name: 'KnowledgeExtractor '
+  - component: {fileID: 7497128780170070616}
+  m_Layer: 6
+  m_Name: KnowledgeExtractor
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -223,3 +224,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7497128780170070616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393119220524161010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0b95ca7a2b98d4fb2698e2fa9e073c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
+  Visual: {fileID: 0}
+  UpgradeTier: 0
+  PlacementSound: 0
+  Activated: 0
+  curRotation: 0
+  ressourceType: 1
+  stats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
+  people: 1
+  fonctional: 1
+  stock: 0
