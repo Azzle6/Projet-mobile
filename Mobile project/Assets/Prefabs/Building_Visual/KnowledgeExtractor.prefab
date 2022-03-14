@@ -200,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3412804940829909132}
+  - component: {fileID: 7497128780170070616}
   m_Layer: 6
   m_Name: KnowledgeExtractor
   m_TagString: Untagged
@@ -223,3 +224,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7497128780170070616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393119220524161010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0b95ca7a2b98d4fb2698e2fa9e073c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingScriptable: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
+  Visual: {fileID: 0}
+  UpgradeTier: 0
+  PlacementSound: 0
+  Activated: 0
+  curRotation: 0
+  ressourceType: 1
+  stats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
+  people: 1
+  fonctional: 1
+  stock: 0

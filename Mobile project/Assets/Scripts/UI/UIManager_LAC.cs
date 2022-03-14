@@ -12,18 +12,20 @@ public class UIManager_LAC : MonoBehaviour
     
     public RessourceManager_LAC ressourceM;
     [Header("Ressource")]
-    public TextMeshProUGUI matter;
-    public TextMeshProUGUI knowledge;
+    
     public LayerMask BuildingsLayer;
     public GameObject CurrentSelectedBuilding;
-    [SerializeField]
-    private GameObject BuildMenu;
-    [SerializeField]
-    private GameObject BuildingConfirmMenu;
-    [SerializeField]
-    private GameObject BuildingChoiceMenu;
-    [SerializeField]
-    private GameObject BuildingInfos;
+    
+    [Header("Références")]
+    [SerializeField] private TextMeshProUGUI matter;
+    [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private GameObject BuildMenu;
+    [SerializeField] private GameObject BuildingConfirmMenu;
+    [SerializeField] private GameObject BuildingChoiceMenu;
+    [SerializeField] private GameObject BuildingInfos;
+    [SerializeField] private TextMeshProUGUI SelectedBuildingCurrentPop;
+    [SerializeField] private TextMeshProUGUI SelectedBuildingProduction;
+    [SerializeField] private TextMeshProUGUI SelectedBuildingStockage;
 
     private void Awake()
     {
@@ -83,6 +85,16 @@ public class UIManager_LAC : MonoBehaviour
     public void DisplayBuildingInfos()
     {
         StateManager.CurrentState = StateManager.State.SelectBuilding;
+        Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
+        if (extractor)
+        {
+            SelectedBuildingCurrentPop.text = extractor.people.ToString();
+            SelectedBuildingProduction.text = extractor.ProductCapacity().ToString();
+            SelectedBuildingStockage.text = extractor.stock.ToString();
+        }
+        
+        
+        
         BuildMenu.SetActive(false);
         BuildingInfos.SetActive(true);
     }

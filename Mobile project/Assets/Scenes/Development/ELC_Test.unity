@@ -727,7 +727,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 454698251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1856487538}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &454698251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2371,7 +2383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125265869}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.09, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1017840592}
@@ -2847,7 +2859,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1249951075}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1856487538}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1249951075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2934,7 +2958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262549750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.18, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1017840592}
@@ -7434,16 +7458,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ressourceM: {fileID: 1856487540}
-  matter: {fileID: 397137127}
-  knowledge: {fileID: 771618184}
   BuildingsLayer:
     serializedVersion: 2
     m_Bits: 64
   CurrentSelectedBuilding: {fileID: 0}
+  matter: {fileID: 397137127}
+  knowledge: {fileID: 771618184}
   BuildMenu: {fileID: 436305532}
   BuildingConfirmMenu: {fileID: 2114814181}
   BuildingChoiceMenu: {fileID: 544789440}
   BuildingInfos: {fileID: 9063377}
+  SelectedBuildingCurrentPop: {fileID: 1234401997}
+  SelectedBuildingProduction: {fileID: 2062851831}
+  SelectedBuildingStockage: {fileID: 1101211394}
 --- !u!1 &1915204974
 GameObject:
   m_ObjectHideFlags: 0
@@ -7691,7 +7718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 34.69995, y: -33.799988}
+  m_AnchoredPosition: {x: 34.69995, y: -33.80005}
   m_SizeDelta: {x: 47.8953, y: 47.8953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1975502015
