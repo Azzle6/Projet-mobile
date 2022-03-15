@@ -96,14 +96,20 @@ public class BuildingSystem : MonoBehaviour
 
     private void UpdateBuildingPosition(Vector3Int cellPos) //Déplace le bâtiment sur la case indiquée
     {
-        if (prevPos != cellPos)
+        if (prevPos != cellPos && !isOutOfGrid)
         {
             currentBuilding.transform.localPosition = gridLayout.CellToLocalInterpolated(cellPos + new Vector3(0.5f,0.5f,0));
 
-                    
             prevPos = cellPos;
+            
         }
-        canPlaceBuilding = EmplacementCheck(cellPos, currentBuilding.GetComponent<Building>().BuildingScriptable.buildingArea);
+        canPlaceBuilding = EmplacementCheck(GetAreaEmplacements(cellPos, currentBuilding.GetComponent<Building>().BuildingScriptable.buildingArea));
+        
+        Color color = canPlaceBuilding ? Color.green : Color.red;
+        
+        ChangeColor(prevAreaPositions, Color.white);
+        
+        ChangeColor(currentAreaPositions, color);
     }
 
     public void ConfirmBuild(bool result)
@@ -122,7 +128,7 @@ public class BuildingSystem : MonoBehaviour
         }
         
         isMovingBuilding = false;
-        UIManager_LAC.instance.DisplayBuildingChoiceMenu();
+        UIManager_LAC.instance.SwitchState(StateManager.State.ChooseBuilding);
         
     }
 
@@ -132,11 +138,12 @@ public class BuildingSystem : MonoBehaviour
         {
             globalCellsInfos[vect].isPlaced = true;
         }
-        
+
+        currentBuilding.GetComponent<Building>().enabled = true;
         ChangeColor(currentAreaPositions, Color.black);
     }
 
-    //récupère toutes les coordonnées des tiles concernées
+    //récupère toutes les coordonnées des tiles concernées et si des tiles sont en dehors de la grid
     private Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
     {
         List<Vector3Int> vectList = new List<Vector3Int>();
@@ -151,7 +158,7 @@ public class BuildingSystem : MonoBehaviour
                 Vector3Int XYDisplacement = CalculateRotation(i, j);
                 Vector3Int emplacement = new Vector3Int(pos.x + XYDisplacement.x, pos.y + XYDisplacement.y, pos.z);
 
-                if (globalCellsInfos.ContainsKey(emplacement))
+                if (!IsOutOfGrid(emplacement))
                 {
                     vectList.Add(emplacement);
                 }
@@ -168,17 +175,45 @@ public class BuildingSystem : MonoBehaviour
         return vectList.ToArray();
     }
 
+    //détecte si un emplacement est hors de la grid
+    private bool IsOutOfGrid(Vector3Int coordinate)
+    {
+        if (globalCellsInfos.ContainsKey(coordinate))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
+    private bool IsOutOfGrid(Vector3Int[] coordinate)
+    {
+        bool result = false;
+        foreach (Vector3Int coord in coordinate)
+        {
+            if (!globalCellsInfos.ContainsKey(coord))
+            {
+                result = true;
+                
+            }
+        }
+        return result;
+    }
+    
+
     //Check si l'emplacement est libre
-    private bool EmplacementCheck(Vector3Int pos, bool[,] buildingArea)
+    private bool EmplacementCheck(Vector3Int[] pos)
     {
         prevAreaPositions = currentAreaPositions;
-        currentAreaPositions = GetAreaEmplacements(pos, buildingArea);
+        
 
         bool canPlace = true;
 
         if (!isOutOfGrid)
         {
-            foreach (var vect in currentAreaPositions)
+            foreach (var vect in pos)
             {
                 if (globalCellsInfos[vect].isPlaced)
                 {
@@ -188,13 +223,12 @@ public class BuildingSystem : MonoBehaviour
             }
         }
         else canPlace = false;
-        
-        Color color = canPlace ? Color.green : Color.red;
-        
-        ChangeColor(prevAreaPositions, Color.white);
-        
-        ChangeColor(currentAreaPositions, color);
 
+        if (!isOutOfGrid)
+        {
+            currentAreaPositions = pos;
+        }
+        
         return canPlace;
     }
 
@@ -235,9 +269,9 @@ public class BuildingSystem : MonoBehaviour
             Debug.Log("Building already selected");
             return;
         }
-        
+        currentBuilding.GetComponent<Building>().enabled = false;
         isMovingBuilding = true;
-        UIManager_LAC.instance.DisplayBuildingConfirmMenu();
+        UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
         
     }
@@ -245,6 +279,7 @@ public class BuildingSystem : MonoBehaviour
     public void Rotate()
     {
         Building currentBuild = currentBuilding.GetComponent<Building>();
+        currentBuilding.transform.Rotate(0,-90,0, Space.Self);
         switch (currentBuild.curRotation)
         {
             case Rotation.Back :
