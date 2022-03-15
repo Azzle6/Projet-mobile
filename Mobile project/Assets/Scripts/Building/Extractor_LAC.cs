@@ -33,19 +33,27 @@ public class Extractor_LAC : Building
 
     public override void Upgrade()
     {
-        if (stats.Length <= 0)
+        if (stats.Length <= 0) 
             return;
         level = Mathf.Clamp(level+1, 0, stats.Length);
     }
 
     public void AddPop()
     {
-        people = Mathf.Clamp(people +1, 1, stats[level].maxPeople);
+        if (RessourceManager_LAC.instance.population <= 0 || people == stats[level].maxPeople)
+            return;
+
+        people ++;
+        RessourceManager_LAC.instance.population--;
     }
 
     public void RemovePop()
     {
-        people = Mathf.Clamp(people - 1, 1, stats[level].maxPeople);
+        if( people <= 1)
+            return;
+
+        people--;
+        RessourceManager_LAC.instance.population++;
     }
     public float ProductCapacity()
     {

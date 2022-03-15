@@ -15,6 +15,8 @@ class CamController_LAC : MonoBehaviour
     
     public Plane plane;
 
+    [Header("Cam Clamp")]
+    public float minZoom = 3;
     public float maxZoom = 5;
     public float clampRadius = 3;
 
@@ -46,6 +48,8 @@ class CamController_LAC : MonoBehaviour
 
                 camera.transform.position += Delta1;
             }
+            if (Vector3.Distance(lookPos(), transform.position) > clampRadius)
+                camera.transform.position += lookPos() - transform.position;
         }
 
         //Pinch
@@ -66,11 +70,14 @@ class CamController_LAC : MonoBehaviour
 
 
             //Move cam amount the mid ray
-            float t = Mathf.Clamp(1 / zoom, 0.2f, maxZoom / Vector3.Distance(lookPos(), camera.transform.position));
-            Vector3 newCamPos = Vector3.LerpUnclamped(lookPos(), camera.transform.position,t );
+            float camDist = Vector3.Distance(lookPos(), camera.transform.position);
+            float t = Mathf.Clamp((camDist-minZoom)/(maxZoom-minZoom)/zoom, 0, 1);
+            
+            Vector3 camDir = (camera.transform.position - lookPos()).normalized;
+            Vector3 newCamPos = Vector3.LerpUnclamped(lookPos() + camDir * minZoom, lookPos() + camDir * maxZoom, t );
             //Debug.Log("Cam dist : " + Vector3.Distance(lookPos(), camera.transform.position));
             // clamp cam zoom
-            if (plane.GetDistanceToPoint(newCamPos) >= 1)
+            if (plane.GetDistanceToPoint(newCamPos) >= minZoom)
                 camera.transform.position = newCamPos;
 
             if (rotate && pos2b != pos2)
