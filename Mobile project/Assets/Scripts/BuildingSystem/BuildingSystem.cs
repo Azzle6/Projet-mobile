@@ -15,6 +15,7 @@ public class BuildingSystem : MonoBehaviour
     public GridLayout gridLayout;
     public Tilemap MainTilemap;
     public Tilemap TempTilemap;
+    public LayerMask GroundMask;
     public List<Vector3Int> tilesInf = new List<Vector3Int>(); // pour le débug
     public GameObject ConfirmBuildButtons;
     public GameObject BuildingsButton;
@@ -53,8 +54,8 @@ public class BuildingSystem : MonoBehaviour
         while (isMovingBuilding)
         {
             Debug.Log("isMoving");
-            Ray ray = Camera.main.ScreenPointToRay(/*Input.mousePosition*/InputsManager.GetPosition());
-            if (Physics.Raycast(ray, out RaycastHit rayHit))
+            Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
+            if (Physics.Raycast(ray, out RaycastHit rayHit, 100, GroundMask))
             {
                 Vector3Int cellPos = gridLayout.LocalToCell(rayHit.point);
 
@@ -76,7 +77,7 @@ public class BuildingSystem : MonoBehaviour
             if (InputsManager.Click())
             {
                 Ray ray2 = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
-                if (Physics.Raycast(ray2, out RaycastHit rayHit2))
+                if (Physics.Raycast(ray2, out RaycastHit rayHit2, 100, GroundMask))
                 {
                     Vector3Int cellPos = gridLayout.LocalToCell(rayHit2.point);
                     foreach (var pos in currentAreaPositions)
