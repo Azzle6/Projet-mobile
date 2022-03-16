@@ -30,21 +30,22 @@ public class BehaveGroup : MonoBehaviour
             {
                 boids[i].ViewDetection();
                 boids[i].UpdateVelocity(BehavioursVector(behaviours, boids[i]));
+                Debug.DrawRay(boids[i].transform.position, boids[i].velocity);
                 boids[i].Move(); 
             }
         }
     }
 
-    Vector2 BehavioursVector( List<SteeringBehaviour> behaviours, Boid boid)
+    Vector3 BehavioursVector( List<SteeringBehaviour> behaviours, Boid boid)
     {
-        Vector2 vector = Vector2.zero;
+        Vector3 vector = Vector3.zero;
         for(int i = 0; i < behaviours.Count; i++)
         {
             vector += behaviours[i].VectorCalc(boid) * behaviours[i].weight;
         }
         return vector;
     }
-    public Vector2 GroupCenter(List<Boid> boids)
+    public Vector3 GroupCenter(List<Boid> boids)
     {
         Vector2 summPosition = transform.position;
         foreach (Boid b in boids)
@@ -53,7 +54,7 @@ public class BehaveGroup : MonoBehaviour
         }
         return summPosition / boids.Count;
     }
-    public void AddBoid( Vector2 position)
+    public void AddBoid( Vector3 position)
     {
         // instantiate boid at position 
         // add boid in boids

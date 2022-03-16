@@ -8,7 +8,7 @@ public abstract class SteeringBehaviour : MonoBehaviour
     [HideInInspector]
     public BehaveGroup group;
     public float weight = 1;
-    public abstract Vector2 VectorCalc(Boid boid);
+    public abstract Vector3 VectorCalc(Boid boid);
     public void OnEnable()
     {
         if (!group)

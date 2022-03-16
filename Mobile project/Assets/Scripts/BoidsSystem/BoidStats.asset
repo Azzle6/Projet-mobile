@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8c8c4492382c948bf6448952c2b496, type: 3}
   m_Name: BoidStats
   m_EditorClassIdentifier: 
-  viewDistance: 0
-  viewAngle: 0
+  viewDistance: 2
+  viewAngle: 280
   viewLayer:
     serializedVersion: 2
-    m_Bits: 0
-  minSpeed: 0
-  maxSpeed: 0
+    m_Bits: 320
+  minSpeed: 1
+  maxSpeed: 4
