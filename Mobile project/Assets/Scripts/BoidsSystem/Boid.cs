@@ -6,7 +6,8 @@ public class Boid : MonoBehaviour
 {
     [HideInInspector] public BehaveGroup group;
     [HideInInspector] public BoidStats stats;
-    [HideInInspector] public Vector3 velocity;
+    [HideInInspector] public Vector3 targetVelocity;
+    Vector3 velocity,acceleration;
     
     [HideInInspector] public List<GameObject> viewObj;
     [HideInInspector] public List<Boid> boidMates;
@@ -16,7 +17,7 @@ public class Boid : MonoBehaviour
         this.group = group;
         this.stats = stats;
         Debug.Log(" min: " + stats.minSpeed + " max: " + stats.maxSpeed);
-        velocity = Vector3.forward * Random.Range(stats.minSpeed, stats.maxSpeed);
+        targetVelocity = Vector3.forward * Random.Range(stats.minSpeed, stats.maxSpeed);
         
     }
 
@@ -53,7 +54,7 @@ public class Boid : MonoBehaviour
         return default;
     }
 
-    public void UpdateVelocity( Vector3 velocity)
+    public void UpdateTargetVelocity( Vector3 velocity)
     {
         if (velocity == Vector3.zero)
             velocity = transform.forward;
@@ -63,13 +64,16 @@ public class Boid : MonoBehaviour
         float speed = velocity.magnitude;
         speed = Mathf.Clamp(speed,stats.minSpeed,stats.maxSpeed);
 
-        this.velocity = dir*speed;
+        this.targetVelocity = dir*speed;
         
     }
 
     public void Move()
     {
         // boid displacement
+        velocity = Vector3.Lerp(velocity,targetVelocity,0.1f/stats.inertie);
+        Debug.DrawRay(transform.position, velocity);
+
         transform.forward = velocity.normalized;
         transform.position += velocity * Time.deltaTime;
       

@@ -29,8 +29,8 @@ public class BehaveGroup : MonoBehaviour
             for (int i = 0;i <boids.Count;i++)
             {
                 boids[i].ViewDetection();
-                boids[i].UpdateVelocity(BehavioursVector(behaviours, boids[i]));
-                Debug.DrawRay(boids[i].transform.position, boids[i].velocity);
+                boids[i].UpdateTargetVelocity(BehavioursVector(behaviours, boids[i]));
+                //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
                 boids[i].Move(); 
             }
         }

@@ -12,6 +12,9 @@ public class BoidStats : ScriptableObject
     public LayerMask viewLayer;
 
     [Header("Speed")]
+    
     public float minSpeed;
     public float maxSpeed;
+    [Range(0,10)]
+    public float inertie;
 }
