@@ -5,11 +5,15 @@ using UnityEngine;
 public class BehaveGroup : MonoBehaviour
 {
     public BoidStats boidStats;
+    public GameObject boidPrefab;
+    public int spawnBoids;
+    public float spawnRadius;
 
     [HideInInspector] public List<Boid> boids;
     [HideInInspector] public List<SteeringBehaviour> behaviours;
     private void Start()
     {
+
         // initialize boids
         for(int i= 0; i < transform.childCount; i++)
         {
@@ -20,6 +24,14 @@ public class BehaveGroup : MonoBehaviour
                 boid.Initialize(this, boidStats);
             }
         }
+
+        for (int i = 0; i < spawnBoids; i++)
+        {
+            Vector3 position = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+            AddBoid(position);
+        }
+
+
     }
     private void Update()
     {
@@ -56,6 +68,11 @@ public class BehaveGroup : MonoBehaviour
     }
     public void AddBoid( Vector3 position)
     {
+        GameObject boid0bj = Instantiate(boidPrefab, position, transform.rotation, transform);
+        Boid boid = boid0bj.GetComponent<Boid>();
+
+        boid.Initialize(this,boidStats);
+        boids.Add(boid);
         // instantiate boid at position 
         // add boid in boids
         // load boid stats
