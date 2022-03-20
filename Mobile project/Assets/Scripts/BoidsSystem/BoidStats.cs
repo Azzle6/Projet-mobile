@@ -15,6 +15,8 @@ public class BoidStats : ScriptableObject
     
     public float minSpeed;
     public float maxSpeed;
-    [Range(0,10)]
-    public float inertie;
+    [Range(0.1f,10)]
+    public float acceleration;
+    [Range(0.1f, 10)]
+    public float angularSpeed;
 }

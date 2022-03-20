@@ -19,4 +19,5 @@ MonoBehaviour:
     m_Bits: 320
   minSpeed: 1
   maxSpeed: 4
-  inertie: 5
+  acceleration: 0.8
+  angularSpeed: 10

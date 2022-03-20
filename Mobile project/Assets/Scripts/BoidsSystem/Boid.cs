@@ -7,7 +7,7 @@ public class Boid : MonoBehaviour
     [HideInInspector] public BehaveGroup group;
     [HideInInspector] public BoidStats stats;
     [HideInInspector] public Vector3 targetVelocity;
-    Vector3 velocity,acceleration;
+    [HideInInspector] public Vector3 velocity,acceleration;
     
     [HideInInspector] public List<GameObject> viewObj;
     [HideInInspector] public List<Boid> boidMates;
@@ -71,8 +71,11 @@ public class Boid : MonoBehaviour
     public void Move()
     {
         // boid displacement
-        velocity = Vector3.Lerp(velocity,targetVelocity,0.1f/stats.inertie);
-        Debug.DrawRay(transform.position, velocity);
+        Vector3 dir = Vector3.LerpUnclamped(velocity.normalized,targetVelocity.normalized,stats.angularSpeed * Time.deltaTime);
+        float speed = Mathf.Lerp(velocity.magnitude, targetVelocity.magnitude, stats.acceleration * Time.deltaTime);
+        velocity = dir * speed;
+
+        //Debug.DrawRay(transform.position, velocity);
 
         transform.forward = velocity.normalized;
         transform.position += velocity * Time.deltaTime;
