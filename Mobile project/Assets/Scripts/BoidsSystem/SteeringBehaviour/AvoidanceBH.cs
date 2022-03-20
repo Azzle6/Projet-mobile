@@ -14,6 +14,8 @@ public class AvoidanceBH : SteeringBehaviour
         float rayLength = ( boid.stats.viewDistance);
 
         Vector3 avoidVec = Vector3.zero;
+        int hitVecCoeff = 0;
+
         bool findWay = false;
         //Debug.DrawRay(boid.transform.position, rayDir * 10f, Color.blue);
 
@@ -31,6 +33,9 @@ public class AvoidanceBH : SteeringBehaviour
          
             Debug.DrawRay(boid.transform.position, rayDir * rayLength, (hit)? Color.red : Color.green);
 
+            if (hit)
+                hitVecCoeff = 1;
+
             if (!hit && !findWay)
             {
                 //Debug.DrawRay(boid.transform.position, rayDir *2, Color.green);
@@ -43,6 +48,6 @@ public class AvoidanceBH : SteeringBehaviour
                 avoidVec = rayDir;
         }
         Debug.DrawRay(boid.transform.position, avoidVec, Color.blue);
-        return avoidVec;
+        return avoidVec * hitVecCoeff;
     }
 }
