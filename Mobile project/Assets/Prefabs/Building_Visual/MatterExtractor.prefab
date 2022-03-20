@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6932174129405317879}
   - component: {fileID: -1534512324874370274}
-  - component: {fileID: 7532534279227010861}
   m_Layer: 6
   m_Name: MatterExtractor
   m_TagString: Untagged
@@ -61,19 +60,6 @@ MonoBehaviour:
   people: 2
   fonctional: 1
   stock: 0
---- !u!65 &7532534279227010861
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464669590326285805}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3447238528907895755
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a5db3a5c55934b4590999a9cc2600c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a5db3a5c55934b4590999a9cc2600c9, type: 3}
       propertyPath: m_LocalPosition.y

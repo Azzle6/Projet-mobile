@@ -37,14 +37,16 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Start()
     {
-        DisplayBasicUI();
+        SwitchState(StateManager.State.Free);
     }
 
     private void Update()
     {
+        UpdateUI();
         Debug.Log(StateManager.CurrentState);
         matter.text = (Mathf.Ceil(ressourceM.matter)).ToString();
         knowledge.text = (Mathf.Ceil(ressourceM.knowledge)).ToString();
+        
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
         {
@@ -60,6 +62,7 @@ public class UIManager_LAC : MonoBehaviour
             {
                 if (result.gameObject.layer == 5)
                 {
+                    UpdateUI();
                     canSwitchSelected = false;
                 }
             }
@@ -70,6 +73,31 @@ public class UIManager_LAC : MonoBehaviour
         }
     }
 
+    public void SwitchState(StateManager.State newState)
+    {
+        StateManager.CurrentState = newState;
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        switch (StateManager.CurrentState)
+        {
+            case StateManager.State.Free :
+                DisplayBasicUI();
+                break;
+            case StateManager.State.ChooseBuilding :
+                DisplayBuildingChoiceMenu();
+                break;
+            case StateManager.State.DisplaceBuilding :
+                DisplayBuildingConfirmMenu();
+                break;
+            case StateManager.State.SelectBuilding :
+                DisplayBuildingInfos();
+                break;
+        }
+    }
+
     public void SelectBuilding()
     {
         Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
@@ -77,39 +105,35 @@ public class UIManager_LAC : MonoBehaviour
         {
             CurrentSelectedBuilding = rayHit.collider.gameObject;
             
-            DisplayBuildingInfos();
+            SwitchState(StateManager.State.SelectBuilding);
         }
         else
         {
             CurrentSelectedBuilding = null;
-            DisplayBasicUI();
+            SwitchState(StateManager.State.Free);
         }
     }
 
-    public void DisplayBasicUI()
+    private void DisplayBasicUI()
     {
-        StateManager.CurrentState = StateManager.State.Free;
         BuildMenu.SetActive(true);
         BuildingInfos.SetActive(false);
     }
 
-    public void DisplayBuildingConfirmMenu()
+    private void DisplayBuildingConfirmMenu()
     {
-        StateManager.CurrentState = StateManager.State.DisplaceBuilding;
         BuildingConfirmMenu.SetActive(true);
         BuildingChoiceMenu.SetActive(false);
     }
     
-    public void DisplayBuildingChoiceMenu()
+    private void DisplayBuildingChoiceMenu()
     {
-        StateManager.CurrentState = StateManager.State.ChooseBuilding;
         BuildingConfirmMenu.SetActive(false);
         BuildingChoiceMenu.SetActive(true);
     }
 
-    public void DisplayBuildingInfos()
+    private void DisplayBuildingInfos()
     {
-        StateManager.CurrentState = StateManager.State.SelectBuilding;
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
