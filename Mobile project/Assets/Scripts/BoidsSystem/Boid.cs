@@ -65,6 +65,7 @@ public class Boid : MonoBehaviour
         speed = Mathf.Clamp(speed,stats.minSpeed,stats.maxSpeed);
 
         this.targetVelocity = dir*speed;
+        targetVelocity.y = 0;
         
     }
 

@@ -31,7 +31,7 @@ public class AvoidanceBH : SteeringBehaviour
             bool hit = Physics.SphereCast(checkRay, rayWidth, out rayHit,  rayLength, obstacleMask);
             //bool hit = Physics.Raycast(checkRay, out rayHit, boid.velocity.magnitude, obstacleMask);
          
-            Debug.DrawRay(boid.transform.position, rayDir * rayLength, (hit)? Color.red : Color.green);
+            //Debug.DrawRay(boid.transform.position, rayDir * rayLength, (hit)? Color.red : Color.green);
 
             if (hit)
                 hitVecCoeff = 1;
