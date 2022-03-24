@@ -11,6 +11,13 @@ public class Boid : MonoBehaviour
     
     [HideInInspector] public List<GameObject> viewObj;
     [HideInInspector] public List<Boid> boidMates;
+
+    [HideInInspector] public Extractor_LAC target;
+    bool inRange;
+    float inRangeTime, inRangeDuration = 1;
+    public enum BoidState { MOVE,ATTACK,DIE};
+    public BoidState boidState;
+
     public void Initialize( BehaveGroup group, BoidStats stats)
     {
         //initialize boid parameter
@@ -20,7 +27,6 @@ public class Boid : MonoBehaviour
         targetVelocity = Vector3.forward * Random.Range(stats.minSpeed, stats.maxSpeed);
         
     }
-
     public void ViewDetection()
     {
         
@@ -47,13 +53,6 @@ public class Boid : MonoBehaviour
         }
 
     }
-
-    float nearestBoidDist()
-    {
-        // return distance with nearest boid in boidMates list 
-        return default;
-    }
-
     public void UpdateTargetVelocity( Vector3 velocity)
     {
         if (velocity == Vector3.zero)
@@ -68,7 +67,6 @@ public class Boid : MonoBehaviour
         targetVelocity.y = 0;
         
     }
-
     public void Move()
     {
         // boid displacement
@@ -82,4 +80,42 @@ public class Boid : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
       
     }
+    public void UpdateState()
+    {
+        if (target)
+        {
+            if (!inRange && Vector3.Distance(transform.position, target.transform.position) < stats.range)
+            {
+                inRange = true;
+                inRangeTime = Time.time;
+            }
+            if (Vector3.Distance(transform.position, target.transform.position) > stats.range)
+                inRange = false;
+        }
+        else
+            inRange = false;
+
+        switch (boidState)
+        {
+            case BoidState.MOVE:
+                {
+
+                    if (inRange && (Time.time - inRangeTime) > inRangeDuration)
+                        boidState = BoidState.ATTACK;
+                    break;
+                }
+
+            case BoidState.ATTACK:
+                {
+                   if(!inRange)
+                        boidState = BoidState.MOVE;
+                    break;
+                }
+
+
+        }
+        
+        
+    }
+    
 }

@@ -17,7 +17,9 @@ MonoBehaviour:
   viewLayer:
     serializedVersion: 2
     m_Bits: 320
-  minSpeed: 1
-  maxSpeed: 4
+  minSpeed: 3
+  maxSpeed: 6
   acceleration: 10
   angularSpeed: 10
+  range: 0
+  damage: 0

@@ -19,4 +19,8 @@ public class BoidStats : ScriptableObject
     public float acceleration;
     [Range(0.1f, 10)]
     public float angularSpeed;
+
+    [Header("Attack")]
+    public float range;
+    public int damage;
 }

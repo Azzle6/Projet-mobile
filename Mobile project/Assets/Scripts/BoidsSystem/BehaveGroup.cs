@@ -40,10 +40,13 @@ public class BehaveGroup : MonoBehaviour
         {
             for (int i = 0;i <boids.Count;i++)
             {
+                boids[i].UpdateState();
                 boids[i].ViewDetection();
                 boids[i].UpdateTargetVelocity(BehavioursVector(behaviours, boids[i]));
                 //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
-                boids[i].Move(); 
+
+                if(boids[i].boidState == Boid.BoidState.MOVE)
+                    boids[i].Move(); 
             }
         }
     }
@@ -73,6 +76,7 @@ public class BehaveGroup : MonoBehaviour
 
         boid.Initialize(this,boidStats);
         boids.Add(boid);
+
         // instantiate boid at position 
         // add boid in boids
         // load boid stats
