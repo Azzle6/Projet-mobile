@@ -8,5 +8,10 @@ using UnityEngine;
 public class BuildingSO : SerializedScriptableObject
 {
     public string name;
+    public string production;
+    public string description;
+    public Sprite image;
+    public GameObject prefab;
+    
     public bool[,] buildingArea;
 }

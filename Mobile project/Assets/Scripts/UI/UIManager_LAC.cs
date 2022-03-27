@@ -25,6 +25,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject BuildingConfirmMenu;
     [SerializeField] private GameObject BuildingChoiceMenu;
     [SerializeField] private GameObject BuildingInfos;
+    [SerializeField] private GameObject BuildingPannelInfos;
+    [SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI SelectedBuildingCurrentPop;
     [SerializeField] private TextMeshProUGUI SelectedBuildingProduction;
     [SerializeField] private TextMeshProUGUI SelectedBuildingStockage;
@@ -78,6 +80,13 @@ public class UIManager_LAC : MonoBehaviour
         StateManager.CurrentState = newState;
         UpdateUI();
     }
+    
+    public void SwitchState(int newState)
+    {
+        StateManager.CurrentState = (StateManager.State)newState;
+        Debug.Log(StateManager.CurrentState);
+        UpdateUI();
+    }
 
     private void UpdateUI()
     {
@@ -89,11 +98,15 @@ public class UIManager_LAC : MonoBehaviour
             case StateManager.State.ChooseBuilding :
                 DisplayBuildingChoiceMenu();
                 break;
+            
             case StateManager.State.DisplaceBuilding :
                 DisplayBuildingConfirmMenu();
                 break;
             case StateManager.State.SelectBuilding :
                 DisplayBuildingInfos();
+                break;
+            case StateManager.State.BuildingInfosPannel :
+                DisplayBuildingPannel();
                 break;
         }
     }
@@ -114,21 +127,34 @@ public class UIManager_LAC : MonoBehaviour
         }
     }
 
+    private void DisplayBuildingPannel()
+    {
+        BuildingInfos.SetActive(false);
+        BuildingChoiceMenu.SetActive(false);
+        BuildingPannelInfos.SetActive(true);
+        
+    }
+
     private void DisplayBasicUI()
     {
-        BuildMenu.SetActive(true);
+        MainUI.SetActive(true);
         BuildingInfos.SetActive(false);
+        BuildingConfirmMenu.SetActive(false);
     }
 
     private void DisplayBuildingConfirmMenu()
     {
         BuildingConfirmMenu.SetActive(true);
+        BuildingPannelInfos.SetActive(false);
         BuildingChoiceMenu.SetActive(false);
     }
     
     private void DisplayBuildingChoiceMenu()
     {
+        BuildMenu.SetActive(true);
+        BuildingPannelInfos.SetActive(false);
         BuildingConfirmMenu.SetActive(false);
+        MainUI.SetActive(false);
         BuildingChoiceMenu.SetActive(true);
     }
 

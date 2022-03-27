@@ -128,7 +128,7 @@ public class BuildingSystem : MonoBehaviour
         }
         
         isMovingBuilding = false;
-        UIManager_LAC.instance.SwitchState(StateManager.State.ChooseBuilding);
+        UIManager_LAC.instance.SwitchState(StateManager.State.Free);
         
     }
 
@@ -256,7 +256,7 @@ public class BuildingSystem : MonoBehaviour
                 continue;
             }
             
-            globalCellsInfos.Add(pos, new TileInfos(TileM.GetTile(pos)));
+            globalCellsInfos.Add(pos, new TileInfos(/*TileM.GetTile(pos)*/));
             tilesInf.Add(pos); //pour le débug
         }
     }
@@ -322,17 +322,20 @@ public class BuildingSystem : MonoBehaviour
 
         return newDisplacement;
     }
+
+    
 }
 
 [System.Serializable]
 public class TileInfos
 {
-    public TileBase TileB;
+    //public TileBase TileB;
     public bool isPlaced = false;
-    public int IslandIndex = 0;
+    public Vector3Int position;
+    //public int IslandIndex = 0;
 
-    public TileInfos(TileBase tileB)
+    /*public TileInfos(TileBase tileB)
     {
         TileB = tileB;
-    }
+    }*/
 }
