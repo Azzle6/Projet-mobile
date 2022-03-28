@@ -15,7 +15,7 @@ public class EnemyAnimator : MonoBehaviour
     }
     private void Update()
     {
-        linkBoidState();
+        //linkBoidState();
         UpdateAnim();
 
     }
@@ -30,11 +30,11 @@ public class EnemyAnimator : MonoBehaviour
         if (animState == AnimState.Idle)
             return;
 
-        if ((int)boid.boidState == 0)
+        /*if ((int)boid.boidState == 0)
             animState = AnimState.Move;
 
         if ((int)boid.boidState == 1)
-            animState = AnimState.Attack;
+            animState = AnimState.Attack;*/
 
     }
     void UpdateAnim()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BehaveGroup : MonoBehaviour
 {
     public BoidStats boidStats;
@@ -11,9 +12,9 @@ public class BehaveGroup : MonoBehaviour
 
     [HideInInspector] public List<Boid> boids;
     [HideInInspector] public List<SteeringBehaviour> behaviours;
-    private void Start()
+    protected object child;
+    protected void Start()
     {
-
         // initialize boids
         for(int i= 0; i < transform.childCount; i++)
         {
@@ -30,22 +31,19 @@ public class BehaveGroup : MonoBehaviour
             Vector3 position = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
             AddBoid(position);
         }
-
-
+        Debug.Log("Type object " + child);
     }
-    private void Update()
+    public void Update()
     {
         // run all steering behaviour throug out boids
         if(boids != null)
         {
             for (int i = 0;i <boids.Count;i++)
             {
-                boids[i].UpdateState();
                 boids[i].ViewDetection();
                 boids[i].UpdateTargetVelocity(BehavioursVector(behaviours, boids[i]));
                 //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
-
-                if(boids[i].boidState == Boid.BoidState.MOVE)
+                if (child.GetType() != typeof(EnemyGroup))
                     boids[i].Move(); 
             }
         }

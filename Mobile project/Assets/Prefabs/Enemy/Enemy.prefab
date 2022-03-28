@@ -54,6 +54,7 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   viewObj: []
   boidMates: []
+  target: {fileID: 0}
   boidState: 0
 --- !u!135 &91820558664734504
 SphereCollider:
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAnim: {fileID: 4008266033963430656}
+  boid: {fileID: 91820558664734506}
   animState: 0
 --- !u!1001 &91820558578502733
 PrefabInstance:
