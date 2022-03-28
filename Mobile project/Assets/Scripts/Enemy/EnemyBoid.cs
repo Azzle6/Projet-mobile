@@ -2,25 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Boid
+public class EnemyBoid : Boid
 {
-    EnemyStats eStats;
+    EnemyStats enemyStats;
     [HideInInspector] public Transform target;
     bool inRange;
     float inRangeTime, inRangeDuration = 1;
     public enum EnemyState { MOVE, ATTACK, DIE };
     public EnemyState enemyState;
 
+    public void Initialize(BehaveGroup group, BoidStats stats,EnemyStats eStats)
+    {
+        this.enemyStats = eStats;
+        Initialize(group, stats);
+    }
     public void UpdateState()
     {
         if (target)
         {
-            if (!inRange && Vector3.Distance(transform.position, target.transform.position) < eStats.range)
+            if (!inRange && Vector3.Distance(transform.position, target.transform.position) < enemyStats.range)
             {
                 inRange = true;
                 inRangeTime = Time.time;
             }
-            if (Vector3.Distance(transform.position, target.transform.position) > eStats.range)
+            if (Vector3.Distance(transform.position, target.transform.position) > enemyStats.range)
                 inRange = false;
         }
         else

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571516, b: 0.3069215, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028438, g: 0.22571507, b: 0.30692336, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3748,11 +3748,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boidStats: {fileID: 11400000, guid: 75ad4184b995ba245bc7de1759c60a23, type: 2}
   boidPrefab: {fileID: 91820558664734507, guid: f73b9a4b5acff544bbfefcff8fc847f9, type: 3}
-  spawnBoids: 0
-  spawnRadius: 0
+  spawnBoids: 20
+  spawnRadius: 3
   boids: []
   behaviours: []
-  eStats: {fileID: 0}
+  enemyStats: {fileID: 11400000, guid: 368b692fe0802b94cbe5c4e7dff76339, type: 2}
   enemies: []
 --- !u!4 &1263565715
 Transform:

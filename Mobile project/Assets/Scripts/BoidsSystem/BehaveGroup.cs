@@ -12,7 +12,7 @@ public class BehaveGroup : MonoBehaviour
 
     [HideInInspector] public List<Boid> boids;
     [HideInInspector] public List<SteeringBehaviour> behaviours;
-    protected object child;
+
     protected void Start()
     {
         // initialize boids
@@ -21,7 +21,7 @@ public class BehaveGroup : MonoBehaviour
             Boid boid = transform.GetChild(i).GetComponent<Boid>();
             if (boid)
             {
-                boids.Add(boid);
+                AddBoid(boid);
                 boid.Initialize(this, boidStats);
             }
         }
@@ -29,9 +29,9 @@ public class BehaveGroup : MonoBehaviour
         for (int i = 0; i < spawnBoids; i++)
         {
             Vector3 position = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
-            AddBoid(position);
+            InstantiateBoid(position);
         }
-        Debug.Log("Type object " + child);
+
     }
     public void Update()
     {
@@ -43,8 +43,7 @@ public class BehaveGroup : MonoBehaviour
                 boids[i].ViewDetection();
                 boids[i].UpdateTargetVelocity(BehavioursVector(behaviours, boids[i]));
                 //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
-                if (child.GetType() != typeof(EnemyGroup))
-                    boids[i].Move(); 
+                boids[i].Move(); 
             }
         }
     }
@@ -67,17 +66,21 @@ public class BehaveGroup : MonoBehaviour
         }
         return summPosition / boids.Count;
     }
-    public void AddBoid( Vector3 position)
+    public void InstantiateBoid( Vector3 position)
     {
         GameObject boid0bj = Instantiate(boidPrefab, position, transform.rotation, transform);
         Boid boid = boid0bj.GetComponent<Boid>();
 
         boid.Initialize(this,boidStats);
-        boids.Add(boid);
+        AddBoid(boid);
 
         // instantiate boid at position 
         // add boid in boids
         // load boid stats
+    }
+    public void AddBoid(Boid boid)
+    {
+        boids.Add(boid);
     }
 
     public void RemoveBoid(int boidIndex)

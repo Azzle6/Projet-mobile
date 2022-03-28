@@ -18,7 +18,7 @@ public class Boid : MonoBehaviour
         //initialize boid parameter
         this.group = group;
         this.stats = stats;
-        Debug.Log(" min: " + stats.minSpeed + " max: " + stats.maxSpeed);
+        //Debug.Log(" min: " + stats.minSpeed + " max: " + stats.maxSpeed);
         targetVelocity = Vector3.forward * Random.Range(stats.minSpeed, stats.maxSpeed);
         
     }
