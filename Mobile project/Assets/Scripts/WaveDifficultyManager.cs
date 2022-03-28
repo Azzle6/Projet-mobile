@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEditor;
 
 public class WaveDifficultyManager : MonoBehaviour
 {
+    public static WaveDifficultyManager instance;
+
     [Header("Difficulty Values")]
     [SerializeField] float globalDifficulty;
     [SerializeField] float localDifficulty;
@@ -28,15 +31,56 @@ public class WaveDifficultyManager : MonoBehaviour
     float noisyBuildsProportion;      
 
     //[Header("Defense Level Parameters")]
-    //Recuperer totalite des tourelles du jeu, leur niveau actuel pour le joueur et le niveau maximum qui existe pour elle
+    //Recupérer totalité des tourelles du jeu, leur niveau actuel pour le joueur et le niveau maximum qui existe pour elle
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        
+        instance = this;
+    }
+
+    public void ActualizeParameters(int islandNbr)
+    {
+        RessourceManager_LAC ressourceMana = RessourceManager_LAC.instance;
+
+        //Unlocked Tech Parameters
+        
+        mineralsStocked = Mathf.RoundToInt(ressourceMana.matter);
+        cristalsStocked = Mathf.RoundToInt(ressourceMana.knowledge);
+
+        mineralExtractorsTotal = 0;
+        cristalGeneratorsTotal = 0;
+        for (int i = 0; i < ressourceMana.activeExtractor.Count; i++)
+        {
+            if (ressourceMana.activeExtractor[i].ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+            {
+                mineralExtractorsTotal++;
+            }
+            else
+            {
+                cristalGeneratorsTotal++;
+            }
+        }
+        
+        //Global Defense Potential Parameters
+        
+        //Local Defense Potential Parameters
+       
+        //isleTileNbr =
+        //isleBuildsCount = IslandManager.instance.IslandsList[islandNbr].BuildingsList.Count;
+    }
     
     void GlobalDifficultyCalculation()
     {
         globalDifficulty = (unlockedTechnologiesValue + stockedRessourcesValue + globalDefensePotentialValue)/ 3;
     }    
-    void LocalDifficultyCalculation(int isleNbrOfTiles)
+    void LocalDifficultyCalculation()
     {
-        localDifficulty = (isleNbrOfTiles + noisyBuildsProportion + localDefensePotential) / 3;
+        localDifficulty = (isleTileNbr + noisyBuildsProportion + localDefensePotential) / 3;
     }
 
     #region Global Difficulty Parameters Calculation
@@ -81,6 +125,7 @@ public class WaveDifficultyManager : MonoBehaviour
     }
     #endregion
     #region Local Difficulty Parameters Calculation
+    
     //Local Defense Potential Value Parameters
     [HideInInspector] public float localDefensiveProportion;
 
@@ -91,10 +136,12 @@ public class WaveDifficultyManager : MonoBehaviour
 
     [Header("Isle Size Value Parameters")]
     [Min(1)] public int isleTileMaxNbr = 150;
+    public int isleTileNbr;
 
     [Header("Noisy Proportion Parameters")]
     [HideInInspector] public int isleNoisyBuilds;
-    public float isleNoisyBuildsMaxProportion;
+    [Range(0f,1f)] public float isleNoisyBuildsMaxProportion = 0.25f;
+    [HideInInspector] public int isleBuildsCount;
 
     void LocalDefensiveProportionCalculation()
     {
@@ -104,13 +151,13 @@ public class WaveDifficultyManager : MonoBehaviour
     {
         localDefensePotential = localDefensiveProportion * defenseLevel;
     }
-    public void IsleSizeValueCalculation(int isleNbrOfTiles)
+    public void IsleSizeValueCalculation()
     {
-        isleSizeValue = Mathf.Clamp01(isleNbrOfTiles / isleTileMaxNbr);
+        isleSizeValue = Mathf.Clamp01(isleTileNbr / isleTileMaxNbr);
     }
     void NoisyBuildsProportionCalculation()
     {
-        noisyBuildsProportion = Mathf.Clamp01(isleNoisyBuilds / isleNoisyBuildsMaxProportion * isleNoisyBuildsMaxProportion);
+        noisyBuildsProportion = Mathf.Clamp01(isleNoisyBuilds / isleBuildsCount * isleNoisyBuildsMaxProportion);
     }
     #endregion
 
@@ -119,11 +166,11 @@ public class WaveDifficultyManager : MonoBehaviour
 
     }    
 
-    [ContextMenu("Calcuate Difficulty")]
+    [ContextMenu("Calculate Difficulty")]
     public float WaveDifficultyCalculation()
     {
         //Parametres de la Global Difficulty
-        UnlockedTechCalculation();
+        //UnlockedTechCalculation();
         StockedRessourcesCalculation();
         DefensiveLevelCalculation();
         DefensiveProportionCalculation();
@@ -134,13 +181,39 @@ public class WaveDifficultyManager : MonoBehaviour
         //Parametres de la Local Difficulty
         LocalDefensePotentialCalculation();
         LocalDefensiveProportionCalculation();
-        //IsleSizeValueCalculation(); AJOUTER PARAMETRE
+        IsleSizeValueCalculation();
         NoisyBuildsProportionCalculation();
 
-        //LocalDifficultyCalculation(); AJOUTER PARAMETRE
+        LocalDifficultyCalculation();
 
         float waveDifficulty = globalDifficulty * globalDifficultyInfluence + localDifficulty * (100 - globalDifficultyInfluence);
 
         return waveDifficulty;
     }
+
+
+
+    #region Wave Threshold
+    public int WaveThresholdCalculation(int isleNbrOfTile, int isleNbrOfOccupiedTiles)
+    {
+        int maxThreshold = 0;
+
+        if (isleNbrOfTile < 15)
+        {
+            maxThreshold = 2000;
+        }
+        else if (isleNbrOfTile < 20)
+        {
+            maxThreshold = 3500;
+        }
+        else if (isleNbrOfTile > 20)
+        {
+            maxThreshold = 7500;
+        }
+
+        int waveThreshold = isleNbrOfTile / isleNbrOfOccupiedTiles * maxThreshold;
+
+        return waveThreshold;
+    }
+    #endregion
 }
