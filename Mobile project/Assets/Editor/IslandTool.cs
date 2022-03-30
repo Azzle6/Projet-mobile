@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class IslandTool : EditorWindow
 {
-    private IslandManager islandMana;
+    /*private IslandManager islandMana;
     private GridLayout gridLayout;
     private LayerMask gridMask;
     private Tilemap TileM;

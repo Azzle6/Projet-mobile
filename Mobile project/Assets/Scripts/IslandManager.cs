@@ -12,7 +12,8 @@ public class IslandManager : MonoBehaviour
     
     
     //public Dictionary<int, Island> IslandsList = new Dictionary<int, Island>();
-    public Island[] islandsList = new Island[1];
+    public Island[] islandsList = new Island[2];
+    public Island currentIsland;
 
     private void Awake()
     {
@@ -20,7 +21,27 @@ public class IslandManager : MonoBehaviour
         instance = this;
     }
 
-    [ExecuteInEditMode]
+    private void Start()
+    {
+        currentIsland = islandsList[0];
+    }
+
+    [ContextMenu("Switch Island")]
+    public void SwitchIsland()
+    {
+        if (StateManager.CurrentState != StateManager.State.Free) return;
+        
+        currentIsland.TilemapObject.SetActive(false);
+        currentIsland = islandsList[1];
+        BuildingSystem.instance.MainTilemap = currentIsland.TilemapObject.GetComponent<Tilemap>();
+        //BuildingSystem.instance.gridLayout = BuildingSystem.instance.MainTilemap.layoutGrid;
+        BuildingSystem.instance.UpdateTMPos();
+        islandsList[1].TilemapObject.SetActive(true);
+    }
+    
+    
+
+    /*[ExecuteInEditMode]
     public void TriggerSelecting(int islandInd)
     {
         StartCoroutine(Selecting(islandInd));
@@ -67,5 +88,5 @@ public class IslandManager : MonoBehaviour
                 islandsList[islandIndex].tilesList.Add(tileInf);
             }
         }
-    }
+    }*/
 }

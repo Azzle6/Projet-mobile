@@ -6,10 +6,10 @@ using UnityEngine.WSA;
 [System.Serializable]
 public class Island
 {
-    public List<TileInfos> tilesList = new List<TileInfos>();
+    public GameObject TilemapObject;
     [HideInInspector]public List<Building> BuildingsList = new List<Building>();
-    [HideInInspector] public float CurrentSounds;
+    [HideInInspector]public float CurrentSounds;
     [HideInInspector]public bool IsUnderAttack;
     [HideInInspector]public bool IsConnected;
-    [HideInInspector]public bool MainIsland;
+    public bool MainIsland;
 }
