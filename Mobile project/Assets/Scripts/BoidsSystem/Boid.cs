@@ -13,11 +13,11 @@ public class Boid : MonoBehaviour
     [HideInInspector] public List<Boid> boidMates;
 
 
-    public void Initialize( BehaveGroup group, BoidStats stats)
+    public void Initialize( BehaveGroup group)
     {
         //initialize boid parameter
         this.group = group;
-        this.stats = stats;
+        stats = group.boidStats;
         //Debug.Log(" min: " + stats.minSpeed + " max: " + stats.maxSpeed);
         targetVelocity = Vector3.forward * Random.Range(stats.minSpeed, stats.maxSpeed);
         
@@ -68,7 +68,7 @@ public class Boid : MonoBehaviour
         Vector3 dir = Vector3.LerpUnclamped(velocity.normalized,targetVelocity.normalized,stats.angularSpeed * Time.deltaTime);
         float speed = Mathf.Lerp(velocity.magnitude, targetVelocity.magnitude, stats.acceleration * Time.deltaTime);
         velocity = dir * speed;
-
+        velocity.y = 0;
         //Debug.DrawRay(transform.position, velocity);
 
         transform.forward = velocity.normalized;

@@ -11,10 +11,10 @@ public class EnemyBoid : Boid
     public enum EnemyState { MOVE, ATTACK, DIE };
     public EnemyState enemyState;
 
-    public void Initialize(BehaveGroup group, BoidStats stats,EnemyStats eStats)
+    public void Initialize(EnemyGroup enemyGroup)
     {
-        this.enemyStats = eStats;
-        Initialize(group, stats);
+        enemyStats = enemyGroup.enemyStats;
+        Initialize(enemyGroup as BehaveGroup);
     }
     public void UpdateState()
     {

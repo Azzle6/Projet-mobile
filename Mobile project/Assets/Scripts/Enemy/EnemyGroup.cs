@@ -27,6 +27,7 @@ public class EnemyGroup : BehaveGroup
         }
     }
 
+    #region BoidManagement
     public new void InstantiateBoid(Vector3 position)
     {
         GameObject boid0bj = Instantiate(boidPrefab, position, transform.rotation, transform);
@@ -55,4 +56,5 @@ public class EnemyGroup : BehaveGroup
         enemies.Add(enemy);
         base.AddBoid(enemy);
     }
+    #endregion
 }

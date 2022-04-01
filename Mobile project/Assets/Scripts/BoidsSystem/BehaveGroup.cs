@@ -11,7 +11,7 @@ public class BehaveGroup : MonoBehaviour
     public float spawnRadius;
 
     [HideInInspector] public List<Boid> boids;
-    [HideInInspector] public List<SteeringBehaviour> behaviours;
+    public List<SteeringBehaviour> behaviours;
 
     protected void Start()
     {
@@ -22,7 +22,7 @@ public class BehaveGroup : MonoBehaviour
             if (boid)
             {
                 AddBoid(boid);
-                boid.Initialize(this, boidStats);
+                boid.Initialize(this);
             }
         }
 
@@ -41,22 +41,14 @@ public class BehaveGroup : MonoBehaviour
             for (int i = 0;i <boids.Count;i++)
             {
                 boids[i].ViewDetection();
-                boids[i].UpdateTargetVelocity(BehavioursVector(behaviours, boids[i]));
+                boids[i].UpdateTargetVelocity(BehaviourHelper.BehavioursVec(boids[i],behaviours));
                 //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
                 boids[i].Move(); 
             }
         }
     }
 
-    Vector3 BehavioursVector( List<SteeringBehaviour> behaviours, Boid boid)
-    {
-        Vector3 vector = Vector3.zero;
-        for(int i = 0; i < behaviours.Count; i++)
-        {
-            vector += behaviours[i].VectorCalc(boid) * behaviours[i].weight;
-        }
-        return vector;
-    }
+
     public Vector3 GroupCenter(List<Boid> boids)
     {
         Vector2 summPosition = transform.position;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAnimator : MonoBehaviour
 {
     public Animator enemyAnim;
-    public Boid boid;
+    public EnemyBoid enemy;
     public enum AnimState { Idle, Move, Attack}
     public AnimState animState;
 
@@ -15,7 +15,7 @@ public class EnemyAnimator : MonoBehaviour
     }
     private void Update()
     {
-        //linkBoidState();
+        linkBoidState();
         UpdateAnim();
 
     }
@@ -30,13 +30,13 @@ public class EnemyAnimator : MonoBehaviour
         if (animState == AnimState.Idle)
             return;
 
-        /*if ((int)boid.boidState == 0)
+        if ((int)enemy.enemyState == 0)
             animState = AnimState.Move;
 
-        if ((int)boid.boidState == 1)
-            animState = AnimState.Attack;*/
-
+        if ((int)enemy.enemyState == 1)
+            animState = AnimState.Attack;
     }
+
     void UpdateAnim()
     {
         enemyAnim.SetInteger("State", (int)animState);
