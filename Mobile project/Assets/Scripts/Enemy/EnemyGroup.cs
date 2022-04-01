@@ -16,7 +16,7 @@ public class EnemyGroup : BehaveGroup
             if (eboid)
             {
                 AddBoid(eboid);
-                eboid.Initialize(this, boidStats,enemyStats);
+                eboid.Initialize(this);
             }
         }
 
@@ -39,7 +39,7 @@ public class EnemyGroup : BehaveGroup
             return;
         }
 
-        enemy.Initialize(this, boidStats,enemyStats);
+        enemy.Initialize(this);
         AddBoid(enemy);
     }
     public new void AddBoid(Boid boid)

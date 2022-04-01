@@ -63,7 +63,7 @@ public class BehaveGroup : MonoBehaviour
         GameObject boid0bj = Instantiate(boidPrefab, position, transform.rotation, transform);
         Boid boid = boid0bj.GetComponent<Boid>();
 
-        boid.Initialize(this,boidStats);
+        boid.Initialize(this);
         AddBoid(boid);
 
         // instantiate boid at position 
