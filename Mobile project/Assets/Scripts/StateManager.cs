@@ -9,7 +9,8 @@ public static class StateManager
         DisplaceBuilding,
         ChooseBuilding,
         SelectBuilding,
-        Free
+        Free,
+        BuildingInfosPannel,
     }
 
     public static State CurrentState = State.Free;
