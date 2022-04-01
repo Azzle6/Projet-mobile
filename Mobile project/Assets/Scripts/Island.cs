@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
+[System.Serializable]
 public class Island
 {
-    public Vector2Int[] Positions = new Vector2Int[2];
-    public List<Building> BuildingsList = new List<Building>();
-    public float CurrentSounds;
-    public bool IsUnderAttack;
-    public bool IsConnected;
+    public GameObject TilemapObject;
+    [HideInInspector]public List<Building> BuildingsList = new List<Building>();
+    [HideInInspector]public float CurrentSounds;
+    [HideInInspector]public bool IsUnderAttack;
+    [HideInInspector]public bool IsConnected;
     public bool MainIsland;
 }
