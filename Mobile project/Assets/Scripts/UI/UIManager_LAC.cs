@@ -11,7 +11,7 @@ public class UIManager_LAC : MonoBehaviour
 {
     public static UIManager_LAC instance;
     
-    public RessourceManager_LAC ressourceM;
+    private RessourceManager_LAC ressourceM;
     [Header("Ressource")]
     
     public LayerMask BuildingsLayer;
@@ -21,12 +21,12 @@ public class UIManager_LAC : MonoBehaviour
     [Header("Références")]
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
-    [SerializeField] private GameObject BuildMenu;
-    [SerializeField] private GameObject BuildingConfirmMenu;
-    [SerializeField] private GameObject BuildingChoiceMenu;
+    //[SerializeField] private GameObject BuildMenu;
+    //[SerializeField] private GameObject BuildingConfirmMenu;
+    //[SerializeField] private GameObject BuildingChoiceMenu;
     [SerializeField] private GameObject BuildingInfos;
-    [SerializeField] private GameObject BuildingPannelInfos;
-    [SerializeField] private GameObject MainUI;
+    //[SerializeField] private GameObject BuildingPannelInfos;
+    //[SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI SelectedBuildingCurrentPop;
     [SerializeField] private TextMeshProUGUI SelectedBuildingProduction;
     [SerializeField] private TextMeshProUGUI SelectedBuildingStockage;
@@ -39,6 +39,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Start()
     {
+        ressourceM = RessourceManager_LAC.instance;
         SwitchState(StateManager.State.Free);
     }
 
@@ -46,8 +47,8 @@ public class UIManager_LAC : MonoBehaviour
     {
         UpdateUI();
         Debug.Log(StateManager.CurrentState);
-        matter.text = (Mathf.Ceil(ressourceM.matter)).ToString();
-        knowledge.text = (Mathf.Ceil(ressourceM.knowledge)).ToString();
+        matter.text = Mathf.Ceil(ressourceM.matter).ToString();
+        knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
@@ -127,35 +128,41 @@ public class UIManager_LAC : MonoBehaviour
         }
     }
 
+    public void IncreaseBuildingPop(bool increaseOrDecrease)
+    {
+        if(increaseOrDecrease) RessourceManager_LAC.instance.AddPop();
+        else RessourceManager_LAC.instance.RemovePop();
+    }
+
     private void DisplayBuildingPannel()
     {
-        BuildingInfos.SetActive(false);
+        /*BuildingInfos.SetActive(false);
         BuildingChoiceMenu.SetActive(false);
-        BuildingPannelInfos.SetActive(true);
+        BuildingPannelInfos.SetActive(true);*/
         
     }
 
     private void DisplayBasicUI()
     {
-        MainUI.SetActive(true);
+        //MainUI.SetActive(true);
         BuildingInfos.SetActive(false);
-        BuildingConfirmMenu.SetActive(false);
+        //BuildingConfirmMenu.SetActive(false);
     }
 
     private void DisplayBuildingConfirmMenu()
     {
-        BuildingConfirmMenu.SetActive(true);
+        /*BuildingConfirmMenu.SetActive(true);
         BuildingPannelInfos.SetActive(false);
-        BuildingChoiceMenu.SetActive(false);
+        BuildingChoiceMenu.SetActive(false);*/
     }
     
     private void DisplayBuildingChoiceMenu()
     {
-        BuildMenu.SetActive(true);
+        /*BuildMenu.SetActive(true);
         BuildingPannelInfos.SetActive(false);
         BuildingConfirmMenu.SetActive(false);
         MainUI.SetActive(false);
-        BuildingChoiceMenu.SetActive(true);
+        BuildingChoiceMenu.SetActive(true);*/
     }
 
     private void DisplayBuildingInfos()
@@ -163,14 +170,11 @@ public class UIManager_LAC : MonoBehaviour
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            SelectedBuildingCurrentPop.text = extractor.people.ToString();
-            SelectedBuildingProduction.text = extractor.ProductCapacity().ToString();
-            SelectedBuildingStockage.text = extractor.stock.ToString();
+            SelectedBuildingCurrentPop.text = "Pop : " + extractor.people;
+            SelectedBuildingProduction.text = "Production : " + extractor.ProductCapacity() + " / s";
+            SelectedBuildingStockage.text = "Stock : " + extractor.stock;
         }
         
-        
-        
-        BuildMenu.SetActive(false);
         BuildingInfos.SetActive(true);
     }
 }

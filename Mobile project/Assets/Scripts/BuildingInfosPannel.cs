@@ -11,7 +11,7 @@ using Image = UnityEngine.UI.Image;
 public class BuildingInfosPannel : MonoBehaviour
 {
     [SerializeField] private Image buildImage;
-    [SerializeField] private TMP_Text buildName, buildProd, buildDescription;
+    [SerializeField] private TMP_Text buildName, buildProd, buildPrice, buildDescription;
     public BuildingSO buildingInf;
     
     private void OnEnable()
@@ -25,6 +25,7 @@ public class BuildingInfosPannel : MonoBehaviour
         buildImage.sprite = buildingInf.image;
         buildName.text = buildingInf.name;
         buildProd.text = buildingInf.production;
+        buildPrice.text = buildingInf.price;
         buildDescription.text = buildingInf.description;
     }
 
