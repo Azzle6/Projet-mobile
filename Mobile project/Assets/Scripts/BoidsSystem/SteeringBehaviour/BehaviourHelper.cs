@@ -35,6 +35,16 @@ public static class BehaviourHelper
 
         return Vector3.zero;
     }
+    public static HeadingBH GetHeadingBH(ref List<SteeringBehaviour> bhs)
+    {
+        HeadingBH head = null;
+        for(int i = 0; i< bhs.Count; i++)
+        {
+            if (bhs[i] is HeadingBH)
+                return bhs[i] as HeadingBH;
+        }
+        return head;
+    }
     #region specific behaviours
     static Vector3 SeparationVec(Boid boid,SeparationBH bh)
     {

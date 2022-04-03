@@ -7,4 +7,10 @@ public class HeadingBH : SteeringBehaviour
     public Transform head;
     public float headRadius = 1.5f;
 
+    public HeadingBH(Transform head, float headRadius)
+    {
+        this.head = head;
+        this.headRadius = headRadius;
+    }
+
 }

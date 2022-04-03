@@ -6,9 +6,12 @@ public class EnemyGroup : BehaveGroup
 {
     public EnemyStats enemyStats;
     [HideInInspector] public List<EnemyBoid> enemies;
-
+    public Transform target;
+    [Header("Debug")]
+    public HeadingBH headings;
     private new void Start()
     {
+        InitilaizePreset();
         // initialize boids
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -25,8 +28,46 @@ public class EnemyGroup : BehaveGroup
             Vector3 position = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
             InstantiateBoid(position);
         }
+
+        /*foreach (SteeringBehaviour sb in presetBH.behaviours)
+        {
+            if(sb is HeadingBH)
+            {
+                Debug.Log("Head " + sb.name);
+                headings = Instantiate(sb as HeadingBH);
+            }
+            
+        }*/
     }
 
+    new void Update()
+    {
+        // run all steering behaviour throug out boids
+        if (enemies != null)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].ViewDetection();
+                enemies[i].UpdateTargetVelocity(BehaviourHelper.BehavioursVec(enemies[i], presetBH.behaviours));
+                //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
+
+                enemies[i].UpdateState();
+                if(enemies[i].enemyState == EnemyBoid.EnemyState.MOVE)
+                    enemies[i].Move();
+            }
+        }
+    }
+
+    #region Group Management
+    public void SetTarget(Transform target)
+    {
+        BehaviourHelper.GetHeadingBH(ref presetBH.behaviours).head = target;
+        for(int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].target = target;
+        }
+    }
+    #endregion
     #region BoidManagement
     public new void InstantiateBoid(Vector3 position)
     {

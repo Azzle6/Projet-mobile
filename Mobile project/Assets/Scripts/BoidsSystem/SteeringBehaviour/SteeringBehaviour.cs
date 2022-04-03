@@ -10,7 +10,8 @@ public abstract class SteeringBehaviour : ScriptableObject
     public float weight = 1;
     public void Initilaize(BehaveGroup group)
     {
-        group.behaviours.Add(this);
+        if(!group.presetBH.behaviours.Contains(this))
+            group.presetBH.behaviours.Add(this);
         this.group = group;
     }
 

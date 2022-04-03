@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(order = 1, fileName = "Building", menuName = "Scriptables/BuildingSO")]
 public class BuildingSO : SerializedScriptableObject
 {
-    public string name;
+    public new string name;
     public string production;
     public string description;
     public string price;

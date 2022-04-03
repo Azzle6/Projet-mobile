@@ -56,6 +56,9 @@ MonoBehaviour:
   boidMates: []
   target: {fileID: 0}
   enemyState: 0
+  m_renderer: {fileID: 1623446433615368393}
+  moveMat: {fileID: 2100000, guid: 565a5a841af4a4d4a88b8105f8b0acc0, type: 2}
+  attackMat: {fileID: 2100000, guid: e903dee2e32c0844aac0aef83fe3d05b, type: 2}
 --- !u!135 &91820558664734504
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -167,5 +170,10 @@ PrefabInstance:
 --- !u!4 &489923907602295718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d734c66a744a3b24388a4d8954508186, type: 3}
+  m_PrefabInstance: {fileID: 91820558578502733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1623446433615368393 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d734c66a744a3b24388a4d8954508186, type: 3}
   m_PrefabInstance: {fileID: 91820558578502733}
   m_PrefabAsset: {fileID: 0}
