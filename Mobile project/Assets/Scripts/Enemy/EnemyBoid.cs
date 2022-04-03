@@ -5,11 +5,17 @@ using UnityEngine;
 public class EnemyBoid : Boid
 {
     EnemyStats enemyStats;
+    public enum EnemyState { MOVE, ATTACK, DIE };
+    public EnemyState enemyState;
+
+    // displacement
     [HideInInspector] public Transform target;
     bool inRange;
     float inRangeTime, inRangeDuration = 0.1f;
-    public enum EnemyState { MOVE, ATTACK, DIE };
-    public EnemyState enemyState;
+
+    //Attack
+    float attackDelay = 0;
+
     [Header("Debug")]
     public MeshRenderer m_renderer;
     public Material moveMat, attackMat;
@@ -20,6 +26,12 @@ public class EnemyBoid : Boid
         target = enemyGroup.target;
         Initialize(enemyGroup as BehaveGroup);
 
+    }
+
+    public void Attack()
+    {
+        if (target)
+            Destroy(target.gameObject);
     }
     public void UpdateState()
     {
@@ -52,11 +64,25 @@ public class EnemyBoid : Boid
 
             case EnemyState.ATTACK:
                 {
-                    transform.forward = (target.position - transform.position).normalized;
+                    
                     if (!inRange)
                     {
+                        attackDelay = 0;
                         m_renderer.material = moveMat;
                         enemyState = EnemyState.MOVE;
+                    }
+
+                    if (target)
+                    {
+                        transform.forward = (target.position - transform.position).normalized;
+                        attackDelay += Time.deltaTime;
+
+                        if(attackDelay > enemyStats.attackSpeed)
+                        {
+                            attackDelay = 0;
+                            Attack();
+                        }
+                        
                     }
                         
                     break;

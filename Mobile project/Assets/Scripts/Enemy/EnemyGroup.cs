@@ -6,13 +6,20 @@ public class EnemyGroup : BehaveGroup
 {
     public EnemyStats enemyStats;
     [HideInInspector] public List<EnemyBoid> enemies;
+
+    [Header("Displacement")]
     public Transform target;
+    public Transform spawnPoint;
+
     [Header("Debug")]
-    public HeadingBH headings;
+    public List<Transform> targets;
+
     private new void Start()
     {
         InitilaizePreset();
+
         // initialize boids
+        StartCoroutine(SpawnEnemies(spawnPoint.position, spawnBoids, 0.5f));
         for (int i = 0; i < transform.childCount; i++)
         {
             EnemyBoid eboid = transform.GetChild(i).GetComponent<EnemyBoid>();
@@ -23,11 +30,10 @@ public class EnemyGroup : BehaveGroup
             }
         }
 
-        for (int i = 0; i < spawnBoids; i++)
-        {
-            Vector3 position = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
-            InstantiateBoid(position);
-        }
+        SetTarget(target);
+
+
+
 
         /*foreach (SteeringBehaviour sb in presetBH.behaviours)
         {
@@ -56,17 +62,60 @@ public class EnemyGroup : BehaveGroup
                     enemies[i].Move();
             }
         }
+
+        Transform nTarget = NearestTarget(spawnPoint, targets);
+        if (!target && nTarget)
+        {
+            target = nTarget;
+            SetTarget(target);
+        }
+            
     }
 
     #region Group Management
     public void SetTarget(Transform target)
     {
+        if (target == null)
+            Debug.Log("Target null for " + this.name);
+
         BehaviourHelper.GetHeadingBH(ref presetBH.behaviours).head = target;
         for(int i = 0; i < enemies.Count; i++)
         {
             enemies[i].target = target;
         }
     }
+    public Transform NearestTarget(Transform origin,List<Transform> targets)
+    {
+        Transform nearestTarget = null;
+        float minDist = -1;
+
+        
+        for(int i= 0; i < targets.Count; i++)
+        {
+            if (targets[i])
+            {
+                float dist = Vector3.Distance(transform.position, targets[i].position);
+                if (minDist < 0 || dist < minDist)
+                {
+                    minDist = dist;
+                    nearestTarget = targets[i];
+                }
+            }
+        }
+        return nearestTarget;
+    }
+
+    public IEnumerator SpawnEnemies(Vector3 origin, int number, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Vector3 position = origin + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
+        InstantiateBoid(position);
+        number--;
+
+        if (number > 0)
+            StartCoroutine(SpawnEnemies(origin, number, delay));
+    }
+
     #endregion
     #region BoidManagement
     public new void InstantiateBoid(Vector3 position)

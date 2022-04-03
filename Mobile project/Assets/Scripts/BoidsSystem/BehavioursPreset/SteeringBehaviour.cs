@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SteeringBehaviour", menuName = "Scriptables/SteeringBehaviour_SO", order = 1)]
+
 public abstract class SteeringBehaviour : ScriptableObject
 {
     [HideInInspector]

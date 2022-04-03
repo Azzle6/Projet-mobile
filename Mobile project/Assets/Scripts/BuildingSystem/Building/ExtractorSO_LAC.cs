@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(order = 2, fileName = "ExtractorStats", menuName = "Scriptables/ExtractorSO")]
+[CreateAssetMenu(order = 2, fileName = "ExtractorStats", menuName = "Scriptables/BuildingSO/ExtractorSO")]
 public class ExtractorSO_LAC : ScriptableObject
 {
     public GameObject visual;
