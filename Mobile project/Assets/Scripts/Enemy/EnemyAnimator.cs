@@ -6,7 +6,7 @@ public class EnemyAnimator : MonoBehaviour
 {
     public Animator enemyAnim;
     public EnemyBoid enemy;
-    public enum AnimState { Idle, Move, Attack}
+    public enum AnimState { Idle, Move, Attack,Die}
     public AnimState animState;
 
     private void Start()
@@ -35,6 +35,9 @@ public class EnemyAnimator : MonoBehaviour
 
         if ((int)enemy.enemyState == 1)
             animState = AnimState.Attack;
+
+        if ((int)enemy.enemyState == 2)
+            animState = AnimState.Die;
     }
 
     void UpdateAnim()

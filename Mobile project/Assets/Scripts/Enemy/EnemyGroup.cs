@@ -53,13 +53,16 @@ public class EnemyGroup : BehaveGroup
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                enemies[i].ViewDetection();
-                enemies[i].UpdateTargetVelocity(BehaviourHelper.BehavioursVec(enemies[i], presetBH.behaviours));
-                //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
+                if (enemies[i])
+                {
+                    enemies[i].ViewDetection();
+                    enemies[i].UpdateTargetVelocity(BehaviourHelper.BehavioursVec(enemies[i], presetBH.behaviours));
+                    //Debug.DrawRay(boids[i].transform.position, boids[i].targetVelocity);
 
-                enemies[i].UpdateState();
-                if(enemies[i].enemyState == EnemyBoid.EnemyState.MOVE)
-                    enemies[i].Move();
+                    enemies[i].UpdateState();
+                    if (enemies[i].enemyState == EnemyBoid.EnemyState.MOVE)
+                        enemies[i].Move();
+                }
             }
         }
 

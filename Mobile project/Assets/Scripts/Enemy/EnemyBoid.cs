@@ -14,6 +14,7 @@ public class EnemyBoid : Boid
     float inRangeTime, inRangeDuration = 0.1f;
 
     //Attack
+    [HideInInspector] public int health;
     float attackDelay = 0;
 
     [Header("Debug")]
@@ -24,6 +25,7 @@ public class EnemyBoid : Boid
     {
         enemyStats = enemyGroup.enemyStats;
         target = enemyGroup.target;
+        health = enemyStats.healthPoint;
         Initialize(enemyGroup as BehaveGroup);
 
     }
@@ -33,6 +35,24 @@ public class EnemyBoid : Boid
         if (target)
             Destroy(target.gameObject);
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+            Die();
+            
+    }
+
+    public void Die()
+    {
+        enemyState = EnemyState.DIE;
+        transform.parent.gameObject.layer = 0;
+        group.RemoveBoid(this);
+
+        Destroy(this);
+    }
+
     public void UpdateState()
     {
         if (target)
@@ -47,6 +67,7 @@ public class EnemyBoid : Boid
         }
         else
             inRange = false;
+            
 
         switch (enemyState)
         {
@@ -85,6 +106,10 @@ public class EnemyBoid : Boid
                         
                     }
                         
+                    break;
+                }
+            case EnemyState.DIE:
+                {
                     break;
                 }
         }
