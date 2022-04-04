@@ -35,6 +35,7 @@ public class Turret_LAC : Building
         }
             
     }
+
     public void UpdateTarget()
     {
         if (!enemyTarget)
@@ -64,7 +65,6 @@ public class Turret_LAC : Building
         else if (Vector3.Distance(transform.position, enemyTarget.transform.position) > stats[level].range)
             enemyTarget = null;
     }
-
     public void Attack(EnemyBoid enemytarget)
     {
         enemyTarget.TakeDamage(stats[level].damage);
@@ -79,6 +79,20 @@ public class Turret_LAC : Building
         level = Mathf.Clamp(level + 1, 0, stats.Length);
     }
 
+    #region Get Stats
+    public int CurrentDamage()
+    {
+        return stats[level].damage;
+    }
+    public float CurrentRange()
+    {
+        return stats[level].range;
+    }
+    public float CurrentAttackSpeed()
+    {
+        return stats[level].attackSpeed;
+    }
+    #endregion
     // debug
     IEnumerator ResetTargetMat(float delay)
     {

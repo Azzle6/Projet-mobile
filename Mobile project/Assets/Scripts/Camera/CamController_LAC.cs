@@ -37,7 +37,7 @@ class CamController_LAC : MonoBehaviour
         var Delta2 = Vector3.zero;
 
         //Scroll
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 && StateManager.CurrentState != StateManager.State.DisplaceBuilding)
         {
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -53,7 +53,7 @@ class CamController_LAC : MonoBehaviour
         }
 
         //Pinch
-        if (Input.touchCount >= 2)
+        if (Input.touchCount >= 2 && StateManager.CurrentState != StateManager.State.DisplaceBuilding)
         {
             var pos1  = PlanePosition(Input.GetTouch(0).position);
             var pos2  = PlanePosition(Input.GetTouch(1).position);
@@ -83,7 +83,6 @@ class CamController_LAC : MonoBehaviour
             if (rotate && pos2b != pos2)
                 camera.transform.RotateAround(lookPos(), plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
-
     }
 
     protected Vector3 lookPos()
