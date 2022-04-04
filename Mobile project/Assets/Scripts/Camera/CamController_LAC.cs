@@ -122,13 +122,14 @@ class CamController_LAC : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
         Vector3 lookPosG = (lookPos() == Vector3.zero) ? transform.position : lookPos();
+        Vector3 camDir = (camera.transform.position - lookPosG).normalized;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(lookPosG, (camera.transform.position - lookPosG).normalized * maxZoom);
+        Gizmos.DrawLine(lookPosG + camDir*minZoom, lookPosG + camDir * maxZoom);
 
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(lookPosG,0.2f);
-        Gizmos.DrawLine(camera.transform.position, lookPosG);
+        //Gizmos.DrawLine(camera.transform.position, lookPosG);
         Gizmos.DrawWireSphere(transform.position, clampRadius);
 
     }
