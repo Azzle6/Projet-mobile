@@ -37,7 +37,7 @@ class CamController_LAC : MonoBehaviour
         var Delta2 = Vector3.zero;
 
         //Scroll
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 && StateManager.CurrentState != StateManager.State.DisplaceBuilding)
         {
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -53,7 +53,7 @@ class CamController_LAC : MonoBehaviour
         }
 
         //Pinch
-        if (Input.touchCount >= 2)
+        if (Input.touchCount >= 2 && StateManager.CurrentState != StateManager.State.DisplaceBuilding)
         {
             var pos1  = PlanePosition(Input.GetTouch(0).position);
             var pos2  = PlanePosition(Input.GetTouch(1).position);
@@ -83,7 +83,6 @@ class CamController_LAC : MonoBehaviour
             if (rotate && pos2b != pos2)
                 camera.transform.RotateAround(lookPos(), plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
-
     }
 
     protected Vector3 lookPos()
@@ -122,13 +121,14 @@ class CamController_LAC : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
         Vector3 lookPosG = (lookPos() == Vector3.zero) ? transform.position : lookPos();
+        Vector3 camDir = (camera.transform.position - lookPosG).normalized;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(lookPosG, (camera.transform.position - lookPosG).normalized * maxZoom);
+        Gizmos.DrawLine(lookPosG + camDir*minZoom, lookPosG + camDir * maxZoom);
 
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(lookPosG,0.2f);
-        Gizmos.DrawLine(camera.transform.position, lookPosG);
+        //Gizmos.DrawLine(camera.transform.position, lookPosG);
         Gizmos.DrawWireSphere(transform.position, clampRadius);
 
     }
