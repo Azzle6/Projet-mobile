@@ -88,14 +88,11 @@ public class BehaveGroup : MonoBehaviour
         boids.Add(boid);
     }
 
-    public void RemoveBoid(int boidIndex)
-    {
-        // remove boid from list && destroy this
-    }
-
     public void RemoveBoid(Boid boid)
     {
         // remove boid from list && destroy this
+        if (boids.Contains(boid))
+            boids.Remove(boid);
     }
     #endregion
 

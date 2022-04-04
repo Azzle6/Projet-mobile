@@ -34,16 +34,19 @@ public class Boid : MonoBehaviour
        // Debug.Log(" Detection: ");
         for (int i = 0; i < surrondObj.Length; i++)
         {
-            if(Vector3.Angle(transform.forward, (surrondObj[i].transform.position - transform.position)) < stats.viewAngle * 0.5f)
+            if (surrondObj[i] != null)
             {
-                viewObj.Add(surrondObj[i].gameObject);
-                Boid viewBoid = surrondObj[i].GetComponent<Boid>();
-                if (viewBoid)
+                if (Vector3.Angle(transform.forward, (surrondObj[i].transform.position - transform.position)) < stats.viewAngle * 0.5f)
                 {
-                    boidMates.Add(viewBoid);
-                    Debug.DrawLine(viewBoid.transform.position, transform.position);
+                    viewObj.Add(surrondObj[i].gameObject);
+                    Boid viewBoid = surrondObj[i].GetComponent<Boid>();
+                    if (viewBoid)
+                    {
+                        boidMates.Add(viewBoid);
+                        Debug.DrawLine(viewBoid.transform.position, transform.position);
+                    }
+
                 }
-                    
             }
         }
 
