@@ -24,9 +24,27 @@ public class BuildingInfosPannel : MonoBehaviour
     {
         buildImage.sprite = buildingInf.image;
         buildName.text = buildingInf.name;
-        buildProd.text = buildingInf.production;
-        buildPrice.text = buildingInf.price;
+        
+        buildPrice.text = "Price : " + buildingInf.price.quantity + " " + buildingInf.price.ressource;
         buildDescription.text = buildingInf.description;
+
+        if (buildingInf.buildingStats.GetType() == typeof(ExtractorSO_LAC))
+        {
+            ExtractorSO_LAC stats = (ExtractorSO_LAC) buildingInf.buildingStats;
+            buildProd.text = "Production : " + stats.production.quantity + "/s " + stats.production.ressource;
+        }
+        else if (buildingInf.buildingStats.GetType() == typeof(HouseSO_LAC))
+        {
+            HouseSO_LAC stats = (HouseSO_LAC) buildingInf.buildingStats;
+            buildProd.text = "Pop added : " + stats.peopleAdd;
+        }
+        else if(buildingInf.buildingStats.GetType() == typeof(TurretSO_LAC))
+        {
+            TurretSO_LAC stats = (TurretSO_LAC) buildingInf.buildingStats;
+            buildProd.text = "Range : " + stats.range + "\nDamage : " + stats.damage + "\nAttack speed : " + stats.attackSpeed;
+        }
+
+
     }
 
     public void SpawnCurrentBuilding()
