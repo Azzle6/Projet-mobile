@@ -70,7 +70,7 @@ public class BuildingSystem : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit rayHit, 100, GroundMask))
             {
                 Vector3Int cellPos = gridLayout.LocalToCell(rayHit.point);
-                Debug.Log(cellPos.x + " " + cellPos.y);
+                //Debug.Log(cellPos.x + " " + cellPos.y);
                 UpdateBuildingPosition(cellPos);
             }
 
