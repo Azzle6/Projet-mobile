@@ -22,6 +22,12 @@ public class WaveManager : MonoBehaviour
         else
             instance = this;
     }
+    public void ExtractorAsTarget(List<Extractor_LAC> ext)
+    {
+        targets.Clear();
+        foreach (Extractor_LAC ex in ext)
+            targets.Add(ex.transform);
+    }
     public void UpdateActiveSpawn()
     {
         List<Transform> currentSpawns = spawnPoints;
