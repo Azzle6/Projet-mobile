@@ -67,7 +67,7 @@ public class EnemyGroup : BehaveGroup
         }
 
         Transform nTarget = NearestTarget(spawnPoint, targets);
-        if ((!target || !target.gameObject.activeSelf) && nTarget)
+        if ((!target || !target.gameObject.activeSelf))
         {
             target = nTarget;
             SetTarget(target);
