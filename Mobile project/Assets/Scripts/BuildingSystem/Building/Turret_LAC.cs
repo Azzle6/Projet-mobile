@@ -103,7 +103,7 @@ public class Turret_LAC : Building
     #region Get Stats
     public int CurrentDamage()
     {
-        return (int)(stats[level].damage + stats[level].peopleGainDamage * (people - 1));
+        return (int)Mathf.Ceil(stats[level].damage + stats[level].peopleGainDamage * (people - 1));
     }
     public float CurrentRange()
     {

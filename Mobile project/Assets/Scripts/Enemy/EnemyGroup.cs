@@ -46,6 +46,12 @@ public class EnemyGroup : BehaveGroup
         }*/
     }
 
+    public void Initilaize(Transform spawnPoint, List<Transform> targets)
+    {
+        this.spawnPoint = spawnPoint;
+        this.targets = targets;
+    }
+
     new void Update()
     {
         // run all steering behaviour throug out boids
@@ -122,14 +128,7 @@ public class EnemyGroup : BehaveGroup
     {
         StartCoroutine(SpawnEnemies(spawnPoint.transform.position, 10, 0.2f));
     }
-    public void DebugResetTarget()
-    {
-        for(int i = 0; i< targets.Count; i++)
-        {
-            if (!targets[i].gameObject.activeSelf)
-                targets[i].gameObject.SetActive(true);
-        }
-    }
+
     #endregion
     public IEnumerator SpawnEnemies(Vector3 origin, int number, float delay)
     {
@@ -171,6 +170,12 @@ public class EnemyGroup : BehaveGroup
     {
         enemies.Add(enemy);
         base.AddBoid(enemy);
+    }
+
+    public void RemoveBoid(EnemyBoid enemy)
+    {
+        enemies.Remove(enemy);
+        base.RemoveBoid(enemy);
     }
     #endregion
 }

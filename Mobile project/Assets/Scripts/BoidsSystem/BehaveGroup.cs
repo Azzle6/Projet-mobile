@@ -93,6 +93,9 @@ public class BehaveGroup : MonoBehaviour
         // remove boid from list && destroy this
         if (boids.Contains(boid))
             boids.Remove(boid);
+
+        if (boids.Count <= 0)
+            Destroy(gameObject);
     }
     #endregion
 
