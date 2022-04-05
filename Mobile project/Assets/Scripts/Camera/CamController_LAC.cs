@@ -71,6 +71,8 @@ class CamController_LAC : MonoBehaviour
 
             //Move cam amount the mid ray
             float camDist = Vector3.Distance(lookPos(), camera.transform.position);
+            camDist = Mathf.Clamp(camDist, minZoom, maxZoom);
+
             float t = Mathf.Clamp((camDist-minZoom)/(maxZoom-minZoom)/zoom, 0, 1);
             
             Vector3 camDir = (camera.transform.position - lookPos()).normalized;

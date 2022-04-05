@@ -9,6 +9,8 @@ public class Turret_LAC : Building
     public LayerMask enemyMask;
     float attackDelay = 0;
 
+    public int people;
+
     [Header("Debug")]
     public GameObject target;
     public MeshRenderer targetRenderer;
@@ -67,7 +69,7 @@ public class Turret_LAC : Building
     }
     public void Attack(EnemyBoid enemytarget)
     {
-        enemyTarget.TakeDamage(stats[level].damage);
+        enemyTarget.TakeDamage(CurrentDamage());
         // debug
         targetRenderer.material = targetAttack;
         StartCoroutine(ResetTargetMat(0.5f));
@@ -79,10 +81,29 @@ public class Turret_LAC : Building
         level = Mathf.Clamp(level + 1, 0, stats.Length);
     }
 
+    #region Pop management
+    public void AddPop()
+    {
+        if (RessourceManager_LAC.instance.population <= 0 || people == stats[level].maxPeople)
+            return;
+
+        people++;
+        RessourceManager_LAC.instance.population--;
+    }
+
+    public void RemovePop()
+    {
+        if (people <= 1)
+            return;
+
+        people--;
+        RessourceManager_LAC.instance.population++;
+    }
+    #endregion
     #region Get Stats
     public int CurrentDamage()
     {
-        return stats[level].damage;
+        return (int)(stats[level].damage + stats[level].peopleGainDamage * (people - 1));
     }
     public float CurrentRange()
     {
@@ -90,7 +111,7 @@ public class Turret_LAC : Building
     }
     public float CurrentAttackSpeed()
     {
-        return stats[level].attackSpeed;
+        return stats[level].attackSpeed + stats[level].peopleGainAttackSpeed * (people - 1);
     }
     #endregion
     // debug

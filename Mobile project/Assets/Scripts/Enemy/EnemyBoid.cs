@@ -33,7 +33,7 @@ public class EnemyBoid : Boid
     public void Attack()
     {
         if (target)
-            Destroy(target.gameObject);
+           target.gameObject.SetActive(false);
     }
 
     public void TakeDamage(int damage)
@@ -50,6 +50,7 @@ public class EnemyBoid : Boid
         transform.parent.gameObject.layer = 0;
         group.RemoveBoid(this);
 
+        Destroy(gameObject, 5);
         Destroy(this);
     }
 

@@ -19,7 +19,7 @@ public class EnemyGroup : BehaveGroup
         InitilaizePreset();
 
         // initialize boids
-        StartCoroutine(SpawnEnemies(spawnPoint.position, spawnBoids, 0.5f));
+       // StartCoroutine(SpawnEnemies(spawnPoint.position, spawnBoids, 0.5f));
         for (int i = 0; i < transform.childCount; i++)
         {
             EnemyBoid eboid = transform.GetChild(i).GetComponent<EnemyBoid>();
@@ -67,7 +67,7 @@ public class EnemyGroup : BehaveGroup
         }
 
         Transform nTarget = NearestTarget(spawnPoint, targets);
-        if (!target && nTarget)
+        if ((!target || !target.gameObject.activeSelf))
         {
             target = nTarget;
             SetTarget(target);
@@ -78,6 +78,13 @@ public class EnemyGroup : BehaveGroup
     #region Group Management
     public void SetTarget(Transform target)
     {
+        if (target)
+        {
+            if (!target.gameObject.activeSelf)
+                target = null;
+        }
+
+            
         if (target == null)
             Debug.Log("Target null for " + this.name);
 
@@ -97,17 +104,33 @@ public class EnemyGroup : BehaveGroup
         {
             if (targets[i])
             {
-                float dist = Vector3.Distance(transform.position, targets[i].position);
-                if (minDist < 0 || dist < minDist)
+                if (targets[i].gameObject.activeSelf)
                 {
-                    minDist = dist;
-                    nearestTarget = targets[i];
+                    float dist = Vector3.Distance(transform.position, targets[i].position);
+                    if (minDist < 0 || dist < minDist)
+                    {
+                        minDist = dist;
+                        nearestTarget = targets[i];
+                    }
                 }
             }
         }
         return nearestTarget;
     }
-
+    #region debug
+    public void DebugSpawn()
+    {
+        StartCoroutine(SpawnEnemies(spawnPoint.transform.position, 10, 0.2f));
+    }
+    public void DebugResetTarget()
+    {
+        for(int i = 0; i< targets.Count; i++)
+        {
+            if (!targets[i].gameObject.activeSelf)
+                targets[i].gameObject.SetActive(true);
+        }
+    }
+    #endregion
     public IEnumerator SpawnEnemies(Vector3 origin, int number, float delay)
     {
         yield return new WaitForSeconds(delay);
