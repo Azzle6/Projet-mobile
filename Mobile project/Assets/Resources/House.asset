@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afeae442c886b5c419e4c967496991f3, type: 3}
-  m_Name: KnowledgeGen
+  m_Name: House
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,13 +26,10 @@ MonoBehaviour:
       Data: 0|System.Boolean[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: ranks
       Entry: 1
-      Data: 2|1
-    - Name: 
-      Entry: 5
-      Data: true
+      Data: 1|1
     - Name: 
       Entry: 5
       Data: true
@@ -42,11 +39,11 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  name: Knowledge Extractor
-  description: Fais du savoir en fait
+  name: House
+  description: "M\xE9zon"
   price:
-    quantity: 4
-    ressource: 1
-  image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  prefab: {fileID: 7393119220524161010, guid: 0f3629327cf89db4980f74bff16362b6, type: 3}
-  buildingStats: {fileID: 11400000, guid: a8264712da713f34097212185ca46e6b, type: 2}
+    quantity: 3
+    ressource: 0
+  image: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  prefab: {fileID: 3651774682582830496, guid: c234a671c130a4341811d232514ed61c, type: 3}
+  buildingStats: {fileID: 11400000, guid: 9a3622205b95836478645efaad8fa0bd, type: 2}

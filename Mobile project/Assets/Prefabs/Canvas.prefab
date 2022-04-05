@@ -1856,7 +1856,7 @@ MonoBehaviour:
         m_MethodName: ChangeBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 028d2e87e109bd241af7b3498f95c922, type: 2}
           m_ObjectArgumentAssemblyTypeName: BuildingSO, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3570,7 +3570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &679518728404204495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3826,7 +3826,7 @@ MonoBehaviour:
         m_MethodName: ChangeBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: d3d69f956ec37c14e93487ddf4ddd919, type: 2}
           m_ObjectArgumentAssemblyTypeName: BuildingSO, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -7592,9 +7592,7 @@ MonoBehaviour:
   matter: {fileID: 7496009523215617481}
   knowledge: {fileID: 8466370726659099972}
   BuildingInfos: {fileID: 4510598844573150891}
-  SelectedBuildingCurrentPop: {fileID: 9036787207092140438}
-  SelectedBuildingProduction: {fileID: 2598489101243289024}
-  SelectedBuildingStockage: {fileID: 7471993771253120932}
+  Texts: []
 --- !u!1 &7496009523002907686
 GameObject:
   m_ObjectHideFlags: 0
@@ -10915,7 +10913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 221.15335, y: 71.51}
+  m_AnchoredPosition: {x: 221.15335, y: 111}
   m_SizeDelta: {x: -442.307, y: -406.689}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7496009524023160231
