@@ -33,7 +33,7 @@ public class EnemyBoid : Boid
     public void Attack()
     {
         if (target)
-            Destroy(target.gameObject);
+           target.gameObject.SetActive(false);
     }
 
     public void TakeDamage(int damage)
