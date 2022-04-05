@@ -85,7 +85,7 @@ public static class BehaviourHelper
         Vector3 headVec = Vector3.zero;
         if (!bh.head)
         {
-            Debug.LogWarning("Missing Head");
+            //Debug.LogWarning("Missing Head");
             return headVec;
         }
 
