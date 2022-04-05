@@ -78,6 +78,7 @@ public class RessourceManager_LAC : MonoBehaviour
         if (population > 0)
         {
             UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.AddPop();
+            //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.AddPop();
             
         }
     }
@@ -88,7 +89,7 @@ public class RessourceManager_LAC : MonoBehaviour
         if (population > 0)
         {
             UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.RemovePop();
-            
+            //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.RemovePop();
         }
     }
 

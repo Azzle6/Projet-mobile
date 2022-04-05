@@ -183,14 +183,21 @@ public class UIManager_LAC : MonoBehaviour
             Turret_LAC turret = CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>();
             if (turret)
             {
-                //In progress
+                Texts[0].text = "Pop : ";
+                Texts[1].text = "Range : " + turret.CurrentRange();
+                Texts[2].text = "Damage : " + turret.CurrentDamage();
+                Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
             }
             else
             {
                 House_LAC house = CurrentSelectedBuilding.GetComponentInParent<House_LAC>();
                 if (house)
                 {
-                    //In progress
+                    Texts[0].text = "Added pop : " + house.currentPeople;
+                    for (int i = 1; i < Texts.Length; i++)
+                    {
+                        Texts[i].gameObject.SetActive(false);
+                    }
                 }
             }
             
