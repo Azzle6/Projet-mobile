@@ -12,5 +12,5 @@ public class ExtractorSO_LAC : BuildingStatSO
     public float peopleGain;
 
     [Header("Product")]
-    public float production;
+    public ResourceQuantity production;
 }

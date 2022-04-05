@@ -8,11 +8,18 @@ using UnityEngine;
 public class BuildingSO : SerializedScriptableObject
 {
     public new string name;
-    public string production;
     public string description;
-    public string price;
+    public ResourceQuantity price;
     public Sprite image;
     public GameObject prefab;
+    public BuildingStatSO buildingStats;
     
     public bool[,] buildingArea;
+}
+
+[System.Serializable]
+public class ResourceQuantity
+{
+    public float quantity;
+    public RessourceManager_LAC.RessourceType ressource;
 }

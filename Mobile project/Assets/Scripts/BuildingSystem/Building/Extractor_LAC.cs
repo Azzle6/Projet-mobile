@@ -57,7 +57,7 @@ public class Extractor_LAC : Building
     }
     public float ProductCapacity()
     {
-       return  stats[level].production * (1 + (people-1) * stats[level].peopleGain);   
+       return  stats[level].production.quantity * (1 + (people-1) * stats[level].peopleGain);   
     }
 
 

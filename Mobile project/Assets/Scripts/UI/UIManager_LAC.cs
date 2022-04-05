@@ -27,9 +27,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject BuildingInfos;
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingCurrentPop;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingProduction;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingStockage;
+    [SerializeField] private TextMeshProUGUI[] Texts;
 
     private void Awake()
     {
@@ -167,12 +165,35 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
+        foreach (var txt in Texts)
+        {
+            txt.gameObject.SetActive(true);
+        }
+        
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            SelectedBuildingCurrentPop.text = "Pop : " + extractor.people;
-            SelectedBuildingProduction.text = "Production : " + extractor.ProductCapacity() + " / s";
-            SelectedBuildingStockage.text = "Stock : " + extractor.stock;
+            Texts[0].text = "Pop : " + extractor.people;
+            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s";
+            Texts[2].text = "Stock : " + extractor.stock;
+            Texts[3].gameObject.SetActive(false);
+        }
+        else
+        {
+            Turret_LAC turret = CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>();
+            if (turret)
+            {
+                //In progress
+            }
+            else
+            {
+                House_LAC house = CurrentSelectedBuilding.GetComponentInParent<House_LAC>();
+                if (house)
+                {
+                    //In progress
+                }
+            }
+            
         }
         
         BuildingInfos.SetActive(true);
