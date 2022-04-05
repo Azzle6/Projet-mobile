@@ -53,8 +53,9 @@ public class WaveManager : MonoBehaviour
 
     public void DebugWave()
     {
+        ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
         UpdateActiveSpawn();
-        StartWave();
+        if(targets.Count > 0) StartWave();
     }
 
     public void DebugResetTarget()
