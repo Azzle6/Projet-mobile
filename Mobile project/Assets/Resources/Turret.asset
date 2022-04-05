@@ -26,16 +26,13 @@ MonoBehaviour:
       Data: 0|System.Boolean[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: ranks
       Entry: 1
-      Data: 2|1
+      Data: 1|1
     - Name: 
       Entry: 5
       Data: true
-    - Name: 
-      Entry: 5
-      Data: false
     - Name: 
       Entry: 13
       Data: 
@@ -43,8 +40,10 @@ MonoBehaviour:
       Entry: 8
       Data: 
   name: Turret
-  production: 
   description: Piou Piou Piouuuuuuuuuu!
-  price: Beaucoup
+  price:
+    quantity: 0
+    ressource: 0
   image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  prefab: {fileID: 464669590326285805, guid: 6b75703179f47d64aabefebd04fdd568, type: 3}
+  prefab: {fileID: 5380295845529954097, guid: 4bd48c2198e3d7f4283ac278a284f22a, type: 3}
+  buildingStats: {fileID: 11400000, guid: 9da65200628ccd04eb6ba0b96aa45668, type: 2}

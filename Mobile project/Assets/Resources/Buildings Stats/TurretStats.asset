@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TurretStats
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
-  maxPeople: 0
-  peopleGainDamage: 0
-  peopleGainAttackSpeed: 0
+  maxPeople: 5
+  peopleGainDamage: 0.103
+  peopleGainAttackSpeed: 0.112
   range: 3
   damage: 2
   attackSpeed: 0.5
