@@ -50,12 +50,15 @@ MonoBehaviour:
   PlacementSound: 0
   Activated: 1
   curRotation: 0
+  statsSO:
+  - {fileID: 11400000, guid: 56e55966e90617c4da35dcc60ee4e5f7, type: 2}
   stats:
   - {fileID: 11400000, guid: 56e55966e90617c4da35dcc60ee4e5f7, type: 2}
   enemyTarget: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 256
+  people: 0
   target: {fileID: 5421820326063403356}
   targetRenderer: {fileID: 5421820326063403353}
   targetAttack: {fileID: 2100000, guid: b2fd8e3b1f462004cbba51cf139365c9, type: 2}

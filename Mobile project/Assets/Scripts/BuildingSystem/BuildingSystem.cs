@@ -92,7 +92,6 @@ public class BuildingSystem : MonoBehaviour
                 if (Physics.Raycast(ray2, out RaycastHit rayHit2, 100, GroundMask))
                 {
                     Vector3Int cellPos = gridLayout.LocalToCell(rayHit2.point);
-                    Debug.Log(cellPos.x + " " + cellPos.y);
                     foreach (var pos in currentAreaPositions)
                     {
                         if (cellPos == pos) isMovingBuilding = true;
