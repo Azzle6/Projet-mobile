@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class Extractor_LAC : Building
 {
     [Header("Extractor")]
     public RessourceManager_LAC.RessourceType ressourceType;
-    public ExtractorSO_LAC[] stats;
+    [HideInInspector] public ExtractorSO_LAC[] stats;
     //[HideInInspector]
     public int people;
     float productCoolDown;
@@ -18,6 +19,7 @@ public class Extractor_LAC : Building
     private void Start()
     {
         RessourceManager_LAC.instance.AddExtractor(this);
+        stats = Array.ConvertAll(statsSO, input => input as ExtractorSO_LAC);
     }
 
     private void Update()
@@ -29,13 +31,6 @@ public class Extractor_LAC : Building
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
         }
         
-    }
-
-    public override void Upgrade()
-    {
-        if (stats.Length <= 0) 
-            return;
-        level = Mathf.Clamp(level+1, 0, stats.Length);
     }
 
     public void AddPop()

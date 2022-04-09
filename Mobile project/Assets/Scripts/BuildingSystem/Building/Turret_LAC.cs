@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret_LAC : Building
 {
-    public TurretSO_LAC[] stats;
+    [HideInInspector]public TurretSO_LAC[] stats;
     public EnemyBoid enemyTarget;
     public LayerMask enemyMask;
     float attackDelay = 0;
@@ -15,6 +16,12 @@ public class Turret_LAC : Building
     public GameObject target;
     public MeshRenderer targetRenderer;
     public Material targetAttack, targetAim;
+
+    private void Start()
+    {
+        stats = Array.ConvertAll(statsSO, input => input as TurretSO_LAC);
+    }
+
     public void Update()
     {
         UpdateTarget();
@@ -74,12 +81,7 @@ public class Turret_LAC : Building
         targetRenderer.material = targetAttack;
         StartCoroutine(ResetTargetMat(0.5f));
     }
-    public override void Upgrade()
-    {
-        if (stats.Length <= 0)
-            return;
-        level = Mathf.Clamp(level + 1, 0, stats.Length);
-    }
+    
 
     #region Pop management
     public void AddPop()

@@ -13,6 +13,7 @@ public class BuildingSO : SerializedScriptableObject
     public Sprite image;
     public GameObject prefab;
     public BuildingStatSO buildingStats;
+    public int unlockedLevel;
     
     public bool[,] buildingArea;
 }
