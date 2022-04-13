@@ -132,6 +132,11 @@ public class UIManager_LAC : MonoBehaviour
         else RessourceManager_LAC.instance.RemovePop();
     }
 
+    public void UpgradeBuilding()
+    {
+        CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
+    }
+
     private void DisplayBuildingPannel()
     {
         /*BuildingInfos.SetActive(false);

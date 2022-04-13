@@ -13,6 +13,7 @@ public class Building : MonoBehaviour
     public float PlacementSound;
     public bool Activated;
     public BuildingSystem.Rotation curRotation = BuildingSystem.Rotation.Face;
+    public BuildingStatSO[] statsSO;
 
     private void Awake()
     {
@@ -20,7 +21,21 @@ public class Building : MonoBehaviour
             Instantiate(Visual, transform);
     }
 
-    public virtual void Upgrade() { }
+    public virtual void Upgrade()
+    {
+        Debug.Log("Commence l'upgrade");
+        if (statsSO.Length <= 0) 
+            return;
+        
+        if (BuildingScriptable.unlockedLevel > level)
+        {
+            level = Mathf.Clamp(level+1, 0, statsSO.Length);
+            Debug.Log("Upgrade !");
+            return;
+        }
+        Debug.Log("Upgrade pas");
+    }
+    
  
 
     /*private void Start()
