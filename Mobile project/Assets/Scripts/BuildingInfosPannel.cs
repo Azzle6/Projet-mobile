@@ -9,9 +9,17 @@ using Image = UnityEngine.UI.Image;
 
 public class BuildingInfosPannel : MonoBehaviour
 {
+    public static BuildingInfosPannel instance;
     [SerializeField] private Image buildImage;
     [SerializeField] private TMP_Text buildName, buildProd, buildPrice, buildDescription;
     public BuildingSO buildingInf;
+
+
+    public void RegisterInstance()
+    {
+        if (instance) return;
+        instance = this;
+    }
     
     private void OnEnable()
     {
@@ -54,6 +62,7 @@ public class BuildingInfosPannel : MonoBehaviour
     public void ChangeBuilding(BuildingSO newBuild)
     {
         buildingInf = newBuild;
+        Debug.Log(newBuild.name);
         UpdateUI();
 
     }

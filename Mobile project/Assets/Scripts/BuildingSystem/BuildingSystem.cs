@@ -310,11 +310,11 @@ public class BuildingSystem : MonoBehaviour
         
     }
 
-    public void UpdateTMPos() 
+    /*public void UpdateTMPos() 
     {
         tilemapTilePos = new Vector3Int((int)IslandManager.instance.transform.localPosition.x, 0,
             (int)IslandManager.instance.transform.localPosition.z);
-    }
+    }*/
 
     public void Rotate()
     {
