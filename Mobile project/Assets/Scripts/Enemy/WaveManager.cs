@@ -15,20 +15,36 @@ public class WaveManager : MonoBehaviour
     public List<Transform> targets;
 
     public GameObject enemyGroup;
+    int currentWave;
     void Awake()
     {
         if (instance != this && instance)
             Destroy(this);
         else
             instance = this;
+
+        currentWave = DiffCalculator.currentWave;
     }
+
+    public void Update()
+    {
+        if(currentWave != DiffCalculator.currentWave)
+        {
+            currentWave = DiffCalculator.currentWave;  
+            ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
+            UpdateActiveSpawn(DiffCalculator.SpawnRatio());
+            StartWave();
+            
+        }
+    }
+    #region Wave Process
     public void ExtractorAsTarget(List<Extractor_LAC> ext)
     {
         targets.Clear();
         foreach (Extractor_LAC ex in ext)
             targets.Add(ex.transform);
     }
-    public void UpdateActiveSpawn()
+    public void UpdateActiveSpawn(float spawnRatio)
     {
         List<Transform> currentSpawns = spawnPoints;
         activeSpawnPoints.Clear();
@@ -43,18 +59,27 @@ public class WaveManager : MonoBehaviour
     }
     public void StartWave()
     {
+        int enemyToSpawn = DiffCalculator.EnemyNumber();
+        
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
             EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[i]).GetComponent<EnemyGroup>();
             enemyG.Initilaize(activeSpawnPoints[i], targets);
-            enemyG.DebugSpawn();
+
+            int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
+            float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
+
+            int currentSpawnEnemy = Mathf.RoundToInt(Random.Range(midEnemy - enemyDisp, midEnemy + enemyDisp));
+            enemyToSpawn -= currentSpawnEnemy;
+            enemyG.SpawnEnemy(currentSpawnEnemy);
         }
     }
-
+    #endregion
+    #region Debug
     public void DebugWave()
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-        UpdateActiveSpawn();
+        UpdateActiveSpawn(spawnRatio);
         if(targets.Count > 0) StartWave();
     }
 
@@ -66,4 +91,5 @@ public class WaveManager : MonoBehaviour
                 targets[i].gameObject.SetActive(true);
         }
     }
+    #endregion
 }

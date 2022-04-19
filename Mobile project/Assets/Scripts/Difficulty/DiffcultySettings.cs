@@ -19,8 +19,13 @@ public class DiffcultySettings : ScriptableObject
     public float peopleW = 1;
 
     [Header("Enemy")]
-
+    public float noiseThreshold = 210;
+    [Range(0,1)]
+    public float noiseGainPerWave = 0.1f;
     public AnimationCurve spawnRatio; // between 0 & 1
+    public int maxEnemy = 30;
+    [Range(0,1)]
+    public float enemyDisp = 0 ;
     public AnimationCurve enemyRatio; // between 0 & 1
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class DiffCalculator 
 {
+    public static DiffcultySettings setting;
     // level
     public static int builTile;
     public static int defendTile;
@@ -12,11 +13,14 @@ public static class DiffCalculator
     public static int currentTech;
 
     // people
-    public static int currentMaxPeople;
+    public static int currentMaxPeople = 0;
 
+    // threat
+    public static int currentWave = 0;
     public static float Difficulty;
+
     #region Calculation
-    public static float LevelCalc(DiffcultySettings setting)
+     static float LevelCalc()
     {
         if (setting.MapSize <= 0 || builTile <= 0 || (setting.buildingW + setting.defenseW) == 0)
         {
@@ -27,7 +31,7 @@ public static class DiffCalculator
 
         return ((builTile / setting.MapSize)*setting.buildingW + (defendTile/builTile)*setting.defenseW)/(setting.buildingW+ setting.defenseW);
     }
-    public static float TechCalc(DiffcultySettings setting)
+    static float TechCalc()
     {
         if(setting.techMax <= 0)
         {
@@ -37,7 +41,7 @@ public static class DiffCalculator
 
         return currentTech / setting.techMax;
     }
-    public static float PeopleCalc(DiffcultySettings setting)
+    static float PeopleCalc()
     {
         if (setting.peopleMax <= 0)
         {
@@ -48,15 +52,30 @@ public static class DiffCalculator
         return Mathf.Clamp(currentMaxPeople / setting.peopleMax,0,1);
     }
 
-    public static float DifficultyCalc(DiffcultySettings setting)
+    public static void DifficultyCalc()
     {
         if((setting.levelW + setting.techW + setting.peopleW) <= 0)
         {
             Debug.Log(" Difficulty 0 exception");
-            return 0;
+            return ;
         }
-        Difficulty = (LevelCalc(setting) * setting.levelW + TechCalc(setting) * setting.techW + PeopleCalc(setting) * setting.peopleW) / (setting.levelW+setting.techW+setting.peopleW);
-        return Difficulty;
+        Difficulty = (LevelCalc() * setting.levelW + TechCalc() * setting.techW + PeopleCalc() * setting.peopleW) / (setting.levelW+setting.techW+setting.peopleW);
     }
+
+    public static float NoiseThreshold()
+    {
+        return setting.noiseThreshold * (setting.noiseGainPerWave + 1);
+    }
+
+    public static float SpawnRatio()
+    {
+        return setting.spawnRatio.Evaluate(Difficulty);
+    }
+
+    public static int EnemyNumber()
+    {
+        return Mathf.RoundToInt(setting.enemyRatio.Evaluate(Difficulty)*setting.maxEnemy);
+    }
+
     #endregion;
 }
