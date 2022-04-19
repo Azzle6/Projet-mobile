@@ -17,8 +17,9 @@ public class UIManager_LAC : MonoBehaviour
     public LayerMask BuildingsLayer;
     public LayerMask UILayerMask;
     public GameObject CurrentSelectedBuilding;
-    
-    [Header("Références")]
+
+    [Header("Références")] 
+    [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
     //[SerializeField] private GameObject BuildMenu;
@@ -31,6 +32,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Awake()
     {
+        InfosPannel.RegisterInstance();
         if (instance != null) return;
         instance = this;
     }
@@ -44,7 +46,7 @@ public class UIManager_LAC : MonoBehaviour
     private void Update()
     {
         UpdateUI();
-        Debug.Log(StateManager.CurrentState);
+        //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         
