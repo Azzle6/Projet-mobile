@@ -23,7 +23,6 @@ public class Building : MonoBehaviour
 
     public virtual void Upgrade()
     {
-        Debug.Log("Commence l'upgrade");
         if (statsSO.Length <= 0) 
             return;
         

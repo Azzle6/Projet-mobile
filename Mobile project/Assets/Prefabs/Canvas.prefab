@@ -12377,6 +12377,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7647549724877278342, guid: 3c3f53835737faf478b789bc5b58682d, type: 3}
+      propertyPath: timeToDiscover
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647549724877278342, guid: 3c3f53835737faf478b789bc5b58682d, type: 3}
       propertyPath: concernedBuilding
       value: 
       objectReference: {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
