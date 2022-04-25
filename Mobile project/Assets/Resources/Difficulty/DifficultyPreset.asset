@@ -15,20 +15,63 @@ MonoBehaviour:
   MapSize: 150
   buildingW: 1
   defenseW: 2
-  levelW: 1
   techMax: 6
+  maxMatter: 0
+  matterW: 0
+  maxKnowledge: 2500
+  knowledgeW: 1
   techW: 1
-  peopleMax: 100
-  peopleW: 1
+  levelW: 1
+  ressourceW: 1
+  noiseThreshold: 210
+  noiseGainPerWave: 0.1
   spawnRatio:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maxEnemy: 30
+  enemyDisp: 0
   enemyRatio:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

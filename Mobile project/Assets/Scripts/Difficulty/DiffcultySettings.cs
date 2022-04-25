@@ -8,15 +8,21 @@ public class DiffcultySettings : ScriptableObject
     [Header("Level")]
     public int MapSize = 150;
     public float buildingW = 1, defenseW = 2;
-    public float levelW = 1;
-
+    
     [Header("Tech")]
     public float techMax = 6;
-    public float techW = 1;
 
-    [Header("People")]
-    public float peopleMax = 100;
-    public float peopleW = 1;
+    [Header("Ressource")]
+    public float maxMatter;
+    public float matterW;
+
+    public float maxKnowledge;
+    public float knowledgeW;
+
+    [Header("Parameter")]
+    public float techW = 1;
+    public float levelW = 1;
+    public float ressourceW = 1;
 
     [Header("Enemy")]
     public float noiseThreshold = 210;
@@ -27,5 +33,6 @@ public class DiffcultySettings : ScriptableObject
     [Range(0,1)]
     public float enemyDisp = 0 ;
     public AnimationCurve enemyRatio; // between 0 & 1
+
 
 }

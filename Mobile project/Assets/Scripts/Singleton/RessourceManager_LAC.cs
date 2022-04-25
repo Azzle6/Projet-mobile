@@ -6,7 +6,12 @@ public class RessourceManager_LAC : MonoBehaviour
 {
     public static DiffcultySettings diffPreset;
     public static RessourceManager_LAC instance { get; private set; }
-   
+
+    [Header("Map")]
+    public int buildTile;
+    public int defendTile;
+
+    [Header("Ressource")]
     public int population;
     public enum RessourceType { MATTER, KNOWLEDGE }
     public List<Extractor_LAC> activeExtractor;// { get; private set; }
@@ -14,7 +19,8 @@ public class RessourceManager_LAC : MonoBehaviour
     public float knowledge;// { get; private set; }
     public float noise;
 
-
+    [Header("Tech")]
+    public int currentTech;
 
     private void Awake()
     {
@@ -32,7 +38,7 @@ public class RessourceManager_LAC : MonoBehaviour
     public void StockNoise(float noise)
     {
         this.noise += noise;
-        if (this.noise > DiffCalculator.NoiseThreshold());
+        if (this.noise > DiffCalculator.NoiseThreshold())
         {
             this.noise = 0;
             DiffCalculator.DifficultyCalc();
@@ -105,5 +111,6 @@ public class RessourceManager_LAC : MonoBehaviour
             //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.RemovePop();
         }
     }
+
 
 }
