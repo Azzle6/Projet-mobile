@@ -130,7 +130,12 @@ public class EnemyGroup : BehaveGroup
     }
 
     #endregion
-    public IEnumerator SpawnEnemies(Vector3 origin, int number, float delay)
+
+    public void SpawnEnemy(int enemyNb)
+    {
+        StartCoroutine(SpawnEnemies(spawnPoint.transform.position, enemyNb, 0.2f));
+    }
+    IEnumerator SpawnEnemies(Vector3 origin, int number, float delay)
     {
         yield return new WaitForSeconds(delay);
         Vector3 position = origin + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));

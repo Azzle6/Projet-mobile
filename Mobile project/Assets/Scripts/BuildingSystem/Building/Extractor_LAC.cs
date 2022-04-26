@@ -29,6 +29,7 @@ public class Extractor_LAC : Building
         {
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
+            RessourceManager_LAC.instance.StockNoise(stats[level].noise);
         }
         
     }
