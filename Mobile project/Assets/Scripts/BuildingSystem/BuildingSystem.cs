@@ -152,7 +152,9 @@ public class BuildingSystem : MonoBehaviour
             globalCellsInfos[vect].isPlaced = true;
         }
 
-        currentBuilding.GetComponent<Building>().enabled = true;
+        Building building = currentBuilding.GetComponent<Building>();
+        building.enabled = true;
+        building.RegisterTile();
         ChangeColor(currentAreaPositions, Color.black);
     }
 

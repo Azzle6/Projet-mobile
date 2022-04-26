@@ -45,6 +45,12 @@ public class Turret_LAC : Building
             
     }
 
+    public override void RegisterTile()
+    {
+        base.RegisterTile();
+        RessourceManager_LAC.instance.defendTile += GetTile();
+    }
+    #region Defend
     public void UpdateTarget()
     {
         if (!enemyTarget)
@@ -81,7 +87,7 @@ public class Turret_LAC : Building
         targetRenderer.material = targetAttack;
         StartCoroutine(ResetTargetMat(0.5f));
     }
-    
+    #endregion
 
     #region Pop management
     public void AddPop()
@@ -102,6 +108,7 @@ public class Turret_LAC : Building
         RessourceManager_LAC.instance.population++;
     }
     #endregion
+
     #region Get Stats
     public int CurrentDamage()
     {

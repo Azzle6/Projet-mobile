@@ -5,36 +5,33 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager instance;
-    //public WaveData data;
 
-    [Range(0, 1)]
-    public float spawnRatio;
     public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
 
     public List<Transform> targets;
 
     public GameObject enemyGroup;
-    int currentWave;
+    public int currentWave = 0;
+    // debug
+    public float difficulty, levelDiff, techDiff, ressourceDiff;
     void Awake()
     {
         if (instance != this && instance)
             Destroy(this);
         else
             instance = this;
-
-        currentWave = DiffCalculator.currentWave;
     }
 
     public void Update()
     {
-        if(currentWave != DiffCalculator.currentWave)
+        float noiseThresohld = DiffCalculator.setting.noiseThreshold * (1 + DiffCalculator.setting.noiseGainPerWave * currentWave);
+        if(RessourceManager_LAC.instance.noise > noiseThresohld)
         {
-            currentWave = DiffCalculator.currentWave;  
+            RessourceManager_LAC.instance.noise = 0;
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
             UpdateActiveSpawn(DiffCalculator.SpawnRatio());
-            StartWave();
-            
+            StartWave(); 
         }
     }
     #region Wave Process
@@ -79,8 +76,13 @@ public class WaveManager : MonoBehaviour
     public void DebugWave()
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-        UpdateActiveSpawn(spawnRatio);
+        UpdateActiveSpawn(0.5f);
         if(targets.Count > 0) StartWave();
+    }
+
+    public void DebugDifficulty()
+    {
+        difficulty = DiffCalculator.DifficultyCalc();
     }
 
     public void DebugResetTarget()

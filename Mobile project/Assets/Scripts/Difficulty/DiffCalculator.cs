@@ -5,10 +5,9 @@ using UnityEngine;
 public static class DiffCalculator
 {
     public static DiffcultySettings setting;
-
-    // threat
-    public static int currentWave = 0;
     public static float Difficulty;
+    // debug
+    public static float levelDiff, techDiff, ressourceDiff;
 
     #region Calculation
     static DifficultyData LevelCalc()
@@ -20,6 +19,7 @@ public static class DiffCalculator
         DifficultyData defendDif = new DifficultyData((defendTile / buildTile), setting.defenseW);
         List<DifficultyData> diffs = new List<DifficultyData>{buildDif, defendDif};
 
+        levelDiff = (SummDiffData(diffs).value / SummDiffData(diffs).weight);
         return new DifficultyData(SummDiffData(diffs).value / SummDiffData(diffs).weight, setting.levelW);
     }
     static DifficultyData TechCalc()
@@ -30,7 +30,9 @@ public static class DiffCalculator
             Debug.Log("Tech diff 0 exception");
             return diff;
         }
+        
         diff.value = RessourceManager_LAC.instance.currentTech / setting.techMax;
+        techDiff = diff.value;
         return diff;
     }
     static DifficultyData RessourceCalc()
@@ -43,6 +45,7 @@ public static class DiffCalculator
         DifficultyData diffSumm = SummDiffData(diffs);
         diffData.value = diffSumm.value / diffSumm.weight;
 
+        ressourceDiff = diffData.value;
         return diffData;
     }
 
@@ -51,7 +54,8 @@ public static class DiffCalculator
     {
         List<DifficultyData> diffs = new List<DifficultyData> { LevelCalc(), TechCalc(), RessourceCalc() };
         DifficultyData diff = SummDiffData(diffs);
-        return diff.value / diff.weight;
+        Difficulty = (diff.value / diff.weight);
+        return Difficulty;
     }
 
     public static float NoiseThreshold()

@@ -38,12 +38,6 @@ public class RessourceManager_LAC : MonoBehaviour
     public void StockNoise(float noise)
     {
         this.noise += noise;
-        if (this.noise > DiffCalculator.NoiseThreshold())
-        {
-            this.noise = 0;
-            DiffCalculator.DifficultyCalc();
-            DiffCalculator.currentWave += 1;
-        }
     }
     public void StockRessource(float value, RessourceType rType)
     {
