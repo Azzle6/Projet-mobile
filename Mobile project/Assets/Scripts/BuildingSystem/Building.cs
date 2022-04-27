@@ -20,7 +20,19 @@ public class Building : MonoBehaviour
         if (Visual)
             Instantiate(Visual, transform);
     }
-
+    public virtual void RegisterTile()
+    {
+        RessourceManager_LAC.instance.buildTile += GetTile();
+    }
+    public int GetTile()
+    {
+        int tile = 0;
+        foreach (bool b in BuildingScriptable.buildingArea)
+        {
+            if (b) { tile++; }
+        }
+        return tile;
+    }
     public virtual void Upgrade()
     {
         if (statsSO.Length <= 0) 

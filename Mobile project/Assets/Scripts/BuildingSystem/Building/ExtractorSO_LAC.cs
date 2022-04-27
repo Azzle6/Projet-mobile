@@ -13,4 +13,5 @@ public class ExtractorSO_LAC : BuildingStatSO
 
     [Header("Product")]
     public ResourceQuantity production;
+    public float noise;
 }
