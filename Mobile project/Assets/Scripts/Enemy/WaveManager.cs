@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager instance;
+    public DiffcultySettings diffPreset;
 
     public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
@@ -21,6 +22,9 @@ public class WaveManager : MonoBehaviour
             Destroy(this);
         else
             instance = this;
+
+        // initialize difficulty preset
+        DiffCalculator.setting = diffPreset;
     }
 
     public void Update()
