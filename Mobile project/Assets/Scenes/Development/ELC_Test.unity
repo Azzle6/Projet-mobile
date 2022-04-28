@@ -1108,14 +1108,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2448967763958437431, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_Name
-      value: Turret
-      objectReference: {fileID: 0}
-    - target: {fileID: 2448967763958437431, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3412408712031748309, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -1214,14 +1206,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4723658273597893412, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4938448946788896686, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_Name
-      value: House
-      objectReference: {fileID: 0}
-    - target: {fileID: 4938448946788896686, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5409743681866733059, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
@@ -1418,14 +1402,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8478304585500488675, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8594143484424542170, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_Name
-      value: MatterExtractor
-      objectReference: {fileID: 0}
-    - target: {fileID: 8594143484424542170, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

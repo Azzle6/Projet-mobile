@@ -29,6 +29,7 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI[] Texts;
+    [SerializeField] private GameObject BuildingInfosUpgradeButton;
 
     private void Awake()
     {
@@ -176,7 +177,22 @@ public class UIManager_LAC : MonoBehaviour
         {
             txt.gameObject.SetActive(true);
         }
+
         
+        Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+        ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
+        if (build.level < build.BuildingScriptable.unlockedLevel)
+        {
+            BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
+            colors.normalColor = Color.green;
+        }
+        else
+        {
+            BuildingInfosUpgradeButton.GetComponent<Button>().interactable = false;
+            colors.normalColor = Color.red;
+        }
+        BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
+
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
