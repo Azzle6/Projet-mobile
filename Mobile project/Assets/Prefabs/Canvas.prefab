@@ -5442,6 +5442,7 @@ MonoBehaviour:
   knowledge: {fileID: 8466370726659099972}
   BuildingInfos: {fileID: 4510598844573150891}
   Texts: []
+  BuildingInfosUpgradeButton: {fileID: 5113097934714911044}
 --- !u!1 &7496009523002907686
 GameObject:
   m_ObjectHideFlags: 0
@@ -12375,6 +12376,10 @@ PrefabInstance:
     - target: {fileID: 7647549724877278342, guid: 3c3f53835737faf478b789bc5b58682d, type: 3}
       propertyPath: techPrice
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647549724877278342, guid: 3c3f53835737faf478b789bc5b58682d, type: 3}
+      propertyPath: timeToDiscover
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7647549724877278342, guid: 3c3f53835737faf478b789bc5b58682d, type: 3}
       propertyPath: concernedBuilding
