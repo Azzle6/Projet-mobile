@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
     public static WaveManager instance;
     public DiffcultySettings diffPreset;
 
+    public Transform spawnParent;
     public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
 
@@ -14,14 +15,25 @@ public class WaveManager : MonoBehaviour
 
     public GameObject enemyGroup;
     public int currentWave = 0;
-    // debug
-    public float difficulty, levelDiff, techDiff, ressourceDiff;
+    [Header("Debug")]
+    public float difficulty;
+    public float levelDiff, techDiff, ressourceDiff;
     void Awake()
     {
         if (instance != this && instance)
             Destroy(this);
         else
             instance = this;
+        // setup spawnPoint
+        if (spawnParent)
+        {
+            for (int i = 0; i < spawnParent.childCount; i++)
+            {
+                spawnPoints.Add(spawnParent.GetChild(i));
+
+            }
+
+        }
 
         // initialize difficulty preset
         DiffCalculator.setting = diffPreset;
