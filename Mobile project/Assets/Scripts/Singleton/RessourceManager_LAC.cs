@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RessourceManager_LAC : MonoBehaviour
 {
-    public static DiffcultySettings diffPreset;
+    
     public static RessourceManager_LAC instance { get; private set; }
 
     [Header("Map")]
@@ -32,8 +32,6 @@ public class RessourceManager_LAC : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-        // initialize difficulty preset
-        DiffCalculator.setting = diffPreset;
     }
     public void StockNoise(float noise)
     {

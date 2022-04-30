@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d479a513511ea964fa79a4098c09f9fc, type: 3}
   m_Name: DifficultyPreset
   m_EditorClassIdentifier: 
-  MapSize: 150
+  MapSize: 300
   buildingW: 1
   defenseW: 2
   techMax: 6
-  maxMatter: 0
-  matterW: 0
-  maxKnowledge: 2500
+  maxMatter: 2000
+  matterW: 2
+  maxKnowledge: 1500
   knowledgeW: 1
-  techW: 1
-  levelW: 1
+  techW: 2
+  levelW: 2.5
   ressourceW: 1
   noiseThreshold: 210
   noiseGainPerWave: 0.1
-  spawnRatio:
+  maxEnemy: 30
+  enemyRatio:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -49,9 +50,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxEnemy: 30
   enemyDisp: 0
-  enemyRatio:
+  spawnRatio:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
