@@ -15,4 +15,5 @@ public class TurretSO_LAC : BuildingStatSO
     public float range;
     public int damage;
     public float attackSpeed;
+    public float bulletDuration = 1;
 }
