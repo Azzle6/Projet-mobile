@@ -19,7 +19,7 @@ public class EnemyBoid : Boid
 
     [Header("Debug")]
     public MeshRenderer m_renderer;
-    public Material moveMat, attackMat;
+    //public Material moveMat, attackMat;
 
     public void Initialize(EnemyGroup enemyGroup)
     {
@@ -77,7 +77,7 @@ public class EnemyBoid : Boid
                     
                     if (inRange && (Time.time - inRangeTime) > inRangeDuration)
                     {
-                        m_renderer.material = attackMat;
+                        //m_renderer.material = attackMat;
                         enemyState = EnemyState.ATTACK;
                     }
                         
@@ -90,7 +90,7 @@ public class EnemyBoid : Boid
                     if (!inRange)
                     {
                         attackDelay = 0;
-                        m_renderer.material = moveMat;
+                        //m_renderer.material = moveMat;
                         enemyState = EnemyState.MOVE;
                     }
 

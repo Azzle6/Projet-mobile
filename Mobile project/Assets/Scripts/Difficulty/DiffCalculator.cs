@@ -15,8 +15,8 @@ public static class DiffCalculator
         int buildTile = RessourceManager_LAC.instance.buildTile;
         int defendTile = RessourceManager_LAC.instance.defendTile;
 
-        DifficultyData buildDif = new DifficultyData((buildTile / setting.MapSize), setting.buildingW);
-        DifficultyData defendDif = new DifficultyData((defendTile / buildTile), setting.defenseW);
+        DifficultyData buildDif = new DifficultyData(((float)buildTile / setting.MapSize), setting.buildingW);
+        DifficultyData defendDif = new DifficultyData((buildTile!= 0)?((float)defendTile / buildTile) : 0, setting.defenseW);
         List<DifficultyData> diffs = new List<DifficultyData>{buildDif, defendDif};
 
         levelDiff = (SummDiffData(diffs).value / SummDiffData(diffs).weight);
@@ -41,7 +41,7 @@ public static class DiffCalculator
         DifficultyData matterDiff = new DifficultyData(Mathf.Clamp(RessourceManager_LAC.instance.matter / setting.maxMatter, 0, 1), setting.matterW);
         DifficultyData knowlegeDiff = new DifficultyData(Mathf.Clamp(RessourceManager_LAC.instance.knowledge / setting.maxKnowledge, 0, 1), setting.knowledgeW);
 
-        List<DifficultyData> diffs = new List<DifficultyData> { matterDiff, matterDiff };
+        List<DifficultyData> diffs = new List<DifficultyData> { matterDiff, knowlegeDiff };
         DifficultyData diffSumm = SummDiffData(diffs);
         diffData.value = diffSumm.value / diffSumm.weight;
 
@@ -95,7 +95,7 @@ public static class DiffCalculator
             summWeight += d.weight;
         }
 
-        diffData.value = summWeight;
+        diffData.value = summValue;
         diffData.weight = summWeight;
         return diffData;
     }

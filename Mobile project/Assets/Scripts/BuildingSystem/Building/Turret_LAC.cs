@@ -11,7 +11,12 @@ public class Turret_LAC : Building
     float attackDelay = 0;
 
     public int people;
-
+    [Header("Attack")]
+    public Transform shootPoint;
+    public GameObject bulletPrefab;
+    GameObject bullet;
+    float travelBullet = 0;
+    bool attacking;
     [Header("Debug")]
     public GameObject target;
     public MeshRenderer targetRenderer;
@@ -27,16 +32,36 @@ public class Turret_LAC : Building
         UpdateTarget();
         if (enemyTarget)
         {
-            attackDelay += Time.deltaTime;
+            if(!attacking)
+                attackDelay += Time.deltaTime;
+
             if(attackDelay > stats[level].attackSpeed)
             {
+                
                 attackDelay = 0;
-                Attack(enemyTarget);
+                travelBullet = 0;
+                attacking = true;  
+                
+                bullet = Instantiate(bulletPrefab, shootPoint);
+                Debug.Log("bullet" + bullet.name);
+                //Attack(enemyTarget);
+            }
+            if (attacking)
+            {
+                travelBullet += Time.deltaTime / stats[level].bulletDuration;
+                bullet.transform.position = Vector3.Lerp(shootPoint.position, enemyTarget.transform.position, travelBullet);
+                bullet.transform.forward = (enemyTarget.transform.position - shootPoint.position).normalized;
+                if(travelBullet >= 1)
+                {
+                    Attack(enemyTarget);
+                    Destroy(bullet);
+                    attacking = false;
+                }
             }
 
             // debug target
-            target.gameObject.SetActive(true);
-            target.transform.position = enemyTarget.transform.position;
+            //target.gameObject.SetActive(true);
+            //target.transform.position = enemyTarget.transform.position;
         }
         else
         {
