@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0daf1e7e005fe45a8288f2370f81aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingScriptable: {fileID: 11400000, guid: 028d2e87e109bd241af7b3498f95c922, type: 2}
+  BuildingScriptable: {fileID: 11400000, guid: 8110f8183a6faa045a10a78f68592f73, type: 2}
   Visual: {fileID: 0}
   level: 0
   PlacementSound: 0
@@ -60,6 +60,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   people: 0
+  shootPoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
   target: {fileID: 5421820326063403356}
   targetRenderer: {fileID: 5421820326063403353}
   targetAttack: {fileID: 2100000, guid: b2fd8e3b1f462004cbba51cf139365c9, type: 2}
@@ -75,7 +77,6 @@ GameObject:
   - component: {fileID: 5421820326063403359}
   - component: {fileID: 5421820326063403352}
   - component: {fileID: 5421820326063403353}
-  - component: {fileID: 5421820326063403358}
   m_Layer: 6
   m_Name: target
   m_TagString: Untagged
@@ -146,19 +147,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5421820326063403358
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5421820326063403356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3954456315868294636
 PrefabInstance:
   m_ObjectHideFlags: 0
