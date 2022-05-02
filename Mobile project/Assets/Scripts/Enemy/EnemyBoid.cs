@@ -9,7 +9,7 @@ public class EnemyBoid : Boid
     public EnemyState enemyState;
 
     // displacement
-    [HideInInspector] public Transform target;
+    [HideInInspector] public Extractor_LAC target;
     bool inRange;
     float inRangeTime, inRangeDuration = 0.1f;
 
@@ -96,7 +96,7 @@ public class EnemyBoid : Boid
 
                     if (target)
                     {
-                        transform.forward = (target.position - transform.position).normalized;
+                        transform.forward = (target.transform.position - transform.position).normalized;
                         attackDelay += Time.deltaTime;
 
                         if(attackDelay > enemyStats.attackSpeed)

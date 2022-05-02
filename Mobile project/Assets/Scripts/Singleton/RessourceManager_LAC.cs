@@ -37,6 +37,37 @@ public class RessourceManager_LAC : MonoBehaviour
     {
         this.noise += noise;
     }
+
+    public bool SpendRessource(float value, RessourceType rType)
+    {
+        bool canSpend = true;
+        // ressource value
+        if (rType == RessourceType.KNOWLEDGE)
+        {
+            if (knowledge - value >= 0)
+                knowledge -= value;
+            else
+                canSpend = false;
+        }
+            
+        if (rType == RessourceType.MATTER)
+        {
+            if (matter - value > 0)
+                matter -= value;
+            else
+                canSpend = false;
+        }
+        // update stock for all extractor
+        if (canSpend)
+        {
+            for (int i = 0; i < activeExtractor.Count; i++)
+            {
+                if (activeExtractor[i].ressourceType == rType)
+                    activeExtractor[i].stock -= value * activeExtractor[i].ProductCapacity() / G_ProductCapacity(rType);
+            }
+        }
+        return canSpend;
+    }
     public void StockRessource(float value, RessourceType rType)
     {
         // ressource value
