@@ -51,9 +51,9 @@ MonoBehaviour:
   Activated: 0
   curRotation: 0
   statsSO:
-  - {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
-  - {fileID: 11400000, guid: 48aaefec02c5c914d892c1e3dcd2045e, type: 2}
   - {fileID: 11400000, guid: 12ac8f2fceabf204282b2002a82f5a9c, type: 2}
+  - {fileID: 11400000, guid: 74751c914f90e0744bc8d77c9f005e7e, type: 2}
+  - {fileID: 11400000, guid: a73b737b5c5e59c478d8da1bf5f1492d, type: 2}
   ressourceType: 1
   stats:
   - {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
@@ -160,5 +160,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9765277, y: 0.9575672, z: 1}
-  m_Center: {x: 0.48826385, y: 0.52303874, z: 0}
+  m_Size: {x: 1.9765277, y: 1.4367362, z: 1}
+  m_Center: {x: 0.48826385, y: 0.76262325, z: 0}
