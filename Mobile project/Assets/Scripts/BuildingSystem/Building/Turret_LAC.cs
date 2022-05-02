@@ -51,6 +51,7 @@ public class Turret_LAC : Building
                 travelBullet += Time.deltaTime / stats[level].bulletDuration;
                 bullet.transform.position = Vector3.Lerp(shootPoint.position, enemyTarget.transform.position, travelBullet);
                 bullet.transform.forward = (enemyTarget.transform.position - shootPoint.position).normalized;
+
                 if(travelBullet >= 1)
                 {
                     Attack(enemyTarget);
@@ -65,6 +66,10 @@ public class Turret_LAC : Building
         }
         else
         {
+            if (bullet)
+                Destroy(bullet);
+            attacking = false;
+
             target.gameObject.SetActive(false);
         }
             
