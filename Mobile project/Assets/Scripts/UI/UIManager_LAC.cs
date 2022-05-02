@@ -30,6 +30,7 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private GameObject BuildingInfosPop;
 
     private void Awake()
     {
@@ -177,6 +178,7 @@ public class UIManager_LAC : MonoBehaviour
         {
             txt.gameObject.SetActive(true);
         }
+        BuildingInfosPop.SetActive(true);
 
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
@@ -221,6 +223,7 @@ public class UIManager_LAC : MonoBehaviour
                     {
                         Texts[i].gameObject.SetActive(false);
                     }
+                    BuildingInfosPop.SetActive(false);
                 }
             }
             
