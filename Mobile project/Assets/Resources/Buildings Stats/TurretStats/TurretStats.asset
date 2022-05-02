@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
   maxPeople: 2
-  peopleGainDamage: 0.2
-  peopleGainAttackSpeed: 0
+  peopleGainDamage: 0
+  peopleGainAttackSpeed: 0.3
   range: 6
-  damage: 1
-  attackSpeed: 1
+  damage: 10
+  attackSpeed: 0.1
   bulletDuration: 1
