@@ -8,7 +8,9 @@ public class BuildPosCursor : MonoBehaviour
 {
     [SerializeField] private LayerMask mask;
     [SerializeField] private Tilemap TileM;
-    private void Update()
+    [SerializeField] private int rightSideSecurity;
+    [SerializeField] private int downSideSecurity;
+    private void FixedUpdate()
     {
         UpdateCursorPos();
     }
@@ -19,14 +21,25 @@ public class BuildPosCursor : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit rayHit, 100, mask))
         {
             Vector3Int cellPos = TileM.WorldToCell(rayHit.point) + Vector3Int.forward; //On ajoute Vector3Int.forward prcq sinon on a une valeur arrondie à -1 en Z
-            if(BuildingSystem.instance.globalCellsInfos.ContainsKey(cellPos)) 
+            bool canPlace = true;
+
+            for (int i = 0; i < rightSideSecurity; i++)
             {
-                if (!BuildingSystem.instance.globalCellsInfos[cellPos].isPlaced)
+                for (int j = 0; j < downSideSecurity; j++)
                 {
-                    transform.position = TileM.CellToWorld(cellPos ) + new Vector3(0.5f,0, 0.5f);
+                    Vector3Int additionVect = new Vector3Int(i, -j, 0);
+                    if (BuildingSystem.instance.globalCellsInfos.ContainsKey(cellPos + additionVect))
+                    {
+                        if (BuildingSystem.instance.globalCellsInfos[cellPos + additionVect].isPlaced)
+                        {
+                            canPlace = false;
+                        }
+                    }
+                    else canPlace = false;
                 }
-                
             }
+            
+            if(canPlace) transform.position = TileM.CellToWorld(cellPos ) + new Vector3(0.5f,0, 0.5f);
         }
     }
 }

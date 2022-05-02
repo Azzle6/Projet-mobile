@@ -180,7 +180,9 @@ public class BuildingSystem : MonoBehaviour
                 else
                 {
                     outOfGrid = true;
+                    
                     Debug.Log("Déborde de la zone");
+                    
                 }
 
             }
@@ -317,6 +319,28 @@ public class BuildingSystem : MonoBehaviour
         tilemapTilePos = new Vector3Int((int)IslandManager.instance.transform.localPosition.x, 0,
             (int)IslandManager.instance.transform.localPosition.z);
     }*/
+
+    public void Movebuilding()
+    {
+        GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
+        foreach (var vect in GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position), go.GetComponentInParent<Building>().BuildingScriptable.buildingArea))
+        {
+            globalCellsInfos.Remove(vect);
+        }
+        
+        if (currentBuilding == null) currentBuilding = go; 
+        else
+        {
+            Debug.Log("Building already selected");
+            return;
+        }
+        currentBuilding.GetComponent<Building>().enabled = false;
+        isMovingBuilding = false;
+        
+        UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
+        DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
+    }
 
     public void Rotate()
     {
