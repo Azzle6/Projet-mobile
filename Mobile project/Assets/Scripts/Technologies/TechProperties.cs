@@ -16,7 +16,7 @@ public class TechProperties : MonoBehaviour
     [HideInInspector]
     public float timeSpentToDiscover;
     public TechnoType techType;
-    public BuildingSO concernedBuilding;
+    public BuildingSO[] concernedBuilding;
 
     private void Start()
     {
@@ -45,14 +45,21 @@ public class TechProperties : MonoBehaviour
         switch (techType)
         {
             case TechnoType.Upgrade :
-                concernedBuilding.unlockedLevel++;
-                Debug.Log("Upgrade for " + concernedBuilding.name + " unlocked !");
+                foreach (BuildingSO build in concernedBuilding)
+                {
+                    build.unlockedLevel++;
+                    Debug.Log("Upgrade for " + build.name + " unlocked !");
+                }
+                
                 break;
             case TechnoType.Unlock :
-                
-                concernedBuilding.isUnlocked = true;
+                foreach (BuildingSO build in concernedBuilding)
+                {
+                    build.isUnlocked = true;
+                    Debug.Log("Building " + build.name + " discovered !");
+                }
                 BuildingsManager.instance.UpdateUnlockedBuildings();
-                Debug.Log("Building " + concernedBuilding.name + " discovered !");
+                
                 break;
         }
     }
@@ -75,7 +82,7 @@ public class TechProperties : MonoBehaviour
         TMP_Text priceTxt = transform.GetChild(2).GetComponent<TMP_Text>();
         Slider slider = transform.GetChild(3).GetComponent<Slider>();
 
-        nameTxt.text = techType + " " + concernedBuilding.name;
+        nameTxt.text = techType + " " + concernedBuilding[0].name;
         stateTxt.text = curState.ToString();
         priceTxt.text = techPrice.ToString();
         slider.gameObject.SetActive(false);
