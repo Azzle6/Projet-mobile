@@ -7,9 +7,10 @@ public class WaveManager : MonoBehaviour
     public static WaveManager instance;
     public DiffcultySettings diffPreset;
 
-    public Transform spawnParent;
+    public Transform[] orientedSpawnParents = new Transform[5];
     public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
+    List<Transform>[] orientedSpawn = new List<Transform>[5];
 
     public List<Extractor_LAC> targets;
 
@@ -30,13 +31,15 @@ public class WaveManager : MonoBehaviour
         else
             instance = this;
         // setup spawnPoint
-        if (spawnParent)
+        for(int i = 0; i <orientedSpawnParents.Length; i++)
         {
-            for (int i = 0; i < spawnParent.childCount; i++)
+            if (orientedSpawnParents[i])
             {
-                spawnPoints.Add(spawnParent.GetChild(i));
+                for(int j = 0; j < orientedSpawnParents[i].childCount; j++)
+                {
+                    spawnPoints.Add(orientedSpawnParents[i].GetChild(i));
+                }
             }
-
         }
 
         // initialize difficulty preset
@@ -67,13 +70,14 @@ public class WaveManager : MonoBehaviour
 
         if (underAttack)
         {
-            int groupsDown = 0;
+            int currentEnnemies = 0;
             foreach(EnemyGroup g in groups)
             {
-                if (!g)
-                    groupsDown++;
+                if (g)
+                    currentEnnemies += g.enemies.Count;
             }
-            if (groupsDown >= groups.Count)
+            totalEnnemies = currentEnnemies;
+            if (currentEnnemies == 0)
                 underAttack = false;
         }
     }
@@ -98,12 +102,13 @@ public class WaveManager : MonoBehaviour
     public void StartWave()
     {
         groups.Clear();
-        int enemyToSpawn = totalEnnemies = DiffCalculator.EnemyNumber();
+        int enemyToSpawn = DiffCalculator.EnemyNumber();
         
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
             EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[i]).GetComponent<EnemyGroup>();
             enemyG.Initilaize(activeSpawnPoints[i], targets);
+            groups.Add(enemyG);
 
             int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
             float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
