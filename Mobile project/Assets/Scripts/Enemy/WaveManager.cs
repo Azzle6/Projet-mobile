@@ -41,10 +41,20 @@ public class WaveManager : MonoBehaviour
 
     public void Update()
     {
+        // debug diff
+        DiffCalculator.DifficultyCalc();
+        levelDiff = DiffCalculator.levelDiff;
+        techDiff = DiffCalculator.techDiff;
+        ressourceDiff = DiffCalculator.ressourceDiff;
+
+        difficulty = DiffCalculator.Difficulty;
         float noiseThresohld = DiffCalculator.setting.noiseThreshold * (1 + DiffCalculator.setting.noiseGainPerWave * currentWave);
         if(RessourceManager_LAC.instance.noise > noiseThresohld)
         {
             RessourceManager_LAC.instance.noise = 0;
+            
+            currentWave++;
+
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
             UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             StartWave(); 
