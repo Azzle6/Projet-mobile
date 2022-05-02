@@ -22,6 +22,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
@@ -51,6 +52,7 @@ public class UIManager_LAC : MonoBehaviour
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
+        knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
