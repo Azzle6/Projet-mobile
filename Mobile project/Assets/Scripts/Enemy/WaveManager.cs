@@ -11,10 +11,15 @@ public class WaveManager : MonoBehaviour
     public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
 
-    public List<Transform> targets;
+    public List<Extractor_LAC> targets;
 
     public GameObject enemyGroup;
+    public List<EnemyGroup> groups;
+
     public int currentWave = 0;
+    public bool underAttack;
+    public int totalEnnemies;
+
     [Header("Debug")]
     public float difficulty;
     public float levelDiff, techDiff, ressourceDiff;
@@ -30,7 +35,6 @@ public class WaveManager : MonoBehaviour
             for (int i = 0; i < spawnParent.childCount; i++)
             {
                 spawnPoints.Add(spawnParent.GetChild(i));
-
             }
 
         }
@@ -52,20 +56,31 @@ public class WaveManager : MonoBehaviour
         if(RessourceManager_LAC.instance.noise > noiseThresohld)
         {
             RessourceManager_LAC.instance.noise = 0;
-            
             currentWave++;
 
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
             UpdateActiveSpawn(DiffCalculator.SpawnRatio());
-            StartWave(); 
+            StartWave();
+
+            underAttack = true;
+        }
+
+        if (underAttack)
+        {
+            int groupsDown = 0;
+            foreach(EnemyGroup g in groups)
+            {
+                if (!g)
+                    groupsDown++;
+            }
+            if (groupsDown >= groups.Count)
+                underAttack = false;
         }
     }
     #region Wave Process
     public void ExtractorAsTarget(List<Extractor_LAC> ext)
     {
-        targets.Clear();
-        foreach (Extractor_LAC ex in ext)
-            targets.Add(ex.transform);
+        targets = ext;
     }
     public void UpdateActiveSpawn(float spawnRatio)
     {
@@ -82,7 +97,8 @@ public class WaveManager : MonoBehaviour
     }
     public void StartWave()
     {
-        int enemyToSpawn = DiffCalculator.EnemyNumber();
+        groups.Clear();
+        int enemyToSpawn = totalEnnemies = DiffCalculator.EnemyNumber();
         
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
