@@ -320,7 +320,7 @@ public class BuildingSystem : MonoBehaviour
             (int)IslandManager.instance.transform.localPosition.z);
     }*/
 
-    public void Movebuilding()
+    public void Movebuilding() //marche pas lol
     {
         GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
         foreach (var vect in GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position), go.GetComponentInParent<Building>().BuildingScriptable.buildingArea))
@@ -328,12 +328,8 @@ public class BuildingSystem : MonoBehaviour
             globalCellsInfos.Remove(vect);
         }
         
-        if (currentBuilding == null) currentBuilding = go; 
-        else
-        {
-            Debug.Log("Building already selected");
-            return;
-        }
+        currentBuilding = go.transform.parent.gameObject; 
+        
         currentBuilding.GetComponent<Building>().enabled = false;
         isMovingBuilding = false;
         

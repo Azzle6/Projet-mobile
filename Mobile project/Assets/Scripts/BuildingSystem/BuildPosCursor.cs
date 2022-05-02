@@ -10,6 +10,7 @@ public class BuildPosCursor : MonoBehaviour
     [SerializeField] private Tilemap TileM;
     [SerializeField] private int rightSideSecurity;
     [SerializeField] private int downSideSecurity;
+
     private void FixedUpdate()
     {
         UpdateCursorPos();
@@ -39,7 +40,7 @@ public class BuildPosCursor : MonoBehaviour
                 }
             }
             
-            if(canPlace) transform.position = TileM.CellToWorld(cellPos ) + new Vector3(0.5f,0, 0.5f);
+            if(canPlace) transform.position = TileM.CellToWorld(cellPos ) + new Vector3(0.6f,0, 0.6f);
         }
     }
 }
