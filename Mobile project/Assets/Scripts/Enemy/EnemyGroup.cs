@@ -10,6 +10,7 @@ public class EnemyGroup : BehaveGroup
     [Header("Displacement")]
     public Transform target;
     public Transform spawnPoint;
+    [HideInInspector] Extractor_LAC exTarget;
 
     [Header("Debug")]
     public List<Transform> targets;
