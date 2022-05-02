@@ -22,6 +22,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
@@ -30,6 +31,7 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private GameObject BuildingInfosPop;
 
     private void Awake()
     {
@@ -50,6 +52,7 @@ public class UIManager_LAC : MonoBehaviour
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
+        knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
@@ -177,6 +180,7 @@ public class UIManager_LAC : MonoBehaviour
         {
             txt.gameObject.SetActive(true);
         }
+        BuildingInfosPop.SetActive(true);
 
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
@@ -221,6 +225,7 @@ public class UIManager_LAC : MonoBehaviour
                     {
                         Texts[i].gameObject.SetActive(false);
                     }
+                    BuildingInfosPop.SetActive(false);
                 }
             }
             

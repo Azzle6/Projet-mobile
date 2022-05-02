@@ -9,6 +9,7 @@ public class TechnoManager : MonoBehaviour
     public static TechnoManager instance;
     public bool isDiscoveringTechnology;
     public bool resetDiscoveriesOnLaunch = true;
+    public Slider ui_mainScreenTechSlider;
 
     private void Awake()
     {
@@ -42,11 +43,15 @@ public class TechnoManager : MonoBehaviour
         techno.SwitchState(TechState.Discovering);
         Slider slider = techno.transform.GetChild(3).GetComponent<Slider>();
         slider.maxValue = techno.timeToDiscover;
+        ui_mainScreenTechSlider.maxValue = techno.timeToDiscover;
         
         while (techno.timeToDiscover > techno.timeSpentToDiscover)
         {
             techno.timeSpentToDiscover += 0.1f;
-            if(techno.gameObject.activeInHierarchy) slider.value = techno.timeSpentToDiscover; //Actualise le slider que si le joueur est dans le menu de techno
+            if (techno.gameObject.activeInHierarchy)
+                slider.value = techno.timeSpentToDiscover; //Actualise le slider que si le joueur est dans le menu de techno
+            else if(ui_mainScreenTechSlider.gameObject.activeInHierarchy) 
+                ui_mainScreenTechSlider.value = techno.timeSpentToDiscover;
             yield return new WaitForSeconds(0.1f);
             yield return null;
         }
