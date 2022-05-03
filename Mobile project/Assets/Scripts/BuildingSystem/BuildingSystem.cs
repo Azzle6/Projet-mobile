@@ -59,6 +59,7 @@ public class BuildingSystem : MonoBehaviour
         
         
         InitializeAllTiles();
+        RegisterPreplacedObstacles(BuildingsManager.instance.preplacedBuildings);
     }
 
 
@@ -160,7 +161,7 @@ public class BuildingSystem : MonoBehaviour
     }
 
     //récupère toutes les coordonnées des tiles concernées et si des tiles sont en dehors de la grid
-    private Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
+    public Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
     {
         List<Vector3Int> vectList = new List<Vector3Int>();
 
@@ -260,6 +261,7 @@ public class BuildingSystem : MonoBehaviour
             MainTilemap.SetTileFlags(vect, TileFlags.None);
             MainTilemap.SetColor(vect, color);
             MainTilemap.SetTileFlags(vect, TileFlags.LockColor);
+            Debug.Log("draw");
         }
     }
     
@@ -343,6 +345,29 @@ public class BuildingSystem : MonoBehaviour
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
         UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
     }
+    
+    
+    public void RegisterPreplacedObstacles(GameObject[] buildingsList)
+    {
+        Debug.Log("Register preplaced buildings");
+        foreach (var obj in buildingsList)
+        {
+            Building buildScript = obj.GetComponent<Building>();
+            currentBuilding = obj;
+            Vector3Int[] area = GetAreaEmplacements(
+                gridLayout.WorldToCell(obj.transform.position),
+                buildScript.BuildingScriptable.buildingArea);
+
+            foreach (var vect in area)
+            {
+                globalCellsInfos[vect].isPlaced = true;
+            }
+
+            ChangeColor(area, Color.black);
+        }
+
+        currentBuilding = null;
+    }
 
     public void Rotate()
     {
@@ -380,10 +405,10 @@ public class BuildingSystem : MonoBehaviour
                 newDisplacement = new Vector3Int(i, - j,0);
                 break;
             case Rotation.Left :
-                newDisplacement = new Vector3Int(j, - i,0);
+                newDisplacement = new Vector3Int(-j, - i,0);
                 break;
             case Rotation.Right :
-                newDisplacement = new Vector3Int(- j, i,0);
+                newDisplacement = new Vector3Int(j, i,0);
                 break;
             
         }
