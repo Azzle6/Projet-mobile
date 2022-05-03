@@ -51,6 +51,7 @@ public class WaveManager : MonoBehaviour
 
         // initialize difficulty preset
         DiffCalculator.setting = diffPreset;
+        UpdateActiveSpawn(DiffCalculator.SpawnRatio());
     }
 
     public void Update()
@@ -69,7 +70,6 @@ public class WaveManager : MonoBehaviour
             currentWave++;
 
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-            UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             StartWave();
 
             underAttack = true;
@@ -85,7 +85,11 @@ public class WaveManager : MonoBehaviour
             }
             totalEnnemies = currentEnnemies;
             if (currentEnnemies == 0)
+            {
                 underAttack = false;
+                UpdateActiveSpawn(DiffCalculator.SpawnRatio());
+            }
+                
         }
     }
     #region Wave Process
@@ -109,6 +113,7 @@ public class WaveManager : MonoBehaviour
         {
             // active spawn
             Transform t = currentSpawns[Random.Range(0, spawnPoints.Count)];
+            Debug.Log("Spawn " + t.name);
             activeSpawnPoints.Add(t);
             currentSpawns.Remove(t);
 
@@ -116,7 +121,11 @@ public class WaveManager : MonoBehaviour
             for(int j = 0; j < orientedSpawn.Length; j++)
             {
                 if (orientedSpawn[j].Contains(t))
-                    orientedProba[j] += 1 / orientedSpawn[j].Count;
+                {
+                    Debug.Log(j+ " find " + t.name);
+                    orientedProba[j] += (float)1 / orientedSpawn[j].Count;
+                }
+                    
             }
         }
     }
