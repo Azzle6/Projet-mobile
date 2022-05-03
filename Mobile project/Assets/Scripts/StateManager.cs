@@ -7,10 +7,11 @@ public static class StateManager
     public enum State
     {
         DisplaceBuilding,
+        HoldBuilding,
         ChooseBuilding,
         SelectBuilding,
         Free,
-        BuildingInfosPannel,
+        BuildingInfosPannel
     }
 
     public static State CurrentState = State.Free;
