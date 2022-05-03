@@ -323,14 +323,18 @@ public class BuildingSystem : MonoBehaviour
 
     public void Movebuilding() //marche pas lol
     {
+        
         GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
-        Debug.Log(go.name);
-        foreach (var vect in GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position), go.GetComponentInParent<Building>().BuildingScriptable.buildingArea))
+        currentBuilding = go.transform.parent.gameObject;
+        Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position),
+            go.GetComponentInParent<Building>().BuildingScriptable.buildingArea);
+        
+        foreach (var vect in area)
         {
             globalCellsInfos.Remove(vect);
         }
+        ChangeColor(area, Color.white, true);
         
-        currentBuilding = go.transform.parent.gameObject; 
         
         currentBuilding.GetComponent<Building>().enabled = false;
         isMovingBuilding = false;
