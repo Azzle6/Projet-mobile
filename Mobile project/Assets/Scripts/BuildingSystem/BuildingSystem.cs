@@ -331,7 +331,7 @@ public class BuildingSystem : MonoBehaviour
         
         foreach (var vect in area)
         {
-            globalCellsInfos.Remove(vect);
+            globalCellsInfos[vect].isPlaced = false;
         }
         ChangeColor(area, Color.white, true);
         
