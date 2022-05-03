@@ -66,6 +66,7 @@ public class BuildingSystem : MonoBehaviour
     {
         while (isMovingBuilding)
         {
+            UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
             Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
             if (Physics.Raycast(ray, out RaycastHit rayHit, 100, GroundMask))
             {
@@ -85,7 +86,7 @@ public class BuildingSystem : MonoBehaviour
         while (!isMovingBuilding)
         {
             Debug.Log("isNotMoving");
-            
+            UIManager_LAC.instance.SwitchState(StateManager.State.HoldBuilding);
             if (InputsManager.Click())
             {
                 Ray ray2 = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
@@ -180,7 +181,9 @@ public class BuildingSystem : MonoBehaviour
                 else
                 {
                     outOfGrid = true;
+                    
                     Debug.Log("Déborde de la zone");
+                    
                 }
 
             }
@@ -317,6 +320,25 @@ public class BuildingSystem : MonoBehaviour
         tilemapTilePos = new Vector3Int((int)IslandManager.instance.transform.localPosition.x, 0,
             (int)IslandManager.instance.transform.localPosition.z);
     }*/
+
+    public void Movebuilding() //marche pas lol
+    {
+        GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
+        Debug.Log(go.name);
+        foreach (var vect in GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position), go.GetComponentInParent<Building>().BuildingScriptable.buildingArea))
+        {
+            globalCellsInfos.Remove(vect);
+        }
+        
+        currentBuilding = go.transform.parent.gameObject; 
+        
+        currentBuilding.GetComponent<Building>().enabled = false;
+        isMovingBuilding = false;
+        
+        UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
+        DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
+    }
 
     public void Rotate()
     {

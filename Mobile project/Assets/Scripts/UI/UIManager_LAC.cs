@@ -55,7 +55,7 @@ public class UIManager_LAC : MonoBehaviour
         knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
         {
             bool canSwitchSelected = true;
             
@@ -105,6 +105,9 @@ public class UIManager_LAC : MonoBehaviour
                 break;
             
             case StateManager.State.DisplaceBuilding :
+                DisplayBuildingConfirmMenu();
+                break;
+            case StateManager.State.HoldBuilding :
                 DisplayBuildingConfirmMenu();
                 break;
             case StateManager.State.SelectBuilding :
