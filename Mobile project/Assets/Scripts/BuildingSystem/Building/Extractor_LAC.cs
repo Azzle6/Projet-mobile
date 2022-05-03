@@ -15,6 +15,8 @@ public class Extractor_LAC : Building
     [Header("Attack")]
     public bool fonctionnal;
     public float stock = 0;
+    [HideInInspector] public float maxStock;
+    bool triggerWave;
     public ParticleSystem smokeFX;
     
     private void Start()
@@ -25,8 +27,12 @@ public class Extractor_LAC : Building
 
     private void Update()
     {
-        if(!WaveManager.instance.underAttack)
+        if (!WaveManager.instance.underAttack)
+        {
             productCoolDown -= Time.deltaTime;
+            stock = maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
+        }
+            
 
         if (productCoolDown < 0)
         {
@@ -34,7 +40,7 @@ public class Extractor_LAC : Building
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
             RessourceManager_LAC.instance.StockNoise(stats[level].noise);
         }
-        
+  
     }
 
     #region Manage product
@@ -73,7 +79,6 @@ public class Extractor_LAC : Building
         }
         
     }
-
     public void TakeDown()
     {
         fonctionnal = false;

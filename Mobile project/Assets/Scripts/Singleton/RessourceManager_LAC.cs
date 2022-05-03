@@ -15,8 +15,10 @@ public class RessourceManager_LAC : MonoBehaviour
     public int population;
     public enum RessourceType { MATTER, KNOWLEDGE }
     public List<Extractor_LAC> activeExtractor;// { get; private set; }
-    public float matter;// { get; private set; }
-    public float knowledge;// { get; private set; }
+    public float matter, maxMatter;// { get; private set; }
+    [HideInInspector]public float matterRatio;
+    public float knowledge, maxKnowledge;// { get; private set; }
+    [HideInInspector] public float knowledgeRatio;
     public float noise;
 
     [Header("Tech")]
@@ -48,6 +50,7 @@ public class RessourceManager_LAC : MonoBehaviour
                 knowledge -= value;
             else
                 canSpend = false;
+            knowledgeRatio = knowledge / maxKnowledge;
         }
             
         if (rType == RessourceType.MATTER)
@@ -56,15 +59,7 @@ public class RessourceManager_LAC : MonoBehaviour
                 matter -= value;
             else
                 canSpend = false;
-        }
-        // update stock for all extractor
-        if (canSpend)
-        {
-            for (int i = 0; i < activeExtractor.Count; i++)
-            {
-                if (activeExtractor[i].ressourceType == rType)
-                    activeExtractor[i].stock -= value * activeExtractor[i].ProductCapacity() / G_ProductCapacity(rType);
-            }
+            matterRatio = matter / maxMatter;
         }
         return canSpend;
     }
@@ -72,16 +67,26 @@ public class RessourceManager_LAC : MonoBehaviour
     {
         // ressource value
         if (rType == RessourceType.KNOWLEDGE)
-            knowledge += value;
+        {
+            knowledge = Mathf.Clamp(knowledge + value, 0,  maxKnowledge);
+            knowledgeRatio = knowledge / maxKnowledge;
+        }
+            
+        
+            
         if (rType == RessourceType.MATTER)
-            matter += value;
+        {
+            matter = Mathf.Clamp(matter + value, 0, maxMatter);
+            matterRatio = matter / maxMatter;
+        }
+            
 
         // update stock for all extractor
-        for (int i = 0; i < activeExtractor.Count; i++)
+        /*for (int i = 0; i < activeExtractor.Count; i++)
         {
             if (activeExtractor[i].ressourceType == rType)
-                activeExtractor[i].stock += value * activeExtractor[i].ProductCapacity()/G_ProductCapacity(rType);
-        }
+                activeExtractor[i].stock = (ressourceValue / maxValue)*activeExtractor[i];
+        }*/
     }
    
     // Extractor
