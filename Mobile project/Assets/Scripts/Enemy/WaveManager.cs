@@ -8,7 +8,10 @@ public class WaveManager : MonoBehaviour
     public DiffcultySettings diffPreset;
 
     public Transform[] orientedSpawnParents = new Transform[5];
-    public List<Transform> spawnPoints;
+    [Range(0,1)]
+    public float[] orientedProba = new float[5];
+
+    [HideInInspector]public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
     List<Transform>[] orientedSpawn = new List<Transform>[5];
 
@@ -35,9 +38,13 @@ public class WaveManager : MonoBehaviour
         {
             if (orientedSpawnParents[i])
             {
+                orientedSpawn[i] = new List<Transform>();
                 for(int j = 0; j < orientedSpawnParents[i].childCount; j++)
                 {
-                    spawnPoints.Add(orientedSpawnParents[i].GetChild(i));
+                    Transform spawn = orientedSpawnParents[i].GetChild(j);
+                    orientedSpawn[i].Add(spawn);
+                    Debug.Log(i + orientedSpawnParents[i].name + spawn.name);
+                    spawnPoints.Add(spawn);
                 }
             }
         }
@@ -88,15 +95,29 @@ public class WaveManager : MonoBehaviour
     }
     public void UpdateActiveSpawn(float spawnRatio)
     {
+        // reset oriented spawn
+        for (int j = 0; j < orientedProba.Length; j++)
+        {
+            orientedProba[j] = 0;
+        }
+
         List<Transform> currentSpawns = spawnPoints;
         activeSpawnPoints.Clear();
         int number = (int)Mathf.Ceil(spawnPoints.Count * spawnRatio);
 
         for (int i = 0; i < number; i++)
         {
+            // active spawn
             Transform t = currentSpawns[Random.Range(0, spawnPoints.Count)];
             activeSpawnPoints.Add(t);
             currentSpawns.Remove(t);
+
+            // oriented spawn
+            for(int j = 0; j < orientedSpawn.Length; j++)
+            {
+                if (orientedSpawn[j].Contains(t))
+                    orientedProba[j] += 1 / orientedSpawn[j].Count;
+            }
         }
     }
     public void StartWave()
@@ -139,6 +160,11 @@ public class WaveManager : MonoBehaviour
             if (!targets[i].gameObject.activeSelf)
                 targets[i].gameObject.SetActive(true);
         }
+    }
+    [ContextMenu("Oriented Spawn")]
+    public void DebugOrientedSpawn()
+    {
+        UpdateActiveSpawn(0.5f);
     }
     #endregion
 }
