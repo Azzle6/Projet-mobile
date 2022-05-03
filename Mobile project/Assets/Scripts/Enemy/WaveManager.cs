@@ -7,9 +7,13 @@ public class WaveManager : MonoBehaviour
     public static WaveManager instance;
     public DiffcultySettings diffPreset;
 
-    public Transform spawnParent;
-    public List<Transform> spawnPoints;
+    public Transform[] orientedSpawnParents = new Transform[5];
+    [Range(0,1)]
+    public float[] orientedProba = new float[5];
+
+    [HideInInspector]public List<Transform> spawnPoints;
     List<Transform> activeSpawnPoints = new List<Transform>();
+    List<Transform>[] orientedSpawn = new List<Transform>[5];
 
     public List<Extractor_LAC> targets;
 
@@ -30,13 +34,19 @@ public class WaveManager : MonoBehaviour
         else
             instance = this;
         // setup spawnPoint
-        if (spawnParent)
+        for(int i = 0; i <orientedSpawnParents.Length; i++)
         {
-            for (int i = 0; i < spawnParent.childCount; i++)
+            if (orientedSpawnParents[i])
             {
-                spawnPoints.Add(spawnParent.GetChild(i));
+                orientedSpawn[i] = new List<Transform>();
+                for(int j = 0; j < orientedSpawnParents[i].childCount; j++)
+                {
+                    Transform spawn = orientedSpawnParents[i].GetChild(j);
+                    orientedSpawn[i].Add(spawn);
+                    Debug.Log(i + orientedSpawnParents[i].name + spawn.name);
+                    spawnPoints.Add(spawn);
+                }
             }
-
         }
 
         // initialize difficulty preset
@@ -67,13 +77,14 @@ public class WaveManager : MonoBehaviour
 
         if (underAttack)
         {
-            int groupsDown = 0;
+            int currentEnnemies = 0;
             foreach(EnemyGroup g in groups)
             {
-                if (!g)
-                    groupsDown++;
+                if (g)
+                    currentEnnemies += g.enemies.Count;
             }
-            if (groupsDown >= groups.Count)
+            totalEnnemies = currentEnnemies;
+            if (currentEnnemies == 0)
                 underAttack = false;
         }
     }
@@ -84,26 +95,41 @@ public class WaveManager : MonoBehaviour
     }
     public void UpdateActiveSpawn(float spawnRatio)
     {
+        // reset oriented spawn
+        for (int j = 0; j < orientedProba.Length; j++)
+        {
+            orientedProba[j] = 0;
+        }
+
         List<Transform> currentSpawns = spawnPoints;
         activeSpawnPoints.Clear();
         int number = (int)Mathf.Ceil(spawnPoints.Count * spawnRatio);
 
         for (int i = 0; i < number; i++)
         {
+            // active spawn
             Transform t = currentSpawns[Random.Range(0, spawnPoints.Count)];
             activeSpawnPoints.Add(t);
             currentSpawns.Remove(t);
+
+            // oriented spawn
+            for(int j = 0; j < orientedSpawn.Length; j++)
+            {
+                if (orientedSpawn[j].Contains(t))
+                    orientedProba[j] += 1 / orientedSpawn[j].Count;
+            }
         }
     }
     public void StartWave()
     {
         groups.Clear();
-        int enemyToSpawn = totalEnnemies = DiffCalculator.EnemyNumber();
+        int enemyToSpawn = DiffCalculator.EnemyNumber();
         
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
             EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[i]).GetComponent<EnemyGroup>();
             enemyG.Initilaize(activeSpawnPoints[i], targets);
+            groups.Add(enemyG);
 
             int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
             float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
@@ -134,6 +160,11 @@ public class WaveManager : MonoBehaviour
             if (!targets[i].gameObject.activeSelf)
                 targets[i].gameObject.SetActive(true);
         }
+    }
+    [ContextMenu("Oriented Spawn")]
+    public void DebugOrientedSpawn()
+    {
+        UpdateActiveSpawn(0.5f);
     }
     #endregion
 }
