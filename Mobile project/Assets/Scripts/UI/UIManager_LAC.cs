@@ -33,6 +33,13 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
     [SerializeField] private GameObject BuildingInfosPop;
 
+
+    [Header("Wave Preview")]
+    [SerializeField] private Transform camT;
+    [SerializeField] private GameObject wavePreview;
+    [SerializeField] private Image[] waveZone = new Image[0];
+
+
     private void Awake()
     {
         InfosPannel.RegisterInstance();
@@ -48,6 +55,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        UpdateWavePreview();
         UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
@@ -116,6 +124,21 @@ public class UIManager_LAC : MonoBehaviour
             case StateManager.State.BuildingInfosPannel :
                 DisplayBuildingPannel();
                 break;
+        }
+    }
+    private void UpdateWavePreview()
+    {
+        Vector3 worldCamdir = camT.forward;
+        Vector2 uiCamDir = new Vector2(worldCamdir.x, worldCamdir.z);
+
+        wavePreview.transform.up = uiCamDir;
+
+        for(int i = 0; i < waveZone.Length; i++)
+        {
+            if (waveZone[i])
+                waveZone[i].color = Color.Lerp(Color.white, Color.red, WaveManager.instance.orientedProba[i]);
+            else
+                Debug.LogWarning(" wave zone " + i + " is missing");
         }
     }
 
