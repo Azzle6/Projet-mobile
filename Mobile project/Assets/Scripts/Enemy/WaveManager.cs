@@ -43,7 +43,7 @@ public class WaveManager : MonoBehaviour
                 {
                     Transform spawn = orientedSpawnParents[i].GetChild(j);
                     orientedSpawn[i].Add(spawn);
-                    Debug.Log(i + orientedSpawnParents[i].name + spawn.name);
+                    //Debug.Log(i + orientedSpawnParents[i].name + spawn.name);
                     spawnPoints.Add(spawn);
                 }
             }
@@ -70,7 +70,7 @@ public class WaveManager : MonoBehaviour
             currentWave++;
 
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-            StartWave();
+            StartWave(DiffCalculator.EnemyNumber());
 
             underAttack = true;
         }
@@ -129,11 +129,9 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
-    public void StartWave()
+    public void StartWave(int enemyToSpawn)
     {
         groups.Clear();
-        int enemyToSpawn = DiffCalculator.EnemyNumber();
-        
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
             EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[i]).GetComponent<EnemyGroup>();
@@ -153,8 +151,8 @@ public class WaveManager : MonoBehaviour
     public void DebugWave()
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-        UpdateActiveSpawn(0.5f);
-        if(targets.Count > 0) StartWave();
+        UpdateActiveSpawn(1f);
+        StartWave(10);
     }
 
     public void DebugDifficulty()

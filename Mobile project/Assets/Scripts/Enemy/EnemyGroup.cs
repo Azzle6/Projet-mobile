@@ -73,7 +73,7 @@ public class EnemyGroup : BehaveGroup
         }
 
         Extractor_LAC nTarget = NearestTarget(spawnPoint, targets);
-        if ((!target || !target.gameObject.activeSelf))
+        if ((!target || !target.gameObject.activeSelf) && nTarget)
         {
             target = nTarget;
             SetTarget(target);
@@ -92,12 +92,14 @@ public class EnemyGroup : BehaveGroup
 
             
         if (target == null)
-            Debug.Log("Target null for " + this.name);
-
-        BehaviourHelper.GetHeadingBH(ref presetBH.behaviours).head = target.transform;
-        for(int i = 0; i < enemies.Count; i++)
+            Debug.LogWarning("Target null for " + this.name);
+        else
         {
-            enemies[i].target = target;
+            BehaviourHelper.GetHeadingBH(ref presetBH.behaviours).head = target.transform;
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].target = target;
+            }
         }
     }
     public Extractor_LAC NearestTarget(Transform origin,List<Extractor_LAC> targets)

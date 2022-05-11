@@ -13,5 +13,6 @@ public class ExtractorSO_LAC : BuildingStatSO
 
     [Header("Product")]
     public ResourceQuantity production;
+    public int maxStock = 100;
     public float noise;
 }
