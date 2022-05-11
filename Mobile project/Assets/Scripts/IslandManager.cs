@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class IslandManager : MonoBehaviour
 {
-    public static IslandManager instance;
+    /*public static IslandManager instance;
     [HideInInspector] public Vector3Int mousePosition;
     public Tilemap tileM;
     

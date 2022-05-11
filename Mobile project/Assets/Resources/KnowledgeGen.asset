@@ -43,7 +43,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   name: Knowledge Extractor
-  production: knowledge
   description: Fais du savoir en fait
+  price:
+    quantity: 4
+    ressource: 1
   image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   prefab: {fileID: 7393119220524161010, guid: 0f3629327cf89db4980f74bff16362b6, type: 3}
+  buildingStats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
+  isUnlocked: 1
+  unlockedLevel: 0

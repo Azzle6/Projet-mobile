@@ -17,22 +17,25 @@ public class UIManager_LAC : MonoBehaviour
     public LayerMask BuildingsLayer;
     public LayerMask UILayerMask;
     public GameObject CurrentSelectedBuilding;
-    
-    [Header("Références")]
+
+    [Header("Références")] 
+    [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
     [SerializeField] private GameObject BuildingInfos;
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingCurrentPop;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingProduction;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingStockage;
+    [SerializeField] private TextMeshProUGUI[] Texts;
+    [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private GameObject BuildingInfosPop;
 
     private void Awake()
     {
+        InfosPannel.RegisterInstance();
         if (instance != null) return;
         instance = this;
     }
@@ -46,12 +49,13 @@ public class UIManager_LAC : MonoBehaviour
     private void Update()
     {
         UpdateUI();
-        Debug.Log(StateManager.CurrentState);
+        //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
+        knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
         {
             bool canSwitchSelected = true;
             
@@ -103,6 +107,9 @@ public class UIManager_LAC : MonoBehaviour
             case StateManager.State.DisplaceBuilding :
                 DisplayBuildingConfirmMenu();
                 break;
+            case StateManager.State.HoldBuilding :
+                DisplayBuildingConfirmMenu();
+                break;
             case StateManager.State.SelectBuilding :
                 DisplayBuildingInfos();
                 break;
@@ -132,6 +139,16 @@ public class UIManager_LAC : MonoBehaviour
     {
         if(increaseOrDecrease) RessourceManager_LAC.instance.AddPop();
         else RessourceManager_LAC.instance.RemovePop();
+    }
+
+    public void UpgradeBuilding()
+    {
+        CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
+    }
+
+    public void DisplaceBuilding()
+    {
+        BuildingSystem.instance.Movebuilding();
     }
 
     private void DisplayBuildingPannel()
@@ -167,12 +184,59 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
+        foreach (var txt in Texts)
+        {
+            txt.gameObject.SetActive(true);
+        }
+        BuildingInfosPop.SetActive(true);
+
+        
+        Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+        ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
+        if (build.level < build.BuildingScriptable.unlockedLevel)
+        {
+            BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
+            colors.normalColor = Color.green;
+        }
+        else
+        {
+            BuildingInfosUpgradeButton.GetComponent<Button>().interactable = false;
+            colors.normalColor = Color.red;
+        }
+        BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
+
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            SelectedBuildingCurrentPop.text = "Pop : " + extractor.people;
-            SelectedBuildingProduction.text = "Production : " + extractor.ProductCapacity() + " / s";
-            SelectedBuildingStockage.text = "Stock : " + extractor.stock;
+            Texts[0].text = "Pop : " + extractor.people;
+            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s";
+            Texts[2].text = "Stock : " + extractor.stock;
+            Texts[3].gameObject.SetActive(false);
+        }
+        else
+        {
+            Turret_LAC turret = CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>();
+            if (turret)
+            {
+                Texts[0].text = "Pop : ";
+                Texts[1].text = "Range : " + turret.CurrentRange();
+                Texts[2].text = "Damage : " + turret.CurrentDamage();
+                Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
+            }
+            else
+            {
+                House_LAC house = CurrentSelectedBuilding.GetComponentInParent<House_LAC>();
+                if (house)
+                {
+                    Texts[0].text = "Added pop : " + house.currentPeople;
+                    for (int i = 1; i < Texts.Length; i++)
+                    {
+                        Texts[i].gameObject.SetActive(false);
+                    }
+                    BuildingInfosPop.SetActive(false);
+                }
+            }
+            
         }
         
         BuildingInfos.SetActive(true);

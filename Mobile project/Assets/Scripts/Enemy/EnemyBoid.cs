@@ -9,21 +9,23 @@ public class EnemyBoid : Boid
     public EnemyState enemyState;
 
     // displacement
-    [HideInInspector] public Transform target;
+    [HideInInspector] public Extractor_LAC target;
     bool inRange;
     float inRangeTime, inRangeDuration = 0.1f;
 
     //Attack
+    [HideInInspector] public int health;
     float attackDelay = 0;
 
     [Header("Debug")]
     public MeshRenderer m_renderer;
-    public Material moveMat, attackMat;
+    //public Material moveMat, attackMat;
 
     public void Initialize(EnemyGroup enemyGroup)
     {
         enemyStats = enemyGroup.enemyStats;
         target = enemyGroup.target;
+        health = enemyStats.healthPoint;
         Initialize(enemyGroup as BehaveGroup);
 
     }
@@ -31,8 +33,27 @@ public class EnemyBoid : Boid
     public void Attack()
     {
         if (target)
-            Destroy(target.gameObject);
+           target.gameObject.SetActive(false);
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+            Die();
+            
+    }
+
+    public void Die()
+    {
+        enemyState = EnemyState.DIE;
+        transform.parent.gameObject.layer = 0;
+        group.RemoveBoid(this);
+
+        Destroy(gameObject, 5);
+        Destroy(this);
+    }
+
     public void UpdateState()
     {
         if (target)
@@ -47,6 +68,7 @@ public class EnemyBoid : Boid
         }
         else
             inRange = false;
+            
 
         switch (enemyState)
         {
@@ -55,7 +77,7 @@ public class EnemyBoid : Boid
                     
                     if (inRange && (Time.time - inRangeTime) > inRangeDuration)
                     {
-                        m_renderer.material = attackMat;
+                        //m_renderer.material = attackMat;
                         enemyState = EnemyState.ATTACK;
                     }
                         
@@ -68,13 +90,13 @@ public class EnemyBoid : Boid
                     if (!inRange)
                     {
                         attackDelay = 0;
-                        m_renderer.material = moveMat;
+                        //m_renderer.material = moveMat;
                         enemyState = EnemyState.MOVE;
                     }
 
                     if (target)
                     {
-                        transform.forward = (target.position - transform.position).normalized;
+                        transform.forward = (target.transform.position - transform.position).normalized;
                         attackDelay += Time.deltaTime;
 
                         if(attackDelay > enemyStats.attackSpeed)
@@ -85,6 +107,10 @@ public class EnemyBoid : Boid
                         
                     }
                         
+                    break;
+                }
+            case EnemyState.DIE:
+                {
                     break;
                 }
         }

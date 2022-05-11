@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class RessourceManager_LAC : MonoBehaviour
 {
+    
     public static RessourceManager_LAC instance { get; private set; }
-   
+
+    [Header("Map")]
+    public int buildTile;
+    public int defendTile;
+
+    [Header("Ressource")]
     public int population;
     public enum RessourceType { MATTER, KNOWLEDGE }
     public List<Extractor_LAC> activeExtractor;// { get; private set; }
     public float matter;// { get; private set; }
     public float knowledge;// { get; private set; }
+    public float noise;
 
-
+    [Header("Tech")]
+    public int currentTech;
 
     private void Awake()
     {
@@ -25,7 +33,41 @@ public class RessourceManager_LAC : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
+    public void StockNoise(float noise)
+    {
+        this.noise += noise;
+    }
 
+    public bool SpendRessource(float value, RessourceType rType)
+    {
+        bool canSpend = true;
+        // ressource value
+        if (rType == RessourceType.KNOWLEDGE)
+        {
+            if (knowledge - value >= 0)
+                knowledge -= value;
+            else
+                canSpend = false;
+        }
+            
+        if (rType == RessourceType.MATTER)
+        {
+            if (matter - value > 0)
+                matter -= value;
+            else
+                canSpend = false;
+        }
+        // update stock for all extractor
+        if (canSpend)
+        {
+            for (int i = 0; i < activeExtractor.Count; i++)
+            {
+                if (activeExtractor[i].ressourceType == rType)
+                    activeExtractor[i].stock -= value * activeExtractor[i].ProductCapacity() / G_ProductCapacity(rType);
+            }
+        }
+        return canSpend;
+    }
     public void StockRessource(float value, RessourceType rType)
     {
         // ressource value
@@ -78,6 +120,7 @@ public class RessourceManager_LAC : MonoBehaviour
         if (population > 0)
         {
             UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.AddPop();
+            //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.AddPop();
             
         }
     }
@@ -88,8 +131,9 @@ public class RessourceManager_LAC : MonoBehaviour
         if (population > 0)
         {
             UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.RemovePop();
-            
+            //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.RemovePop();
         }
     }
+
 
 }

@@ -15,10 +15,12 @@ public class BuildingSystem : MonoBehaviour
     public GameObject currentBuilding;
     public GridLayout gridLayout;
     public Tilemap MainTilemap;
-    [HideInInspector]public List<Island> IslandsList = new List<Island>();
-    [HideInInspector]public List<Tilemap> IslandsTMList = new List<Tilemap>();
+    //[HideInInspector]public List<Island> IslandsList = new List<Island>();
+    //[HideInInspector]public List<Tilemap> IslandsTMList = new List<Tilemap>();
     public LayerMask GroundMask;
     public List<Vector3Int> tilesInf = new List<Vector3Int>(); // pour le débug
+    public Transform SpawnBuildingPos;
+    
 
 
     public Dictionary<Vector3Int, TileInfos> globalCellsInfos = new Dictionary<Vector3Int, TileInfos>();
@@ -52,14 +54,12 @@ public class BuildingSystem : MonoBehaviour
     private void Start()
     {
         InputsManager.PhoneInputs = DisableMouseControl;
-        IslandsList = IslandManager.instance.islandsList.ToList();
+        //IslandsList = IslandManager.instance.islandsList.ToList();
         
-        foreach (var isle in IslandsList)
-        {
-            IslandsTMList.Add(isle.TilemapObject.GetComponent<Tilemap>());
-        }
+        
         
         InitializeAllTiles();
+        RegisterPreplacedObstacles(BuildingsManager.instance.preplacedBuildings);
     }
 
 
@@ -67,11 +67,12 @@ public class BuildingSystem : MonoBehaviour
     {
         while (isMovingBuilding)
         {
+            UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
             Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
             if (Physics.Raycast(ray, out RaycastHit rayHit, 100, GroundMask))
             {
                 Vector3Int cellPos = gridLayout.LocalToCell(rayHit.point);
-                Debug.Log(cellPos.x + " " + cellPos.y);
+                //Debug.Log(cellPos.x + " " + cellPos.y);
                 UpdateBuildingPosition(cellPos);
             }
 
@@ -86,14 +87,13 @@ public class BuildingSystem : MonoBehaviour
         while (!isMovingBuilding)
         {
             Debug.Log("isNotMoving");
-            
+            UIManager_LAC.instance.SwitchState(StateManager.State.HoldBuilding);
             if (InputsManager.Click())
             {
                 Ray ray2 = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
                 if (Physics.Raycast(ray2, out RaycastHit rayHit2, 100, GroundMask))
                 {
                     Vector3Int cellPos = gridLayout.LocalToCell(rayHit2.point);
-                    Debug.Log(cellPos.x + " " + cellPos.y);
                     foreach (var pos in currentAreaPositions)
                     {
                         if (cellPos == pos) isMovingBuilding = true;
@@ -154,12 +154,14 @@ public class BuildingSystem : MonoBehaviour
             globalCellsInfos[vect].isPlaced = true;
         }
 
-        currentBuilding.GetComponent<Building>().enabled = true;
+        Building building = currentBuilding.GetComponent<Building>();
+        building.enabled = true;
+        building.RegisterTile();
         ChangeColor(currentAreaPositions, Color.black);
     }
 
     //récupère toutes les coordonnées des tiles concernées et si des tiles sont en dehors de la grid
-    private Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
+    public Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
     {
         List<Vector3Int> vectList = new List<Vector3Int>();
 
@@ -180,7 +182,9 @@ public class BuildingSystem : MonoBehaviour
                 else
                 {
                     outOfGrid = true;
+                    
                     Debug.Log("Déborde de la zone");
+                    
                 }
 
             }
@@ -257,32 +261,31 @@ public class BuildingSystem : MonoBehaviour
             MainTilemap.SetTileFlags(vect, TileFlags.None);
             MainTilemap.SetColor(vect, color);
             MainTilemap.SetTileFlags(vect, TileFlags.LockColor);
+            Debug.Log("draw");
         }
     }
     
 
     private void InitializeAllTiles()
     {
-        for (int i = 0; i < IslandsList.Count; i++)
+        
+        foreach (var pos in MainTilemap.cellBounds.allPositionsWithin)
         {
-            foreach (var pos in IslandsTMList[i].cellBounds.allPositionsWithin)
+            if (!MainTilemap.HasTile(pos))
             {
-                if (!IslandsTMList[i].HasTile(pos))
-                {
-                    continue;
-                }
-
-                TileInfos tileInf = new TileInfos();
-                tileInf.position = pos;
-                tileInf.IslandTM = IslandsTMList[i];
-
-                tilemapTilePos = new Vector3Int((int)IslandsTMList[i].transform.localPosition.x, 0,
-                    (int)IslandsTMList[i].transform.localPosition.z);
-            
-                globalCellsInfos.Add(pos + tilemapTilePos, new TileInfos(/*TileM.GetTile(pos)*/));
-                tilesInf.Add(pos + tilemapTilePos); //pour le débug
+                continue;
             }
+
+            TileInfos tileInf = new TileInfos();
+            tileInf.position = pos;
+
+            tilemapTilePos = new Vector3Int((int)MainTilemap.transform.localPosition.x, 0,
+                (int)MainTilemap.transform.localPosition.z);
+        
+            globalCellsInfos.Add(pos + tilemapTilePos, new TileInfos(/*TileM.GetTile(pos)*/));
+            tilesInf.Add(pos + tilemapTilePos); //pour le débug
         }
+        
     }
 
     public int CalculateTilesOfIsland(Tilemap TM)
@@ -298,23 +301,72 @@ public class BuildingSystem : MonoBehaviour
     
     public void SpawnBuilding(GameObject build)
     {
-        if (currentBuilding == null) currentBuilding = Instantiate(build, Vector3.zero, quaternion.identity);
+        if (currentBuilding == null) currentBuilding = Instantiate(build, SpawnBuildingPos.position, quaternion.identity); 
         else
         {
             Debug.Log("Building already selected");
             return;
         }
         currentBuilding.GetComponent<Building>().enabled = false;
-        isMovingBuilding = true;
+        isMovingBuilding = false;
+        
         UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
+        
         
     }
 
-    public void UpdateTMPos()
+    /*public void UpdateTMPos() 
     {
         tilemapTilePos = new Vector3Int((int)IslandManager.instance.transform.localPosition.x, 0,
             (int)IslandManager.instance.transform.localPosition.z);
+    }*/
+
+    public void Movebuilding() //marche pas lol
+    {
+        
+        GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
+        currentBuilding = go.transform.parent.gameObject;
+        Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position),
+            go.GetComponentInParent<Building>().BuildingScriptable.buildingArea);
+        
+        foreach (var vect in area)
+        {
+            globalCellsInfos[vect].isPlaced = false;
+        }
+        ChangeColor(area, Color.white, true);
+        
+        
+        currentBuilding.GetComponent<Building>().enabled = false;
+        isMovingBuilding = false;
+        
+        UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
+        DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
+    }
+    
+    
+    public void RegisterPreplacedObstacles(GameObject[] buildingsList)
+    {
+        Debug.Log("Register preplaced buildings");
+        foreach (var obj in buildingsList)
+        {
+            Building buildScript = obj.GetComponent<Building>();
+            currentBuilding = obj;
+            Vector3Int[] area = GetAreaEmplacements(
+                gridLayout.WorldToCell(obj.transform.position),
+                buildScript.BuildingScriptable.buildingArea);
+
+            foreach (var vect in area)
+            {
+                globalCellsInfos[vect].isPlaced = true;
+            }
+
+            ChangeColor(area, Color.black);
+        }
+
+        currentBuilding = null;
     }
 
     public void Rotate()
@@ -353,10 +405,10 @@ public class BuildingSystem : MonoBehaviour
                 newDisplacement = new Vector3Int(i, - j,0);
                 break;
             case Rotation.Left :
-                newDisplacement = new Vector3Int(j, - i,0);
+                newDisplacement = new Vector3Int(-j, - i,0);
                 break;
             case Rotation.Right :
-                newDisplacement = new Vector3Int(- j, i,0);
+                newDisplacement = new Vector3Int(j, i,0);
                 break;
             
         }
@@ -375,7 +427,7 @@ public class TileInfos
     //public TileBase TileB;
     public bool isPlaced = false;
     public Vector3Int position;
-    public Tilemap IslandTM;
+    //public Tilemap IslandTM;
 
     /*public TileInfos(TileBase tileB)
     {
