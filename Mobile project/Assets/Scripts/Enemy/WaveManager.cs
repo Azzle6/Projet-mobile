@@ -11,7 +11,8 @@ public class WaveManager : MonoBehaviour
     [Range(0,1)]
     public float[] orientedProba = new float[5];
 
-    [HideInInspector]public List<Transform> spawnPoints;
+    public List<Transform> spawnPoints;
+    [SerializeField]
     List<Transform> activeSpawnPoints = new List<Transform>();
     List<Transform>[] orientedSpawn = new List<Transform>[5];
 
@@ -105,14 +106,20 @@ public class WaveManager : MonoBehaviour
             orientedProba[j] = 0;
         }
 
-        List<Transform> currentSpawns = spawnPoints;
+        List<Transform> currentSpawns = new List<Transform>();
+        foreach(Transform t in spawnPoints)
+        {
+            currentSpawns.Add(t);
+        }
+
         activeSpawnPoints.Clear();
         int number = (int)Mathf.Ceil(spawnPoints.Count * spawnRatio);
+        Debug.Log("NB Spawn " + number + "/ " + spawnPoints.Count);
 
         for (int i = 0; i < number; i++)
         {
             // active spawn
-            Transform t = currentSpawns[Random.Range(0, spawnPoints.Count)];
+            Transform t = currentSpawns[Random.Range(0, currentSpawns.Count)];
             Debug.Log("Spawn " + t.name);
             activeSpawnPoints.Add(t);
             currentSpawns.Remove(t);
@@ -138,12 +145,12 @@ public class WaveManager : MonoBehaviour
             enemyG.Initilaize(activeSpawnPoints[i], targets);
             groups.Add(enemyG);
 
-            int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
-            float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
+            //int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
+            //float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
 
-            int currentSpawnEnemy = Mathf.RoundToInt(Random.Range(midEnemy - enemyDisp, midEnemy + enemyDisp));
-            enemyToSpawn -= currentSpawnEnemy;
-            enemyG.SpawnEnemy(currentSpawnEnemy);
+            //int currentSpawnEnemy = Mathf.RoundToInt(Random.Range(midEnemy - enemyDisp, midEnemy + enemyDisp));
+            if(enemyToSpawn > 0)
+                enemyG.SpawnEnemy(enemyToSpawn);
         }
     }
     #endregion
@@ -151,8 +158,8 @@ public class WaveManager : MonoBehaviour
     public void DebugWave()
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-        UpdateActiveSpawn(1f);
-        StartWave(10);
+        UpdateActiveSpawn(0.5f);
+        StartWave(1);
     }
 
     public void DebugDifficulty()
