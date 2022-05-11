@@ -26,22 +26,13 @@ MonoBehaviour:
       Data: 0|System.Boolean[,], mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 3
     - Name: ranks
       Entry: 1
-      Data: 3|2
+      Data: 3|1
     - Name: 
       Entry: 5
       Data: true
-    - Name: 
-      Entry: 5
-      Data: true
-    - Name: 
-      Entry: 5
-      Data: true
-    - Name: 
-      Entry: 5
-      Data: false
     - Name: 
       Entry: 5
       Data: true
@@ -62,5 +53,5 @@ MonoBehaviour:
   image: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   prefab: {fileID: 3651774682582830496, guid: a02441dc887639d41960fa121d3cebb2, type: 3}
   buildingStats: {fileID: 11400000, guid: d96cb42b58b019243904f1754216b903, type: 2}
-  isUnlocked: 0
+  isUnlocked: 1
   unlockedLevel: 0
