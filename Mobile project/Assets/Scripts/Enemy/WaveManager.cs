@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -25,8 +26,10 @@ public class WaveManager : MonoBehaviour
     public bool underAttack;
     public int totalEnnemies;
 
-    [Header("Debug")]
+    [Header("Debug")] 
+    [SerializeField] private bool debug = false;
     public float difficulty;
+    [SerializeField] private GameObject difficultyDebugText;
     public float levelDiff, techDiff, ressourceDiff;
     void Awake()
     {
@@ -92,6 +95,8 @@ public class WaveManager : MonoBehaviour
             }
                 
         }
+        
+        DebugDifficultyText();
     }
     #region Wave Process
     public void ExtractorAsTarget(List<Extractor_LAC> ext)
@@ -179,6 +184,23 @@ public class WaveManager : MonoBehaviour
     public void DebugOrientedSpawn()
     {
         UpdateActiveSpawn(0.5f);
+    }
+    
+    void DebugDifficultyText()
+    {
+        if (debug)
+        {
+            if(difficultyDebugText.activeSelf == true) 
+            difficultyDebugText.GetComponentInChildren<TextMeshProUGUI>().text = difficulty.ToString("F2");
+            else
+            {
+                difficultyDebugText.SetActive(true);
+            }
+        }
+        else if (difficultyDebugText.activeSelf == true)
+        {
+            difficultyDebugText.SetActive(false);
+        }
     }
     #endregion
 }

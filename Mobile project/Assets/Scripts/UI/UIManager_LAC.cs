@@ -39,7 +39,6 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject wavePreview;
     [SerializeField] private Image[] waveZone = new Image[0];
 
-
     private void Awake()
     {
         InfosPannel.RegisterInstance();
@@ -82,9 +81,6 @@ public class UIManager_LAC : MonoBehaviour
                 }
             }
             if(canSwitchSelected) SelectBuilding();
-            
-             
-            
         }
     }
 
@@ -235,6 +231,7 @@ public class UIManager_LAC : MonoBehaviour
             Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s";
             Texts[2].text = "Stock : " + extractor.stock;
             Texts[3].gameObject.SetActive(false);
+            Texts[4].text = extractor.BuildingScriptable.name;
         }
         else
         {
@@ -245,6 +242,7 @@ public class UIManager_LAC : MonoBehaviour
                 Texts[1].text = "Range : " + turret.CurrentRange();
                 Texts[2].text = "Damage : " + turret.CurrentDamage();
                 Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
+                Texts[4].text = turret.BuildingScriptable.name;
             }
             else
             {
@@ -257,11 +255,14 @@ public class UIManager_LAC : MonoBehaviour
                         Texts[i].gameObject.SetActive(false);
                     }
                     BuildingInfosPop.SetActive(false);
+                    
+                    Texts[4].text = house.BuildingScriptable.name;
+                    Texts[4].gameObject.SetActive(true);
                 }
             }
             
         }
-        
+
         BuildingInfos.SetActive(true);
     }
 }
