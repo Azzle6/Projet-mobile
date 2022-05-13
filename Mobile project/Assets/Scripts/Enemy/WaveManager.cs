@@ -166,7 +166,7 @@ public class WaveManager : MonoBehaviour
         UpdateActiveSpawn(0.5f);
         StartWave(1);
     }
-
+    [ContextMenu("DebugDifficulty")]
     public void DebugDifficulty()
     {
         difficulty = DiffCalculator.DifficultyCalc();

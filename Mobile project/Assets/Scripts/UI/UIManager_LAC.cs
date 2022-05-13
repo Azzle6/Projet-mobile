@@ -13,7 +13,6 @@ public class UIManager_LAC : MonoBehaviour
     
     private RessourceManager_LAC ressourceM;
     [Header("Ressource")]
-    
     public LayerMask BuildingsLayer;
     public LayerMask UILayerMask;
     public GameObject CurrentSelectedBuilding;
@@ -22,6 +21,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI pop;
     [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
@@ -60,7 +60,7 @@ public class UIManager_LAC : MonoBehaviour
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
-        
+        pop.text = Mathf.Ceil(ressourceM.population).ToString();
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
         {
