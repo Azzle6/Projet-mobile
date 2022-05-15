@@ -143,6 +143,8 @@ public class WaveManager : MonoBehaviour
     }
     public void StartWave(int enemyToSpawn)
     {
+        AudioManager.instance.PlaySound("THREAT_ThresholdReached");
+
         groups.Clear();
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {

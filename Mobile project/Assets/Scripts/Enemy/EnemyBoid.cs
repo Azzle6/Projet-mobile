@@ -21,6 +21,11 @@ public class EnemyBoid : Boid
     public MeshRenderer m_renderer;
     //public Material moveMat, attackMat;
 
+    private void Start()
+    {
+        AudioManager.instance.PlaySound("MOBS_MobA_Appear");
+    }
+
     public void Initialize(EnemyGroup enemyGroup)
     {
         enemyStats = enemyGroup.enemyStats;
@@ -34,6 +39,9 @@ public class EnemyBoid : Boid
     {
         if (target)
            target.gameObject.SetActive(false);
+
+        AudioManager.instance.PlaySound("MOBS_MobA_Attack");
+        AudioManager.instance.PlaySound("THREAT_BuildHit");
     }
 
     public void TakeDamage(int damage)
@@ -49,6 +57,8 @@ public class EnemyBoid : Boid
         enemyState = EnemyState.DIE;
         transform.parent.gameObject.layer = 0;
         group.RemoveBoid(this);
+
+        AudioManager.instance.PlaySound("MOBS_MobA_Death");
 
         Destroy(gameObject, 5);
         Destroy(this);

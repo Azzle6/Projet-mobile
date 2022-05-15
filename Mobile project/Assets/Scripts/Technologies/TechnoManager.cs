@@ -25,6 +25,7 @@ public class TechnoManager : MonoBehaviour
 
     public void StartDiscoveringTech(TechProperties tech)
     {
+        AudioManager.instance.PlaySound("TECH_ResearchStart");
         StartCoroutine(DiscoverTechnology(tech));
     }
 
@@ -55,7 +56,9 @@ public class TechnoManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             yield return null;
         }
-        
+
+        AudioManager.instance.PlaySound("TECH_ResearchEnd");
+
         Debug.Log(techno.timeSpentToDiscover);
         techno.SwitchState(TechState.Discovered);
         techno.ApplyTech();
