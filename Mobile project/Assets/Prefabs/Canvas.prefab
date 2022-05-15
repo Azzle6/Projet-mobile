@@ -2006,7 +2006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3921569, g: 0, b: 0.36862746, a: 1}
+  m_Color: {r: 0.1137255, g: 0.76470596, b: 0.9803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3581,7 +3581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c83c866c9e1a8a4c858c39cf4137724, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e22e589d40d09e4183c34d6689cd414, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3921,6 +3921,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: Rotate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4598383629523132179}
         m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
         m_MethodName: PlayValidationSFX
@@ -4828,7 +4840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.03875936, g: 0.18431373, b: 0.6320754, a: 1}
+  m_Color: {r: 0, g: 0.5137255, b: 0.37647063, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5262,7 +5274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 401ffdcc9b324e347904675f03cd935d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90d9788c86d1bcd40b9668fc2d1e0639, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -12625,7 +12637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c83c866c9e1a8a4c858c39cf4137724, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e22e589d40d09e4183c34d6689cd414, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -13351,7 +13363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 401ffdcc9b324e347904675f03cd935d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90d9788c86d1bcd40b9668fc2d1e0639, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
