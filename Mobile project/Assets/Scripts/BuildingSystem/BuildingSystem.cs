@@ -261,7 +261,6 @@ public class BuildingSystem : MonoBehaviour
             MainTilemap.SetTileFlags(vect, TileFlags.None);
             MainTilemap.SetColor(vect, color);
             MainTilemap.SetTileFlags(vect, TileFlags.LockColor);
-            Debug.Log("draw");
         }
     }
     
