@@ -15,7 +15,7 @@ public class Extractor_LAC : Building
     [Header("Attack")]
     public bool fonctionnal;
     public float stock = 0;
-    [HideInInspector] public float maxStock;
+    [HideInInspector] public float maxStock, attackStock;
     bool triggerWave;
     public ParticleSystem smokeFX;
     
@@ -29,8 +29,10 @@ public class Extractor_LAC : Building
     {
         if (!WaveManager.instance.underAttack)
         {
+            if (!fonctionnal)
+                Repair();
             productCoolDown -= Time.deltaTime;
-            stock = maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
+            stock = attackStock =  maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
             
 
@@ -74,7 +76,13 @@ public class Extractor_LAC : Building
             stock -= damage;
         else
         {
-            stock = 0;
+            if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+                RessourceManager_LAC.instance.matter -= attackStock;
+
+            if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+                RessourceManager_LAC.instance.knowledge -= attackStock;
+
+            stock = attackStock = 0;
             TakeDown();
         }
         
@@ -84,6 +92,12 @@ public class Extractor_LAC : Building
         AudioManager.instance.PlaySound("BUILD_Destroyed");
         fonctionnal = false;
         smokeFX.Play();
+    }
+
+    public void Repair()
+    {
+        fonctionnal = false;
+        smokeFX.Stop();
     }
     #endregion
 

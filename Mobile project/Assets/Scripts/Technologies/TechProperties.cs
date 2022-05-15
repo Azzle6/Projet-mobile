@@ -34,8 +34,9 @@ public class TechProperties : MonoBehaviour
 
     public void BuyTech() //Vérifie si la technologie peut être achetée
     {
-        if (techPrice <= RessourceManager_LAC.instance.knowledge && curState == TechState.Unlocked)
+        if (techPrice <= RessourceManager_LAC.instance.knowledge  && curState == TechState.Unlocked)
         {
+            RessourceManager_LAC.instance.SpendRessource(techPrice, RessourceManager_LAC.RessourceType.KNOWLEDGE);
             TechnoManager.instance.StartDiscoveringTech(this);
         }
     }
