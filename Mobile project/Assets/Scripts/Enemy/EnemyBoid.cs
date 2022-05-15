@@ -38,7 +38,10 @@ public class EnemyBoid : Boid
     public void Attack()
     {
         if (target)
-           target.gameObject.SetActive(false);
+        {
+            target.TakeDamage(enemyStats.damage);
+        }
+           //target.gameObject.SetActive(false);
 
         AudioManager.instance.PlaySound("MOBS_MobA_Attack");
         AudioManager.instance.PlaySound("THREAT_BuildHit");
