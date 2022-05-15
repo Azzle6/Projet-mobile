@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -11,7 +12,8 @@ public class WaveManager : MonoBehaviour
     [Range(0,1)]
     public float[] orientedProba = new float[5];
 
-    [HideInInspector]public List<Transform> spawnPoints;
+    public List<Transform> spawnPoints;
+    [SerializeField]
     List<Transform> activeSpawnPoints = new List<Transform>();
     List<Transform>[] orientedSpawn = new List<Transform>[5];
 
@@ -24,8 +26,10 @@ public class WaveManager : MonoBehaviour
     public bool underAttack;
     public int totalEnnemies;
 
-    [Header("Debug")]
+    [Header("Debug")] 
+    [SerializeField] private bool debug = false;
     public float difficulty;
+    [SerializeField] private GameObject difficultyDebugText;
     public float levelDiff, techDiff, ressourceDiff;
     void Awake()
     {
@@ -43,7 +47,7 @@ public class WaveManager : MonoBehaviour
                 {
                     Transform spawn = orientedSpawnParents[i].GetChild(j);
                     orientedSpawn[i].Add(spawn);
-                    Debug.Log(i + orientedSpawnParents[i].name + spawn.name);
+                    //Debug.Log(i + orientedSpawnParents[i].name + spawn.name);
                     spawnPoints.Add(spawn);
                 }
             }
@@ -70,7 +74,7 @@ public class WaveManager : MonoBehaviour
             currentWave++;
 
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
-            StartWave();
+            StartWave(DiffCalculator.EnemyNumber());
 
             underAttack = true;
         }
@@ -91,6 +95,8 @@ public class WaveManager : MonoBehaviour
             }
                 
         }
+        
+        DebugDifficultyText();
     }
     #region Wave Process
     public void ExtractorAsTarget(List<Extractor_LAC> ext)
@@ -105,14 +111,20 @@ public class WaveManager : MonoBehaviour
             orientedProba[j] = 0;
         }
 
-        List<Transform> currentSpawns = spawnPoints;
+        List<Transform> currentSpawns = new List<Transform>();
+        foreach(Transform t in spawnPoints)
+        {
+            currentSpawns.Add(t);
+        }
+
         activeSpawnPoints.Clear();
         int number = (int)Mathf.Ceil(spawnPoints.Count * spawnRatio);
+        Debug.Log("NB Spawn " + number + "/ " + spawnPoints.Count);
 
         for (int i = 0; i < number; i++)
         {
             // active spawn
-            Transform t = currentSpawns[Random.Range(0, spawnPoints.Count)];
+            Transform t = currentSpawns[Random.Range(0, currentSpawns.Count)];
             Debug.Log("Spawn " + t.name);
             activeSpawnPoints.Add(t);
             currentSpawns.Remove(t);
@@ -129,23 +141,21 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
-    public void StartWave()
+    public void StartWave(int enemyToSpawn)
     {
         groups.Clear();
-        int enemyToSpawn = DiffCalculator.EnemyNumber();
-        
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
             EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[i]).GetComponent<EnemyGroup>();
             enemyG.Initilaize(activeSpawnPoints[i], targets);
             groups.Add(enemyG);
 
-            int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
-            float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
+            //int midEnemy = (enemyToSpawn / (activeSpawnPoints.Count - i));
+            //float enemyDisp = enemyToSpawn*DiffCalculator.setting.enemyDisp * 0.5f;
 
-            int currentSpawnEnemy = Mathf.RoundToInt(Random.Range(midEnemy - enemyDisp, midEnemy + enemyDisp));
-            enemyToSpawn -= currentSpawnEnemy;
-            enemyG.SpawnEnemy(currentSpawnEnemy);
+            //int currentSpawnEnemy = Mathf.RoundToInt(Random.Range(midEnemy - enemyDisp, midEnemy + enemyDisp));
+            if(enemyToSpawn > 0)
+                enemyG.SpawnEnemy(enemyToSpawn);
         }
     }
     #endregion
@@ -154,9 +164,9 @@ public class WaveManager : MonoBehaviour
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
         UpdateActiveSpawn(0.5f);
-        if(targets.Count > 0) StartWave();
+        StartWave(1);
     }
-
+    [ContextMenu("DebugDifficulty")]
     public void DebugDifficulty()
     {
         difficulty = DiffCalculator.DifficultyCalc();
@@ -174,6 +184,23 @@ public class WaveManager : MonoBehaviour
     public void DebugOrientedSpawn()
     {
         UpdateActiveSpawn(0.5f);
+    }
+    
+    void DebugDifficultyText()
+    {
+        if (debug)
+        {
+            if(difficultyDebugText.activeSelf == true) 
+            difficultyDebugText.GetComponentInChildren<TextMeshProUGUI>().text = difficulty.ToString("F2");
+            else
+            {
+                difficultyDebugText.SetActive(true);
+            }
+        }
+        else if (difficultyDebugText.activeSelf == true)
+        {
+            difficultyDebugText.SetActive(false);
+        }
     }
     #endregion
 }
