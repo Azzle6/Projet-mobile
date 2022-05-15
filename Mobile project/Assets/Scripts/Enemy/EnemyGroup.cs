@@ -73,7 +73,7 @@ public class EnemyGroup : BehaveGroup
         }
 
         Extractor_LAC nTarget = NearestTarget(spawnPoint, targets);
-        if ((!target || !target.gameObject.activeSelf) && nTarget)
+        if ((!target || !target.fonctionnal) && nTarget)
         {
             target = nTarget;
             SetTarget(target);
@@ -112,7 +112,7 @@ public class EnemyGroup : BehaveGroup
         {
             if (targets[i])
             {
-                if (targets[i].gameObject.activeSelf)
+                if (targets[i].fonctionnal)
                 {
                     float dist = Vector3.Distance(transform.position, targets[i].transform.position);
                     if (minDist < 0 || dist < minDist)
