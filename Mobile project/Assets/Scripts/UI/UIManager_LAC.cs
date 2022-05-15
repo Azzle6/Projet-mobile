@@ -55,7 +55,7 @@ public class UIManager_LAC : MonoBehaviour
     private void Update()
     {
         UpdateWavePreview();
-        UpdateUI();
+        //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();

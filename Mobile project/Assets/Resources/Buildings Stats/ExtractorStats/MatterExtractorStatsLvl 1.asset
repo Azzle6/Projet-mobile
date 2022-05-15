@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
   maxPeople: 3
-  peopleGain: 0.1
+  peopleGain: 0.3
   production:
-    quantity: 3
+    quantity: 5
     ressource: 0
-  noise: 2
+  maxStock: 300
+  noise: 10

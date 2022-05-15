@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: KnowledgeExtractorStatsLv 2
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
-  maxPeople: 7
+  maxPeople: 4
   peopleGain: 0.2
   production:
     quantity: 7
-    ressource: 0
-  noise: 2
+    ressource: 1
+  maxStock: 400
+  noise: 12
