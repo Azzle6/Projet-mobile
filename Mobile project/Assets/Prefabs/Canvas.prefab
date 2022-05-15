@@ -304,6 +304,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1020267089672290696
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +916,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2001568218350639667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1118,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
         m_MethodName: IncreaseBuildingPop
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1321,6 +1357,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2358110100222861885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,6 +1542,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2814,7 +2874,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2201226971192964976}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4510598844573150891
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,6 +3427,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5153982541633811047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,7 +3920,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6404673246522688219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5548449862451997095
 GameObject:
   m_ObjectHideFlags: 0
@@ -5309,6 +5405,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7496009522691238360
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,6 +5695,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7496009522744378272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5724,6 +5844,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6782,6 +6914,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7496009523136889537
 GameObject:
   m_ObjectHideFlags: 0
@@ -6982,7 +7126,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7496009523156932645}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009523176175090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7688,6 +7844,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009523443249734
 GameObject:
   m_ObjectHideFlags: 0
@@ -8129,7 +8297,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7496009523559292159}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009523637816922
 GameObject:
   m_ObjectHideFlags: 0
@@ -8227,6 +8407,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8607,7 +8799,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7496009523779809577}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009523782251500
 GameObject:
   m_ObjectHideFlags: 0
@@ -9129,6 +9333,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9662,6 +9878,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10473,7 +10701,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7496009524389551062}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009524403085414
 GameObject:
   m_ObjectHideFlags: 0
@@ -10610,6 +10850,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10755,6 +11007,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11227,7 +11491,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7496009524584825499}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009524600275116
 GameObject:
   m_ObjectHideFlags: 0
@@ -11365,6 +11641,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11568,7 +11856,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7496009524756202620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7496009524771785314
 GameObject:
   m_ObjectHideFlags: 0
@@ -11742,6 +12042,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12727,6 +13039,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4598383629523132179}
+        m_TargetAssemblyTypeName: UIManager_LAC, Assembly-CSharp
+        m_MethodName: PlayValidationSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &8921817852008406648
 GameObject:
   m_ObjectHideFlags: 0
@@ -13228,6 +13552,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 8110f8183a6faa045a10a78f68592f73, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: Turret (1)
@@ -14216,6 +14544,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: c52236f24de014f4fabe7dd58b1a624c, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (4)
@@ -14326,6 +14658,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: a9939130792e73140b4fe9e9ed86f7fb, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (3)
@@ -14436,6 +14772,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 49083f6802557004eba7099559e33502, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: Turret (2)
@@ -14743,6 +15083,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 43d90ef766fa8a64ab8b31604f7dc17a, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (6)
@@ -14853,6 +15197,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 196b7500314b6e742a9ab895a5d94dac, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (5)
@@ -15085,6 +15433,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 9a6767b8f3c8a9a449bb156d03837505, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (2)
@@ -15711,6 +16063,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 31bc9c4284db5984fbdc1cc99617098c, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (7)
@@ -16033,6 +16389,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 22e25d3cbb2c96743baf6843b3f1da62, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: MatterExtractor
@@ -16329,6 +16689,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: d3d69f956ec37c14e93487ddf4ddd919, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House
@@ -16439,6 +16803,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 047aa3d6bffc5d8488814ea118d3c499, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: House (1)
@@ -16549,6 +16917,10 @@ PrefabInstance:
       propertyPath: buildingSo
       value: 
       objectReference: {fileID: 11400000, guid: 028d2e87e109bd241af7b3498f95c922, type: 2}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: Turret
@@ -16655,6 +17027,10 @@ PrefabInstance:
       propertyPath: m_text
       value: K
       objectReference: {fileID: 0}
+    - target: {fileID: 3249471271987145812, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4598383629523132179}
     - target: {fileID: 3683979727548736465, guid: 66b84f42828ddd64c83b2c5c72235c92, type: 3}
       propertyPath: m_Name
       value: Knowledge Gen

@@ -81,6 +81,7 @@ public class Extractor_LAC : Building
     }
     public void TakeDown()
     {
+        AudioManager.instance.PlaySound("BUILD_Destroyed");
         fonctionnal = false;
         smokeFX.Play();
     }
