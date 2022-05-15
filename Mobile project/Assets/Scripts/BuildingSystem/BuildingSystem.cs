@@ -154,6 +154,8 @@ public class BuildingSystem : MonoBehaviour
             globalCellsInfos[vect].isPlaced = true;
         }
 
+        AudioManager.instance.PlaySound("BUILD_Place");
+
         Building building = currentBuilding.GetComponent<Building>();
         building.enabled = true;
         building.RegisterTile();
@@ -343,6 +345,8 @@ public class BuildingSystem : MonoBehaviour
         UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
         UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
+
+        AudioManager.instance.PlaySound("BUILD_Rotate");
     }
     
     
@@ -387,6 +391,9 @@ public class BuildingSystem : MonoBehaviour
                 currentBuild.curRotation = Rotation.Back;
                 break;
         }
+
+        AudioManager.instance.PlaySound("BUILD_Rotate");
+
         UpdateBuildingPosition(gridLayout.LocalToCell(currentBuild.gameObject.transform.localPosition));
     }
 

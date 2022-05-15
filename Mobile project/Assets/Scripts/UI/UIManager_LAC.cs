@@ -265,4 +265,9 @@ public class UIManager_LAC : MonoBehaviour
 
         BuildingInfos.SetActive(true);
     }
+
+    public void PlayValidationSFX()
+    {
+        AudioManager.instance.PlaySound("UI_Validation");
+    }
 }
