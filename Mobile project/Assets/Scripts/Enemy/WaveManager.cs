@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager instance;
+    public static bool gameOver = false;
     public DiffcultySettings diffPreset;
 
     public Transform[] orientedSpawnParents = new Transform[5];
@@ -93,7 +95,9 @@ public class WaveManager : MonoBehaviour
                 underAttack = false;
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             }
-                
+
+            if (RessourceManager_LAC.instance.matter + RessourceManager_LAC.instance.knowledge <= 0)
+                gameOver = true;
         }
         
         DebugDifficultyText();
@@ -145,7 +149,30 @@ public class WaveManager : MonoBehaviour
     {
         AudioManager.instance.PlaySound("THREAT_ThresholdReached");
 
+        // assign enemy to spawn
+        Dictionary<int, int> enemySpawn = new Dictionary<int, int>();
+        for(int i = 0; i < enemyToSpawn; i++)
+        {
+            int spawnIndex = Random.Range(0, activeSpawnPoints.Count);
+            if (enemySpawn.ContainsKey(spawnIndex))
+                enemySpawn[spawnIndex]++;
+            else
+                enemySpawn.Add(spawnIndex, 1);
+
+            
+        }
+
         groups.Clear();
+        
+        foreach(KeyValuePair<int,int> eS in enemySpawn)
+        {
+            EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[eS.Key]).GetComponent<EnemyGroup>();
+            enemyG.Initilaize(activeSpawnPoints[eS.Key], targets);
+            groups.Add(enemyG);
+
+            enemyG.SpawnEnemy(eS.Value);
+        }
+        /*
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
             EnemyGroup enemyG = Instantiate(enemyGroup, activeSpawnPoints[i]).GetComponent<EnemyGroup>();
@@ -158,7 +185,7 @@ public class WaveManager : MonoBehaviour
             //int currentSpawnEnemy = Mathf.RoundToInt(Random.Range(midEnemy - enemyDisp, midEnemy + enemyDisp));
             if(enemyToSpawn > 0)
                 enemyG.SpawnEnemy(enemyToSpawn);
-        }
+        }*/
     }
     #endregion
     #region Debug
@@ -166,7 +193,7 @@ public class WaveManager : MonoBehaviour
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
         UpdateActiveSpawn(0.5f);
-        StartWave(1);
+        StartWave(3);
     }
     [ContextMenu("DebugDifficulty")]
     public void DebugDifficulty()
