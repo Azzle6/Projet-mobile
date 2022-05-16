@@ -217,7 +217,7 @@ public class UIManager_LAC : MonoBehaviour
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
-        if (build.level < build.BuildingScriptable.unlockedLevel)
+        if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
             colors.normalColor = Color.green;
