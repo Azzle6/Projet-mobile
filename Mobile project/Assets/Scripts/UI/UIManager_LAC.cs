@@ -41,6 +41,8 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
+    [SerializeField] private GameObject noiseHandle;
+    private float previousNoise = 0;
 
     private void Awake()
     {
@@ -277,6 +279,8 @@ public class UIManager_LAC : MonoBehaviour
         noiseSlider.maxValue = DiffCalculator.setting.noiseThreshold *
             (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
         noiseSlider.value = RessourceManager_LAC.instance.noise;
+
+        float animSpeed = noiseSlider.maxValue - previousNoise;
     }
     #endregion
     
