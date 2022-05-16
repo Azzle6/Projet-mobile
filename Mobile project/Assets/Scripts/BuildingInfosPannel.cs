@@ -57,7 +57,8 @@ public class BuildingInfosPannel : MonoBehaviour
         if (buildingInf.price.ressource == RessourceManager_LAC.RessourceType.MATTER) matterComparison = RessourceManager_LAC.instance.matter;
         else matterComparison = RessourceManager_LAC.instance.knowledge;
         
-        confirmButton.interactable = buildingInf.price.quantity > matterComparison;
+        Debug.Log(matterComparison);
+        confirmButton.interactable = buildingInf.price.quantity < matterComparison;
 
     }
 
