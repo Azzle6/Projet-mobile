@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f667cab7bcd3a40a39c0ef55c3b19f, type: 3}
-  m_Name: HeadingBH
+  m_Script: {fileID: 11500000, guid: eefdc66c0d601524e9d140ae2ea29d68, type: 3}
+  m_Name: AlignementBH
   m_EditorClassIdentifier: 
   group: {fileID: 0}
-  weight: 2
-  head: {fileID: 0}
-  headRadius: 1.5
+  weight: 0.5
