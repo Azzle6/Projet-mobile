@@ -201,6 +201,7 @@ public class WaveManager : MonoBehaviour
     #region Debug
     public void DebugWave()
     {
+        Debug.Log("Debug xwave");
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
         UpdateActiveSpawn(0.5f);
         StartWave(10);

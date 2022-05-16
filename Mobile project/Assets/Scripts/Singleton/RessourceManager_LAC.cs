@@ -63,6 +63,19 @@ public class RessourceManager_LAC : MonoBehaviour
         }
         return canSpend;
     }
+
+    public bool CanPlaceBuilding(float cost, RessourceType rType)
+    {
+        if (population > 0)
+        {
+            population--;
+            return SpendRessource(cost, rType);
+        }
+            
+        else
+            return false;
+        
+    }
     public void StockRessource(float value, RessourceType rType)
     {
         // ressource value
@@ -119,25 +132,26 @@ public class RessourceManager_LAC : MonoBehaviour
         
     }
 
-    public void AddPop()
+    public void AddPopBuild()
     {
-        Debug.Log("Add pop");
+        
         if (population > 0)
         {
             UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.AddPop();
-            //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.AddPop();
-            
+            UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.AddPop();
+
+            Debug.Log("Add / pop : " + population);
         }
     }
     
-    public void RemovePop()
+    public void RemovePopBuild()
     {
-        Debug.Log("Remove pop");
-        if (population > 0)
-        {
+        //Debug.Log("Remove pop");
+
             UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>()?.RemovePop();
-            //UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.RemovePop();
-        }
+            UIManager_LAC.instance.CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>()?.RemovePop();
+            Debug.Log("Remove / pop : " + population);
+        
     }
 
 
