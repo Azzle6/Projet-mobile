@@ -39,6 +39,9 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject wavePreview;
     [SerializeField] private Image[] waveZone = new Image[0];
 
+    [Header("UI")] 
+    [SerializeField] private Slider noiseSlider;
+
     private void Awake()
     {
         InfosPannel.RegisterInstance();
@@ -82,6 +85,8 @@ public class UIManager_LAC : MonoBehaviour
             }
             if(canSwitchSelected) SelectBuilding();
         }
+        
+        ActualizeNoiseSlider();
     }
 
     public void SwitchState(StateManager.State newState)
@@ -265,7 +270,16 @@ public class UIManager_LAC : MonoBehaviour
 
         BuildingInfos.SetActive(true);
     }
-
+    
+    #region Noise
+    public void ActualizeNoiseSlider()
+    {
+        noiseSlider.maxValue = DiffCalculator.setting.noiseThreshold *
+            (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
+        noiseSlider.value = RessourceManager_LAC.instance.noise;
+    }
+    #endregion
+    
     public void PlayValidationSFX()
     {
         AudioManager.instance.PlaySound("UI_Validation");
