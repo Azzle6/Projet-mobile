@@ -203,7 +203,7 @@ public class WaveManager : MonoBehaviour
     {
         ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
         UpdateActiveSpawn(0.5f);
-        StartWave(3);
+        StartWave(10);
     }
     [ContextMenu("DebugDifficulty")]
     public void DebugDifficulty()
