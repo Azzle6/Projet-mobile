@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f2b26c344bc6e41b93c6bd82ac9f72, type: 3}
+  m_Name: SoundListSO
+  m_EditorClassIdentifier: 
+  sounds:
+  - clipName: BUILD_CleanRock
+    clip: {fileID: 8300000, guid: a510b151120b2464d88f39caa6be63ff, type: 3}
+    clipVolume: 1
+  - clipName: BUILD_Destroyed
+    clip: {fileID: 8300000, guid: 761f9e328c43a374385e3930a95366ba, type: 3}
+    clipVolume: 1
+  - clipName: BUILD_Place
+    clip: {fileID: 8300000, guid: 0458b3544365a1c46b6730dc3dd6e2b7, type: 3}
+    clipVolume: 1
+  - clipName: BUILD_Rebuild
+    clip: {fileID: 8300000, guid: c74cc7d5eca5fe045a5619c0ef0f8168, type: 3}
+    clipVolume: 1
+  - clipName: BUILD_Rotate
+    clip: {fileID: 8300000, guid: d0c38b00099707c438b698c2dfef7727, type: 3}
+    clipVolume: 1
+  - clipName: BUILD_TakeBack
+    clip: {fileID: 8300000, guid: 97e65280ac3d77c418773cbdef66f074, type: 3}
+    clipVolume: 1
+  - clipName: BUILD_Upgrade
+    clip: {fileID: 8300000, guid: cc7ed790d9773964d84ce1623bf94ccb, type: 3}
+    clipVolume: 1
+  - clipName: MOBS_MobA_Appear
+    clip: {fileID: 8300000, guid: b5065adc9eaf2204eb8d4818cbe9b126, type: 3}
+    clipVolume: 1
+  - clipName: MOBS_MobA_Attack
+    clip: {fileID: 8300000, guid: aa593bde81bfdc946808630575ef1e6e, type: 3}
+    clipVolume: 1
+  - clipName: MOBS_MobA_Death
+    clip: {fileID: 8300000, guid: af0fa6efce3573f4a9b8fe47579022d9, type: 3}
+    clipVolume: 1
+  - clipName: TECH_ResearchEnd
+    clip: {fileID: 8300000, guid: be5f8a970a70afe4ea1556552714903f, type: 3}
+    clipVolume: 1
+  - clipName: TECH_ResearchStart
+    clip: {fileID: 8300000, guid: 16c7a59900625e64cb35abc645b342c1, type: 3}
+    clipVolume: 1
+  - clipName: THREAT_BuildHit
+    clip: {fileID: 8300000, guid: 48d18f6139e93de419fb8d9575392242, type: 3}
+    clipVolume: 1
+  - clipName: THREAT_ThresholdReached
+    clip: {fileID: 8300000, guid: 29beb0f9103058241b75227a347b3e5c, type: 3}
+    clipVolume: 1
+  - clipName: THREAT_WaveEnd
+    clip: {fileID: 8300000, guid: cddad1475d7b2f340ad552a995393f9f, type: 3}
+    clipVolume: 1
+  - clipName: UI_TitleScreenButton
+    clip: {fileID: 8300000, guid: fcb8043954ce62f45b29488844a0254d, type: 3}
+    clipVolume: 1
+  - clipName: UI_TouchFloor
+    clip: {fileID: 8300000, guid: 202ff659c902bce42ab60ce7ed325004, type: 3}
+    clipVolume: 1
+  - clipName: UI_Validation
+    clip: {fileID: 8300000, guid: 8c8038125ec9b5444a416376f303b60d, type: 3}
+    clipVolume: 1
+  randomSounds:
+  - categoryName: 
+    sounds:
+    - clipName: 
+      clip: {fileID: 0}
+      clipVolume: 1

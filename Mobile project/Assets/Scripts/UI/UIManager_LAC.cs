@@ -13,26 +13,38 @@ public class UIManager_LAC : MonoBehaviour
     
     private RessourceManager_LAC ressourceM;
     [Header("Ressource")]
-    
     public LayerMask BuildingsLayer;
     public LayerMask UILayerMask;
     public GameObject CurrentSelectedBuilding;
-    
-    [Header("Références")]
+
+    [Header("Références")] 
+    [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI pop;
+    [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
     [SerializeField] private GameObject BuildingInfos;
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingCurrentPop;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingProduction;
-    [SerializeField] private TextMeshProUGUI SelectedBuildingStockage;
+    [SerializeField] private TextMeshProUGUI[] Texts;
+    [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private GameObject BuildingInfosPop;
+
+
+    [Header("Wave Preview")]
+    [SerializeField] private Transform camT;
+    [SerializeField] private GameObject wavePreview;
+    [SerializeField] private Image[] waveZone = new Image[0];
+
+    [Header("UI")] 
+    [SerializeField] private Slider noiseSlider;
 
     private void Awake()
     {
+        InfosPannel.RegisterInstance();
         if (instance != null) return;
         instance = this;
     }
@@ -45,13 +57,15 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        UpdateUI();
-        Debug.Log(StateManager.CurrentState);
+        UpdateWavePreview();
+        //UpdateUI();
+        //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
-        
+        knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
+        pop.text = Mathf.Ceil(ressourceM.population).ToString();
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding) && InputsManager.Click())
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
         {
             bool canSwitchSelected = true;
             
@@ -70,10 +84,9 @@ public class UIManager_LAC : MonoBehaviour
                 }
             }
             if(canSwitchSelected) SelectBuilding();
-            
-             
-            
         }
+        
+        ActualizeNoiseSlider();
     }
 
     public void SwitchState(StateManager.State newState)
@@ -103,12 +116,30 @@ public class UIManager_LAC : MonoBehaviour
             case StateManager.State.DisplaceBuilding :
                 DisplayBuildingConfirmMenu();
                 break;
+            case StateManager.State.HoldBuilding :
+                DisplayBuildingConfirmMenu();
+                break;
             case StateManager.State.SelectBuilding :
                 DisplayBuildingInfos();
                 break;
             case StateManager.State.BuildingInfosPannel :
                 DisplayBuildingPannel();
                 break;
+        }
+    }
+    private void UpdateWavePreview()
+    {
+        Vector3 worldCamdir = camT.forward;
+        Vector2 uiCamDir = new Vector2(worldCamdir.x, worldCamdir.z);
+
+        wavePreview.transform.up = uiCamDir;
+
+        for(int i = 0; i < waveZone.Length; i++)
+        {
+            if (waveZone[i])
+                waveZone[i].color = Color.Lerp(Color.white, Color.red, WaveManager.instance.orientedProba[i]);
+            else
+                Debug.LogWarning(" wave zone " + i + " is missing");
         }
     }
 
@@ -130,8 +161,18 @@ public class UIManager_LAC : MonoBehaviour
 
     public void IncreaseBuildingPop(bool increaseOrDecrease)
     {
-        if(increaseOrDecrease) RessourceManager_LAC.instance.AddPop();
-        else RessourceManager_LAC.instance.RemovePop();
+        if(increaseOrDecrease) RessourceManager_LAC.instance.AddPopBuild();
+        else RessourceManager_LAC.instance.RemovePopBuild();
+    }
+
+    public void UpgradeBuilding()
+    {
+        CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
+    }
+
+    public void DisplaceBuilding()
+    {
+        BuildingSystem.instance.Movebuilding();
     }
 
     private void DisplayBuildingPannel()
@@ -167,14 +208,80 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
+        foreach (var txt in Texts)
+        {
+            txt.gameObject.SetActive(true);
+        }
+        BuildingInfosPop.SetActive(true);
+
+        
+        Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+        ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
+        if (build.level < build.BuildingScriptable.unlockedLevel)
+        {
+            BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
+            colors.normalColor = Color.green;
+        }
+        else
+        {
+            BuildingInfosUpgradeButton.GetComponent<Button>().interactable = false;
+            colors.normalColor = Color.red;
+        }
+        BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
+
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            SelectedBuildingCurrentPop.text = "Pop : " + extractor.people;
-            SelectedBuildingProduction.text = "Production : " + extractor.ProductCapacity() + " / s";
-            SelectedBuildingStockage.text = "Stock : " + extractor.stock;
+            Texts[0].text = "Pop : " + extractor.people;
+            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s";
+            Texts[2].text = "Stock : " + extractor.stock;
+            Texts[3].gameObject.SetActive(false);
+            Texts[4].text = extractor.BuildingScriptable.name;
         }
-        
+        else
+        {
+            Turret_LAC turret = CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>();
+            if (turret)
+            {
+                Texts[0].text = "Pop : ";
+                Texts[1].text = "Range : " + turret.CurrentRange();
+                Texts[2].text = "Damage : " + turret.CurrentDamage();
+                Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
+                Texts[4].text = turret.BuildingScriptable.name;
+            }
+            else
+            {
+                House_LAC house = CurrentSelectedBuilding.GetComponentInParent<House_LAC>();
+                if (house)
+                {
+                    Texts[0].text = "Added pop : " + house.currentPeople;
+                    for (int i = 1; i < Texts.Length; i++)
+                    {
+                        Texts[i].gameObject.SetActive(false);
+                    }
+                    BuildingInfosPop.SetActive(false);
+                    
+                    Texts[4].text = house.BuildingScriptable.name;
+                    Texts[4].gameObject.SetActive(true);
+                }
+            }
+            
+        }
+
         BuildingInfos.SetActive(true);
+    }
+    
+    #region Noise
+    public void ActualizeNoiseSlider()
+    {
+        noiseSlider.maxValue = DiffCalculator.setting.noiseThreshold *
+            (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
+        noiseSlider.value = RessourceManager_LAC.instance.noise;
+    }
+    #endregion
+    
+    public void PlayValidationSFX()
+    {
+        AudioManager.instance.PlaySound("UI_Validation");
     }
 }

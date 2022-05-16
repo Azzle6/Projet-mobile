@@ -13,14 +13,42 @@ public class Building : MonoBehaviour
     public float PlacementSound;
     public bool Activated;
     public BuildingSystem.Rotation curRotation = BuildingSystem.Rotation.Face;
+    public BuildingStatSO[] statsSO;
 
     private void Awake()
     {
         if (Visual)
             Instantiate(Visual, transform);
     }
+    public virtual void RegisterTile()
+    {
+        RessourceManager_LAC.instance.buildTile += GetTile();
+    }
+    public int GetTile()
+    {
+        int tile = 0;
+        foreach (bool b in BuildingScriptable.buildingArea)
+        {
+            if (b) { tile++; }
+        }
+        return tile;
+    }
+    public virtual void Upgrade()
+    {
+        if (statsSO.Length <= 0) 
+            return;
+        
+        if (BuildingScriptable.unlockedLevel > level)
+        {
+            level = Mathf.Clamp(level+1, 0, statsSO.Length);
+            Debug.Log("Upgrade !");
 
-    public virtual void Upgrade() { }
+            AudioManager.instance.PlaySound("BUILD_Upgrade");
+            return;
+        }
+        Debug.Log("Upgrade pas");
+    }
+    
  
 
     /*private void Start()
