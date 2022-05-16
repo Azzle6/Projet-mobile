@@ -93,7 +93,8 @@ public class Extractor_LAC : Building
     {
         AudioManager.instance.PlaySound("BUILD_Destroyed");
         fonctionnal = false;
-        smokeFX?.Play();
+        if(smokeFX)
+            smokeFX?.Play();
     }
 
     public void Repair()
