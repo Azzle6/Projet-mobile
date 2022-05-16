@@ -13646,6 +13646,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456905286}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &469699920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7496009523516573845, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+  m_PrefabInstance: {fileID: 872703266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &484722674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13975,7 +13986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3651774682582830502, guid: 5038bcca0950dad418a59cb8c6b40443, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.98
+      value: -11.433373
       objectReference: {fileID: 0}
     - target: {fileID: 3651774682582830502, guid: 5038bcca0950dad418a59cb8c6b40443, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14587,18 +14598,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 1561659152893833426, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561659152893833426, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561659152893833426, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1695176441633880421, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -14859,14 +14858,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4576641725728013886, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576641725728013886, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4590727478694626054, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -14899,6 +14890,10 @@ PrefabInstance:
       propertyPath: ressourceM
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4598383629523132179, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: noiseSlider
+      value: 
+      objectReference: {fileID: 469699920}
     - target: {fileID: 4598383629523132179, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: wavePreview
       value: 
@@ -15014,10 +15009,6 @@ PrefabInstance:
     - target: {fileID: 5729187485586706899, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5845187421905431054, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6068513449249508868, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.y
@@ -15302,10 +15293,6 @@ PrefabInstance:
     - target: {fileID: 8309612912475156725, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8333941744915332926, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8478304585500488675, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.x

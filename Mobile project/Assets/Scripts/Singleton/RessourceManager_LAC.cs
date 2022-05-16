@@ -64,6 +64,17 @@ public class RessourceManager_LAC : MonoBehaviour
         return canSpend;
     }
 
+    public bool CanSpendResources(float value, RessourceType rType)
+    {
+        float matterComparison = 0;
+        
+        if (rType == RessourceManager_LAC.RessourceType.MATTER) matterComparison = RessourceManager_LAC.instance.matter;
+        else matterComparison = RessourceManager_LAC.instance.knowledge;
+        
+        Debug.Log(matterComparison);
+        return value < matterComparison;
+    }
+
     public bool CanPlaceBuilding(float cost, RessourceType rType)
     {
         if (population > 0)

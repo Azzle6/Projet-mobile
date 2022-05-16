@@ -327,7 +327,7 @@ public class BuildingSystem : MonoBehaviour
             (int)IslandManager.instance.transform.localPosition.z);
     }*/
 
-    public void Movebuilding() //marche pas lol
+    public void Movebuilding() 
     {
         
         GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
