@@ -134,7 +134,7 @@ public class BuildingSystem : MonoBehaviour
         {
             PlaceBuilding();
             Building build = currentBuilding.GetComponent<Building>();
-            RessourceManager_LAC.instance.SpendRessource(build.BuildingScriptable.price.quantity,
+            RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
                 build.BuildingScriptable.price.ressource);
             currentBuilding = null;
         }

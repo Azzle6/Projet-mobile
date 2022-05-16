@@ -156,8 +156,8 @@ public class UIManager_LAC : MonoBehaviour
 
     public void IncreaseBuildingPop(bool increaseOrDecrease)
     {
-        if(increaseOrDecrease) RessourceManager_LAC.instance.AddPop();
-        else RessourceManager_LAC.instance.RemovePop();
+        if(increaseOrDecrease) RessourceManager_LAC.instance.AddPopBuild();
+        else RessourceManager_LAC.instance.RemovePopBuild();
     }
 
     public void UpgradeBuilding()
