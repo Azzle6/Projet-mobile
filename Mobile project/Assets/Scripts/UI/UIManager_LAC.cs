@@ -41,6 +41,8 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
+    [SerializeField] private GameObject noiseHandle;
+    private float previousNoise = 0;
 
     private void Awake()
     {
@@ -57,7 +59,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        UpdateWavePreview();
+        DisplayWavePreview();//UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
@@ -277,7 +279,32 @@ public class UIManager_LAC : MonoBehaviour
         noiseSlider.maxValue = DiffCalculator.setting.noiseThreshold *
             (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
         noiseSlider.value = RessourceManager_LAC.instance.noise;
+
+        if (previousNoise != noiseSlider.value)
+        {
+            float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
+         
+            noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
+            Debug.Log(animSpeed);
+            
+            previousNoise = RessourceManager_LAC.instance.noise;
+        }
     }
+
+    public void DisplayWavePreview(float noiseT = 0.7f, bool display = true)
+    {
+        float noiseR = RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
+        if (noiseR > noiseT && display)
+        {
+            UpdateWavePreview();
+            wavePreview.SetActive(true);
+        }
+            
+        else
+            wavePreview.SetActive(false);
+    }
+
+    
     #endregion
     
     public void PlayValidationSFX()
