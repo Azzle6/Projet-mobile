@@ -280,7 +280,15 @@ public class UIManager_LAC : MonoBehaviour
             (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
         noiseSlider.value = RessourceManager_LAC.instance.noise;
 
-        float animSpeed = noiseSlider.maxValue - previousNoise;
+        if (previousNoise != noiseSlider.value)
+        {
+            float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
+         
+            noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
+            Debug.Log(animSpeed);
+            
+            previousNoise = RessourceManager_LAC.instance.noise;
+        }
     }
     #endregion
     
