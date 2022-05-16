@@ -133,6 +133,9 @@ public class BuildingSystem : MonoBehaviour
         if (result && canPlaceBuilding)
         {
             PlaceBuilding();
+            Building build = currentBuilding.GetComponent<Building>();
+            RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
+                build.BuildingScriptable.price.ressource);
             currentBuilding = null;
         }
         else

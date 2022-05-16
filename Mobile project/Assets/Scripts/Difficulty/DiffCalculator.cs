@@ -70,7 +70,7 @@ public static class DiffCalculator
 
     public static int EnemyNumber()
     {
-        return Mathf.RoundToInt(setting.enemyRatio.Evaluate(Difficulty) * setting.maxEnemy);
+        return Mathf.CeilToInt(setting.enemyRatio.Evaluate(Difficulty) * setting.maxEnemy+0.01f);
     }
 
     #endregion;
