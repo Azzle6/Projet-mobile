@@ -13631,6 +13631,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1975318545403570993, guid: 7e44c0c55d847cb4fa8d7c0793dc4e4c, type: 3}
   m_PrefabInstance: {fileID: 729690159}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &806448330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7496009523516573845, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+  m_PrefabInstance: {fileID: 872703266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &811449102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14310,6 +14321,10 @@ PrefabInstance:
       propertyPath: ressourceM
       value: 
       objectReference: {fileID: 1864143649}
+    - target: {fileID: 4598383629523132179, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: noiseSlider
+      value: 
+      objectReference: {fileID: 806448330}
     - target: {fileID: 4598383629523132179, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: BuildingChoiceMenu
       value: 

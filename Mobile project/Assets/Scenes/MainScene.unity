@@ -13340,13 +13340,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342179683}
-  m_LocalRotation: {x: 0.28425345, y: -0, z: -0, w: 0.9587492}
-  m_LocalPosition: {x: -0.6, y: 9.1, z: -14.7}
+  m_LocalRotation: {x: 0.3920741, y: -0, z: -0, w: 0.9199337}
+  m_LocalPosition: {x: -0.5999999, y: 12, z: -14.700001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1320275596}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 33.028, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.167, y: 0, z: 0}
 --- !u!1001 &408951578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13402,6 +13402,10 @@ PrefabInstance:
       propertyPath: ui_mainScreenTechSlider
       value: 
       objectReference: {fileID: 11802216}
+    - target: {fileID: 3262663041739135506, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
+      propertyPath: resetDiscoveriesOnLaunch
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3262663041739135507, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: difficultyDebugText
       value: 
@@ -14308,6 +14312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tempete de sable et fog
       objectReference: {fileID: 0}
+    - target: {fileID: 563370520395805792, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 563370520395805793, guid: f9012340781c24249849040891816264, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -14455,6 +14463,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -268.5
       objectReference: {fileID: 0}
+    - target: {fileID: 305064109992112745, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: previousButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2095998402}
     - target: {fileID: 457116891036307575, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -15186,6 +15198,18 @@ PrefabInstance:
     - target: {fileID: 7496009524206413109, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496009524363841990, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496009524363841990, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496009524363841990, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7496009524417654104, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -16762,6 +16786,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2095998402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7374711375861034518, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+  m_PrefabInstance: {fileID: 872703266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35838bdf017073e488526ed5a003765d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4384005008809729507
