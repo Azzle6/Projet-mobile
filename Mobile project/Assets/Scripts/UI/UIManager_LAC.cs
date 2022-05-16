@@ -57,7 +57,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        UpdateWavePreview();
+        DisplayWavePreview();//UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
@@ -278,6 +278,21 @@ public class UIManager_LAC : MonoBehaviour
             (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
         noiseSlider.value = RessourceManager_LAC.instance.noise;
     }
+
+    public void DisplayWavePreview(float noiseT = 0.7f, bool display = true)
+    {
+        float noiseR = RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
+        if (noiseR > noiseT && display)
+        {
+            UpdateWavePreview();
+            wavePreview.SetActive(true);
+        }
+            
+        else
+            wavePreview.SetActive(false);
+    }
+
+    
     #endregion
     
     public void PlayValidationSFX()
