@@ -41,6 +41,8 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
+    [SerializeField] private GameObject noiseHandle;
+    private float previousNoise = 0;
 
     private void Awake()
     {
@@ -217,7 +219,7 @@ public class UIManager_LAC : MonoBehaviour
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
-        if (build.level < build.BuildingScriptable.unlockedLevel)
+        if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
             colors.normalColor = Color.green;
@@ -277,6 +279,16 @@ public class UIManager_LAC : MonoBehaviour
         noiseSlider.maxValue = DiffCalculator.setting.noiseThreshold *
             (1 + DiffCalculator.setting.noiseGainPerWave * WaveManager.instance.currentWave);
         noiseSlider.value = RessourceManager_LAC.instance.noise;
+
+        if (previousNoise != noiseSlider.value)
+        {
+            float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
+         
+            noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
+            Debug.Log(animSpeed);
+            
+            previousNoise = RessourceManager_LAC.instance.noise;
+        }
     }
     #endregion
     
