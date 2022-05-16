@@ -10,7 +10,7 @@ public class Extractor_LAC : Building
     [HideInInspector] public ExtractorSO_LAC[] stats;
     //[HideInInspector]
     public int people;
-    float productCoolDown;
+    public float productCoolDown;
 
     [Header("Attack")]
     public bool fonctionnal;
@@ -31,6 +31,7 @@ public class Extractor_LAC : Building
         {
             if (!fonctionnal)
                 Repair();
+
             productCoolDown -= Time.deltaTime;
             stock = attackStock =  maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
@@ -38,6 +39,7 @@ public class Extractor_LAC : Building
 
         if (productCoolDown < 0)
         {
+            
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
             RessourceManager_LAC.instance.StockNoise(stats[level].noise);
@@ -91,13 +93,14 @@ public class Extractor_LAC : Building
     {
         AudioManager.instance.PlaySound("BUILD_Destroyed");
         fonctionnal = false;
-        smokeFX.Play();
+        smokeFX?.Play();
     }
 
     public void Repair()
     {
-        fonctionnal = false;
-        smokeFX.Stop();
+        fonctionnal = true;
+        if(smokeFX)
+            smokeFX?.Stop();
     }
     #endregion
 

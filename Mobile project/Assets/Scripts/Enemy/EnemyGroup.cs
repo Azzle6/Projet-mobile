@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyGroup : BehaveGroup
 {
     public EnemyStats enemyStats;
-    [HideInInspector] public List<EnemyBoid> enemies;
+    public List<EnemyBoid> enemies;
 
     [Header("Displacement")]
     public Extractor_LAC target;
@@ -146,6 +146,7 @@ public class EnemyGroup : BehaveGroup
 
         if (number > 0)
             StartCoroutine(SpawnEnemies(origin, number, delay));
+           
     }
 
     #endregion
