@@ -7719,9 +7719,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShakeLab
       objectReference: {fileID: 0}
+    - target: {fileID: 6577142795402098054, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8268440476246554034, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 4.5
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}

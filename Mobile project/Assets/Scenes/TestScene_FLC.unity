@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &11802216 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7496009522746662158, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-  m_PrefabInstance: {fileID: 872703266}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &32414939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14255,6 +14244,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4549206269536887920, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549206269536887920, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4576641725728013886, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -16584,7 +16581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDiscoveringTechnology: 0
   resetDiscoveriesOnLaunch: 0
-  ui_mainScreenTechSlider: {fileID: 11802216}
+  ui_mainScreenTechSlider: {fileID: 0}
 --- !u!114 &1864143647
 MonoBehaviour:
   m_ObjectHideFlags: 0
