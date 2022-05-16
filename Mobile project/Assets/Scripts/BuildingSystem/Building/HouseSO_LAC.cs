@@ -8,4 +8,6 @@ public class HouseSO_LAC : BuildingStatSO
         public GameObject visual;
         [Header("People")]
         public int peopleAdd;
+
+        
 }
