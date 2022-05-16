@@ -84,13 +84,16 @@ public class WaveManager : MonoBehaviour
         if (underAttack)
         {
             int currentEnnemies = 0;
-            foreach(EnemyGroup g in groups)
+            for(int i = 0; i < groups.Count; i++)
             {
-                if (g)
-                    currentEnnemies += g.enemies.Count;
+                if (groups[i])
+                {
+                    //Debug.Log("Group " + groups[i].gameObject.name + " enemy " + groups[i].enemies.Count);
+                    currentEnnemies += groups[i].enemies.Count;
+                }
             }
             totalEnnemies = currentEnnemies;
-            if (currentEnnemies == 0)
+            if (totalEnnemies == 0)
             {
                 underAttack = false;
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
@@ -172,6 +175,7 @@ public class WaveManager : MonoBehaviour
 
             enemyG.SpawnEnemy(eS.Value);
         }
+        StartCoroutine(StartAttack());
         /*
         for (int i = 0; i < activeSpawnPoints.Count; i++)
         {
@@ -186,6 +190,12 @@ public class WaveManager : MonoBehaviour
             if(enemyToSpawn > 0)
                 enemyG.SpawnEnemy(enemyToSpawn);
         }*/
+    }
+
+    IEnumerator StartAttack()
+    {
+        yield return new WaitForSeconds(1);
+        underAttack = true;
     }
     #endregion
     #region Debug
