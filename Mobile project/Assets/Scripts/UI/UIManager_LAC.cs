@@ -178,6 +178,11 @@ public class UIManager_LAC : MonoBehaviour
         CurrentSelectedBuilding.GetComponent<Labo_LAC>()?.UpgradeCristal();
     }
 
+    public void RemoveBuilding()
+    {
+        CurrentSelectedBuilding.GetComponentInParent<Building>().Remove();
+    }
+
     public void DisplaceBuilding()
     {
         BuildingSystem.instance.Movebuilding();
@@ -228,6 +233,7 @@ public class UIManager_LAC : MonoBehaviour
         if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
+            
             colors.normalColor = Color.green;
         }
         else

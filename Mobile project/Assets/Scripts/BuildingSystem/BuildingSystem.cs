@@ -351,6 +351,26 @@ public class BuildingSystem : MonoBehaviour
 
         AudioManager.instance.PlaySound("BUILD_Rotate");
     }
+
+    public void RemoveBuilding(GameObject ObjectToRemove = null)
+    {
+        if (ObjectToRemove == null) ObjectToRemove = UIManager_LAC.instance.CurrentSelectedBuilding;
+        currentBuilding = ObjectToRemove.transform.parent.gameObject;
+        
+        Debug.Log("Removed");
+        Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(ObjectToRemove.transform.parent.position),
+            ObjectToRemove.GetComponentInParent<Building>().BuildingScriptable.buildingArea);
+        
+        foreach (var vect in area)
+        {
+            globalCellsInfos[vect].isPlaced = false;
+        }
+        ChangeColor(area, Color.white, true);
+        
+        Destroy(currentBuilding);
+        
+        UIManager_LAC.instance.SwitchState(StateManager.State.Free);
+    }
     
     
     public void RegisterPreplacedObstacles(GameObject[] buildingsList)
