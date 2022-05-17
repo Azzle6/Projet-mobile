@@ -223,6 +223,7 @@ public class UIManager_LAC : MonoBehaviour
         if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
+            
             colors.normalColor = Color.green;
         }
         else

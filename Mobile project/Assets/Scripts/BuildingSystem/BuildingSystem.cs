@@ -351,6 +351,22 @@ public class BuildingSystem : MonoBehaviour
 
         AudioManager.instance.PlaySound("BUILD_Rotate");
     }
+
+    public void RemoveBuilding(GameObject ObjectToRemove)
+    {
+        currentBuilding = ObjectToRemove;
+        Debug.Log("Removed");
+        Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(ObjectToRemove.transform.position),
+            ObjectToRemove.GetComponent<Building>().BuildingScriptable.buildingArea);
+        
+        foreach (var vect in area)
+        {
+            globalCellsInfos[vect].isPlaced = false;
+        }
+        ChangeColor(area, Color.white, true);
+        
+        Destroy(currentBuilding);
+    }
     
     
     public void RegisterPreplacedObstacles(GameObject[] buildingsList)
