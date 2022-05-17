@@ -44,6 +44,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Slider noiseSlider;
     [SerializeField] private GameObject noiseHandle;
     private float previousNoise = 0;
+    public Animation anim_techCompleted;
 
     private void Awake()
     {
