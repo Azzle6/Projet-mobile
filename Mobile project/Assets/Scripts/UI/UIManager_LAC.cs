@@ -173,6 +173,11 @@ public class UIManager_LAC : MonoBehaviour
         CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
     }
 
+    public void RemoveBuilding()
+    {
+        CurrentSelectedBuilding.GetComponentInParent<Building>().Remove();
+    }
+
     public void DisplaceBuilding()
     {
         BuildingSystem.instance.Movebuilding();

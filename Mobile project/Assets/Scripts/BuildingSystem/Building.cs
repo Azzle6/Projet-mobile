@@ -48,6 +48,12 @@ public class Building : MonoBehaviour
         }
         Debug.Log("Upgrade pas");
     }
+
+    public virtual void Remove()
+    {
+        BuildingSystem.instance.RemoveBuilding();
+        
+    }
     
  
 
