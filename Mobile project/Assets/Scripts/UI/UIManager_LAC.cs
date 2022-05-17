@@ -31,6 +31,7 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private GameObject BuildingInfosUpgradeCristal;
     [SerializeField] private GameObject BuildingInfosPop;
 
 
@@ -172,6 +173,10 @@ public class UIManager_LAC : MonoBehaviour
     {
         CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
     }
+    public void UpgradeCristal()
+    {
+        CurrentSelectedBuilding.GetComponent<Labo_LAC>()?.UpgradeCristal();
+    }
 
     public void DisplaceBuilding()
     {
@@ -233,6 +238,31 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
 
         
+        // upgrade cristal
+        if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
+        {
+            Labo_LAC lab = build as Labo_LAC;
+            BuildingInfosUpgradeCristal.SetActive(true);
+            if (ressourceM.CanSpendResources(lab.cristalStats[lab.cristalLv].UpgradePrice.quantity, lab.cristalStats[lab.cristalLv].UpgradePrice.ressource))
+            {
+                BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = true;
+                colors.normalColor = Color.green;
+            }
+            else
+            {
+                BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = false;
+                colors.normalColor = Color.red;
+            }
+        }
+        else
+        {
+            if (BuildingInfosUpgradeCristal == null)
+                Debug.LogWarning("No Upgrade cristal button");
+            else
+                BuildingInfosUpgradeCristal.SetActive(false);
+        }
+        // end upgrade cristal
+        
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
@@ -272,12 +302,12 @@ public class UIManager_LAC : MonoBehaviour
                 // cristal modif
                 else
                 {
-                    /*Cristal_LAC cristal = CurrentSelectedBuilding.GetComponentInParent<Cristal_LAC>();
-                    if (cristal)
+                    Labo_LAC labo = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+                    if (labo)
                     {
-                        Texts[4].text = cristal.name;
+                        Texts[4].text = labo.BuildingScriptable.name;
                         BuildingInfosPop.SetActive(false);
-                    }*/
+                    }
                 }
                 // end cristal
             }
