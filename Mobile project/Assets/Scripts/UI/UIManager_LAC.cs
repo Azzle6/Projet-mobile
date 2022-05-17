@@ -38,6 +38,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Transform camT;
     [SerializeField] private GameObject wavePreview;
     [SerializeField] private Image[] waveZone = new Image[0];
+    [SerializeField] private Animator wavePAnimator;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
@@ -297,11 +298,20 @@ public class UIManager_LAC : MonoBehaviour
         if (noiseR > noiseT && display)
         {
             UpdateWavePreview();
-            wavePreview.SetActive(true);
+            //
+            if(wavePAnimator)
+                wavePAnimator.SetBool("Show", true);
+            else
+                wavePreview.SetActive(true);
         }
-            
         else
-            wavePreview.SetActive(false);
+        {
+            if (wavePAnimator)
+                wavePAnimator.SetBool("Show", false);
+            else
+                wavePreview.SetActive(false);
+        }
+
     }
 
     

@@ -2674,7 +2674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8688753430149111754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21, y: 0, z: -9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9159791989080197321}
@@ -7718,6 +7718,14 @@ PrefabInstance:
     - target: {fileID: 6577142795193933189, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}
       propertyPath: m_Name
       value: ShakeLab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577142795402098054, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268440476246554034, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b71e883f287e91489ed43c67b9a21c3, type: 3}
