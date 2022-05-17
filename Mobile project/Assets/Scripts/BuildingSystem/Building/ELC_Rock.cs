@@ -6,10 +6,10 @@ using UnityEngine;
 public class ELC_Rock : Building
 {
     [ContextMenu("BreakRock")]
-    public void BreakRock()
+    public override void Remove()
     {
         RessourceManager_LAC.instance.SpendRessource(BuildingScriptable.price.quantity,
             BuildingScriptable.price.ressource);
-        BuildingSystem.instance.RemoveBuilding(this.gameObject);
+        BuildingSystem.instance.RemoveBuilding(this.transform.GetChild(0).gameObject);
     }
 }
