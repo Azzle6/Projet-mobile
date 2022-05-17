@@ -232,6 +232,7 @@ public class UIManager_LAC : MonoBehaviour
         }
         BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
 
+        
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
@@ -252,6 +253,7 @@ public class UIManager_LAC : MonoBehaviour
                 Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
                 Texts[4].text = turret.BuildingScriptable.name;
             }
+
             else
             {
                 House_LAC house = CurrentSelectedBuilding.GetComponentInParent<House_LAC>();
@@ -267,6 +269,17 @@ public class UIManager_LAC : MonoBehaviour
                     Texts[4].text = house.BuildingScriptable.name;
                     Texts[4].gameObject.SetActive(true);
                 }
+                // cristal modif
+                else
+                {
+                    /*Cristal_LAC cristal = CurrentSelectedBuilding.GetComponentInParent<Cristal_LAC>();
+                    if (cristal)
+                    {
+                        Texts[4].text = cristal.name;
+                        BuildingInfosPop.SetActive(false);
+                    }*/
+                }
+                // end cristal
             }
             
         }

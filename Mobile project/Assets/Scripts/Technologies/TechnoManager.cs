@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class TechnoManager : MonoBehaviour
 {
     public static TechnoManager instance;
+    public float timeBoost = 1;// modify by Labo_LAC
     public bool isDiscoveringTechnology;
     public bool resetDiscoveriesOnLaunch = true;
     public Slider ui_mainScreenTechSlider;
+
 
     private void Awake()
     {
@@ -48,7 +50,7 @@ public class TechnoManager : MonoBehaviour
         
         while (techno.timeToDiscover > techno.timeSpentToDiscover)
         {
-            techno.timeSpentToDiscover += 0.1f;
+            techno.timeSpentToDiscover += 0.1f * timeBoost;
             if (techno.gameObject.activeInHierarchy)
                 slider.value = techno.timeSpentToDiscover; //Actualise le slider que si le joueur est dans le menu de techno
             else if(ui_mainScreenTechSlider.gameObject.activeInHierarchy) 
