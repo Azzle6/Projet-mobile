@@ -12,6 +12,8 @@ public class BuildingInfosPannel : MonoBehaviour
     public static BuildingInfosPannel instance;
     [SerializeField] private Image buildImage;
     [SerializeField] private TMP_Text buildName, buildProd, buildPrice, buildDescription;
+    [SerializeField] private Image priceIcon;
+    [SerializeField] private Button confirmButton;
     public BuildingSO buildingInf;
 
 
@@ -32,7 +34,8 @@ public class BuildingInfosPannel : MonoBehaviour
         buildImage.sprite = buildingInf.image;
         buildName.text = buildingInf.name;
         
-        buildPrice.text = "Price : " + buildingInf.price.quantity + " " + buildingInf.price.ressource;
+        buildPrice.text = "Price : " + buildingInf.price.quantity;
+        priceIcon.sprite = RessourceManager_LAC.instance.GetResourceLogo(buildingInf.price.ressource);
         buildDescription.text = buildingInf.description;
 
         if (buildingInf.buildingStats.GetType() == typeof(ExtractorSO_LAC))
@@ -51,6 +54,13 @@ public class BuildingInfosPannel : MonoBehaviour
             buildProd.text = "Range : " + stats.range + "\nDamage : " + stats.damage + "\nAttack speed : " + stats.attackSpeed;
         }
 
+        float matterComparison = 0;
+        
+        if (buildingInf.price.ressource == RessourceManager_LAC.RessourceType.MATTER) matterComparison = RessourceManager_LAC.instance.matter;
+        else matterComparison = RessourceManager_LAC.instance.knowledge;
+        
+        Debug.Log(matterComparison);
+        confirmButton.interactable = buildingInf.price.quantity < matterComparison;
 
     }
 
@@ -62,7 +72,7 @@ public class BuildingInfosPannel : MonoBehaviour
     public void ChangeBuilding(BuildingSO newBuild)
     {
         buildingInf = newBuild;
-        Debug.Log(newBuild.name);
+        //Debug.Log(newBuild.name);
         UpdateUI();
 
     }

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: MatterExtractorStatsLvl 3
   m_EditorClassIdentifier: 
   visual: {fileID: 0}
-  maxPeople: 3
-  peopleGain: 0.1
+  maxPeople: 5
+  peopleGain: 0.3
   production:
-    quantity: 3
+    quantity: 10
     ressource: 0
-  noise: 2
+  maxStock: 500
+  noise: 15

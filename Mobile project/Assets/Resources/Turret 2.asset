@@ -40,12 +40,13 @@ MonoBehaviour:
       Entry: 8
       Data: 
   name: Turret
-  description: Piou Piou Piouuuuuuuuuu!
+  description: A tower topped by a charged crystal. There's a chance you might receive
+    a shock if you stand next to it.
   price:
-    quantity: 0
+    quantity: 450
     ressource: 0
   image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   prefab: {fileID: 5380295845529954097, guid: 7556c940730b78747837bad53e7b379e, type: 3}
   buildingStats: {fileID: 11400000, guid: 56e55966e90617c4da35dcc60ee4e5f7, type: 2}
-  isUnlocked: 1
+  isUnlocked: 0
   unlockedLevel: 0

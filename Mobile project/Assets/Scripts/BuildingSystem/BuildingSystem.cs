@@ -59,6 +59,7 @@ public class BuildingSystem : MonoBehaviour
         
         
         InitializeAllTiles();
+        RegisterPreplacedObstacles(BuildingsManager.instance.preplacedBuildings);
     }
 
 
@@ -66,6 +67,7 @@ public class BuildingSystem : MonoBehaviour
     {
         while (isMovingBuilding)
         {
+            UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
             Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
             if (Physics.Raycast(ray, out RaycastHit rayHit, 100, GroundMask))
             {
@@ -85,7 +87,7 @@ public class BuildingSystem : MonoBehaviour
         while (!isMovingBuilding)
         {
             Debug.Log("isNotMoving");
-            
+            UIManager_LAC.instance.SwitchState(StateManager.State.HoldBuilding);
             if (InputsManager.Click())
             {
                 Ray ray2 = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
@@ -131,6 +133,9 @@ public class BuildingSystem : MonoBehaviour
         if (result && canPlaceBuilding)
         {
             PlaceBuilding();
+            Building build = currentBuilding.GetComponent<Building>();
+            RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
+                build.BuildingScriptable.price.ressource);
             currentBuilding = null;
         }
         else
@@ -152,6 +157,8 @@ public class BuildingSystem : MonoBehaviour
             globalCellsInfos[vect].isPlaced = true;
         }
 
+        AudioManager.instance.PlaySound("BUILD_Place");
+
         Building building = currentBuilding.GetComponent<Building>();
         building.enabled = true;
         building.RegisterTile();
@@ -159,7 +166,7 @@ public class BuildingSystem : MonoBehaviour
     }
 
     //récupère toutes les coordonnées des tiles concernées et si des tiles sont en dehors de la grid
-    private Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
+    public Vector3Int[] GetAreaEmplacements(Vector3Int pos, bool[,] buildingArea)
     {
         List<Vector3Int> vectList = new List<Vector3Int>();
 
@@ -180,7 +187,9 @@ public class BuildingSystem : MonoBehaviour
                 else
                 {
                     outOfGrid = true;
+                    
                     Debug.Log("Déborde de la zone");
+                    
                 }
 
             }
@@ -318,6 +327,74 @@ public class BuildingSystem : MonoBehaviour
             (int)IslandManager.instance.transform.localPosition.z);
     }*/
 
+    public void Movebuilding() 
+    {
+        
+        GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
+        currentBuilding = go.transform.parent.gameObject;
+        Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position),
+            go.GetComponentInParent<Building>().BuildingScriptable.buildingArea);
+        
+        foreach (var vect in area)
+        {
+            globalCellsInfos[vect].isPlaced = false;
+        }
+        ChangeColor(area, Color.white, true);
+        
+        
+        currentBuilding.GetComponent<Building>().enabled = false;
+        isMovingBuilding = false;
+        
+        UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
+        DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
+        UpdateBuildingPosition(gridLayout.WorldToCell(SpawnBuildingPos.position));
+
+        AudioManager.instance.PlaySound("BUILD_Rotate");
+    }
+
+    public void RemoveBuilding(GameObject ObjectToRemove = null)
+    {
+        if (ObjectToRemove == null) ObjectToRemove = UIManager_LAC.instance.CurrentSelectedBuilding;
+        currentBuilding = ObjectToRemove.transform.parent.gameObject;
+        
+        Debug.Log("Removed");
+        Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(ObjectToRemove.transform.parent.position),
+            ObjectToRemove.GetComponentInParent<Building>().BuildingScriptable.buildingArea);
+        
+        foreach (var vect in area)
+        {
+            globalCellsInfos[vect].isPlaced = false;
+        }
+        ChangeColor(area, Color.white, true);
+        
+        Destroy(currentBuilding);
+        
+        UIManager_LAC.instance.SwitchState(StateManager.State.Free);
+    }
+    
+    
+    public void RegisterPreplacedObstacles(GameObject[] buildingsList)
+    {
+        Debug.Log("Register preplaced buildings");
+        foreach (var obj in buildingsList)
+        {
+            Building buildScript = obj.GetComponent<Building>();
+            currentBuilding = obj;
+            Vector3Int[] area = GetAreaEmplacements(
+                gridLayout.WorldToCell(obj.transform.position),
+                buildScript.BuildingScriptable.buildingArea);
+
+            foreach (var vect in area)
+            {
+                globalCellsInfos[vect].isPlaced = true;
+            }
+
+            ChangeColor(area, Color.black);
+        }
+
+        currentBuilding = null;
+    }
+
     public void Rotate()
     {
         Building currentBuild = currentBuilding.GetComponent<Building>();
@@ -337,6 +414,9 @@ public class BuildingSystem : MonoBehaviour
                 currentBuild.curRotation = Rotation.Back;
                 break;
         }
+
+        AudioManager.instance.PlaySound("BUILD_Rotate");
+
         UpdateBuildingPosition(gridLayout.LocalToCell(currentBuild.gameObject.transform.localPosition));
     }
 
@@ -354,10 +434,10 @@ public class BuildingSystem : MonoBehaviour
                 newDisplacement = new Vector3Int(i, - j,0);
                 break;
             case Rotation.Left :
-                newDisplacement = new Vector3Int(j, - i,0);
+                newDisplacement = new Vector3Int(-j, - i,0);
                 break;
             case Rotation.Right :
-                newDisplacement = new Vector3Int(- j, i,0);
+                newDisplacement = new Vector3Int(j, i,0);
                 break;
             
         }

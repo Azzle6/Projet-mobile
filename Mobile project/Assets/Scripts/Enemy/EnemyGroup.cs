@@ -5,15 +5,14 @@ using UnityEngine;
 public class EnemyGroup : BehaveGroup
 {
     public EnemyStats enemyStats;
-    [HideInInspector] public List<EnemyBoid> enemies;
+    public List<EnemyBoid> enemies;
 
     [Header("Displacement")]
-    public Transform target;
+    public Extractor_LAC target;
     public Transform spawnPoint;
-    [HideInInspector] Extractor_LAC exTarget;
 
     [Header("Debug")]
-    public List<Transform> targets;
+    public List<Extractor_LAC> targets;
 
     private new void Start()
     {
@@ -47,7 +46,7 @@ public class EnemyGroup : BehaveGroup
         }*/
     }
 
-    public void Initilaize(Transform spawnPoint, List<Transform> targets)
+    public void Initilaize(Transform spawnPoint, List<Extractor_LAC> targets)
     {
         this.spawnPoint = spawnPoint;
         this.targets = targets;
@@ -73,8 +72,8 @@ public class EnemyGroup : BehaveGroup
             }
         }
 
-        Transform nTarget = NearestTarget(spawnPoint, targets);
-        if ((!target || !target.gameObject.activeSelf))
+        Extractor_LAC nTarget = NearestTarget(spawnPoint, targets);
+        if ((!target || !target.fonctionnal) && nTarget)
         {
             target = nTarget;
             SetTarget(target);
@@ -83,7 +82,7 @@ public class EnemyGroup : BehaveGroup
     }
 
     #region Group Management
-    public void SetTarget(Transform target)
+    public void SetTarget(Extractor_LAC target)
     {
         if (target)
         {
@@ -93,17 +92,19 @@ public class EnemyGroup : BehaveGroup
 
             
         if (target == null)
-            Debug.Log("Target null for " + this.name);
-
-        BehaviourHelper.GetHeadingBH(ref presetBH.behaviours).head = target;
-        for(int i = 0; i < enemies.Count; i++)
+            Debug.LogWarning("Target null for " + this.name);
+        else
         {
-            enemies[i].target = target;
+            BehaviourHelper.GetHeadingBH(ref presetBH.behaviours).head = target.transform;
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].target = target;
+            }
         }
     }
-    public Transform NearestTarget(Transform origin,List<Transform> targets)
+    public Extractor_LAC NearestTarget(Transform origin,List<Extractor_LAC> targets)
     {
-        Transform nearestTarget = null;
+        Extractor_LAC nearestTarget = null;
         float minDist = -1;
 
         
@@ -111,9 +112,9 @@ public class EnemyGroup : BehaveGroup
         {
             if (targets[i])
             {
-                if (targets[i].gameObject.activeSelf)
+                if (targets[i].fonctionnal)
                 {
-                    float dist = Vector3.Distance(transform.position, targets[i].position);
+                    float dist = Vector3.Distance(transform.position, targets[i].transform.position);
                     if (minDist < 0 || dist < minDist)
                     {
                         minDist = dist;
@@ -145,6 +146,7 @@ public class EnemyGroup : BehaveGroup
 
         if (number > 0)
             StartCoroutine(SpawnEnemies(origin, number, delay));
+           
     }
 
     #endregion
@@ -182,6 +184,9 @@ public class EnemyGroup : BehaveGroup
     {
         enemies.Remove(enemy);
         base.RemoveBoid(enemy);
+
+        if (enemies.Count <= 0)
+            Destroy(gameObject);
     }
     #endregion
 }

@@ -42,9 +42,17 @@ public class Building : MonoBehaviour
         {
             level = Mathf.Clamp(level+1, 0, statsSO.Length);
             Debug.Log("Upgrade !");
+
+            AudioManager.instance.PlaySound("BUILD_Upgrade");
             return;
         }
         Debug.Log("Upgrade pas");
+    }
+
+    public virtual void Remove()
+    {
+        BuildingSystem.instance.RemoveBuilding();
+        
     }
     
  
