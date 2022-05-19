@@ -31,6 +31,7 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject MainUI;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private GameObject BuildingInfosUpgradeCristal;
     [SerializeField] private GameObject BuildingInfosPop;
 
 
@@ -44,6 +45,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Slider noiseSlider;
     [SerializeField] private GameObject noiseHandle;
     private float previousNoise = 0;
+    public Animation anim_techCompleted;
 
     private void Awake()
     {
@@ -172,6 +174,15 @@ public class UIManager_LAC : MonoBehaviour
     {
         CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
     }
+    public void UpgradeCristal()
+    {
+        CurrentSelectedBuilding.GetComponent<Labo_LAC>()?.UpgradeCristal();
+    }
+
+    public void RemoveBuilding()
+    {
+        CurrentSelectedBuilding.GetComponentInParent<Building>().Remove();
+    }
 
     public void DisplaceBuilding()
     {
@@ -223,6 +234,7 @@ public class UIManager_LAC : MonoBehaviour
         if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
+            
             colors.normalColor = Color.green;
         }
         else
@@ -232,6 +244,32 @@ public class UIManager_LAC : MonoBehaviour
         }
         BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
 
+        
+        // upgrade cristal
+        if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
+        {
+            Labo_LAC lab = build as Labo_LAC;
+            BuildingInfosUpgradeCristal.SetActive(true);
+            if (ressourceM.CanSpendResources(lab.cristalStats[lab.cristalLv].UpgradePrice.quantity, lab.cristalStats[lab.cristalLv].UpgradePrice.ressource))
+            {
+                BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = true;
+                colors.normalColor = Color.green;
+            }
+            else
+            {
+                BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = false;
+                colors.normalColor = Color.red;
+            }
+        }
+        else
+        {
+            if (BuildingInfosUpgradeCristal == null)
+                Debug.LogWarning("No Upgrade cristal button");
+            else
+                BuildingInfosUpgradeCristal.SetActive(false);
+        }
+        // end upgrade cristal
+        
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
@@ -252,6 +290,7 @@ public class UIManager_LAC : MonoBehaviour
                 Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
                 Texts[4].text = turret.BuildingScriptable.name;
             }
+
             else
             {
                 House_LAC house = CurrentSelectedBuilding.GetComponentInParent<House_LAC>();
@@ -267,6 +306,17 @@ public class UIManager_LAC : MonoBehaviour
                     Texts[4].text = house.BuildingScriptable.name;
                     Texts[4].gameObject.SetActive(true);
                 }
+                // cristal modif
+                else
+                {
+                    Labo_LAC labo = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+                    if (labo)
+                    {
+                        Texts[4].text = labo.BuildingScriptable.name;
+                        BuildingInfosPop.SetActive(false);
+                    }
+                }
+                // end cristal
             }
             
         }
