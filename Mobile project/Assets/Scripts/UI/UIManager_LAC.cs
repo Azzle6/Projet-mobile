@@ -26,12 +26,18 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
-    [SerializeField] private GameObject BuildingInfos;
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
+    
+    [Header("Stats buildings InGame")]
+    [SerializeField] private GameObject BuildingInfos;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private TMP_Text UpgradePrice;
+    [SerializeField] private Image UpgradeIcon;
     [SerializeField] private GameObject BuildingInfosUpgradeCristal;
+    [SerializeField] private GameObject BuildingInfosRemoveButton;
+    [SerializeField] private GameObject BuildingInfosMoveButton;
     [SerializeField] private GameObject BuildingInfosPop;
 
 
@@ -227,6 +233,9 @@ public class UIManager_LAC : MonoBehaviour
             txt.gameObject.SetActive(true);
         }
         BuildingInfosPop.SetActive(true);
+        BuildingInfosRemoveButton.SetActive(true);
+        BuildingInfosMoveButton.SetActive(true);
+        BuildingInfosUpgradeButton.SetActive(true);
 
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
@@ -243,7 +252,8 @@ public class UIManager_LAC : MonoBehaviour
             colors.normalColor = Color.red;
         }
         BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
-
+        UpgradePrice.text = "Price : " + build.statsSO[build.level].UpgradePrice.quantity;
+        UpgradeIcon.sprite = ressourceM.GetResourceLogo(build.statsSO[build.level].UpgradePrice.ressource);
         
         // upgrade cristal
         if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
@@ -313,7 +323,25 @@ public class UIManager_LAC : MonoBehaviour
                     if (labo)
                     {
                         Texts[4].text = labo.BuildingScriptable.name;
+                        BuildingInfosRemoveButton.SetActive(false);
                         BuildingInfosPop.SetActive(false);
+                        BuildingInfosMoveButton.SetActive(false);
+                    }
+                    else
+                    {
+                        ELC_Rock rock = CurrentSelectedBuilding.GetComponentInParent<ELC_Rock>();
+                        if (rock)
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                Texts[i].gameObject.SetActive(false);
+                            }
+                            Texts[4].text = rock.BuildingScriptable.name;
+                            BuildingInfosUpgradeButton.SetActive(false);
+                            BuildingInfosPop.SetActive(false);
+                            BuildingInfosMoveButton.SetActive(false);
+                            
+                        }
                     }
                 }
                 // end cristal
