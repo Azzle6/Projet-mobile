@@ -13425,7 +13425,7 @@ PrefabInstance:
       objectReference: {fileID: 151696515}
     - target: {fileID: 3262663041739135506, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: resetDiscoveriesOnLaunch
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3262663041739135507, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: difficultyDebugText
@@ -15017,10 +15017,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -268.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4510598844573150891, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4549206269536887920, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -15236,6 +15232,10 @@ PrefabInstance:
     - target: {fileID: 7006504704181164271, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118097450290338332, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7496009522975540982, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_Name
