@@ -14,6 +14,7 @@ public class RessourceManager_LAC : MonoBehaviour
     [Header("Ressource")]
     public int population;
     public enum RessourceType { MATTER, KNOWLEDGE }
+    public ResourcesIcons[] resourcesIcon;
     public List<Extractor_LAC> activeExtractor;// { get; private set; }
     public float matter, maxMatter;// { get; private set; }
     [HideInInspector]public float matterRatio;
@@ -165,5 +166,22 @@ public class RessourceManager_LAC : MonoBehaviour
         
     }
 
+    public Sprite GetResourceLogo(RessourceType type)
+    {
+        foreach (var icons in resourcesIcon)
+        {
+            if (icons.type == type) return icons.icon;
+        }
+        return null;
 
+    }
+
+
+}
+
+[System.Serializable]
+public class ResourcesIcons
+{
+    public RessourceManager_LAC.RessourceType type;
+    public Sprite icon;
 }
