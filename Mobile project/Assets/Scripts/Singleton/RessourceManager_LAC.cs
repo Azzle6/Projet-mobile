@@ -97,15 +97,13 @@ public class RessourceManager_LAC : MonoBehaviour
             knowledgeRatio = knowledge / maxKnowledge;
         }
             
-        
-            
         if (rType == RessourceType.MATTER)
         {
             matter = Mathf.Clamp(matter + value, 0, maxMatter);
             matterRatio = matter / maxMatter;
         }
-            
 
+        UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
         // update stock for all extractor
         /*for (int i = 0; i < activeExtractor.Count; i++)
         {

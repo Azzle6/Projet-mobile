@@ -18,6 +18,9 @@ public class TechProperties : MonoBehaviour
     public TechnoType techType;
     public BuildingSO[] concernedBuilding;
 
+    [Header("Colors")]
+    [SerializeField] private Color lockedColor, unlockedColor, discoveringColor, discoveredColor;
+
     private void Start()
     {
         foreach (var but in previousButtons)
@@ -91,17 +94,17 @@ public class TechProperties : MonoBehaviour
         switch (curState)
         {
             case TechState.Locked :
-                img.color = Color.grey;
+                img.color = lockedColor;
                 break;
             case TechState.Unlocked :
-                img.color = Color.red;
+                img.color = unlockedColor;
                 break;
             case TechState.Discovering :
-                img.color = Color.blue;
+                img.color = discoveringColor;
                 slider.gameObject.SetActive(true);
                 break;
             case TechState.Discovered :
-                img.color = Color.green;
+                img.color = discoveredColor;
                 break;
         }
     }
