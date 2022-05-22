@@ -132,6 +132,13 @@ public class RessourceManager_LAC : MonoBehaviour
         {
             StockRessource(extractor.stock, extractor.ressourceType);
             activeExtractor.Add(extractor);
+
+            // update max Stock
+            if (extractor.ressourceType == RessourceType.MATTER)
+                maxMatter += extractor.stats[extractor.level].maxStock;
+
+            if (extractor.ressourceType == RessourceType.KNOWLEDGE)
+                maxKnowledge += extractor.stats[extractor.level].maxStock;
         }
     }
 
