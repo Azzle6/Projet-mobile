@@ -41,6 +41,8 @@ public class BuildingSystem : MonoBehaviour
     private bool isOutOfGrid;
     [SerializeField]private bool isMovingBuilding;
     private Coroutine DisplaceCoroutine;
+    private GameObject placementVFX;
+    [SerializeField] private Material canPlace, cantPlace;
 
     private void Awake()
     { 
@@ -121,6 +123,9 @@ public class BuildingSystem : MonoBehaviour
         canPlaceBuilding = EmplacementCheck(GetAreaEmplacements(cellPos, currentBuilding.GetComponent<Building>().BuildingScriptable.buildingArea));
         
         Color color = canPlaceBuilding ? Color.green : Color.red;
+
+        if(placementVFX) placementVFX.GetComponent<MeshRenderer>().material = canPlaceBuilding ? canPlace : cantPlace;
+        
         
         ChangeColor(prevAreaPositions, Color.white);
         
@@ -133,6 +138,7 @@ public class BuildingSystem : MonoBehaviour
         if (result && canPlaceBuilding)
         {
             PlaceBuilding();
+            Destroy(placementVFX);
             Building build = currentBuilding.GetComponent<Building>();
             RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
                 build.BuildingScriptable.price.ressource);
@@ -313,6 +319,8 @@ public class BuildingSystem : MonoBehaviour
         }
         currentBuilding.GetComponent<Building>().enabled = false;
         isMovingBuilding = false;
+        GameObject vfx = currentBuilding.GetComponent<Building>().BuildingScriptable.PlacementVFX;
+        placementVFX = Instantiate(vfx, currentBuilding.transform.GetChild(0).transform);
         
         UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
@@ -344,6 +352,9 @@ public class BuildingSystem : MonoBehaviour
         
         currentBuilding.GetComponent<Building>().enabled = false;
         isMovingBuilding = false;
+        
+        GameObject vfx = currentBuilding.GetComponent<Building>().BuildingScriptable.PlacementVFX;
+        placementVFX = Instantiate(vfx, currentBuilding.transform.GetChild(0).transform);
         
         UIManager_LAC.instance.SwitchState(StateManager.State.DisplaceBuilding);
         DisplaceCoroutine = StartCoroutine(DisplaceBuilding());
