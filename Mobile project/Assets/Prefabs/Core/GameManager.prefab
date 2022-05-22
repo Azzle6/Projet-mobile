@@ -51,6 +51,11 @@ MonoBehaviour:
   buildTile: 0
   defendTile: 0
   population: 10
+  resourcesIcon:
+  - type: 0
+    icon: {fileID: 21300000, guid: eb7a3685ff6c62140ba0d1f39ac00ef6, type: 3}
+  - type: 1
+    icon: {fileID: 21300000, guid: 4e22e589d40d09e4183c34d6689cd414, type: 3}
   activeExtractor: []
   matter: 800
   maxMatter: 800
@@ -123,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ba1b793dd8aef429c281dc85471d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBoost: 1
   isDiscoveringTechnology: 0
   resetDiscoveriesOnLaunch: 0
   ui_mainScreenTechSlider: {fileID: 0}

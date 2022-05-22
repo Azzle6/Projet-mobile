@@ -43,12 +43,14 @@ MonoBehaviour:
       Entry: 8
       Data: 
   name: Matter Extractor
-  description: Oui baguette
+  description: Who needs a quarry when you have this automatic big hammer. Unfortunately,
+    the noise it mades is deafening...
   price:
     quantity: 300
     ressource: 1
   image: {fileID: 21300000, guid: c6468176df4498e4e8d1d826673a8576, type: 3}
   prefab: {fileID: 464669590326285805, guid: 6b75703179f47d64aabefebd04fdd568, type: 3}
   buildingStats: {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
-  isUnlocked: 0
+  isUnlocked: 1
   unlockedLevel: 0
+  PlacementVFX: {fileID: 2840607887287613959, guid: fe25a9f3532c7f942a207aeb4ff3f18b, type: 3}

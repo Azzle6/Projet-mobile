@@ -33,6 +33,7 @@ public class WaveManager : MonoBehaviour
     public float difficulty;
     [SerializeField] private GameObject difficultyDebugText;
     public float levelDiff, techDiff, ressourceDiff;
+    
     void Awake()
     {
         if (instance != this && instance)
@@ -238,7 +239,7 @@ public class WaveManager : MonoBehaviour
                 difficultyDebugText.SetActive(true);
             }
         }
-        else if (difficultyDebugText.activeSelf == true)
+        else if (!debug && difficultyDebugText.activeSelf == true)
         {
             difficultyDebugText.SetActive(false);
         }

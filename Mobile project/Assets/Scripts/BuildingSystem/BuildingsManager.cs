@@ -18,7 +18,7 @@ public class BuildingsManager : MonoBehaviour
         instance = this;
     }
 
-
+    
 
 
     [ContextMenu("Update Buildings")]

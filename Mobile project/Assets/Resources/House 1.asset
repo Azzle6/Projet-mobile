@@ -46,12 +46,13 @@ MonoBehaviour:
       Entry: 8
       Data: 
   name: House
-  description: "M\xE9zon"
+  description: A comfortable house
   price:
     quantity: 150
     ressource: 0
   image: {fileID: 21300000, guid: b52b6d4f1da3c6846842b31368feb3e3, type: 3}
   prefab: {fileID: 3651774682582830496, guid: a02441dc887639d41960fa121d3cebb2, type: 3}
   buildingStats: {fileID: 11400000, guid: d96cb42b58b019243904f1754216b903, type: 2}
-  isUnlocked: 0
+  isUnlocked: 1
   unlockedLevel: 0
+  PlacementVFX: {fileID: 1093606785055636126, guid: 0ef8f5fc16b5c29488423004634d23ad, type: 3}

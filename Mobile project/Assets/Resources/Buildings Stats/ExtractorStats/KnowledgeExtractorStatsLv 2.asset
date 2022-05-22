@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d76d1744bf6a4458a3958e170d6dbe, type: 3}
   m_Name: KnowledgeExtractorStatsLv 2
   m_EditorClassIdentifier: 
+  UpgradePrice:
+    quantity: 500
+    ressource: 0
   visual: {fileID: 0}
   maxPeople: 4
   peopleGain: 0.2
