@@ -233,6 +233,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
+        
         foreach (var txt in Texts)
         {
             txt.gameObject.SetActive(true);
@@ -245,6 +246,7 @@ public class UIManager_LAC : MonoBehaviour
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
+        Debug.Log("Display building " + build.name);
         if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
@@ -288,10 +290,10 @@ public class UIManager_LAC : MonoBehaviour
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            Texts[0].text = "Pop : " + extractor.people;
-            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s";
-            Texts[2].text = "Stock : " + extractor.stock;
-            Texts[3].gameObject.SetActive(false);
+            Texts[0].text = "Stock : " + extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
+            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
+            Texts[2].text =   extractor.people + "/" + extractor.stats[extractor.level].maxPeople; // people
+            Texts[3].text = "Bruit : " + extractor.stats[extractor.level].noise; // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }
         else
@@ -299,9 +301,9 @@ public class UIManager_LAC : MonoBehaviour
             Turret_LAC turret = CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>();
             if (turret)
             {
-                Texts[0].text = "Pop : ";
+                Texts[0].text = "Damage : " + turret.CurrentDamage();
                 Texts[1].text = "Range : " + turret.CurrentRange();
-                Texts[2].text = "Damage : " + turret.CurrentDamage();
+                Texts[2].text = turret.people + "/" + turret.stats[turret.level].maxPeople; // people
                 Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
                 Texts[4].text = turret.BuildingScriptable.name;
             }

@@ -670,7 +670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5191742374595739123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Vie :'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b55237323e5b8c43b763263cf185fc0, type: 2}
   m_sharedMaterial: {fileID: 3781819964368896383, guid: 7b55237323e5b8c43b763263cf185fc0, type: 2}
@@ -4017,7 +4017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 186, y: -76}
+  m_AnchoredPosition: {x: 186, y: -18.743}
   m_SizeDelta: {x: 394.566, y: -50.734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7898620547375068171
@@ -4623,7 +4623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &679518728404204495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6907,7 +6907,7 @@ GameObject:
   - component: {fileID: 843469180434597020}
   - component: {fileID: 9036787207092140438}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TextPop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9116,7 +9116,7 @@ MonoBehaviour:
   Texts:
   - {fileID: 7471993771253120932}
   - {fileID: 2598489101243289024}
-  - {fileID: 793333956371560753}
+  - {fileID: 9036787207092140438}
   - {fileID: 6920742665934282586}
   - {fileID: 4547142721613613230}
   BuildingInfosUpgradeButton: {fileID: 5113097934714911044}
