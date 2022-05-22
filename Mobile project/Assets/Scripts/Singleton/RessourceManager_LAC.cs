@@ -14,6 +14,7 @@ public class RessourceManager_LAC : MonoBehaviour
     [Header("Ressource")]
     public int population;
     public enum RessourceType { MATTER, KNOWLEDGE }
+    public ResourcesIcons[] resourcesIcon;
     public List<Extractor_LAC> activeExtractor;// { get; private set; }
     public float matter, maxMatter;// { get; private set; }
     [HideInInspector]public float matterRatio;
@@ -64,6 +65,17 @@ public class RessourceManager_LAC : MonoBehaviour
         return canSpend;
     }
 
+    public bool CanSpendResources(float value, RessourceType rType)
+    {
+        float matterComparison = 0;
+        
+        if (rType == RessourceManager_LAC.RessourceType.MATTER) matterComparison = RessourceManager_LAC.instance.matter;
+        else matterComparison = RessourceManager_LAC.instance.knowledge;
+        
+        Debug.Log(matterComparison);
+        return value < matterComparison;
+    }
+
     public bool CanPlaceBuilding(float cost, RessourceType rType)
     {
         if (population > 0)
@@ -85,15 +97,13 @@ public class RessourceManager_LAC : MonoBehaviour
             knowledgeRatio = knowledge / maxKnowledge;
         }
             
-        
-            
         if (rType == RessourceType.MATTER)
         {
             matter = Mathf.Clamp(matter + value, 0, maxMatter);
             matterRatio = matter / maxMatter;
         }
-            
 
+        UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
         // update stock for all extractor
         /*for (int i = 0; i < activeExtractor.Count; i++)
         {
@@ -154,5 +164,22 @@ public class RessourceManager_LAC : MonoBehaviour
         
     }
 
+    public Sprite GetResourceLogo(RessourceType type)
+    {
+        foreach (var icons in resourcesIcon)
+        {
+            if (icons.type == type) return icons.icon;
+        }
+        return null;
 
+    }
+
+
+}
+
+[System.Serializable]
+public class ResourcesIcons
+{
+    public RessourceManager_LAC.RessourceType type;
+    public Sprite icon;
 }

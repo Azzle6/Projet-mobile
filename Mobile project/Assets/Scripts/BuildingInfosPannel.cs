@@ -12,6 +12,7 @@ public class BuildingInfosPannel : MonoBehaviour
     public static BuildingInfosPannel instance;
     [SerializeField] private Image buildImage;
     [SerializeField] private TMP_Text buildName, buildProd, buildPrice, buildDescription;
+    [SerializeField] private Image priceIcon;
     [SerializeField] private Button confirmButton;
     public BuildingSO buildingInf;
 
@@ -33,7 +34,8 @@ public class BuildingInfosPannel : MonoBehaviour
         buildImage.sprite = buildingInf.image;
         buildName.text = buildingInf.name;
         
-        buildPrice.text = "Price : " + buildingInf.price.quantity + " " + buildingInf.price.ressource;
+        buildPrice.text = "Price : " + buildingInf.price.quantity;
+        priceIcon.sprite = RessourceManager_LAC.instance.GetResourceLogo(buildingInf.price.ressource);
         buildDescription.text = buildingInf.description;
 
         if (buildingInf.buildingStats.GetType() == typeof(ExtractorSO_LAC))
