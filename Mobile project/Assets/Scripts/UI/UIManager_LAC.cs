@@ -20,9 +20,12 @@ public class UIManager_LAC : MonoBehaviour
     [Header("Références")] 
     [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
+    [SerializeField] private Slider matterSlider, fightMatterSlider;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private Slider knowledgeSlider, fightKnowledgeSlider;
     [SerializeField] private TextMeshProUGUI pop;
     [SerializeField] private TextMeshProUGUI knowledgeTechTree;
+    [SerializeField] private GameObject matterGainLossAnim, knowledgeGainLossAnim;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
@@ -75,6 +78,8 @@ public class UIManager_LAC : MonoBehaviour
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         pop.text = Mathf.Ceil(ressourceM.population).ToString();
+
+        UpdateRessourcesSlider();
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
         {
@@ -352,6 +357,53 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfos.SetActive(true);
     }
     
+    void UpdateRessourcesSlider()
+    {
+        matterSlider.maxValue = ressourceM.maxMatter;
+        fightMatterSlider.maxValue = matterSlider.maxValue;
+        matterSlider.value = ressourceM.matter;
+        fightMatterSlider.value = matterSlider.value;
+
+        knowledgeSlider.maxValue = ressourceM.maxKnowledge;
+        fightKnowledgeSlider.maxValue = knowledgeSlider.maxValue;
+        knowledgeSlider.value = ressourceM.knowledge;
+        fightKnowledgeSlider.value = knowledgeSlider.value;
+    }
+
+    public void RessourceGainLossFeedback(float value, RessourceManager_LAC.RessourceType ressourceType)
+    {
+        TextMeshProUGUI text = null;
+        Animation anim = null;
+
+        if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+        {            
+            text = knowledgeGainLossAnim.GetComponentInChildren<TextMeshProUGUI>();
+            anim = knowledgeGainLossAnim.GetComponentInChildren<Animation>();
+
+            text.text = Mathf.Ceil(value).ToString();
+        }
+        else if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+        {
+            text = matterGainLossAnim.GetComponentInChildren<TextMeshProUGUI>();
+            anim = matterGainLossAnim.GetComponentInChildren<Animation>();
+            
+            text.text = Mathf.Ceil(value).ToString();
+        }
+
+        if (value > 0)
+        {
+            text.color = Color.white;
+            text.text = "+" + text.text;
+        }
+        else
+        {
+            text.color = Color.red;
+        }
+
+        anim.Stop();
+        anim.Play();
+    }
+
     #region Noise
     public void ActualizeNoiseSlider()
     {
