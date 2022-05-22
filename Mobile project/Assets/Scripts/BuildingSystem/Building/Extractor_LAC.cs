@@ -15,7 +15,7 @@ public class Extractor_LAC : Building
     [Header("Attack")]
     public bool fonctionnal;
     public float stock = 0;
-    [HideInInspector] public float maxStock, attackStock;
+    public float currentStock, attackStock;
     bool triggerWave;
     public ParticleSystem smokeFX;
     
@@ -33,7 +33,7 @@ public class Extractor_LAC : Building
                 Repair();
 
             productCoolDown -= Time.deltaTime;
-            stock = attackStock =  maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
+            stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
             
 
@@ -43,8 +43,21 @@ public class Extractor_LAC : Building
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
             RessourceManager_LAC.instance.StockNoise(stats[level].noise);
+            //stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
   
+    }
+
+    public override void Upgrade()
+    {
+        int currentStock = stats[level].maxStock;
+        base.Upgrade();
+        // update max Stock
+        if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+            RessourceManager_LAC.instance.maxMatter += stats[level].maxStock - currentStock;
+
+        if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+            RessourceManager_LAC.instance.maxKnowledge += stats[level].maxStock - currentStock;
     }
 
     #region Manage product

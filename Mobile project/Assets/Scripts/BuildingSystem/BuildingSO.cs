@@ -17,6 +17,7 @@ public class BuildingSO : SerializedScriptableObject
     public int unlockedLevel;
     
     public bool[,] buildingArea;
+    public GameObject PlacementVFX;
 }
 
 [System.Serializable]

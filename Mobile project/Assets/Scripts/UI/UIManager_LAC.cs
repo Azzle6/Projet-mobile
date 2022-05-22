@@ -20,9 +20,12 @@ public class UIManager_LAC : MonoBehaviour
     [Header("Références")] 
     [SerializeField] private BuildingInfosPannel InfosPannel;
     [SerializeField] private TextMeshProUGUI matter;
+    [SerializeField] private Slider matterSlider, fightMatterSlider;
     [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private Slider knowledgeSlider, fightKnowledgeSlider;
     [SerializeField] private TextMeshProUGUI pop;
     [SerializeField] private TextMeshProUGUI knowledgeTechTree;
+    [SerializeField] private GameObject matterGainLossAnim, knowledgeGainLossAnim;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
@@ -75,6 +78,8 @@ public class UIManager_LAC : MonoBehaviour
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         pop.text = Mathf.Ceil(ressourceM.population).ToString();
+
+        UpdateRessourcesSlider();
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
         {
@@ -228,6 +233,7 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
+        
         foreach (var txt in Texts)
         {
             txt.gameObject.SetActive(true);
@@ -240,6 +246,7 @@ public class UIManager_LAC : MonoBehaviour
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
+        Debug.Log("Display building " + build.name);
         if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
@@ -283,10 +290,10 @@ public class UIManager_LAC : MonoBehaviour
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            Texts[0].text = "Pop : " + extractor.people;
-            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s";
-            Texts[2].text = "Stock : " + extractor.stock;
-            Texts[3].gameObject.SetActive(false);
+            Texts[0].text = "Stock : " + extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
+            Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
+            Texts[2].text =   extractor.people + "/" + extractor.stats[extractor.level].maxPeople; // people
+            Texts[3].text = "Bruit : " + extractor.stats[extractor.level].noise; // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }
         else
@@ -294,9 +301,9 @@ public class UIManager_LAC : MonoBehaviour
             Turret_LAC turret = CurrentSelectedBuilding.GetComponentInParent<Turret_LAC>();
             if (turret)
             {
-                Texts[0].text = "Pop : ";
+                Texts[0].text = "Damage : " + turret.CurrentDamage();
                 Texts[1].text = "Range : " + turret.CurrentRange();
-                Texts[2].text = "Damage : " + turret.CurrentDamage();
+                Texts[2].text = turret.people + "/" + turret.stats[turret.level].maxPeople; // people
                 Texts[3].text = "Attack speed : " + turret.CurrentAttackSpeed();
                 Texts[4].text = turret.BuildingScriptable.name;
             }
@@ -352,6 +359,53 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfos.SetActive(true);
     }
     
+    void UpdateRessourcesSlider()
+    {
+        matterSlider.maxValue = ressourceM.maxMatter;
+        fightMatterSlider.maxValue = matterSlider.maxValue;
+        matterSlider.value = ressourceM.matter;
+        fightMatterSlider.value = matterSlider.value;
+
+        knowledgeSlider.maxValue = ressourceM.maxKnowledge;
+        fightKnowledgeSlider.maxValue = knowledgeSlider.maxValue;
+        knowledgeSlider.value = ressourceM.knowledge;
+        fightKnowledgeSlider.value = knowledgeSlider.value;
+    }
+
+    public void RessourceGainLossFeedback(float value, RessourceManager_LAC.RessourceType ressourceType)
+    {
+        TextMeshProUGUI text = null;
+        Animation anim = null;
+
+        if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+        {            
+            text = knowledgeGainLossAnim.GetComponentInChildren<TextMeshProUGUI>();
+            anim = knowledgeGainLossAnim.GetComponentInChildren<Animation>();
+
+            text.text = Mathf.Ceil(value).ToString();
+        }
+        else if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+        {
+            text = matterGainLossAnim.GetComponentInChildren<TextMeshProUGUI>();
+            anim = matterGainLossAnim.GetComponentInChildren<Animation>();
+            
+            text.text = Mathf.Ceil(value).ToString();
+        }
+
+        if (value > 0)
+        {
+            text.color = Color.white;
+            text.text = "+" + text.text;
+        }
+        else
+        {
+            text.color = Color.red;
+        }
+
+        anim.Stop();
+        anim.Play();
+    }
+
     #region Noise
     public void ActualizeNoiseSlider()
     {

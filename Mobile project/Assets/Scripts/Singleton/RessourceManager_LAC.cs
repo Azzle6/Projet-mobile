@@ -95,17 +95,17 @@ public class RessourceManager_LAC : MonoBehaviour
         {
             knowledge = Mathf.Clamp(knowledge + value, 0,  maxKnowledge);
             knowledgeRatio = knowledge / maxKnowledge;
+            //Debug.Log("Stock K " + knowledgeRatio + " : " + knowledge + "/" + maxKnowledge);
         }
-            
-        
             
         if (rType == RessourceType.MATTER)
         {
             matter = Mathf.Clamp(matter + value, 0, maxMatter);
             matterRatio = matter / maxMatter;
+            //Debug.Log("Stock M " + matterRatio + " : " + matter + "/" + maxMatter);
         }
-            
 
+        UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
         // update stock for all extractor
         /*for (int i = 0; i < activeExtractor.Count; i++)
         {
@@ -134,6 +134,13 @@ public class RessourceManager_LAC : MonoBehaviour
         {
             StockRessource(extractor.stock, extractor.ressourceType);
             activeExtractor.Add(extractor);
+
+            // update max Stock
+            if (extractor.ressourceType == RessourceType.MATTER)
+                maxMatter += extractor.stats[extractor.level].maxStock;
+
+            if (extractor.ressourceType == RessourceType.KNOWLEDGE)
+                maxKnowledge += extractor.stats[extractor.level].maxStock;
         }
     }
 
