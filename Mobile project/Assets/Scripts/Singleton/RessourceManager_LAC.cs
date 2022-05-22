@@ -95,12 +95,14 @@ public class RessourceManager_LAC : MonoBehaviour
         {
             knowledge = Mathf.Clamp(knowledge + value, 0,  maxKnowledge);
             knowledgeRatio = knowledge / maxKnowledge;
+            //Debug.Log("Stock K " + knowledgeRatio + " : " + knowledge + "/" + maxKnowledge);
         }
             
         if (rType == RessourceType.MATTER)
         {
             matter = Mathf.Clamp(matter + value, 0, maxMatter);
             matterRatio = matter / maxMatter;
+            //Debug.Log("Stock M " + matterRatio + " : " + matter + "/" + maxMatter);
         }
 
         UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
