@@ -389,13 +389,13 @@ public class BuildingSystem : MonoBehaviour
     }
     
     
-    public void RegisterPreplacedObstacles(GameObject[] buildingsList)
+    public void RegisterPreplacedObstacles(GameObject buildingsList)
     {
         Debug.Log("Register preplaced buildings");
-        foreach (var obj in buildingsList)
+        foreach (Transform obj in buildingsList.transform)
         {
-            Building buildScript = obj.GetComponent<Building>();
-            currentBuilding = obj;
+            Building buildScript = obj.gameObject.GetComponent<Building>();
+            currentBuilding = obj.gameObject;
             Vector3Int[] area = GetAreaEmplacements(
                 gridLayout.WorldToCell(obj.transform.position),
                 buildScript.BuildingScriptable.buildingArea);
