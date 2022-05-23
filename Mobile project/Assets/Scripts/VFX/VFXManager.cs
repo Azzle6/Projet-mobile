@@ -29,6 +29,7 @@ public class VFXManager : MonoBehaviour
 
     IEnumerator BeginPlayVFX(string vfxName, Transform parent)
     {
+        Debug.Log("Play " + vfxName);
         VFXProperties vfx = VFXScriptableList.FindVFX(vfxName);
         GameObject vfxObject = Instantiate(vfx.vfx, parent);
 
