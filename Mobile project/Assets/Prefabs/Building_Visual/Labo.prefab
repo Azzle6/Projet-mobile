@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 3651774682582830502}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &899627741553124279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9075694531626208766}
+  m_Layer: 6
+  m_Name: CristalSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9075694531626208766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899627741553124279}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.608, y: 1.653, z: -0.589}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 3651774682582830502}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3651774682582830496
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3651774682582830502}
-  - component: {fileID: 3651774682582830503}
+  - component: {fileID: 127246822788000879}
   m_Layer: 6
   m_Name: Labo
   m_TagString: Untagged
@@ -60,10 +90,11 @@ Transform:
   m_Children:
   - {fileID: 6131194826923630287}
   - {fileID: 2011458170276598052}
+  - {fileID: 9075694531626208766}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3651774682582830503
+--- !u!114 &127246822788000879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,24 +103,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 3651774682582830496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c30729bf714eee64a842c3fd08ee2f4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e15f2f704c263048974be5ba1938c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingScriptable: {fileID: 11400000, guid: d3d69f956ec37c14e93487ddf4ddd919, type: 2}
+  BuildingScriptable: {fileID: 11400000, guid: 9b374e68b12238346b8ebfac3b9a57b7, type: 2}
   Visual: {fileID: 0}
   level: 0
   PlacementSound: 0
   Activated: 0
   curRotation: 0
   statsSO:
-  - {fileID: 11400000, guid: 9a3622205b95836478645efaad8fa0bd, type: 2}
-  - {fileID: 11400000, guid: ee371c2252e928b419c787c51bb84ada, type: 2}
-  - {fileID: 11400000, guid: 31c5250c6eec24445ae5a5c4fd9981c9, type: 2}
-  stats:
-  - {fileID: 11400000, guid: 9a3622205b95836478645efaad8fa0bd, type: 2}
-  - {fileID: 11400000, guid: ee371c2252e928b419c787c51bb84ada, type: 2}
-  - {fileID: 11400000, guid: 31c5250c6eec24445ae5a5c4fd9981c9, type: 2}
-  currentPeople: 0
+  - {fileID: 11400000, guid: e4b891e1edb5cb948a3503c847e532a6, type: 2}
+  - {fileID: 11400000, guid: 5511300f50155134580da6c20c2240db, type: 2}
+  - {fileID: 11400000, guid: fd67b91c27be6d94a9b8d24cdd981222, type: 2}
+  laboStats:
+  - {fileID: 11400000, guid: e4b891e1edb5cb948a3503c847e532a6, type: 2}
+  - {fileID: 11400000, guid: 5511300f50155134580da6c20c2240db, type: 2}
+  - {fileID: 11400000, guid: fd67b91c27be6d94a9b8d24cdd981222, type: 2}
+  cristalLv: 0
+  cristalStats:
+  - {fileID: 11400000, guid: 2a74f4f840e77344696f6db7d4fd0152, type: 2}
+  - {fileID: 11400000, guid: 0ed8278b14ae34744986233ac5874e5f, type: 2}
+  - {fileID: 11400000, guid: 198e167a049d34d4ca3c281d1dbb7923, type: 2}
+  cristalSocket: {fileID: 9075694531626208766}
+  cristalVisual: {fileID: 0}
 --- !u!1001 &7169314689776242413
 PrefabInstance:
   m_ObjectHideFlags: 0

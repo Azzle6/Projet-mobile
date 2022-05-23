@@ -8,7 +8,7 @@ public class BuildingsManager : MonoBehaviour
 {
     public static BuildingsManager instance;
     public BuildingSO[] allBuildings;
-    public GameObject[] preplacedBuildings;
+    public GameObject preplacedBuildings;
     public GameObject buttonsParent;
     
 
