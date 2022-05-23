@@ -20,6 +20,7 @@ public class BuildingSystem : MonoBehaviour
     public LayerMask GroundMask;
     public List<Vector3Int> tilesInf = new List<Vector3Int>(); // pour le débug
     public Transform SpawnBuildingPos;
+    private bool displaceBuildingPhase;
     
 
 
@@ -139,9 +140,12 @@ public class BuildingSystem : MonoBehaviour
         {
             PlaceBuilding();
             Destroy(placementVFX);
-            Building build = currentBuilding.GetComponent<Building>();
-            RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
-                build.BuildingScriptable.price.ressource);
+            if (!displaceBuildingPhase)
+            {
+                Building build = currentBuilding.GetComponent<Building>();
+                RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
+                    build.BuildingScriptable.price.ressource);
+            }
             currentBuilding = null;
         }
         else
@@ -150,7 +154,8 @@ public class BuildingSystem : MonoBehaviour
             ChangeColor(currentAreaPositions, Color.white);
             currentBuilding = null;
         }
-        
+
+        displaceBuildingPhase = false;
         isMovingBuilding = false;
         UIManager_LAC.instance.SwitchState(StateManager.State.Free);
         
@@ -335,9 +340,9 @@ public class BuildingSystem : MonoBehaviour
             (int)IslandManager.instance.transform.localPosition.z);
     }*/
 
-    public void Movebuilding() 
+    public void Movebuilding()
     {
-        
+        displaceBuildingPhase = true;
         GameObject go = UIManager_LAC.instance.CurrentSelectedBuilding;
         currentBuilding = go.transform.parent.gameObject;
         Vector3Int[] area = GetAreaEmplacements(gridLayout.LocalToCell(go.transform.parent.position),

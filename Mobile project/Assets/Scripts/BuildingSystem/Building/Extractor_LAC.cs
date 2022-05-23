@@ -66,19 +66,7 @@ public class Extractor_LAC : Building
     {
         base.Remove();
 
-        // update max Stock
-        if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
-        {
-            RessourceManager_LAC.instance.matter -= stock;
-            RessourceManager_LAC.instance.maxMatter -= stats[level].maxStock;
-        }
-            
-
-        if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
-        {
-            RessourceManager_LAC.instance.knowledge -= stock;
-            RessourceManager_LAC.instance.maxKnowledge += stats[level].maxStock;
-        }
+        RessourceManager_LAC.instance.StockRessource(-stock, ressourceType);
             
     }
 
@@ -115,12 +103,7 @@ public class Extractor_LAC : Building
             stock -= damage;
         else
         {
-            if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
-                RessourceManager_LAC.instance.matter -= attackStock;
-
-            if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
-                RessourceManager_LAC.instance.knowledge -= attackStock;
-
+            RessourceManager_LAC.instance.StockRessource(-attackStock, ressourceType);
             stock = attackStock = 0;
             TakeDown();
         }

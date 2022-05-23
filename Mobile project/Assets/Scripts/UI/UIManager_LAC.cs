@@ -179,6 +179,7 @@ public class UIManager_LAC : MonoBehaviour
     {
         if(increaseOrDecrease) RessourceManager_LAC.instance.AddPopBuild();
         else RessourceManager_LAC.instance.RemovePopBuild();
+        UpdateUI();
     }
 
     public void UpgradeBuilding()
@@ -400,6 +401,7 @@ public class UIManager_LAC : MonoBehaviour
         else
         {
             text.color = Color.red;
+            Debug.Log("Négatif");
         }
 
         anim.Stop();
