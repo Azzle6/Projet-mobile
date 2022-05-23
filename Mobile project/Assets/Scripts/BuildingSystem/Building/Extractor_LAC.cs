@@ -15,7 +15,7 @@ public class Extractor_LAC : Building
     [Header("Attack")]
     public bool fonctionnal;
     public float stock = 0;
-    [HideInInspector] public float maxStock, attackStock;
+    public float attackStock;
     bool triggerWave;
     public ParticleSystem smokeFX;
     
@@ -23,6 +23,7 @@ public class Extractor_LAC : Building
     {
         RessourceManager_LAC.instance.AddExtractor(this);
         stats = Array.ConvertAll(statsSO, input => input as ExtractorSO_LAC);
+        smokeFX.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -33,7 +34,7 @@ public class Extractor_LAC : Building
                 Repair();
 
             productCoolDown -= Time.deltaTime;
-            stock = attackStock =  maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
+            stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
             
 
@@ -43,8 +44,42 @@ public class Extractor_LAC : Building
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
             RessourceManager_LAC.instance.StockNoise(stats[level].noise);
+            //stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
   
+    }
+
+    public override void Upgrade()
+    {
+        int currentStock = stats[level].maxStock;
+        base.Upgrade();
+
+        // update max Stock
+        if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+            RessourceManager_LAC.instance.maxMatter += stats[level].maxStock - currentStock;
+
+        if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+            RessourceManager_LAC.instance.maxKnowledge += stats[level].maxStock - currentStock;
+    }
+
+    public override void Remove()
+    {
+        base.Remove();
+
+        // update max Stock
+        if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
+        {
+            RessourceManager_LAC.instance.matter -= stock;
+            RessourceManager_LAC.instance.maxMatter -= stats[level].maxStock;
+        }
+            
+
+        if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+        {
+            RessourceManager_LAC.instance.knowledge -= stock;
+            RessourceManager_LAC.instance.maxKnowledge += stats[level].maxStock;
+        }
+            
     }
 
     #region Manage product
@@ -69,6 +104,8 @@ public class Extractor_LAC : Building
     {
        return  stats[level].production.quantity * (1 + (people-1) * stats[level].peopleGain);   
     }
+
+    
     #endregion
 
     #region Attack

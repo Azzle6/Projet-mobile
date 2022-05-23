@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee35223a110730c4990fe69ec98a2128, type: 3}
   m_Name: TurretStats
   m_EditorClassIdentifier: 
+  UpgradePrice:
+    quantity: 0
+    ressource: 0
   visual: {fileID: 0}
   maxPeople: 2
   peopleGainDamage: 0
   peopleGainAttackSpeed: 0.3
-  range: 3
-  damage: 20
-  attackSpeed: 0.05
-  bulletDuration: 0.25
+  range: 4
+  damage: 25
+  attackSpeed: 0.2
+  bulletDuration: 0.4
