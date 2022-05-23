@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Cristal_2
+  m_Name: Props_Atlas
   m_Shader: {fileID: -6465566751694194690, guid: 381f1ad7b427f6e4fb51a475ca7bdf35, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,7 +33,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1d7522cba1e040fe928538eac4f10045:
-        m_Texture: {fileID: 2800000, guid: d989f2c5171e9074f82f9313f7b6d05f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4720df930032e32479338d0b3d54ae41, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -103,6 +103,7 @@ Material:
     - Vector1_afa5acbc0c84422388ba99952d03d4a3: 0.737
     - Vector1_bd7d622d85dd4aecb4dc73bb13b8d342: -0.133
     - Vector1_c05aa1c4ebd84427bc6553925340cd03: 1000.4
+    - Vector1_eed824de9dab4655b69fa4efcb67acc2: 0.2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -132,6 +133,7 @@ Material:
     m_Colors:
     - Color_1e84cf8dea09429387e17970cf3c44c1: {r: 0.32003593, g: 0, b: 1, a: 0}
     - Color_4dd7cab82d064e7fb953bba7aa03b9ad: {r: 0, g: 0, b: 0, a: 0}
+    - Color_6dd27422e1d841749290fe8d77444234: {r: 0, g: 0, b: 0, a: 0}
     - Color_b56f42c729d049e3bcada8a875e43e25: {r: 0.23503146, g: 0.2258366, b: 0.3301887, a: 0}
     - Color_c3a77a2e2732406baee87bbf01698c0f: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
