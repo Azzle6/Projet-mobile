@@ -290,9 +290,9 @@ public class UIManager_LAC : MonoBehaviour
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            Texts[0].text = "Stock : " + extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
+            Texts[0].text = "Stock : " + (int)extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
             Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
-            Texts[2].text =   extractor.people + "/" + extractor.stats[extractor.level].maxPeople; // people
+            Texts[2].text =  ( extractor.people) + "/" + extractor.stats[extractor.level].maxPeople; // people
             Texts[3].text = "Bruit : " + extractor.stats[extractor.level].noise; // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }

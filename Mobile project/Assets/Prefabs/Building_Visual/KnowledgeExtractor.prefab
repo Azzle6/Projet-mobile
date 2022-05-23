@@ -94,9 +94,8 @@ MonoBehaviour:
   productCoolDown: 0
   fonctionnal: 0
   stock: 0
-  maxStock: 0
   attackStock: 0
-  smokeFX: {fileID: 0}
+  smokeFX: {fileID: 7862318042966177521}
 --- !u!1001 &3798940509944353410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,9 +107,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 60829019504923418, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 60829020387604053, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 60829020387604055, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 60829020473806986, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 60829020473807031, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
       propertyPath: m_Layer
@@ -143,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 1866116454726113096, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866116454726113096, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2015473116684751435, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
       propertyPath: m_Layer
@@ -322,6 +337,11 @@ GameObject:
 --- !u!4 &650323467918925645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4449246351250378191, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
+  m_PrefabInstance: {fileID: 3798940509944353410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7862318042966177521 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6459319508253779059, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
   m_PrefabInstance: {fileID: 3798940509944353410}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &6670648789622458792
