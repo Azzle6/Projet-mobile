@@ -21,6 +21,12 @@ public class TechProperties : MonoBehaviour
     [Header("Colors")]
     [SerializeField] private Color lockedColor, unlockedColor, discoveringColor, discoveredColor;
 
+    [Header("Feedback")]
+    [SerializeField] private Color notEnoughRessourceFeedbackColor;
+    [SerializeField] private float colorChangingTime;
+    [SerializeField] private AnimationClip shakingAnim;
+    private Color defaultPriceColor;
+
     private void Start()
     {
         foreach (var but in previousButtons)
@@ -28,6 +34,7 @@ public class TechProperties : MonoBehaviour
             but.nextButtons.Add(this);
         }
         UpdateVisuals();
+        defaultPriceColor = transform.GetChild(2).GetComponent<TMP_Text>().color;
     }
 
     private void OnEnable()
@@ -41,6 +48,15 @@ public class TechProperties : MonoBehaviour
         {
             RessourceManager_LAC.instance.SpendRessource(techPrice, RessourceManager_LAC.RessourceType.KNOWLEDGE);
             TechnoManager.instance.StartDiscoveringTech(this);
+        }
+
+        if(techPrice > RessourceManager_LAC.instance.knowledge && curState == TechState.Unlocked)
+        {
+            TMP_Text priceTxt = transform.GetChild(2).GetComponent<TMP_Text>();
+            priceTxt.color = notEnoughRessourceFeedbackColor;
+            if(shakingAnim!=null)
+                priceTxt.gameObject.GetComponent<Animator>().Play(shakingAnim.name);
+            Invoke("ResetPriceTextColor", colorChangingTime);
         }
     }
     
@@ -115,7 +131,11 @@ public class TechProperties : MonoBehaviour
         UpdateVisuals();
     }
 
-    
+    void ResetPriceTextColor()
+    {
+        TMP_Text priceTxt = transform.GetChild(2).GetComponent<TMP_Text>();
+        priceTxt.color = defaultPriceColor;
+    }
 }
 
 public enum TechnoType

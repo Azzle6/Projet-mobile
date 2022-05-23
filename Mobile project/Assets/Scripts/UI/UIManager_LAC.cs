@@ -39,6 +39,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private TMP_Text UpgradePrice;
     [SerializeField] private Image UpgradeIcon;
     [SerializeField] private GameObject BuildingInfosUpgradeCristal;
+    [SerializeField] private TMP_Text UpgradeCristalPrice;
+    [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
     [SerializeField] private GameObject BuildingInfosPop;
@@ -179,6 +181,7 @@ public class UIManager_LAC : MonoBehaviour
     {
         if(increaseOrDecrease) RessourceManager_LAC.instance.AddPopBuild();
         else RessourceManager_LAC.instance.RemovePopBuild();
+        UpdateUI();
     }
 
     public void UpgradeBuilding()
@@ -187,7 +190,7 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
-        CurrentSelectedBuilding.GetComponent<Labo_LAC>()?.UpgradeCristal();
+        CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
     }
 
     public void RemoveBuilding()
@@ -242,7 +245,7 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfosRemoveButton.SetActive(true);
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
-
+        BuildingInfosUpgradeCristal.SetActive(false);
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
@@ -290,9 +293,9 @@ public class UIManager_LAC : MonoBehaviour
         Extractor_LAC extractor = CurrentSelectedBuilding.GetComponentInParent<Extractor_LAC>();
         if (extractor)
         {
-            Texts[0].text = "Stock : " + extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
+            Texts[0].text = "Stock : " + (int)extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
             Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
-            Texts[2].text =   extractor.people + "/" + extractor.stats[extractor.level].maxPeople; // people
+            Texts[2].text =  ( extractor.people) + "/" + extractor.stats[extractor.level].maxPeople; // people
             Texts[3].text = "Bruit : " + extractor.stats[extractor.level].noise; // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }
@@ -329,7 +332,14 @@ public class UIManager_LAC : MonoBehaviour
                     Labo_LAC labo = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
                     if (labo)
                     {
+                        Texts[1].text = "Research Boost x" + labo.laboStats[labo.level].researchBoost; 
+                        Texts[0].text = "Matter Stock +" + labo.laboStats[labo.level].maxStockMatter; 
+                        Texts[3].text = "Knowledge Stock +" + labo.laboStats[labo.level].maxStockKnowledge; 
                         Texts[4].text = labo.BuildingScriptable.name;
+
+                        UpgradeCristalPrice.text = ""+(int)labo.cristalStats[labo.cristalLv].UpgradePrice.quantity;
+                        UpgradeIcon.sprite = ressourceM.GetResourceLogo(labo.cristalStats[labo.cristalLv].UpgradePrice.ressource);
+
                         BuildingInfosRemoveButton.SetActive(false);
                         BuildingInfosPop.SetActive(false);
                         BuildingInfosMoveButton.SetActive(false);
@@ -400,6 +410,7 @@ public class UIManager_LAC : MonoBehaviour
         else
         {
             text.color = Color.red;
+            Debug.Log("Négatif");
         }
 
         anim.Stop();
