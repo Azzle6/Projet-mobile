@@ -138,6 +138,7 @@ public class BuildingSystem : MonoBehaviour
         StopCoroutine(DisplaceCoroutine);
         if (result && canPlaceBuilding)
         {
+            VFXManager.instance.PlayVFX("BuildPlace", currentBuilding.transform.GetChild(0).transform);
             PlaceBuilding();
             Destroy(placementVFX);
             if (!displaceBuildingPhase)
@@ -154,7 +155,7 @@ public class BuildingSystem : MonoBehaviour
             ChangeColor(currentAreaPositions, Color.white);
             currentBuilding = null;
         }
-
+    
         displaceBuildingPhase = false;
         isMovingBuilding = false;
         UIManager_LAC.instance.SwitchState(StateManager.State.Free);
