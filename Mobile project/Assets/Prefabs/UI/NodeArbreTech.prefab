@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 3815557396092161646}
   - component: {fileID: 7058184925835964798}
   - component: {fileID: 4527601156141390007}
+  - component: {fileID: 6225247153295845345}
   m_Layer: 5
   m_Name: Prix
   m_TagString: Untagged
@@ -169,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.000024796, y: -19.957}
+  m_AnchoredPosition: {x: 6.8, y: -19.956}
   m_SizeDelta: {x: 105.86, y: 39.913}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7058184925835964798
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.35
+  m_fontSize: 46.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -263,12 +264,31 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -31.35783, w: -5.4044094}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &6225247153295845345
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637091822491355847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9dfda12a5e90b8b42a01ef3dde28907d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2563035697942123469
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +708,9 @@ MonoBehaviour:
   unlockedColor: {r: 0.6839622, g: 0.9097037, b: 1, a: 1}
   discoveringColor: {r: 0.6392157, g: 0.54509807, b: 0.76470596, a: 1}
   discoveredColor: {r: 0.15686275, g: 0.56078434, b: 1, a: 1}
+  notEnoughRessourceFeedbackColor: {r: 1, g: 0, b: 0, a: 1}
+  colorChangingTime: 0.3
+  shakingAnim: {fileID: 7400000, guid: 9bdf496c777dbe143ad6cb1a1720f9f5, type: 2}
 --- !u!1 &4722717470639237940
 GameObject:
   m_ObjectHideFlags: 0
