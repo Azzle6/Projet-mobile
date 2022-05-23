@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97e645ba7946e14aab04988cb560ecb, type: 3}
-  m_Name: CristalStats
+  m_Script: {fileID: 11500000, guid: ca3839a86b22c1544b01f07e7310033e, type: 3}
+  m_Name: LaboStats 1
   m_EditorClassIdentifier: 
   UpgradePrice:
     quantity: 0
-    ressource: 1
-  visual: {fileID: 0}
+    ressource: 0
+  researchBoost: 1
+  maxStockMatter: 0
+  maxStockKnowledge: 0

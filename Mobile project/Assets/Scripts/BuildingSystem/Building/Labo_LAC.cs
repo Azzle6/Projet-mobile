@@ -5,11 +5,14 @@ using UnityEngine;
 public class Labo_LAC : Building
 {
     public LaboSO_LAC[] laboStats;
+
+    [Header("Cristal")]
+    public int cristalLv = 0;
     public CristalSO_LAC[] cristalStats;
     public Transform cristalSocket;
     GameObject cristalVisual;
 
-    public int cristalLv = 0;
+    
     int maxMatter, maxKnowledge;
     private void Start()
     {

@@ -80,7 +80,7 @@ public class RessourceManager_LAC : MonoBehaviour
             matterRatio = matter / maxMatter;
         }
         if(canSpend)
-            UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
+            UIManager_LAC.instance.RessourceGainLossFeedback(-value, rType);
         return canSpend;
     }
 
