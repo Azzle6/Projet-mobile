@@ -13643,6 +13643,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fin_Pilar_00
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c5c0897dad7f7847bae8073b427abf1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c5c0897dad7f7847bae8073b427abf1, type: 3}
 --- !u!1 &440114664 stripped
@@ -14543,6 +14547,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 563370518969896718, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 563370518990993658, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 563370520395805792, guid: f9012340781c24249849040891816264, type: 3}
       propertyPath: m_Name
       value: Tempete de sable et fog
@@ -14550,6 +14562,10 @@ PrefabInstance:
     - target: {fileID: 563370520395805792, guid: f9012340781c24249849040891816264, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 563370520395805792, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 563370520395805793, guid: f9012340781c24249849040891816264, type: 3}
       propertyPath: m_RootOrder
@@ -14606,6 +14622,18 @@ PrefabInstance:
     - target: {fileID: 563370520395805793, guid: f9012340781c24249849040891816264, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 563370520443765123, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715777542346777436, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8715777543252724559, guid: f9012340781c24249849040891816264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9012340781c24249849040891816264, type: 3}
