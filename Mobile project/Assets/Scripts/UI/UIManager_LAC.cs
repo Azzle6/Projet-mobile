@@ -401,6 +401,7 @@ public class UIManager_LAC : MonoBehaviour
         else
         {
             text.color = Color.red;
+            Debug.Log("Négatif");
         }
 
         anim.Stop();
