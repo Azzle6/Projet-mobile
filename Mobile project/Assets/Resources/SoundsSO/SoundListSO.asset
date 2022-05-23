@@ -68,8 +68,23 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8c8038125ec9b5444a416376f303b60d, type: 3}
     clipVolume: 1
   randomSounds:
-  - categoryName: 
+  - categoryName: AMBIENT_Crystals
     sounds:
-    - clipName: 
-      clip: {fileID: 0}
+    - clipName: AMBIENT_Crystals_01
+      clip: {fileID: 8300000, guid: 253f96edb7d0326439a3579520442d9b, type: 3}
+      clipVolume: 1
+    - clipName: AMBIENT_Crystals_02
+      clip: {fileID: 8300000, guid: a3b93a36d380c1f42a7877d9b122b93f, type: 3}
+      clipVolume: 1
+    - clipName: AMBIENT_Crystals_03
+      clip: {fileID: 8300000, guid: 871e4ccf5ce14fc4699913798e488cee, type: 3}
+      clipVolume: 1
+    - clipName: AMBIENT_Crystals_04
+      clip: {fileID: 8300000, guid: 6c8ec8b685b7fd641a07762ff55d85fc, type: 3}
+      clipVolume: 1
+    - clipName: AMBIENT_Crystals_05
+      clip: {fileID: 8300000, guid: a3ec4808fca46bc40a35429a907948e0, type: 3}
+      clipVolume: 1
+    - clipName: AMBIENT_Crystals_06
+      clip: {fileID: 8300000, guid: 8d38f801d5d9c0042b0ea157cbfa329c, type: 3}
       clipVolume: 1

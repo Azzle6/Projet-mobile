@@ -13,12 +13,19 @@ public class RessourceManager_LAC : MonoBehaviour
 
     [Header("Ressource")]
     public int population;
+    float productTimer = 0;
     public enum RessourceType { MATTER, KNOWLEDGE }
     public ResourcesIcons[] resourcesIcon;
     public List<Extractor_LAC> activeExtractor;// { get; private set; }
-    public float matter, maxMatter;// { get; private set; }
+    public float matter;// { get; private set; }
+    float matterToAdd;// 
+    public float maxMatter; 
+        
     [HideInInspector]public float matterRatio;
-    public float knowledge, maxKnowledge;// { get; private set; }
+
+    public float knowledge;// { get; private set; }
+    float knowledgeToAdd;
+    public float maxKnowledge; // { get; private set; }
     [HideInInspector] public float knowledgeRatio;
     public float noise;
 
@@ -35,6 +42,16 @@ public class RessourceManager_LAC : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Update()
+    {
+        productTimer += Time.deltaTime;
+        if(productTimer > 1)
+        {
+            productTimer = 0;
+            ProductRessource();
+        }
     }
     public void StockNoise(float noise)
     {
@@ -62,6 +79,8 @@ public class RessourceManager_LAC : MonoBehaviour
                 canSpend = false;
             matterRatio = matter / maxMatter;
         }
+        if(canSpend)
+            UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
         return canSpend;
     }
 
@@ -88,30 +107,40 @@ public class RessourceManager_LAC : MonoBehaviour
             return false;
         
     }
+    public void ProductRessource()
+    {
+        // Matter ressource
+        matter = Mathf.Clamp(matter + matterToAdd, 0, maxMatter);
+        if(matterToAdd != 0)
+            UIManager_LAC.instance.RessourceGainLossFeedback(matterToAdd, RessourceType.MATTER);
+        matterToAdd = 0;
+
+        // Knowledge ressource
+        knowledge = Mathf.Clamp(knowledge + knowledgeToAdd, 0, maxKnowledge);
+        if (knowledgeToAdd != 0)
+            UIManager_LAC.instance.RessourceGainLossFeedback(knowledgeToAdd, RessourceType.KNOWLEDGE);
+        knowledgeToAdd = 0;
+
+        // update ratio
+        knowledgeRatio = knowledge / maxKnowledge;
+        matterRatio = matter / maxMatter;
+    }
     public void StockRessource(float value, RessourceType rType)
     {
         // ressource value
         if (rType == RessourceType.KNOWLEDGE)
         {
-            knowledge = Mathf.Clamp(knowledge + value, 0,  maxKnowledge);
-            knowledgeRatio = knowledge / maxKnowledge;
-            //Debug.Log("Stock K " + knowledgeRatio + " : " + knowledge + "/" + maxKnowledge);
+            knowledgeToAdd += value;
         }
             
         if (rType == RessourceType.MATTER)
         {
-            matter = Mathf.Clamp(matter + value, 0, maxMatter);
-            matterRatio = matter / maxMatter;
-            //Debug.Log("Stock M " + matterRatio + " : " + matter + "/" + maxMatter);
+            matterToAdd += value;
+
         }
 
-        UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
-        // update stock for all extractor
-        /*for (int i = 0; i < activeExtractor.Count; i++)
-        {
-            if (activeExtractor[i].ressourceType == rType)
-                activeExtractor[i].stock = (ressourceValue / maxValue)*activeExtractor[i];
-        }*/
+        //UIManager_LAC.instance.RessourceGainLossFeedback(value, rType);
+
     }
    
     // Extractor
