@@ -113,6 +113,7 @@ public class Extractor_LAC : Building
     public void TakeDown()
     {
         AudioManager.instance.PlaySound("BUILD_Destroyed");
+        VFXManager.instance.PlayVFX("BuildingDestruction", transform.GetChild(0).transform);
         currentSmokeDestructVFX = VFXManager.instance.PlayPermanentVFX("SmokeDestruction", transform.GetChild(0).transform);
         WaveManager.instance.BuildingCountDown();
         fonctionnal = false;
