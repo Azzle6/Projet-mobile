@@ -49,6 +49,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject wavePreview;
     [SerializeField] private Image[] waveZone = new Image[0];
     [SerializeField] private Animator wavePAnimator;
+    bool showTrig;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
@@ -71,7 +72,8 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        DisplayWavePreview();//UpdateWavePreview();
+        DisplayWavePreview();
+        //UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
@@ -146,7 +148,7 @@ public class UIManager_LAC : MonoBehaviour
     private void UpdateWavePreview()
     {
         Vector3 worldCamdir = camT.forward;
-        Vector2 uiCamDir = new Vector2(worldCamdir.x, worldCamdir.z);
+        Vector2 uiCamDir = new Vector2(-worldCamdir.x, worldCamdir.z);
 
         wavePreview.transform.up = uiCamDir;
 
@@ -426,24 +428,19 @@ public class UIManager_LAC : MonoBehaviour
         }
     }
 
-    public void DisplayWavePreview(float noiseT = 0.7f, bool display = true)
+    public void DisplayWavePreview(float noiseT = 0.7f)
     {
-        float noiseR = RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
-        if (noiseR > noiseT && display)
+        float noiseR = noiseSlider.value / noiseSlider.maxValue;
+        if (noiseR > noiseT && !showTrig)
         {
-            UpdateWavePreview();
-            //
-            if(wavePAnimator)
-                wavePAnimator.SetBool("Show", true);
-            else
-                wavePreview.SetActive(true);
+            showTrig = true;
+            wavePAnimator.SetTrigger("Show");
+               
         }
-        else
+        if(noiseR < noiseT && showTrig)
         {
-            if (wavePAnimator)
-                wavePAnimator.SetBool("Show", false);
-            else
-                wavePreview.SetActive(false);
+            showTrig = false;
+            wavePAnimator.SetTrigger("Show");
         }
 
     }

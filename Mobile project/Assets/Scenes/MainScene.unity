@@ -13654,6 +13654,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6672369746186529518, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
   m_PrefabInstance: {fileID: 872703266}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &440114665 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5734740986457437838, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+  m_PrefabInstance: {fileID: 872703266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &456905286
 GameObject:
   m_ObjectHideFlags: 0
@@ -15194,6 +15199,10 @@ PrefabInstance:
       propertyPath: wavePreview
       value: 
       objectReference: {fileID: 440114664}
+    - target: {fileID: 4598383629523132179, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: wavePAnimator
+      value: 
+      objectReference: {fileID: 440114665}
     - target: {fileID: 4598383629523132179, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: Texts.Array.size
       value: 5
