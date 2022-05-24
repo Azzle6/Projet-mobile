@@ -24,6 +24,7 @@ public class EnemyBoid : Boid
     private void Start()
     {
         AudioManager.instance.PlaySound("MOBS_MobA_Appear");
+        VFXManager.instance.PlayVFX("SpawnEnemies", transform);
     }
 
     public void Initialize(EnemyGroup enemyGroup)
@@ -40,11 +41,13 @@ public class EnemyBoid : Boid
         if (target)
         {
             target.TakeDamage(enemyStats.damage);
+
+            AudioManager.instance.PlaySound("MOBS_MobA_Attack");
+            AudioManager.instance.PlaySound("THREAT_BuildHit");
+
+            VFXManager.instance.PlayVFX("LostResources", target.transform.GetChild(0));
         }
            //target.gameObject.SetActive(false);
-
-        AudioManager.instance.PlaySound("MOBS_MobA_Attack");
-        AudioManager.instance.PlaySound("THREAT_BuildHit");
     }
 
     public void TakeDamage(int damage)
