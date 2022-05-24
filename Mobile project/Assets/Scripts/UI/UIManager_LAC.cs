@@ -36,11 +36,11 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject BuildingInfos;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private TMP_Text UpgradeCristalPrice;
+    [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private TMP_Text UpgradePrice;
     [SerializeField] private Image UpgradeIcon;
     [SerializeField] private GameObject BuildingInfosUpgradeCristal;
-    [SerializeField] private TMP_Text UpgradeCristalPrice;
-    [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
     [SerializeField] private GameObject BuildingInfosPop;
@@ -189,6 +189,7 @@ public class UIManager_LAC : MonoBehaviour
     public void UpgradeBuilding()
     {
         CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
+        UpdateUI();
     }
     public void UpgradeCristal()
     {
@@ -245,9 +246,10 @@ public class UIManager_LAC : MonoBehaviour
         }
         BuildingInfosPop.SetActive(true);
         BuildingInfosRemoveButton.SetActive(true);
+        BuildingInfosUpgradeCristal.SetActive(false);
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
-        BuildingInfosUpgradeCristal.SetActive(false);
+
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
@@ -338,10 +340,10 @@ public class UIManager_LAC : MonoBehaviour
                         Texts[0].text = "Matter Stock +" + labo.laboStats[labo.level].maxStockMatter; 
                         Texts[3].text = "Knowledge Stock +" + labo.laboStats[labo.level].maxStockKnowledge; 
                         Texts[4].text = labo.BuildingScriptable.name;
-
+                        
                         UpgradeCristalPrice.text = ""+(int)labo.cristalStats[labo.cristalLv].UpgradePrice.quantity;
                         UpgradeIcon.sprite = ressourceM.GetResourceLogo(labo.cristalStats[labo.cristalLv].UpgradePrice.ressource);
-
+                        
                         BuildingInfosRemoveButton.SetActive(false);
                         BuildingInfosPop.SetActive(false);
                         BuildingInfosMoveButton.SetActive(false);
