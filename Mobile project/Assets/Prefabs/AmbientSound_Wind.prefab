@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3994829375825342613}
   - component: {fileID: 1049885301517529386}
+  - component: {fileID: 3146040823406982358}
   m_Layer: 0
   m_Name: AmbientSound_Wind
   m_TagString: Untagged
@@ -43,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: a6cb9b5a106644744990d29ef1e7d2fe, type: 2}
   m_audioClip: {fileID: 8300000, guid: 1695576f4f1a5e840b5743703c582885, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -127,3 +128,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3146040823406982358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447327549738095841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cfe1928f60fa1e449bcb49eeee4baf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDelay: 5
+  maxDelay: 20

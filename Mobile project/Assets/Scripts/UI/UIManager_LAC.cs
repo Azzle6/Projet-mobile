@@ -36,11 +36,11 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject BuildingInfos;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
+    [SerializeField] private TMP_Text UpgradeCristalPrice;
+    [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private TMP_Text UpgradePrice;
     [SerializeField] private Image UpgradeIcon;
     [SerializeField] private GameObject BuildingInfosUpgradeCristal;
-    [SerializeField] private TMP_Text UpgradeCristalPrice;
-    [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
     [SerializeField] private GameObject BuildingInfosPop;
@@ -51,6 +51,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject wavePreview;
     [SerializeField] private Image[] waveZone = new Image[0];
     [SerializeField] private Animator wavePAnimator;
+    bool showTrig;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
@@ -73,7 +74,8 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        DisplayWavePreview();//UpdateWavePreview();
+        DisplayWavePreview();
+        //UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
@@ -148,7 +150,7 @@ public class UIManager_LAC : MonoBehaviour
     private void UpdateWavePreview()
     {
         Vector3 worldCamdir = camT.forward;
-        Vector2 uiCamDir = new Vector2(worldCamdir.x, worldCamdir.z);
+        Vector2 uiCamDir = new Vector2(-worldCamdir.x, worldCamdir.z);
 
         wavePreview.transform.up = uiCamDir;
 
@@ -187,10 +189,12 @@ public class UIManager_LAC : MonoBehaviour
     public void UpgradeBuilding()
     {
         CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
+        UpdateUI();
     }
     public void UpgradeCristal()
     {
         CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        UpdateUI();
     }
 
     public void RemoveBuilding()
@@ -243,9 +247,10 @@ public class UIManager_LAC : MonoBehaviour
         }
         BuildingInfosPop.SetActive(true);
         BuildingInfosRemoveButton.SetActive(true);
+        BuildingInfosUpgradeCristal.SetActive(false);
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
-        BuildingInfosUpgradeCristal.SetActive(false);
+
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
@@ -258,6 +263,7 @@ public class UIManager_LAC : MonoBehaviour
         }
         else
         {
+            if(build.level >= build.BuildingScriptable.unlockedLevel) BuildingInfosUpgradeButton.SetActive(false);
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = false;
             colors.normalColor = Color.red;
         }
@@ -336,10 +342,10 @@ public class UIManager_LAC : MonoBehaviour
                         Texts[0].text = "Matter Stock +" + labo.laboStats[labo.level].maxStockMatter; 
                         Texts[3].text = "Knowledge Stock +" + labo.laboStats[labo.level].maxStockKnowledge; 
                         Texts[4].text = labo.BuildingScriptable.name;
-
+                        
                         UpgradeCristalPrice.text = ""+(int)labo.cristalStats[labo.cristalLv].UpgradePrice.quantity;
                         UpgradeIcon.sprite = ressourceM.GetResourceLogo(labo.cristalStats[labo.cristalLv].UpgradePrice.ressource);
-
+                        
                         BuildingInfosRemoveButton.SetActive(false);
                         BuildingInfosPop.SetActive(false);
                         BuildingInfosMoveButton.SetActive(false);
@@ -435,24 +441,19 @@ public class UIManager_LAC : MonoBehaviour
         }
     }
 
-    public void DisplayWavePreview(float noiseT = 0.7f, bool display = true)
+    public void DisplayWavePreview(float noiseT = 0.7f)
     {
-        float noiseR = RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
-        if (noiseR > noiseT && display)
+        float noiseR = noiseSlider.value / noiseSlider.maxValue;
+        if (noiseR > noiseT && !showTrig)
         {
-            UpdateWavePreview();
-            //
-            if(wavePAnimator)
-                wavePAnimator.SetBool("Show", true);
-            else
-                wavePreview.SetActive(true);
+            showTrig = true;
+            wavePAnimator.SetTrigger("Show");
+               
         }
-        else
+        if(noiseR < noiseT && showTrig)
         {
-            if (wavePAnimator)
-                wavePAnimator.SetBool("Show", false);
-            else
-                wavePreview.SetActive(false);
+            showTrig = false;
+            wavePAnimator.SetTrigger("Show");
         }
 
     }

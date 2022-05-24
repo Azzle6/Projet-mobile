@@ -27,7 +27,7 @@ public class WaveManager : MonoBehaviour
     public int currentWave = 0;
     public bool underAttack;
     public int totalEnnemies;
-
+    public int totalBuilding;
     [Header("Debug")] 
     [SerializeField] private bool debug = false;
     public float difficulty;
@@ -79,7 +79,7 @@ public class WaveManager : MonoBehaviour
 
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
             StartWave(DiffCalculator.EnemyNumber());
-
+            totalBuilding = RessourceManager_LAC.instance.activeExtractor.Count;
             underAttack = true;
         }
 
@@ -100,9 +100,6 @@ public class WaveManager : MonoBehaviour
                 underAttack = false;
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             }
-
-            if (RessourceManager_LAC.instance.matter + RessourceManager_LAC.instance.knowledge <= 0)
-                gameOver = true;
         }
         
         DebugDifficultyText();
@@ -194,6 +191,15 @@ public class WaveManager : MonoBehaviour
         }*/
     }
 
+    public void BuildingCountDown()
+    {
+        if (underAttack)
+        {
+            totalBuilding--;
+            if (totalBuilding <= 0)
+                gameOver = true;
+        }
+    }
     IEnumerator StartAttack()
     {
         yield return new WaitForSeconds(1);
