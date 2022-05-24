@@ -275,7 +275,7 @@ public class UIManager_LAC : MonoBehaviour
         if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
         {
             Labo_LAC lab = build as Labo_LAC;
-            BuildingInfosUpgradeCristal.SetActive(true);
+            BuildingInfosUpgradeCristal.SetActive(lab.CanUpgradeCristal());
             if (ressourceM.CanSpendResources(lab.cristalStats[lab.cristalLv].UpgradePrice.quantity, lab.cristalStats[lab.cristalLv].UpgradePrice.ressource))
             {
                 BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = true;
