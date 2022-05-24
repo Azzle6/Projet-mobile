@@ -163,6 +163,6 @@ public class Turret_LAC : Building
     private void OnDrawGizmos()
     {
         Gizmos.color = (enemyTarget) ?  Color.magenta : Color.green;
-        Gizmos.DrawWireSphere(transform.position,stats[level].range);
+        //Gizmos.DrawWireSphere(transform.position,stats[level].range);
     }
 }
