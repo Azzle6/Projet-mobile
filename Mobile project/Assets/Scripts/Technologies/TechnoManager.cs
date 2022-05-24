@@ -60,13 +60,15 @@ public class TechnoManager : MonoBehaviour
         }
 
         AudioManager.instance.PlaySound("TECH_ResearchEnd");
+        RessourceManager_LAC.instance.currentTech++;
+
         if (UIManager_LAC.instance.anim_techCompleted != null)
         {
             UIManager_LAC.instance.anim_techCompleted["UI_TechEnded2"].wrapMode = WrapMode.Once;
             UIManager_LAC.instance.anim_techCompleted.Play();
         }
 
-        Debug.Log(techno.timeSpentToDiscover);
+        //Debug.Log(techno.timeSpentToDiscover);
         techno.SwitchState(TechState.Discovered);
         techno.ApplyTech();
         

@@ -46,6 +46,7 @@ public class RessourceManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(currentTech + "Actual tech level");
         productTimer += Time.deltaTime;
         if(productTimer > 1)
         {
