@@ -111,6 +111,7 @@ MonoBehaviour:
   currentWave: 0
   underAttack: 0
   totalEnnemies: 0
+  totalBuilding: 0
   debug: 0
   difficulty: 0
   difficultyDebugText: {fileID: 0}
@@ -156,12 +157,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3d69f956ec37c14e93487ddf4ddd919, type: 2}
   - {fileID: 11400000, guid: cc0654539852a804781dad7d4b8bb3e8, type: 2}
   - {fileID: 11400000, guid: 22e25d3cbb2c96743baf6843b3f1da62, type: 2}
-  - {fileID: 11400000, guid: 8110f8183a6faa045a10a78f68592f73, type: 2}
-  - {fileID: 11400000, guid: 49083f6802557004eba7099559e33502, type: 2}
   - {fileID: 11400000, guid: 028d2e87e109bd241af7b3498f95c922, type: 2}
-  preplacedBuildings:
-  - {fileID: 0}
-  - {fileID: 0}
+  preplacedBuildings: {fileID: 0}
   buttonsParent: {fileID: 0}
 --- !u!114 &3262663041739135535
 MonoBehaviour:
@@ -188,7 +185,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089a8ec8ca7397f4c913d21231e1da3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VFXList:
-  - nameVFX: SpawnEnemy
-    vfx: {fileID: 4566940912123271193, guid: 7198af1272471ac488bba171dbb93197, type: 3}
-    duration: 0
+  VFXScriptableList: {fileID: 11400000, guid: 231044056da996c4a8965ae85ab8e884, type: 2}
