@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d76d1744bf6a4458a3958e170d6dbe, type: 3}
-  m_Name: KnowledgeExtractorStatsLv 2
+  m_Script: {fileID: 11500000, guid: ee35223a110730c4990fe69ec98a2128, type: 3}
+  m_Name: TurretStatsLv 2
   m_EditorClassIdentifier: 
   UpgradePrice:
-    quantity: 800
+    quantity: 1500
     ressource: 0
   visual: {fileID: 0}
-  maxPeople: 4
-  peopleGain: 0.2
-  production:
-    quantity: 7
-    ressource: 1
-  maxStock: 400
-  noise: 12
+  maxPeople: 3
+  peopleGainDamage: 0
+  peopleGainAttackSpeed: 0.3
+  range: 5
+  damage: 30
+  attackSpeed: 0.2
+  bulletDuration: 0.4
