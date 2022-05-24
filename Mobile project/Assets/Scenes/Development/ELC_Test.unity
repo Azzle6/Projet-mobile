@@ -13462,6 +13462,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2769024063415830905, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
+      propertyPath: VFXScriptableList
+      value: 
+      objectReference: {fileID: 11400000, guid: 231044056da996c4a8965ae85ab8e884, type: 2}
     - target: {fileID: 3262663041739135504, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -13476,12 +13480,8 @@ PrefabInstance:
       objectReference: {fileID: 274705516}
     - target: {fileID: 3262663041739135505, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: allBuildings.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 3262663041739135505, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
-      propertyPath: allBuildings.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: 028d2e87e109bd241af7b3498f95c922, type: 2}
     - target: {fileID: 3262663041739135505, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: allBuildings.Array.data[11]
       value: 

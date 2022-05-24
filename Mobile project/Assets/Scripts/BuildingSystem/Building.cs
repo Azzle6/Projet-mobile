@@ -40,7 +40,7 @@ public class Building : MonoBehaviour
         
         if (BuildingScriptable.unlockedLevel > level)
         {
-            level = Mathf.Clamp(level+1, 0, statsSO.Length);
+            level = Mathf.Clamp(level+1, 0, statsSO.Length -1);
             Debug.Log("Upgrade !");
 
             AudioManager.instance.PlaySound("BUILD_Upgrade");
