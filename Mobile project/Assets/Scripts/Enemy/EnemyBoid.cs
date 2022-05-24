@@ -17,8 +17,8 @@ public class EnemyBoid : Boid
     [HideInInspector] public int health;
     float attackDelay = 0;
 
-    [Header("Debug")]
-    public GameObject attackDebug;
+    //[Header("Debug")]
+    //public GameObject attackDebug;
     //public Material moveMat, attackMat;
 
     private void Start()
@@ -94,7 +94,7 @@ public class EnemyBoid : Boid
                     if (inRange && (Time.time - inRangeTime) > inRangeDuration)
                     {
                         //m_renderer.material = attackMat;
-                        attackDebug.SetActive(true);
+                        //attackDebug.SetActive(true);
                         enemyState = EnemyState.ATTACK;
                     }
                         
@@ -107,7 +107,7 @@ public class EnemyBoid : Boid
                     if (!inRange)
                     {
                         attackDelay = 0;
-                        attackDebug.SetActive(false);
+                        //attackDebug.SetActive(false);
                         //m_renderer.material = moveMat;
                         enemyState = EnemyState.MOVE;
                     }
