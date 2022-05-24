@@ -18,12 +18,13 @@ public class Extractor_LAC : Building
     public float attackStock;
     bool triggerWave;
     public ParticleSystem smokeFX;
+    private GameObject currentSmokeDestructVFX;
     
     private void Start()
     {
         RessourceManager_LAC.instance.AddExtractor(this);
         stats = Array.ConvertAll(statsSO, input => input as ExtractorSO_LAC);
-        smokeFX.gameObject.SetActive(true);
+        //smokeFX.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -112,17 +113,17 @@ public class Extractor_LAC : Building
     public void TakeDown()
     {
         AudioManager.instance.PlaySound("BUILD_Destroyed");
+        currentSmokeDestructVFX = VFXManager.instance.PlayPermanentVFX("SmokeDestruction", transform.GetChild(0).transform);
         WaveManager.instance.BuildingCountDown();
         fonctionnal = false;
-        if(smokeFX)
-            smokeFX?.Play();
+        //if(smokeFX) smokeFX?.Play();
     }
 
     public void Repair()
     {
         fonctionnal = true;
-        if(smokeFX)
-            smokeFX?.Stop();
+        if(currentSmokeDestructVFX) Destroy(currentSmokeDestructVFX.gameObject);
+        //if(smokeFX) smokeFX?.Stop();
     }
     #endregion
 
