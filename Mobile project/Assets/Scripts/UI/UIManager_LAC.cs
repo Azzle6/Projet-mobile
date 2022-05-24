@@ -194,6 +194,7 @@ public class UIManager_LAC : MonoBehaviour
     public void UpgradeCristal()
     {
         CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        UpdateUI();
     }
 
     public void RemoveBuilding()
@@ -262,6 +263,7 @@ public class UIManager_LAC : MonoBehaviour
         }
         else
         {
+            if(build.level >= build.BuildingScriptable.unlockedLevel) BuildingInfosUpgradeButton.SetActive(false);
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = false;
             colors.normalColor = Color.red;
         }
