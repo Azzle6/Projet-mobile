@@ -31,9 +31,12 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject BuildingChoiceMenu;
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
-    
+
     [Header("Stats buildings InGame")]
+    [SerializeField] private GameObject menuBatiment;
+    [SerializeField] private GameObject statAchatBatiment;
     [SerializeField] private GameObject BuildingInfos;
+    [SerializeField] private GameObject boutonMenuBatiments;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
     [SerializeField] private TMP_Text UpgradeCristalPrice;
@@ -240,7 +243,6 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
-        
         foreach (var txt in Texts)
         {
             txt.gameObject.SetActive(true);
@@ -421,6 +423,22 @@ public class UIManager_LAC : MonoBehaviour
 
         anim.Stop();
         anim.Play();
+    }
+
+    public void CloseBuyMenu()
+    {
+        statAchatBatiment.SetActive(false);
+    }
+
+    public void CloseBuildingInfos()
+    {
+        BuildingInfos.SetActive(false);
+    }
+
+    public void CloseBuildingMenu()
+    {
+        menuBatiment.SetActive(false);
+        boutonMenuBatiments.SetActive(true);
     }
 
     #region Noise
