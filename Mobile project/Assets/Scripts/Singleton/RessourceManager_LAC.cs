@@ -112,13 +112,13 @@ public class RessourceManager_LAC : MonoBehaviour
     {
         // Matter ressource
         matter = Mathf.Clamp(matter + matterToAdd, 0, maxMatter);
-        if(matterToAdd != 0)
+        if(matterToAdd != 0 && matter < maxMatter)
             UIManager_LAC.instance.RessourceGainLossFeedback(matterToAdd, RessourceType.MATTER);
         matterToAdd = 0;
 
         // Knowledge ressource
         knowledge = Mathf.Clamp(knowledge + knowledgeToAdd, 0, maxKnowledge);
-        if (knowledgeToAdd != 0)
+        if (knowledgeToAdd != 0 && knowledge < maxKnowledge)
             UIManager_LAC.instance.RessourceGainLossFeedback(knowledgeToAdd, RessourceType.KNOWLEDGE);
         knowledgeToAdd = 0;
 
