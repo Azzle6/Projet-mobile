@@ -42,7 +42,8 @@ public class Building : MonoBehaviour
         {
             level = Mathf.Clamp(level+1, 0, statsSO.Length -1);
             Debug.Log("Upgrade !");
-
+            int index = level + 1;
+            VFXManager.instance.PlayVFX("UpgradeBuildingLvl" + index, transform.GetChild(0).transform);
             AudioManager.instance.PlaySound("BUILD_Upgrade");
             return;
         }
