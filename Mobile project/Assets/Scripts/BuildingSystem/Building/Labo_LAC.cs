@@ -38,7 +38,6 @@ public class Labo_LAC : Building
         maxKnowledge = laboStats[level].maxStockKnowledge;
 
     }
-    [ContextMenu("Upgrade Cristal")]
     public void UpgradeCristal()
     {
         if (cristalStats.Length <= 0)
