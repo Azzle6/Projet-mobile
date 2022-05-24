@@ -48,7 +48,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  name: House 2
+  name: House 6
   description: A comfortable house
   price:
     quantity: 150
@@ -56,6 +56,6 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: c7c8f7e93e7ac124d9b72ea9591f574c, type: 3}
   prefab: {fileID: 3651774682582830496, guid: 63c5945c059f7db44a32782f45d1411b, type: 3}
   buildingStats: {fileID: 11400000, guid: 482d082f5db4fdf49ab2f420810fdf0d, type: 2}
-  isUnlocked: 1
+  isUnlocked: 0
   unlockedLevel: 0
   PlacementVFX: {fileID: 3566347212456569706, guid: c45517aa7f7b82d46ab8906cb2e058a5, type: 3}

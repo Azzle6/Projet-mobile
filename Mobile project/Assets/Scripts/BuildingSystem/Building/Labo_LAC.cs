@@ -7,6 +7,7 @@ public class Labo_LAC : Building
     public LaboSO_LAC[] laboStats;
 
     [Header("Cristal")]
+    public BuildingSO cristalB_SO;
     public int cristalLv = 0;
     public CristalSO_LAC[] cristalStats;
     public Transform cristalSocket;
@@ -38,20 +39,26 @@ public class Labo_LAC : Building
         maxKnowledge = laboStats[level].maxStockKnowledge;
 
     }
-    [ContextMenu("Upgrade Cristal")]
     public void UpgradeCristal()
     {
         if (cristalStats.Length <= 0)
             return;
 
-        cristalLv = Mathf.Clamp((cristalLv + 1), 0, cristalStats.Length -1);
-        Debug.Log("Upgrade !");
+        if (CanUpgradeCristal())
+        {
+            cristalLv = Mathf.Clamp((cristalLv + 1), 0, cristalStats.Length - 1);
+            Debug.Log("Upgrade !");
 
-        AudioManager.instance.PlaySound("BUILD_Upgrade");
-        Destroy(cristalVisual.gameObject);
-        cristalVisual = Instantiate(cristalStats[cristalLv].visual, cristalSocket);
-        
+            AudioManager.instance.PlaySound("BUILD_Upgrade");
+            Destroy(cristalVisual.gameObject);
+            cristalVisual = Instantiate(cristalStats[cristalLv].visual, cristalSocket);
+        }
         //Debug.Log("Upgrade pas");
+    }
+
+    public bool CanUpgradeCristal()
+    {
+        return (cristalLv + 1 < cristalStats.Length) && (cristalLv + 1 < cristalB_SO.unlockedLevel);
     }
 }
 
