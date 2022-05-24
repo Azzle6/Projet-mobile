@@ -31,7 +31,7 @@ public static class DiffCalculator
             return diff;
         }
         
-        diff.value = RessourceManager_LAC.instance.currentTech / setting.techMax;
+        diff.value = (float)RessourceManager_LAC.instance.currentTech / setting.techMax;
         techDiff = diff.value;
         return diff;
     }
