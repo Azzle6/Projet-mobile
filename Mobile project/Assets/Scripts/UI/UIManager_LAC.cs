@@ -73,7 +73,8 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        DisplayWavePreview();//UpdateWavePreview();
+        DisplayWavePreview();
+        //UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
@@ -148,7 +149,7 @@ public class UIManager_LAC : MonoBehaviour
     private void UpdateWavePreview()
     {
         Vector3 worldCamdir = camT.forward;
-        Vector2 uiCamDir = new Vector2(worldCamdir.x, worldCamdir.z);
+        Vector2 uiCamDir = new Vector2(-worldCamdir.x, worldCamdir.z);
 
         wavePreview.transform.up = uiCamDir;
 
@@ -437,7 +438,7 @@ public class UIManager_LAC : MonoBehaviour
 
     public void DisplayWavePreview(float noiseT = 0.7f, bool display = true)
     {
-        float noiseR = RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
+        float noiseR = (float)RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
         if (noiseR > noiseT && display)
         {
             UpdateWavePreview();
