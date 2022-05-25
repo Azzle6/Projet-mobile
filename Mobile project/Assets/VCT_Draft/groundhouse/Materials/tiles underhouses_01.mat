@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
-  m_Shader: {fileID: -6465566751694194690, guid: 431fdae903b50314ba2a5a5fdd1d4bc3, type: 3}
+  m_Name: tiles underhouses_01
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,10 +19,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_1d7522cba1e040fe928538eac4f10045:
-        m_Texture: {fileID: 2800000, guid: 6658ec70d26c467458da34503f1c3535, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -48,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6fd0aca02e04c794a936660468dc76db, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -80,11 +76,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_070000669bc4460e9f7de4f038d656e9: 0
-    - Vector1_7f487281bb5c4e07afd62df63f477437: 0.42
-    - Vector1_820f1efd8be94de2a02d3899a17aa426: 0
-    - Vector1_921889cc4d324a64a70acbac971cedb3: 0
-    - Vector1_afa5acbc0c84422388ba99952d03d4a3: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -112,13 +103,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_c3a77a2e2732406baee87bbf01698c0f: {r: 0.0704877, g: 0.08291585, b: 0.15094337, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2104185488691009446
+--- !u!114 &1791549941335805966
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
