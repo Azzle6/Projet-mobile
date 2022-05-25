@@ -33,7 +33,10 @@ public class WaveManager : MonoBehaviour
     public float difficulty;
     [SerializeField] private GameObject difficultyDebugText;
     public float levelDiff, techDiff, ressourceDiff;
-    
+
+    [Header("Feedbacks")]
+    [SerializeField] private GameObject waveAlert;
+
     void Awake()
     {
         if (instance != this && instance)
@@ -150,6 +153,8 @@ public class WaveManager : MonoBehaviour
     public void StartWave(int enemyToSpawn)
     {
         AudioManager.instance.PlaySound("THREAT_ThresholdReached");
+        waveAlert.SetActive(true);
+        Invoke("WaveAlertDisable",5f);
 
         // assign enemy to spawn
         Dictionary<int, int> enemySpawn = new Dictionary<int, int>();
@@ -206,6 +211,12 @@ public class WaveManager : MonoBehaviour
         underAttack = true;
     }
     #endregion
+
+    void WaveAlertDisable()
+    {
+        waveAlert.SetActive(false);
+    }
+
     #region Debug
     public void DebugWave()
     {

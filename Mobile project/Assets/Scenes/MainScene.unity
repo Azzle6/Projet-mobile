@@ -13666,16 +13666,14 @@ Transform:
   - {fileID: 1397847665}
   - {fileID: 1034893420}
   - {fileID: 1619697979}
-  - {fileID: 782879712}
   - {fileID: 1910695408}
-  - {fileID: 1535707658}
   - {fileID: 397485387}
+  - {fileID: 782879712}
   - {fileID: 1532960947}
-  - {fileID: 1759270442}
+  - {fileID: 1535707658}
   - {fileID: 951807401}
   - {fileID: 1950776927}
   - {fileID: 949345780}
-  - {fileID: 1198708445}
   - {fileID: 2142971059}
   - {fileID: 768667666}
   - {fileID: 942790143}
@@ -13689,6 +13687,7 @@ Transform:
   - {fileID: 674051390}
   - {fileID: 1731934402}
   - {fileID: 1233372302}
+  - {fileID: 1198708445}
   - {fileID: 82202224}
   - {fileID: 989551663}
   - {fileID: 577618947}
@@ -13696,27 +13695,28 @@ Transform:
   - {fileID: 1925600842}
   - {fileID: 943305536}
   - {fileID: 686484970}
+  - {fileID: 1759270442}
+  - {fileID: 1421040378}
   - {fileID: 542053883}
   - {fileID: 1297732648}
-  - {fileID: 1421040378}
-  - {fileID: 1365774022}
+  - {fileID: 36599173}
   - {fileID: 1873581880}
   - {fileID: 1833100680}
   - {fileID: 1386925638}
   - {fileID: 1439785501}
-  - {fileID: 36599173}
   - {fileID: 2022266040}
   - {fileID: 741720415}
+  - {fileID: 1045603381}
   - {fileID: 147742521}
-  - {fileID: 1721827367}
+  - {fileID: 1365774022}
   - {fileID: 971045758}
   - {fileID: 1655260595}
-  - {fileID: 1497433702}
-  - {fileID: 1072867415}
+  - {fileID: 1721827367}
   - {fileID: 726460809}
-  - {fileID: 1045603381}
+  - {fileID: 1072867415}
   - {fileID: 1942003355}
   - {fileID: 212118803}
+  - {fileID: 1497433702}
   - {fileID: 1124644349}
   - {fileID: 1473092214}
   - {fileID: 1763243761}
@@ -14152,6 +14152,10 @@ PrefabInstance:
       propertyPath: resetDiscoveriesOnLaunch
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3262663041739135507, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
+      propertyPath: waveAlert
+      value: 
+      objectReference: {fileID: 872703269}
     - target: {fileID: 3262663041739135507, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: difficultyDebugText
       value: 
@@ -17266,6 +17270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &872703269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4072738472429725071, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+  m_PrefabInstance: {fileID: 872703266}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &872703270 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2598489101243289024, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
