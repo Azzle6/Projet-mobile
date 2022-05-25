@@ -380,6 +380,8 @@ public class UIManager_LAC : MonoBehaviour
                             BuildingInfosRemoveButton.GetComponent<Button>().interactable =
                                 ressourceM.CanSpendResources(build.BuildingScriptable.price.quantity,
                                     build.BuildingScriptable.price.ressource);
+                            RemovePrice.gameObject.SetActive(true);
+                            RemoveIcon.gameObject.SetActive(true);
                             if (RemovePrice)
                             {
                                 RemovePrice.text = build.BuildingScriptable.price.quantity.ToString();
