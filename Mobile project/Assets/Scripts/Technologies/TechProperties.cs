@@ -27,6 +27,9 @@ public class TechProperties : MonoBehaviour
     [SerializeField] private AnimationClip shakingAnim;
     private Color defaultPriceColor;
 
+    [Header("Description")]
+    public GameObject descriptionGO;
+
     private void Start()
     {
         foreach (var but in previousButtons)
@@ -111,9 +114,11 @@ public class TechProperties : MonoBehaviour
         {
             case TechState.Locked :
                 img.color = lockedColor;
+                descriptionGO.SetActive(false);
                 break;
             case TechState.Unlocked :
                 img.color = unlockedColor;
+                descriptionGO.SetActive(true);
                 break;
             case TechState.Discovering :
                 img.color = discoveringColor;
@@ -121,6 +126,7 @@ public class TechProperties : MonoBehaviour
                 break;
             case TechState.Discovered :
                 img.color = discoveredColor;
+                descriptionGO.SetActive(true);
                 break;
         }
     }
