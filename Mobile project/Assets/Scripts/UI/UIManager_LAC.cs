@@ -466,6 +466,7 @@ public class UIManager_LAC : MonoBehaviour
         {
             showTrig = true;
             wavePAnimator.SetTrigger("Show");
+            UpdateWavePreview();
                
         }
         if(noiseR < noiseT && showTrig)
