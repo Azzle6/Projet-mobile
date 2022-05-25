@@ -17,13 +17,14 @@ public class EnemyBoid : Boid
     [HideInInspector] public int health;
     float attackDelay = 0;
 
-    [Header("Debug")]
-    public GameObject attackDebug;
+    //[Header("Debug")]
+    //public GameObject attackDebug;
     //public Material moveMat, attackMat;
 
     private void Start()
     {
         AudioManager.instance.PlaySound("MOBS_MobA_Appear");
+        VFXManager.instance.PlayVFX("SpawnEnemies", transform);
     }
 
     public void Initialize(EnemyGroup enemyGroup)
@@ -40,11 +41,13 @@ public class EnemyBoid : Boid
         if (target)
         {
             target.TakeDamage(enemyStats.damage);
+
+            AudioManager.instance.PlaySound("MOBS_MobA_Attack");
+            AudioManager.instance.PlaySound("THREAT_BuildHit");
+
+            VFXManager.instance.PlayVFX("LostResources", target.transform.GetChild(0));
         }
            //target.gameObject.SetActive(false);
-
-        AudioManager.instance.PlaySound("MOBS_MobA_Attack");
-        AudioManager.instance.PlaySound("THREAT_BuildHit");
     }
 
     public void TakeDamage(int damage)
@@ -91,7 +94,7 @@ public class EnemyBoid : Boid
                     if (inRange && (Time.time - inRangeTime) > inRangeDuration)
                     {
                         //m_renderer.material = attackMat;
-                        attackDebug.SetActive(true);
+                        //attackDebug.SetActive(true);
                         enemyState = EnemyState.ATTACK;
                     }
                         
@@ -104,7 +107,7 @@ public class EnemyBoid : Boid
                     if (!inRange)
                     {
                         attackDelay = 0;
-                        attackDebug.SetActive(false);
+                        //attackDebug.SetActive(false);
                         //m_renderer.material = moveMat;
                         enemyState = EnemyState.MOVE;
                     }

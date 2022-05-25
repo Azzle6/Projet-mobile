@@ -18,19 +18,19 @@ MonoBehaviour:
     duration: 5
   - nameVFX: SpawnEnemies
     vfx: {fileID: 4566940912123271193, guid: 7198af1272471ac488bba171dbb93197, type: 3}
-    duration: 3
+    duration: 1
   - nameVFX: UpgradeBuildingLvl2
     vfx: {fileID: 3579673260849853321, guid: 2f50af19cf946fc40b80f2fff4c94e5d, type: 3}
-    duration: 30
+    duration: 5
   - nameVFX: UpgradeBuildingLvl3
     vfx: {fileID: 143237631213103485, guid: 25a37293bca9ef449bcb5bc34b542de3, type: 3}
-    duration: 3
+    duration: 5
   - nameVFX: LostResources
     vfx: {fileID: 5329723863272983561, guid: 53cfa3490b5688940ac67ef07c9b2028, type: 3}
     duration: 2
   - nameVFX: BuildingDestruction
     vfx: {fileID: 7040039506133997189, guid: c0abacd5339ce0049bc4b1d8208e1d20, type: 3}
-    duration: 3
+    duration: 5
   - nameVFX: SmokeDestruction
     vfx: {fileID: 328863302051283893, guid: 6de06bdb81bf1974e838eedd9ba3d8e7, type: 3}
     duration: 0

@@ -18,8 +18,8 @@ public class Turret_LAC : Building
     float travelBullet = 0;
     bool attacking;
     [Header("Debug")]
-    public GameObject target;
-    public MeshRenderer targetRenderer;
+    //public GameObject target;
+    //public MeshRenderer targetRenderer;
     public Material targetAttack, targetAim;
 
     private void Start()
@@ -70,7 +70,7 @@ public class Turret_LAC : Building
                 Destroy(bullet);
             attacking = false;
 
-            target.gameObject.SetActive(false);
+            //target.gameObject.SetActive(false);
         }
             
     }
@@ -114,7 +114,7 @@ public class Turret_LAC : Building
     {
         enemyTarget.TakeDamage(CurrentDamage());
         // debug
-        targetRenderer.material = targetAttack;
+        //targetRenderer.material = targetAttack;
         StartCoroutine(ResetTargetMat(0.5f));
     }
     #endregion
@@ -157,7 +157,7 @@ public class Turret_LAC : Building
     IEnumerator ResetTargetMat(float delay)
     {
         yield return new WaitForSeconds(delay);
-        targetRenderer.material = targetAim;
+        //targetRenderer.material = targetAim;
 
     }
     private void OnDrawGizmos()
