@@ -43,6 +43,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private TMP_Text UpgradePrice;
     [SerializeField] private Image UpgradeIcon;
+    [SerializeField] private TMP_Text RemovePrice;
+    [SerializeField] private Image RemoveIcon;
     [SerializeField] private GameObject BuildingInfosUpgradeCristal;
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
@@ -61,6 +63,9 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject noiseHandle;
     private float previousNoise = 0;
     public Animation anim_techCompleted;
+
+    [Header("End")]
+    public GameObject endCanvas;
 
     private void Awake()
     {
@@ -253,6 +258,13 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
 
+        if (RemovePrice)
+        {
+            RemovePrice.gameObject.SetActive(false);
+            RemoveIcon.gameObject.SetActive(false);
+        }
+        
+
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
@@ -365,7 +377,17 @@ public class UIManager_LAC : MonoBehaviour
                             BuildingInfosUpgradeButton.SetActive(false);
                             BuildingInfosPop.SetActive(false);
                             BuildingInfosMoveButton.SetActive(false);
+                            BuildingInfosRemoveButton.GetComponent<Button>().interactable =
+                                ressourceM.CanSpendResources(build.BuildingScriptable.price.quantity,
+                                    build.BuildingScriptable.price.ressource);
+                            if (RemovePrice)
+                            {
+                                RemovePrice.text = build.BuildingScriptable.price.quantity.ToString();
+                                RemoveIcon.sprite = ressourceM.GetResourceLogo(build.BuildingScriptable.price.ressource);
+                            }
                             
+
+
                         }
                     }
                 }
@@ -441,6 +463,13 @@ public class UIManager_LAC : MonoBehaviour
         boutonMenuBatiments.SetActive(true);
     }
 
+    public void DisplayEnd()
+    {
+        if (endCanvas)
+            endCanvas.SetActive(true);
+        else
+            Debug.LogWarning("No End UI");
+    }
     #region Noise
     public void ActualizeNoiseSlider()
     {
@@ -466,6 +495,7 @@ public class UIManager_LAC : MonoBehaviour
         {
             showTrig = true;
             wavePAnimator.SetTrigger("Show");
+            UpdateWavePreview();
                
         }
         if(noiseR < noiseT && showTrig)
