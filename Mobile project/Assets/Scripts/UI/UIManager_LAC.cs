@@ -62,6 +62,9 @@ public class UIManager_LAC : MonoBehaviour
     private float previousNoise = 0;
     public Animation anim_techCompleted;
 
+    [Header("End")]
+    public GameObject endCanvas;
+
     private void Awake()
     {
         InfosPannel.RegisterInstance();
@@ -441,6 +444,13 @@ public class UIManager_LAC : MonoBehaviour
         boutonMenuBatiments.SetActive(true);
     }
 
+    public void DisplayEnd()
+    {
+        if (endCanvas)
+            endCanvas.SetActive(true);
+        else
+            Debug.LogWarning("No End UI");
+    }
     #region Noise
     public void ActualizeNoiseSlider()
     {
