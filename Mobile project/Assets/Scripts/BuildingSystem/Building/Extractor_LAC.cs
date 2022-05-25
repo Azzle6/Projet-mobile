@@ -102,7 +102,7 @@ public class Extractor_LAC : Building
     {
         if(damage <= stock)
             stock -= damage;
-        else
+        else if(fonctionnal)
         {
             RessourceManager_LAC.instance.StockRessource(-attackStock, ressourceType);
             stock = attackStock = 0;
