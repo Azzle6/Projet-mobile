@@ -44,10 +44,13 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public IEnumerator PlayAudio(string soundName, float delay)
+    public IEnumerator PlayAudio(string soundName, float delay, bool randomSound = false)
     {
-        SoundInfo sound = soundsList.FindSound(soundName);
-        
+
+        SoundInfo sound;
+        if(!randomSound) sound = soundsList.FindSound(soundName);
+        else sound = soundsList.FindRandomSound(soundName);
+            
         yield return new WaitForSeconds(delay);
 
         unavailableAudioS = 0;
