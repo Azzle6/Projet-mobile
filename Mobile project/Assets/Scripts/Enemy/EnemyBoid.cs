@@ -16,7 +16,7 @@ public class EnemyBoid : Boid
     //Attack
     [HideInInspector] public int health;
     float attackDelay = 0;
-
+    [SerializeField] ParticleSystem dieParticle;
     //[Header("Debug")]
     //public GameObject attackDebug;
     //public Material moveMat, attackMat;
@@ -61,6 +61,7 @@ public class EnemyBoid : Boid
     public void Die()
     {
         enemyState = EnemyState.DIE;
+        dieParticle.Play();
         transform.parent.gameObject.layer = 0;
         group.RemoveBoid(this);
 
