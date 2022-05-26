@@ -19,11 +19,11 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("Références")] 
     [SerializeField] private BuildingInfosPannel InfosPannel;
-    [SerializeField] private TextMeshProUGUI matter;
+    [SerializeField] private TextMeshProUGUI matter, fightMatter;
     [SerializeField] private Slider matterSlider, fightMatterSlider;
-    [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI knowledge, fightKnowledge;
     [SerializeField] private Slider knowledgeSlider, fightKnowledgeSlider;
-    [SerializeField] private TextMeshProUGUI pop;
+    [SerializeField] private TextMeshProUGUI pop, fightPop;
     [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     [SerializeField] private GameObject matterGainLossAnim, knowledgeGainLossAnim;
     //[SerializeField] private GameObject BuildMenu;
@@ -111,9 +111,12 @@ public class UIManager_LAC : MonoBehaviour
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
+        fightMatter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
+        fightKnowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         pop.text = Mathf.Ceil(ressourceM.population).ToString();
+        fightPop.text = Mathf.Ceil(ressourceM.population).ToString();
 
         UpdateRessourcesSlider();
 
