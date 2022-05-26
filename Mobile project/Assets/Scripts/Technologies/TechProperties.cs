@@ -50,7 +50,9 @@ public class TechProperties : MonoBehaviour
         if (techPrice <= RessourceManager_LAC.instance.knowledge  && curState == TechState.Unlocked)
         {
             RessourceManager_LAC.instance.SpendRessource(techPrice, RessourceManager_LAC.RessourceType.KNOWLEDGE);
+            RessourceManager_LAC.instance.currentTech++;
             TechnoManager.instance.StartDiscoveringTech(this);
+
         }
 
         if(techPrice > RessourceManager_LAC.instance.knowledge && curState == TechState.Unlocked)
