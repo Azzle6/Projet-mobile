@@ -137,6 +137,12 @@ public class Turret_LAC : Building
         people--;
         RessourceManager_LAC.instance.population++;
     }
+
+    public override void Remove()
+    {
+        base.Remove();
+        RessourceManager_LAC.instance.population += people;
+    }
     #endregion
 
     #region Get Stats

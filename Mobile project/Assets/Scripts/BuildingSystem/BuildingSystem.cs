@@ -147,12 +147,14 @@ public class BuildingSystem : MonoBehaviour
                 RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
                     build.BuildingScriptable.price.ressource);
             }
+            EndStats_LAC.buildings++; // stats update
             currentBuilding = null;
         }
         else
         {
             Destroy(currentBuilding);
             ChangeColor(currentAreaPositions, Color.white);
+            EndStats_LAC.buildings--; // stats update
             currentBuilding = null;
         }
     
@@ -175,6 +177,7 @@ public class BuildingSystem : MonoBehaviour
         building.enabled = true;
         building.RegisterTile();
         ChangeColor(currentAreaPositions, Color.black);
+        
     }
 
     //récupère toutes les coordonnées des tiles concernées et si des tiles sont en dehors de la grid
