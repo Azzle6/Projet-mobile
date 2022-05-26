@@ -61,11 +61,14 @@ public class UIManager_LAC : MonoBehaviour
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
     [SerializeField] private GameObject noiseHandle;
+    [SerializeField] private Animator noiseTextAnimator;
     private float previousNoise = 0;
     public Animation anim_techCompleted;
 
     [Header("End")]
-    public GameObject endCanvas;
+    public UIEndStats_LAC endScreen;
+    public GameObject startDialogue, endDialogue;
+    bool startTrig = true, endTrig;
 
     private void Awake()
     {
@@ -82,6 +85,21 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        // end condition
+        if (WaveManager.gameOver && !endTrig)
+        {
+            endTrig = true;
+            endScreen.DisplayStats(false);
+        }
+            
+
+        // start dialogue
+        if(startTrig)
+        {
+            startTrig = false;
+            startDialogue.SetActive(true);
+        }
+
         DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
@@ -184,6 +202,13 @@ public class UIManager_LAC : MonoBehaviour
         {
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
+
+            // end game condition
+            if (endTrig)
+            {
+                endTrig = false;
+                endDialogue.SetActive(true);
+            }
         }
     }
 
@@ -201,7 +226,10 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
-        CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+        lab.UpgradeCristal();
+        endTrig = lab.maxCristal;
+
         UpdateUI();
     }
 
@@ -380,6 +408,8 @@ public class UIManager_LAC : MonoBehaviour
                             BuildingInfosRemoveButton.GetComponent<Button>().interactable =
                                 ressourceM.CanSpendResources(build.BuildingScriptable.price.quantity,
                                     build.BuildingScriptable.price.ressource);
+                            RemovePrice.gameObject.SetActive(true);
+                            RemoveIcon.gameObject.SetActive(true);
                             if (RemovePrice)
                             {
                                 RemovePrice.text = build.BuildingScriptable.price.quantity.ToString();
@@ -463,13 +493,7 @@ public class UIManager_LAC : MonoBehaviour
         boutonMenuBatiments.SetActive(true);
     }
 
-    public void DisplayEnd()
-    {
-        if (endCanvas)
-            endCanvas.SetActive(true);
-        else
-            Debug.LogWarning("No End UI");
-    }
+
     #region Noise
     public void ActualizeNoiseSlider()
     {
@@ -479,10 +503,11 @@ public class UIManager_LAC : MonoBehaviour
 
         if (previousNoise != noiseSlider.value)
         {
+            if (noiseTextAnimator.GetBool("Noise") == false) noiseTextAnimator.SetBool("Noise", true);
             float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
          
             noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
-            Debug.Log(animSpeed);
+            noiseTextAnimator.speed = animSpeed;
             
             previousNoise = RessourceManager_LAC.instance.noise;
         }
