@@ -38,9 +38,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayRandomSound(string categoryName, float delay = 0)
     {
-        string soundName = soundsList.FindRandomSound(categoryName).clipName;
         
-        instance.StartCoroutine(instance.PlayAudio(soundName, delay));
+        instance.StartCoroutine(instance.PlayAudio(categoryName, delay, true));
 
     }
 
@@ -48,8 +47,7 @@ public class AudioManager : MonoBehaviour
     {
 
         SoundInfo sound;
-        if(!randomSound) sound = soundsList.FindSound(soundName);
-        else sound = soundsList.FindRandomSound(soundName);
+        sound = !randomSound ? soundsList.FindSound(soundName) : soundsList.FindRandomSound(soundName);
             
         yield return new WaitForSeconds(delay);
 
