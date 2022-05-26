@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-
+using UnityEngine.Audio;
 
 public class UIManager_LAC : MonoBehaviour
 {
@@ -69,6 +69,12 @@ public class UIManager_LAC : MonoBehaviour
     public UIEndStats_LAC endScreen;
     public GameObject startDialogue, endDialogue;
     bool startTrig = true, endTrig;
+
+    [Header("Sound")]
+    [SerializeField] private GameObject soundButton;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Sprite soundOnSprite, soundOffSprite;
+    bool onOff = true;
 
     private void Awake()
     {
@@ -534,6 +540,22 @@ public class UIManager_LAC : MonoBehaviour
     
     #endregion
     
+    public void ChangeAudioStatus()
+    {
+        if(!onOff)
+        {
+            soundButton.GetComponent<Image>().sprite = soundOnSprite;
+            audioMixer.SetFloat("MasterVolume",0);
+            onOff = true;
+        }
+        else
+        {
+            soundButton.GetComponent<Image>().sprite = soundOffSprite;
+            audioMixer.SetFloat("MasterVolume", Mathf.Log10(-80));
+            onOff = false;
+        }
+    }
+
     public void PlayValidationSFX()
     {
         AudioManager.instance.PlaySound("UI_Validation");
