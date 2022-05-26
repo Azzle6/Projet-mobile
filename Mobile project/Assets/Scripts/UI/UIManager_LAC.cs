@@ -344,7 +344,7 @@ public class UIManager_LAC : MonoBehaviour
             Texts[0].text = "Stock : " + (int)extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
             Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
             Texts[2].text =  ( extractor.people) + "/" + extractor.stats[extractor.level].maxPeople; // people
-            Texts[3].text = "Noise : " + extractor.stats[extractor.level].noise; // noise
+            Texts[3].text = "Noise : " + extractor.stats[extractor.level].noise * (1 + (extractor.people - 1) * extractor.stats[extractor.level].peopleNoise); // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }
         else

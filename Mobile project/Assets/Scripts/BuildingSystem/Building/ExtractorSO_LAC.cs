@@ -10,9 +10,11 @@ public class ExtractorSO_LAC : BuildingStatSO
     public int maxPeople;
     [Range(0, 1)]
     public float peopleGain;
-    
-    
-    
+    [Range(0, 1)]
+    public float peopleNoise;
+
+
+
     [Header("Product")]
     public ResourceQuantity production;
     public int maxStock = 100;
