@@ -53,7 +53,7 @@ public class EnemyBoid : Boid
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && enemyState != EnemyState.DIE)
             Die();
             
     }
@@ -66,6 +66,7 @@ public class EnemyBoid : Boid
 
         AudioManager.instance.PlaySound("MOBS_MobA_Death");
 
+        EndStats_LAC.enemiesKilled++;
         Destroy(gameObject, 5);
         Destroy(this);
     }
