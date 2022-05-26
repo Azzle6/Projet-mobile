@@ -65,7 +65,7 @@ public class UIManager_LAC : MonoBehaviour
     public Animation anim_techCompleted;
 
     [Header("End")]
-    public GameObject endCanvas;
+    public UIEndStats_LAC endScreen;
     public GameObject startDialogue, endDialogue;
     bool startTrig = true, endTrig;
 
@@ -84,8 +84,16 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        // end condition
+        if (WaveManager.gameOver && !endTrig)
+        {
+            endTrig = true;
+            endScreen.DisplayStats(false);
+        }
+            
+
         // start dialogue
-        if(startTrig && Input.touchCount >= 1)
+        if(startTrig)
         {
             startTrig = false;
             startDialogue.SetActive(true);
@@ -484,13 +492,7 @@ public class UIManager_LAC : MonoBehaviour
         boutonMenuBatiments.SetActive(true);
     }
 
-    public void DisplayEnd()
-    {
-        if (endCanvas)
-            endCanvas.SetActive(true);
-        else
-            Debug.LogWarning("No End UI");
-    }
+
     #region Noise
     public void ActualizeNoiseSlider()
     {
