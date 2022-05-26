@@ -13159,7 +13159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881640565444475136, guid: 61df4dd1261bef74598e7816315b4283, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 7881640565444475136, guid: 61df4dd1261bef74598e7816315b4283, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21275,6 +21275,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VisualGrid
       objectReference: {fileID: 0}
+    - target: {fileID: 3371154753690405110, guid: a021c833087d7344fac5f28687b1d8e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3371154753690405111, guid: a021c833087d7344fac5f28687b1d8e4, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -21285,7 +21289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3371154753690405111, guid: a021c833087d7344fac5f28687b1d8e4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 3371154753690405111, guid: a021c833087d7344fac5f28687b1d8e4, type: 3}
       propertyPath: m_LocalPosition.z
