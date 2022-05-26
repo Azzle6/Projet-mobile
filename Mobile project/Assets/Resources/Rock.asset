@@ -39,13 +39,14 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  name: "Ca\xEFu"
-  description: "tr\xE8s solide"
+  name: Rock
+  description: It takes some place
   price:
-    quantity: 100
+    quantity: 600
     ressource: 0
   image: {fileID: 21300000, guid: eb7a3685ff6c62140ba0d1f39ac00ef6, type: 3}
   prefab: {fileID: 0}
   buildingStats: {fileID: 0}
   isUnlocked: 0
   unlockedLevel: 0
+  PlacementVFX: {fileID: 0}

@@ -13,39 +13,48 @@ MonoBehaviour:
   m_Name: DifficultyPreset
   m_EditorClassIdentifier: 
   MapSize: 150
-  buildingW: 1
+  buildingW: 4
   defenseW: 2
-  techMax: 6
-  maxMatter: 100
+  techMax: 18
+  maxMatter: 1500
   matterW: 2
-  maxKnowledge: 150
+  maxKnowledge: 1000
   knowledgeW: 1
-  techW: 2
+  techW: 3.6
   levelW: 2.5
-  ressourceW: 1
-  noiseThreshold: 1500
-  noiseGainPerWave: 0.15
-  maxEnemy: 10
+  ressourceW: 2
+  noiseThreshold: 1750
+  noiseGainPerWave: 0.1
+  maxEnemy: 30
   enemyRatio:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0.1
-      inSlope: 0.9
-      outSlope: 0.9
-      tangentMode: 34
+      inSlope: 0.011923221
+      outSlope: 0.011923221
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.12783755
+    - serializedVersion: 3
+      time: 0.5219684
+      value: 0.4740589
+      inSlope: 2.010634
+      outSlope: 2.006061
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.11673768
+      outWeight: 0.118936956
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.9
-      outSlope: 0.9
-      tangentMode: 34
+      inSlope: 0.018756304
+      outSlope: 0.018756304
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.21435083
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -56,18 +65,18 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.1
-      inSlope: 0.9
-      outSlope: 0.9
+      value: 0.05
+      inSlope: 0.45
+      outSlope: 0.45
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
-      inSlope: 0.9
-      outSlope: 0.9
+      value: 0.5
+      inSlope: 0.45
+      outSlope: 0.45
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d76d1744bf6a4458a3958e170d6dbe, type: 3}
   m_Name: MatterExtractorStatsLvl 3
   m_EditorClassIdentifier: 
+  UpgradePrice:
+    quantity: 0
+    ressource: 0
   visual: {fileID: 0}
   maxPeople: 5
-  peopleGain: 0.3
+  peopleGain: 0.2
+  peopleNoise: 0.2
   production:
     quantity: 10
     ressource: 0

@@ -18,12 +18,13 @@ public class Extractor_LAC : Building
     public float attackStock;
     bool triggerWave;
     public ParticleSystem smokeFX;
+    private GameObject currentSmokeDestructVFX;
     
     private void Start()
     {
         RessourceManager_LAC.instance.AddExtractor(this);
         stats = Array.ConvertAll(statsSO, input => input as ExtractorSO_LAC);
-        smokeFX.gameObject.SetActive(true);
+        //smokeFX.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -43,7 +44,8 @@ public class Extractor_LAC : Building
             
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
-            RessourceManager_LAC.instance.StockNoise(stats[level].noise);
+            RessourceManager_LAC.instance.StockNoise(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
+            print(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
             //stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
   
@@ -65,7 +67,7 @@ public class Extractor_LAC : Building
     public override void Remove()
     {
         base.Remove();
-
+        RessourceManager_LAC.instance.population += people;
         RessourceManager_LAC.instance.StockRessource(-stock, ressourceType);
             
     }
@@ -101,7 +103,7 @@ public class Extractor_LAC : Building
     {
         if(damage <= stock)
             stock -= damage;
-        else
+        else if(fonctionnal)
         {
             RessourceManager_LAC.instance.StockRessource(-attackStock, ressourceType);
             stock = attackStock = 0;
@@ -112,16 +114,18 @@ public class Extractor_LAC : Building
     public void TakeDown()
     {
         AudioManager.instance.PlaySound("BUILD_Destroyed");
+        VFXManager.instance.PlayVFX("BuildingDestruction", transform.GetChild(0).transform);
+        currentSmokeDestructVFX = VFXManager.instance.PlayPermanentVFX("SmokeDestruction", transform.GetChild(0).transform);
+        WaveManager.instance.BuildingCountDown();
         fonctionnal = false;
-        if(smokeFX)
-            smokeFX?.Play();
+        //if(smokeFX) smokeFX?.Play();
     }
 
     public void Repair()
     {
         fonctionnal = true;
-        if(smokeFX)
-            smokeFX?.Stop();
+        if(currentSmokeDestructVFX) Destroy(currentSmokeDestructVFX.gameObject);
+        //if(smokeFX) smokeFX?.Stop();
     }
     #endregion
 

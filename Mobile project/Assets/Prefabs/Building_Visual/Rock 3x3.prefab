@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464669590326285805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7004952975245673140}
@@ -51,7 +51,7 @@ MonoBehaviour:
   Activated: 0
   curRotation: 0
   statsSO:
-  - {fileID: 11400000, guid: 650d4a76d555ae84483f6270b5b395b7, type: 2}
+  - {fileID: 11400000, guid: 852717ed7e5446f47af38f67a8e3b7ed, type: 2}
 --- !u!1001 &7402843429302494559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,12 +64,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -106,11 +118,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 128c4d5a970f60545b5dda7ca62a9868, type: 2}
+      objectReference: {fileID: 2100000, guid: 5c719835301beb54693ca1012d47d48d, type: 2}
     - target: {fileID: -5754084199372789682, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 587366007896238738, guid: e13d4cd61d99c504dbd14100d4c0896d, type: 3}
+      objectReference: {fileID: 587366007896238738, guid: 809a27ae5b7741943950b1c45f8414b7, type: 3}
     - target: {fileID: 919132149155446097, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_Name
       value: Fin_obstacle_2x2

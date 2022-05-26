@@ -14,6 +14,7 @@ public class BuildingInfosPannel : MonoBehaviour
     [SerializeField] private TMP_Text buildName, buildProd, buildPrice, buildDescription;
     [SerializeField] private Image priceIcon;
     [SerializeField] private Button confirmButton;
+    [SerializeField] private TMP_Text popNeededTxt;
     public BuildingSO buildingInf;
 
 
@@ -42,16 +43,19 @@ public class BuildingInfosPannel : MonoBehaviour
         {
             ExtractorSO_LAC stats = (ExtractorSO_LAC) buildingInf.buildingStats;
             buildProd.text = "Production : " + stats.production.quantity + "/s " + stats.production.ressource;
+            popNeededTxt.text = "1";
         }
         else if (buildingInf.buildingStats.GetType() == typeof(HouseSO_LAC))
         {
             HouseSO_LAC stats = (HouseSO_LAC) buildingInf.buildingStats;
             buildProd.text = "Pop added : " + stats.peopleAdd;
+            popNeededTxt.text = "0";
         }
         else if(buildingInf.buildingStats.GetType() == typeof(TurretSO_LAC))
         {
             TurretSO_LAC stats = (TurretSO_LAC) buildingInf.buildingStats;
             buildProd.text = "Range : " + stats.range + "\nDamage : " + stats.damage + "\nAttack speed : " + stats.attackSpeed;
+            popNeededTxt.text = "1";
         }
 
         float matterComparison = 0;
@@ -59,8 +63,17 @@ public class BuildingInfosPannel : MonoBehaviour
         if (buildingInf.price.ressource == RessourceManager_LAC.RessourceType.MATTER) matterComparison = RessourceManager_LAC.instance.matter;
         else matterComparison = RessourceManager_LAC.instance.knowledge;
         
-        Debug.Log(matterComparison);
-        confirmButton.interactable = buildingInf.price.quantity < matterComparison;
+        bool enoughPop;
+
+        if (buildingInf.prefab.GetComponent<House_LAC>()) enoughPop = true;
+        else
+        {
+            enoughPop = RessourceManager_LAC.instance.population >= 1;
+        }
+        
+        if(!enoughPop) popNeededTxt.color = Color.red;
+        else popNeededTxt.color = Color.black;
+        confirmButton.interactable = buildingInf.price.quantity < matterComparison && enoughPop;
 
     }
 

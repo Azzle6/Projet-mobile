@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+
 
 
 public class WaveManager : MonoBehaviour
@@ -27,13 +29,17 @@ public class WaveManager : MonoBehaviour
     public int currentWave = 0;
     public bool underAttack;
     public int totalEnnemies;
-
+    public int totalBuilding;
     [Header("Debug")] 
     [SerializeField] private bool debug = false;
     public float difficulty;
     [SerializeField] private GameObject difficultyDebugText;
     public float levelDiff, techDiff, ressourceDiff;
-    
+
+    [Header("Feedbacks")]
+    [SerializeField] private GameObject waveAlert;
+    [SerializeField] private Volume normal, dark;
+
     void Awake()
     {
         if (instance != this && instance)
@@ -79,12 +85,16 @@ public class WaveManager : MonoBehaviour
 
             ExtractorAsTarget(RessourceManager_LAC.instance.activeExtractor);
             StartWave(DiffCalculator.EnemyNumber());
-
+            totalBuilding = RessourceManager_LAC.instance.activeExtractor.Count;
             underAttack = true;
         }
 
         if (underAttack)
         {
+            dark.weight = Mathf.Clamp01(dark.weight + Time.deltaTime );
+            normal.weight = Mathf.Clamp01(normal.weight - Time.deltaTime );
+
+
             int currentEnnemies = 0;
             for(int i = 0; i < groups.Count; i++)
             {
@@ -100,11 +110,13 @@ public class WaveManager : MonoBehaviour
                 underAttack = false;
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             }
-
-            if (RessourceManager_LAC.instance.matter + RessourceManager_LAC.instance.knowledge <= 0)
-                gameOver = true;
         }
         
+        if(!underAttack && normal.weight != 1)
+        {
+            dark.weight = Mathf.Clamp01(dark.weight - Time.deltaTime );
+            normal.weight = Mathf.Clamp01(normal.weight + Time.deltaTime);
+        }
         DebugDifficultyText();
     }
     #region Wave Process
@@ -153,6 +165,8 @@ public class WaveManager : MonoBehaviour
     public void StartWave(int enemyToSpawn)
     {
         AudioManager.instance.PlaySound("THREAT_ThresholdReached");
+        waveAlert.SetActive(true);
+        Invoke("WaveAlertDisable",5f);
 
         // assign enemy to spawn
         Dictionary<int, int> enemySpawn = new Dictionary<int, int>();
@@ -194,12 +208,27 @@ public class WaveManager : MonoBehaviour
         }*/
     }
 
+    public void BuildingCountDown()
+    {
+        if (underAttack)
+        {
+            totalBuilding--;
+            if (totalBuilding <= 0)
+                gameOver = true;
+        }
+    }
     IEnumerator StartAttack()
     {
         yield return new WaitForSeconds(1);
         underAttack = true;
     }
     #endregion
+
+    void WaveAlertDisable()
+    {
+        waveAlert.SetActive(false);
+    }
+
     #region Debug
     public void DebugWave()
     {

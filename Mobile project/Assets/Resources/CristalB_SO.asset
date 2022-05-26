@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afeae442c886b5c419e4c967496991f3, type: 3}
+  m_Name: CristalB_SO
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: buildingArea
+      Entry: 7
+      Data: 0|System.Boolean[,], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: ranks
+      Entry: 1
+      Data: 0|0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  name: Cristal
+  description: 'Goal '
+  price:
+    quantity: 150
+    ressource: 0
+  image: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  prefab: {fileID: 3651774682582830496, guid: 5038bcca0950dad418a59cb8c6b40443, type: 3}
+  buildingStats: {fileID: 11400000, guid: 2a74f4f840e77344696f6db7d4fd0152, type: 2}
+  isUnlocked: 1
+  unlockedLevel: 0
+  PlacementVFX: {fileID: 0}

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-
+using UnityEngine.Audio;
 
 public class UIManager_LAC : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("Références")] 
     [SerializeField] private BuildingInfosPannel InfosPannel;
-    [SerializeField] private TextMeshProUGUI matter;
+    [SerializeField] private TextMeshProUGUI matter, fightMatter;
     [SerializeField] private Slider matterSlider, fightMatterSlider;
-    [SerializeField] private TextMeshProUGUI knowledge;
+    [SerializeField] private TextMeshProUGUI knowledge, fightKnowledge;
     [SerializeField] private Slider knowledgeSlider, fightKnowledgeSlider;
-    [SerializeField] private TextMeshProUGUI pop;
+    [SerializeField] private TextMeshProUGUI pop, fightPop;
     [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     [SerializeField] private GameObject matterGainLossAnim, knowledgeGainLossAnim;
     //[SerializeField] private GameObject BuildMenu;
@@ -31,16 +31,21 @@ public class UIManager_LAC : MonoBehaviour
     //[SerializeField] private GameObject BuildingChoiceMenu;
     //[SerializeField] private GameObject BuildingPannelInfos;
     //[SerializeField] private GameObject MainUI;
-    
+
     [Header("Stats buildings InGame")]
+    [SerializeField] private GameObject menuBatiment;
+    [SerializeField] private GameObject statAchatBatiment;
     [SerializeField] private GameObject BuildingInfos;
+    [SerializeField] private GameObject boutonMenuBatiments;
     [SerializeField] private TextMeshProUGUI[] Texts;
     [SerializeField] private GameObject BuildingInfosUpgradeButton;
-    [SerializeField] private TMP_Text UpgradePrice;
-    [SerializeField] private Image UpgradeIcon;
-    [SerializeField] private GameObject BuildingInfosUpgradeCristal;
     [SerializeField] private TMP_Text UpgradeCristalPrice;
     [SerializeField] private Image UpgradeCristalIcon;
+    [SerializeField] private TMP_Text UpgradePrice;
+    [SerializeField] private Image UpgradeIcon;
+    [SerializeField] private TMP_Text RemovePrice;
+    [SerializeField] private Image RemoveIcon;
+    [SerializeField] private GameObject BuildingInfosUpgradeCristal;
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
     [SerializeField] private GameObject BuildingInfosPop;
@@ -51,12 +56,25 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject wavePreview;
     [SerializeField] private Image[] waveZone = new Image[0];
     [SerializeField] private Animator wavePAnimator;
+    bool showTrig;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
     [SerializeField] private GameObject noiseHandle;
+    [SerializeField] private Animator noiseTextAnimator;
     private float previousNoise = 0;
     public Animation anim_techCompleted;
+
+    [Header("End")]
+    public UIEndStats_LAC endScreen;
+    public GameObject startDialogue, endDialogue;
+    bool startTrig = true, endTrig;
+
+    [Header("Sound")]
+    [SerializeField] private GameObject soundButton;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Sprite soundOnSprite, soundOffSprite;
+    bool onOff = true;
 
     private void Awake()
     {
@@ -73,13 +91,32 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        DisplayWavePreview();//UpdateWavePreview();
+        // end condition
+        if (WaveManager.gameOver && !endTrig)
+        {
+            endTrig = true;
+            endScreen.DisplayStats(false);
+        }
+            
+
+        // start dialogue
+        if(startTrig)
+        {
+            startTrig = false;
+            startDialogue.SetActive(true);
+        }
+
+        DisplayWavePreview();
+        //UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
         matter.text = Mathf.Ceil(ressourceM.matter).ToString();
+        fightMatter.text = Mathf.Ceil(ressourceM.matter).ToString();
         knowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
+        fightKnowledge.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         knowledgeTechTree.text = Mathf.Ceil(ressourceM.knowledge).ToString();
         pop.text = Mathf.Ceil(ressourceM.population).ToString();
+        fightPop.text = Mathf.Ceil(ressourceM.population).ToString();
 
         UpdateRessourcesSlider();
 
@@ -148,7 +185,7 @@ public class UIManager_LAC : MonoBehaviour
     private void UpdateWavePreview()
     {
         Vector3 worldCamdir = camT.forward;
-        Vector2 uiCamDir = new Vector2(worldCamdir.x, worldCamdir.z);
+        Vector2 uiCamDir = new Vector2(-worldCamdir.x, worldCamdir.z);
 
         wavePreview.transform.up = uiCamDir;
 
@@ -174,6 +211,13 @@ public class UIManager_LAC : MonoBehaviour
         {
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
+
+            // end game condition
+            if (endTrig)
+            {
+                endTrig = false;
+                endDialogue.SetActive(true);
+            }
         }
     }
 
@@ -187,10 +231,15 @@ public class UIManager_LAC : MonoBehaviour
     public void UpgradeBuilding()
     {
         CurrentSelectedBuilding.GetComponentInParent<Building>().Upgrade();
+        UpdateUI();
     }
     public void UpgradeCristal()
     {
-        CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+        lab.UpgradeCristal();
+        endTrig = lab.maxCristal;
+
+        UpdateUI();
     }
 
     public void RemoveBuilding()
@@ -236,16 +285,23 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingInfos()
     {
-        
         foreach (var txt in Texts)
         {
             txt.gameObject.SetActive(true);
         }
         BuildingInfosPop.SetActive(true);
         BuildingInfosRemoveButton.SetActive(true);
+        BuildingInfosUpgradeCristal.SetActive(false);
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
-        BuildingInfosUpgradeCristal.SetActive(false);
+
+        if (RemovePrice)
+        {
+            RemovePrice.gameObject.SetActive(false);
+            RemoveIcon.gameObject.SetActive(false);
+        }
+        
+
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
@@ -258,6 +314,7 @@ public class UIManager_LAC : MonoBehaviour
         }
         else
         {
+            if(build.level >= build.BuildingScriptable.unlockedLevel) BuildingInfosUpgradeButton.SetActive(false);
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = false;
             colors.normalColor = Color.red;
         }
@@ -269,7 +326,7 @@ public class UIManager_LAC : MonoBehaviour
         if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
         {
             Labo_LAC lab = build as Labo_LAC;
-            BuildingInfosUpgradeCristal.SetActive(true);
+            BuildingInfosUpgradeCristal.SetActive(lab.CanUpgradeCristal());
             if (ressourceM.CanSpendResources(lab.cristalStats[lab.cristalLv].UpgradePrice.quantity, lab.cristalStats[lab.cristalLv].UpgradePrice.ressource))
             {
                 BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = true;
@@ -296,7 +353,7 @@ public class UIManager_LAC : MonoBehaviour
             Texts[0].text = "Stock : " + (int)extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
             Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
             Texts[2].text =  ( extractor.people) + "/" + extractor.stats[extractor.level].maxPeople; // people
-            Texts[3].text = "Bruit : " + extractor.stats[extractor.level].noise; // noise
+            Texts[3].text = "Noise : " + extractor.stats[extractor.level].noise * (1 + (extractor.people - 1) * extractor.stats[extractor.level].peopleNoise); // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }
         else
@@ -336,10 +393,10 @@ public class UIManager_LAC : MonoBehaviour
                         Texts[0].text = "Matter Stock +" + labo.laboStats[labo.level].maxStockMatter; 
                         Texts[3].text = "Knowledge Stock +" + labo.laboStats[labo.level].maxStockKnowledge; 
                         Texts[4].text = labo.BuildingScriptable.name;
-
+                        
                         UpgradeCristalPrice.text = ""+(int)labo.cristalStats[labo.cristalLv].UpgradePrice.quantity;
                         UpgradeIcon.sprite = ressourceM.GetResourceLogo(labo.cristalStats[labo.cristalLv].UpgradePrice.ressource);
-
+                        
                         BuildingInfosRemoveButton.SetActive(false);
                         BuildingInfosPop.SetActive(false);
                         BuildingInfosMoveButton.SetActive(false);
@@ -357,7 +414,19 @@ public class UIManager_LAC : MonoBehaviour
                             BuildingInfosUpgradeButton.SetActive(false);
                             BuildingInfosPop.SetActive(false);
                             BuildingInfosMoveButton.SetActive(false);
+                            BuildingInfosRemoveButton.GetComponent<Button>().interactable =
+                                ressourceM.CanSpendResources(build.BuildingScriptable.price.quantity,
+                                    build.BuildingScriptable.price.ressource);
+                            RemovePrice.gameObject.SetActive(true);
+                            RemoveIcon.gameObject.SetActive(true);
+                            if (RemovePrice)
+                            {
+                                RemovePrice.text = build.BuildingScriptable.price.quantity.ToString();
+                                RemoveIcon.sprite = ressourceM.GetResourceLogo(build.BuildingScriptable.price.ressource);
+                            }
                             
+
+
                         }
                     }
                 }
@@ -417,6 +486,23 @@ public class UIManager_LAC : MonoBehaviour
         anim.Play();
     }
 
+    public void CloseBuyMenu()
+    {
+        statAchatBatiment.SetActive(false);
+    }
+
+    public void CloseBuildingInfos()
+    {
+        BuildingInfos.SetActive(false);
+    }
+
+    public void CloseBuildingMenu()
+    {
+        menuBatiment.SetActive(false);
+        boutonMenuBatiments.SetActive(true);
+    }
+
+
     #region Noise
     public void ActualizeNoiseSlider()
     {
@@ -426,33 +512,30 @@ public class UIManager_LAC : MonoBehaviour
 
         if (previousNoise != noiseSlider.value)
         {
+            if (noiseTextAnimator.GetBool("Noise") == false) noiseTextAnimator.SetBool("Noise", true);
             float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
          
             noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
-            Debug.Log(animSpeed);
+            noiseTextAnimator.speed = animSpeed;
             
             previousNoise = RessourceManager_LAC.instance.noise;
         }
     }
 
-    public void DisplayWavePreview(float noiseT = 0.7f, bool display = true)
+    public void DisplayWavePreview(float noiseT = 0.7f)
     {
-        float noiseR = RessourceManager_LAC.instance.noise / DiffCalculator.NoiseThreshold();
-        if (noiseR > noiseT && display)
+        float noiseR = noiseSlider.value / noiseSlider.maxValue;
+        if (noiseR > noiseT && !showTrig)
         {
+            showTrig = true;
+            wavePAnimator.SetTrigger("Show");
             UpdateWavePreview();
-            //
-            if(wavePAnimator)
-                wavePAnimator.SetBool("Show", true);
-            else
-                wavePreview.SetActive(true);
+               
         }
-        else
+        if(noiseR < noiseT && showTrig)
         {
-            if (wavePAnimator)
-                wavePAnimator.SetBool("Show", false);
-            else
-                wavePreview.SetActive(false);
+            showTrig = false;
+            wavePAnimator.SetTrigger("Show");
         }
 
     }
@@ -460,6 +543,22 @@ public class UIManager_LAC : MonoBehaviour
     
     #endregion
     
+    public void ChangeAudioStatus()
+    {
+        if(!onOff)
+        {
+            soundButton.GetComponent<Image>().sprite = soundOnSprite;
+            audioMixer.SetFloat("MasterVolume",0);
+            onOff = true;
+        }
+        else
+        {
+            soundButton.GetComponent<Image>().sprite = soundOffSprite;
+            audioMixer.SetFloat("MasterVolume", Mathf.Log10(-80));
+            onOff = false;
+        }
+    }
+
     public void PlayValidationSFX()
     {
         AudioManager.instance.PlaySound("UI_Validation");

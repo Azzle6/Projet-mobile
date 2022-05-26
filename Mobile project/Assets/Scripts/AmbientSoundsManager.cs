@@ -20,6 +20,7 @@ public class AmbientSoundsManager : MonoBehaviour
         {
             PlayRandomCrystalSound();
             delay = Random.Range(minDelay, maxDelay);
+            timePassed = 0;
         }
     }
 

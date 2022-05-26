@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "SoundList", menuName = "Scriptables/SoundList", order = 0)]
 public class SoundsListSO : ScriptableObject
@@ -36,6 +37,7 @@ public class SoundInfo
     public AudioClip clip;
     [Range(0,1)]
     public float clipVolume = 1;
+    public AudioMixerGroup audioMixer;
 }
 
 [System.Serializable]
