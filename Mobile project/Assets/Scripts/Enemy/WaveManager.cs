@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+
 
 
 public class WaveManager : MonoBehaviour
@@ -36,6 +38,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("Feedbacks")]
     [SerializeField] private GameObject waveAlert;
+    [SerializeField] private Volume normal, dark;
 
     void Awake()
     {
@@ -88,6 +91,10 @@ public class WaveManager : MonoBehaviour
 
         if (underAttack)
         {
+            dark.weight = Mathf.Clamp01(dark.weight + Time.deltaTime );
+            normal.weight = Mathf.Clamp01(normal.weight - Time.deltaTime );
+
+
             int currentEnnemies = 0;
             for(int i = 0; i < groups.Count; i++)
             {
@@ -105,6 +112,11 @@ public class WaveManager : MonoBehaviour
             }
         }
         
+        if(!underAttack && normal.weight != 1)
+        {
+            dark.weight = Mathf.Clamp01(dark.weight - Time.deltaTime );
+            normal.weight = Mathf.Clamp01(normal.weight + Time.deltaTime);
+        }
         DebugDifficultyText();
     }
     #region Wave Process
