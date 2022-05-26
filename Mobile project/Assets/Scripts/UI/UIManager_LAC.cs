@@ -61,6 +61,7 @@ public class UIManager_LAC : MonoBehaviour
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
     [SerializeField] private GameObject noiseHandle;
+    [SerializeField] private Animator noiseTextAnimator;
     private float previousNoise = 0;
     public Animation anim_techCompleted;
 
@@ -502,10 +503,11 @@ public class UIManager_LAC : MonoBehaviour
 
         if (previousNoise != noiseSlider.value)
         {
+            if (noiseTextAnimator.GetBool("Noise") == false) noiseTextAnimator.SetBool("Noise", true);
             float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
          
             noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
-            Debug.Log(animSpeed);
+            noiseTextAnimator.speed = animSpeed;
             
             previousNoise = RessourceManager_LAC.instance.noise;
         }
