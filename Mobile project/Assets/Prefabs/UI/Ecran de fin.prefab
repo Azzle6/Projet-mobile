@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 1559101938861639317}
   - component: {fileID: 8556690312491387637}
   - component: {fileID: 3303807496094780828}
-  - component: {fileID: 3574526887145495277}
+  - component: {fileID: 1425414381924124526}
   m_Layer: 5
   m_Name: Ecran de fin
   m_TagString: Untagged
@@ -533,7 +533,6 @@ MonoBehaviour:
   diffRef: {fileID: 11400000, guid: 185ee256b3eb882499c0bee6ffee968e, type: 2}
   victory: {fileID: 7951917281598037390}
   defeat: {fileID: 4700145146118059567}
-  anim: {fileID: 3574526887145495277}
   win: 0
   playTime: {fileID: 6963352967692824187}
   enemyKilled: {fileID: 3344731295978576800}
@@ -547,25 +546,29 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4060005918969030321}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!111 &3574526887145495277
-Animation:
+--- !u!95 &1425414381924124526
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4060005918969030321}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 6c1256d4e2a022b4ca94bc95a4742e64, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d940de265ce52894c8ae1fcfa0da839d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4539108246384939507
 GameObject:
   m_ObjectHideFlags: 0

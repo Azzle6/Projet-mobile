@@ -65,7 +65,9 @@ public class UIManager_LAC : MonoBehaviour
     public Animation anim_techCompleted;
 
     [Header("End")]
-    public GameObject endCanvas;
+    public UIEndStats_LAC endScreen;
+    public GameObject startDialogue, endDialogue;
+    bool startTrig = true, endTrig;
 
     private void Awake()
     {
@@ -82,6 +84,21 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        // end condition
+        if (WaveManager.gameOver && !endTrig)
+        {
+            endTrig = true;
+            endScreen.DisplayStats(false);
+        }
+            
+
+        // start dialogue
+        if(startTrig)
+        {
+            startTrig = false;
+            startDialogue.SetActive(true);
+        }
+
         DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
@@ -184,6 +201,13 @@ public class UIManager_LAC : MonoBehaviour
         {
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
+
+            // end game condition
+            if (endTrig)
+            {
+                endTrig = false;
+                endDialogue.SetActive(true);
+            }
         }
     }
 
@@ -201,7 +225,10 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
-        CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+        lab.UpgradeCristal();
+        endTrig = lab.maxCristal;
+
         UpdateUI();
     }
 
@@ -465,13 +492,7 @@ public class UIManager_LAC : MonoBehaviour
         boutonMenuBatiments.SetActive(true);
     }
 
-    public void DisplayEnd()
-    {
-        if (endCanvas)
-            endCanvas.SetActive(true);
-        else
-            Debug.LogWarning("No End UI");
-    }
+
     #region Noise
     public void ActualizeNoiseSlider()
     {
