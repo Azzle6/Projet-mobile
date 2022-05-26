@@ -8,7 +8,7 @@ public class UIEndStats_LAC : MonoBehaviour
 {
     public DiffcultySettings diffRef;
     public GameObject victory, defeat;
-    public Animation anim;
+    //public Animation anim;
     [HideInInspector] public bool win;
     [Header("Stats")]
     public TextMeshProUGUI playTime;
@@ -21,14 +21,17 @@ public class UIEndStats_LAC : MonoBehaviour
 
     public void DisplayStats( bool win)
     {
+        gameObject.SetActive(true);
+
         victory.SetActive(win);
         defeat.SetActive(!win);
 
-        playTime.text = "Play Time" + Time.fixedUnscaledTime;
+        playTime.text = "Play Time" + (int)(Time.fixedUnscaledTime/60) +" min";
         enemyKilled.text = "Enemies Killed " + EndStats_LAC.enemiesKilled;
         building.text = "Buildings " + EndStats_LAC.buildings;
         tech.text = "Tech discovered " + EndStats_LAC.techDiscovered + "/" + diffRef.techMax;
-        
+
+        //anim.Play();
     }
 
 }
