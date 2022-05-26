@@ -66,6 +66,8 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("End")]
     public GameObject endCanvas;
+    public GameObject startDialogue, endDialogue;
+    bool startTrig = true, endTrig;
 
     private void Awake()
     {
@@ -82,6 +84,13 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        // start dialogue
+        if(startTrig && Input.touchCount >= 1)
+        {
+            startTrig = false;
+            startDialogue.SetActive(true);
+        }
+
         DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
@@ -184,6 +193,13 @@ public class UIManager_LAC : MonoBehaviour
         {
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
+
+            // end game condition
+            if (endTrig)
+            {
+                endTrig = false;
+                endDialogue.SetActive(true);
+            }
         }
     }
 
@@ -201,7 +217,10 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
-        CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+        lab.UpgradeCristal();
+        endTrig = lab.maxCristal;
+
         UpdateUI();
     }
 
