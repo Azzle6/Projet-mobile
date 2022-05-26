@@ -72,7 +72,7 @@ public class UIManager_LAC : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private GameObject soundButton;
-    [SerializeField] private AudioMixerGroup audioMixer;
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Sprite soundOnSprite, soundOffSprite;
     bool onOff = true;
 
@@ -545,13 +545,13 @@ public class UIManager_LAC : MonoBehaviour
         if(!onOff)
         {
             soundButton.GetComponent<Image>().sprite = soundOnSprite;
-            audioMixer.audioMixer.SetFloat("MasterVolume",0);
+            audioMixer.SetFloat("MasterVolume",0);
             onOff = true;
         }
         else
         {
             soundButton.GetComponent<Image>().sprite = soundOffSprite;
-            audioMixer.audioMixer.SetFloat("MasterVolume", -80);
+            audioMixer.SetFloat("MasterVolume", Mathf.Log10(-80));
             onOff = false;
         }
     }
