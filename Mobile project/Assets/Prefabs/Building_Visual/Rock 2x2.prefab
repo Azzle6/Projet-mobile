@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: -0.086
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -106,7 +106,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5374ddbfb37d1ee428db240cb4cce2d0, type: 2}
+      objectReference: {fileID: 2100000, guid: 5c719835301beb54693ca1012d47d48d, type: 2}
+    - target: {fileID: -5754084199372789682, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6146093790778236840, guid: 74405891772d9f44699891ac812bb818, type: 3}
     - target: {fileID: 919132149155446097, guid: ddf10d94c53f59f4ea7cf72f5e22ee0d, type: 3}
       propertyPath: m_Name
       value: Fin_obstacle_2x2
