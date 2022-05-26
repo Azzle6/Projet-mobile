@@ -177,6 +177,7 @@ public class RessourceManager_LAC : MonoBehaviour
     public void RemoveExtractor(Extractor_LAC extractor)
     {
         StockRessource(-extractor.stock, extractor.ressourceType);
+        //population += extractor.people;
         activeExtractor.Remove(extractor);
         
     }
