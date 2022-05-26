@@ -43,6 +43,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Image UpgradeCristalIcon;
     [SerializeField] private TMP_Text UpgradePrice;
     [SerializeField] private Image UpgradeIcon;
+    [SerializeField] private TMP_Text RemovePrice;
+    [SerializeField] private Image RemoveIcon;
     [SerializeField] private GameObject BuildingInfosUpgradeCristal;
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
@@ -59,8 +61,14 @@ public class UIManager_LAC : MonoBehaviour
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
     [SerializeField] private GameObject noiseHandle;
+    [SerializeField] private Animator noiseTextAnimator;
     private float previousNoise = 0;
     public Animation anim_techCompleted;
+
+    [Header("End")]
+    public UIEndStats_LAC endScreen;
+    public GameObject startDialogue, endDialogue;
+    bool startTrig = true, endTrig;
 
     private void Awake()
     {
@@ -77,6 +85,21 @@ public class UIManager_LAC : MonoBehaviour
 
     private void Update()
     {
+        // end condition
+        if (WaveManager.gameOver && !endTrig)
+        {
+            endTrig = true;
+            endScreen.DisplayStats(false);
+        }
+            
+
+        // start dialogue
+        if(startTrig)
+        {
+            startTrig = false;
+            startDialogue.SetActive(true);
+        }
+
         DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
@@ -179,6 +202,13 @@ public class UIManager_LAC : MonoBehaviour
         {
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
+
+            // end game condition
+            if (endTrig)
+            {
+                endTrig = false;
+                endDialogue.SetActive(true);
+            }
         }
     }
 
@@ -196,7 +226,10 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
-        CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>().UpgradeCristal();
+        Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
+        lab.UpgradeCristal();
+        endTrig = lab.maxCristal;
+
         UpdateUI();
     }
 
@@ -253,6 +286,13 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
 
+        if (RemovePrice)
+        {
+            RemovePrice.gameObject.SetActive(false);
+            RemoveIcon.gameObject.SetActive(false);
+        }
+        
+
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
@@ -304,7 +344,7 @@ public class UIManager_LAC : MonoBehaviour
             Texts[0].text = "Stock : " + (int)extractor.stock +"/" +extractor.stats[extractor.level].maxStock; // stockage
             Texts[1].text = "Production : " + extractor.ProductCapacity() + " / s"; // production
             Texts[2].text =  ( extractor.people) + "/" + extractor.stats[extractor.level].maxPeople; // people
-            Texts[3].text = "Noise : " + extractor.stats[extractor.level].noise; // noise
+            Texts[3].text = "Noise : " + extractor.stats[extractor.level].noise * (1 + (extractor.people - 1) * extractor.stats[extractor.level].peopleNoise); // noise
             Texts[4].text = extractor.BuildingScriptable.name;
         }
         else
@@ -365,7 +405,19 @@ public class UIManager_LAC : MonoBehaviour
                             BuildingInfosUpgradeButton.SetActive(false);
                             BuildingInfosPop.SetActive(false);
                             BuildingInfosMoveButton.SetActive(false);
+                            BuildingInfosRemoveButton.GetComponent<Button>().interactable =
+                                ressourceM.CanSpendResources(build.BuildingScriptable.price.quantity,
+                                    build.BuildingScriptable.price.ressource);
+                            RemovePrice.gameObject.SetActive(true);
+                            RemoveIcon.gameObject.SetActive(true);
+                            if (RemovePrice)
+                            {
+                                RemovePrice.text = build.BuildingScriptable.price.quantity.ToString();
+                                RemoveIcon.sprite = ressourceM.GetResourceLogo(build.BuildingScriptable.price.ressource);
+                            }
                             
+
+
                         }
                     }
                 }
@@ -441,6 +493,7 @@ public class UIManager_LAC : MonoBehaviour
         boutonMenuBatiments.SetActive(true);
     }
 
+
     #region Noise
     public void ActualizeNoiseSlider()
     {
@@ -450,10 +503,11 @@ public class UIManager_LAC : MonoBehaviour
 
         if (previousNoise != noiseSlider.value)
         {
+            if (noiseTextAnimator.GetBool("Noise") == false) noiseTextAnimator.SetBool("Noise", true);
             float animSpeed = (noiseSlider.value - previousNoise)/noiseSlider.maxValue * 50;
          
             noiseHandle.GetComponentInChildren<Animator>().speed = animSpeed;
-            Debug.Log(animSpeed);
+            noiseTextAnimator.speed = animSpeed;
             
             previousNoise = RessourceManager_LAC.instance.noise;
         }
@@ -466,6 +520,7 @@ public class UIManager_LAC : MonoBehaviour
         {
             showTrig = true;
             wavePAnimator.SetTrigger("Show");
+            UpdateWavePreview();
                
         }
         if(noiseR < noiseT && showTrig)

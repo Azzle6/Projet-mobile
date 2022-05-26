@@ -13,7 +13,7 @@ public class Labo_LAC : Building
     public Transform cristalSocket;
     public GameObject cristalVisual;
 
-    
+    public bool maxCristal = false;
     int maxMatter, maxKnowledge;
     private void Start()
     {
@@ -52,6 +52,8 @@ public class Labo_LAC : Building
             AudioManager.instance.PlaySound("BUILD_Upgrade");
             Destroy(cristalVisual.gameObject);
             cristalVisual = Instantiate(cristalStats[cristalLv].visual, cristalSocket);
+
+            maxCristal = (cristalLv >= cristalStats.Length - 1);
         }
         //Debug.Log("Upgrade pas");
     }

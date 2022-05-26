@@ -62,7 +62,7 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 256
-  people: 0
+  people: 1
   shootPoint: {fileID: 916258084589062094}
   bulletPrefab: {fileID: 4549101373848522119, guid: 50884fc31506e464cb5cb147de653549, type: 3}
   targetAttack: {fileID: 2100000, guid: b2fd8e3b1f462004cbba51cf139365c9, type: 2}
@@ -255,8 +255,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.2017472, y: 10.27102, z: 3.3354096}
-  m_Center: {x: -0.015478283, y: 5.0871873, z: -0.022050738}
+  m_Size: {x: 3.2017472, y: 10.920074, z: 3.3354096}
+  m_Center: {x: -0.015478283, y: 4.762665, z: -0.022050738}
 --- !u!1001 &6866225852899213982
 PrefabInstance:
   m_ObjectHideFlags: 0

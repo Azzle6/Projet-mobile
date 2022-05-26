@@ -810,6 +810,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3642291137733874330, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3669090018121767973, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1080,6 +1084,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6367562976390440413, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672369746186529518, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6883649530069564687, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
@@ -3322,6 +3330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff1d66cbd833cad41a27d6b055d6a86a, type: 3}
+--- !u!1 &1064550698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4072738472429725071, guid: 482ebc282e124d84cb90653487d601ed, type: 3}
+  m_PrefabInstance: {fileID: 113796897}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1082487276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3862,6 +3875,10 @@ PrefabInstance:
       propertyPath: debug
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3262663041739135507, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
+      propertyPath: waveAlert
+      value: 
+      objectReference: {fileID: 1064550698}
     - target: {fileID: 3262663041739135507, guid: d2f95ab514c353f4491a6a4124787df5, type: 3}
       propertyPath: difficultyDebugText
       value: 
