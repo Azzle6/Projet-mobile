@@ -59,6 +59,7 @@ public class AudioManager : MonoBehaviour
                 AudioS.clip = sound.clip;
                 AudioS.volume = sound.clipVolume;
                 AudioS.loop = false;
+                AudioS.outputAudioMixerGroup = sound.audioMixer;
                 AudioS.Play();
                 Debug.Log(sound.clipName + " is playing");
                 break;
