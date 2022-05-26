@@ -67,7 +67,7 @@ public class Extractor_LAC : Building
     public override void Remove()
     {
         base.Remove();
-
+        RessourceManager_LAC.instance.population += people;
         RessourceManager_LAC.instance.StockRessource(-stock, ressourceType);
             
     }
