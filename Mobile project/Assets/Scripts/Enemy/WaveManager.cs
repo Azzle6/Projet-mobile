@@ -105,6 +105,7 @@ public class WaveManager : MonoBehaviour
                 }
             }
             totalEnnemies = currentEnnemies;
+            UIManager_LAC.instance.SetEnemiesCount(totalEnnemies);
             if (totalEnnemies == 0)
             {
                 underAttack = false;
