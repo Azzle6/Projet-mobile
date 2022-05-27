@@ -14,7 +14,7 @@ public class Building : MonoBehaviour
     public bool Activated;
     public BuildingSystem.Rotation curRotation = BuildingSystem.Rotation.Face;
     public BuildingStatSO[] statsSO;
-
+    [HideInInspector]public GameObject selectVFX;
     private void Awake()
     {
         if (Visual)

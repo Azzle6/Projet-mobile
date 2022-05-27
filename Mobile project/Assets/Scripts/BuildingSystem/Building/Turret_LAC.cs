@@ -13,18 +13,23 @@ public class Turret_LAC : Building
     public int people;
     [Header("Attack")]
     public Transform shootPoint;
+   
     public GameObject bulletPrefab;
     GameObject bullet;
     float travelBullet = 0;
     bool attacking;
-    [Header("Debug")]
+    [Header("Range")]
+    public Transform rangeOrigin;
+    [SerializeField] MeshRenderer rangeR;
+    [SerializeField] Material normalMat, aggroMat;
     //public GameObject target;
     //public MeshRenderer targetRenderer;
-    public Material targetAttack, targetAim;
+
 
     private void Start()
     {
         stats = Array.ConvertAll(statsSO, input => input as TurretSO_LAC);
+        rangeOrigin.localScale = new Vector3(stats[level].range * 0.5f, 1, stats[level].range * 0.5f);
     }
 
     public void Update()
@@ -32,6 +37,7 @@ public class Turret_LAC : Building
         UpdateTarget();
         if (enemyTarget)
         {
+            rangeR.material = aggroMat;
             if(!attacking)
                 attackDelay += Time.deltaTime;
 
@@ -69,12 +75,21 @@ public class Turret_LAC : Building
             if (bullet)
                 Destroy(bullet);
             attacking = false;
-
+            rangeR.material = normalMat;
             //target.gameObject.SetActive(false);
         }
             
     }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        rangeOrigin.localScale = new Vector3(stats[level].range * 0.5f, 1, stats[level].range * 0.5f);
+    }
 
+    public void ShowRange( bool show)
+    {
+        rangeOrigin.gameObject.SetActive(show);
+    }
     public override void RegisterTile()
     {
         base.RegisterTile();

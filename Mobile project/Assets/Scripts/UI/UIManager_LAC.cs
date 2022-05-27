@@ -209,12 +209,27 @@ public class UIManager_LAC : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
         if (Physics.Raycast(ray, out RaycastHit rayHit, 100, BuildingsLayer))
         {
+ 
             CurrentSelectedBuilding = rayHit.collider.gameObject;
-            
+
+            // show sfx
+            Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+            GameObject vfx = build.BuildingScriptable.PlacementVFX;
+            if(vfx)
+                build.selectVFX = Instantiate(vfx, build.transform.GetChild(0).transform);
+
             SwitchState(StateManager.State.SelectBuilding);
         }
         else
         {
+            // hide sfx
+            if (CurrentSelectedBuilding)
+            {
+                Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+                if (build)
+                    Destroy(build.selectVFX);
+            }
+
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
 
