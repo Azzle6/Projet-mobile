@@ -40,9 +40,12 @@ public class Building : MonoBehaviour
         
         if (BuildingScriptable.unlockedLevel > level)
         {
+            RessourceManager_LAC.instance.SpendRessource(statsSO[level].UpgradePrice.quantity,
+                statsSO[level].UpgradePrice.ressource);
             level = Mathf.Clamp(level+1, 0, statsSO.Length -1);
             Debug.Log("Upgrade !");
             int index = level + 1;
+            
             VFXManager.instance.PlayVFX("UpgradeBuildingLvl" + index, transform.GetChild(0).transform);
             AudioManager.instance.PlaySound("BUILD_Upgrade");
             return;
