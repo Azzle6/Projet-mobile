@@ -66,6 +66,14 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4549101373848522119, guid: 50884fc31506e464cb5cb147de653549, type: 3}
   targetAttack: {fileID: 2100000, guid: b2fd8e3b1f462004cbba51cf139365c9, type: 2}
   targetAim: {fileID: 2100000, guid: e9745b8df7af7a14480246f38347b928, type: 2}
+  upgradableVisuals:
+  - {fileID: 1061477795044260241}
+  - {fileID: 1315360807945682011}
+  - {fileID: 5243196990607853393}
+  upgradesMat:
+  - {fileID: 2100000, guid: 622c2a2f0db04c044b7dd7259c7c43fe, type: 2}
+  - {fileID: 2100000, guid: 6d74f19310600c548b874b35d2dc4ff7, type: 2}
+  - {fileID: 2100000, guid: 64a78e3cdc0e6e94d88dd456df7c245a, type: 2}
 --- !u!1 &8653451476063252308
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,9 +263,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1716074066850433702, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
   m_PrefabInstance: {fileID: 3793211974386774717}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1061477795044260241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4188086380888787756, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
+  m_PrefabInstance: {fileID: 3793211974386774717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5944114485528094850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7411111411431184959, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
+  m_PrefabInstance: {fileID: 3793211974386774717}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1315360807945682011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2802694300948123366, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
+  m_PrefabInstance: {fileID: 3793211974386774717}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5243196990607853393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8964311513657570796, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
   m_PrefabInstance: {fileID: 3793211974386774717}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1724760219766740228
