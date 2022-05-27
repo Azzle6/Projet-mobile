@@ -68,6 +68,8 @@ public class EnemyBoid : Boid
         AudioManager.instance.PlaySound("MOBS_MobA_Death");
 
         EndStats_LAC.enemiesKilled++;
+        if (WaveManager.instance)
+            WaveManager.instance.totalEnnemies--;
         Destroy(gameObject, 5);
         Destroy(this);
     }

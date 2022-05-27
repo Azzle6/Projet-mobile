@@ -95,7 +95,7 @@ public class WaveManager : MonoBehaviour
             normal.weight = Mathf.Clamp01(normal.weight - Time.deltaTime );
 
 
-            int currentEnnemies = 0;
+            /*int currentEnnemies = 0;
             for(int i = 0; i < groups.Count; i++)
             {
                 if (groups[i])
@@ -103,9 +103,9 @@ public class WaveManager : MonoBehaviour
                     //Debug.Log("Group " + groups[i].gameObject.name + " enemy " + groups[i].enemies.Count);
                     currentEnnemies += groups[i].enemies.Count;
                 }
-            }
-            totalEnnemies = currentEnnemies;
-            if (totalEnnemies == 0)
+            }*/
+
+            if (totalEnnemies <= 0)
             {
                 underAttack = false;
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
@@ -164,6 +164,7 @@ public class WaveManager : MonoBehaviour
     }
     public void StartWave(int enemyToSpawn)
     {
+        totalEnnemies = enemyToSpawn;
         AudioManager.instance.PlaySound("THREAT_ThresholdReached");
         waveAlert.SetActive(true);
         Invoke("WaveAlertDisable",5f);
