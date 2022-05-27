@@ -57,6 +57,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Image[] waveZone = new Image[0];
     [SerializeField] private Animator wavePAnimator;
     bool showTrig;
+    [SerializeField] private TMP_Text enemiesCount;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
@@ -75,6 +76,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Sprite soundOnSprite, soundOffSprite;
     bool onOff = true;
+    [SerializeField]private float touchDuration;
+    private bool isTouching;
 
     private void Awake()
     {
@@ -106,7 +109,10 @@ public class UIManager_LAC : MonoBehaviour
             startDialogue.SetActive(true);
         }
 
-        DisplayWavePreview();
+        if (InputsManager.Click()) touchDuration = 0;
+        else if (InputsManager.IsDown()) touchDuration += Time.deltaTime;
+        
+        //DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
@@ -120,8 +126,9 @@ public class UIManager_LAC : MonoBehaviour
 
         UpdateRessourcesSlider();
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.5f)
         {
+            Debug.Log("detection");
             bool canSwitchSelected = true;
             
             //Pour déterminer si le joueur clique sur l'UI
@@ -540,6 +547,10 @@ public class UIManager_LAC : MonoBehaviour
 
     }
 
+    public void SetEnemiesCount(int enemies)
+    {
+        enemiesCount.text = enemies + " enemies";
+    }
     
     #endregion
     
