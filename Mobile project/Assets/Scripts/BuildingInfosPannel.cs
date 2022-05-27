@@ -17,6 +17,7 @@ public class BuildingInfosPannel : MonoBehaviour
     [SerializeField] private TMP_Text popNeededTxt;
     public BuildingSO buildingInf;
 
+    string extractorRessource = "";
 
     public void RegisterInstance()
     {
@@ -42,7 +43,16 @@ public class BuildingInfosPannel : MonoBehaviour
         if (buildingInf.buildingStats.GetType() == typeof(ExtractorSO_LAC))
         {
             ExtractorSO_LAC stats = (ExtractorSO_LAC) buildingInf.buildingStats;
-            buildProd.text = "Production : " + stats.production.quantity + "/s " + stats.production.ressource;
+            if(stats.production.ressource == RessourceManager_LAC.RessourceType.KNOWLEDGE)
+            {
+                extractorRessource = "Crystals";
+            }
+            else
+            {
+                extractorRessource = stats.production.ressource.ToString();
+            }
+
+            buildProd.text = "Production : " + stats.production.quantity + "/s " + extractorRessource;
             popNeededTxt.text = "1";
         }
         else if (buildingInf.buildingStats.GetType() == typeof(HouseSO_LAC))
