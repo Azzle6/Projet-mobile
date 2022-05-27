@@ -57,6 +57,7 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Image[] waveZone = new Image[0];
     [SerializeField] private Animator wavePAnimator;
     bool showTrig;
+    [SerializeField] private TMP_Text enemiesCount;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
@@ -209,27 +210,12 @@ public class UIManager_LAC : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
         if (Physics.Raycast(ray, out RaycastHit rayHit, 100, BuildingsLayer))
         {
- 
             CurrentSelectedBuilding = rayHit.collider.gameObject;
-
-            // show sfx
-            Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
-            GameObject vfx = build.BuildingScriptable.PlacementVFX;
-            if(vfx)
-                build.selectVFX = Instantiate(vfx, build.transform.GetChild(0).transform);
-
+            
             SwitchState(StateManager.State.SelectBuilding);
         }
         else
         {
-            // hide sfx
-            if (CurrentSelectedBuilding)
-            {
-                Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
-                if (build)
-                    Destroy(build.selectVFX);
-            }
-
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
 
@@ -347,7 +333,7 @@ public class UIManager_LAC : MonoBehaviour
         if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
         {
             Labo_LAC lab = build as Labo_LAC;
-            BuildingInfosUpgradeCristal.SetActive(true);
+            BuildingInfosUpgradeCristal.SetActive(lab.CanUpgradeCristal());
             if (ressourceM.CanSpendResources(lab.cristalStats[lab.cristalLv].UpgradePrice.quantity, lab.cristalStats[lab.cristalLv].UpgradePrice.ressource))
             {
                 BuildingInfosUpgradeCristal.GetComponent<Button>().interactable = true;
@@ -561,6 +547,10 @@ public class UIManager_LAC : MonoBehaviour
 
     }
 
+    public void SetEnemiesCount(int enemies)
+    {
+        enemiesCount.text = enemies + " enemies";
+    }
     
     #endregion
     
