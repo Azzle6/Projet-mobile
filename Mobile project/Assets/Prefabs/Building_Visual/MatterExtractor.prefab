@@ -5172,6 +5172,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6932174129405317879}
     m_Modifications:
+    - target: {fileID: 909373391683292554, guid: 5792a672c8d9bbe478582be4306f8b73, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909373391728094037, guid: 5792a672c8d9bbe478582be4306f8b73, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 909373391728094039, guid: 5792a672c8d9bbe478582be4306f8b73, type: 3}
       propertyPath: m_Name
       value: ShakeOthers
@@ -5231,6 +5239,10 @@ PrefabInstance:
     - target: {fileID: 909373391855259140, guid: 5792a672c8d9bbe478582be4306f8b73, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 909373391855259162, guid: 5792a672c8d9bbe478582be4306f8b73, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5792a672c8d9bbe478582be4306f8b73, type: 3}
