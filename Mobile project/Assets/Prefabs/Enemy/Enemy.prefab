@@ -58,7 +58,7 @@ MonoBehaviour:
   enemyState: 0
   target: {fileID: 0}
   health: 0
-  attackDebug: {fileID: 0}
+  dieParticle: {fileID: 7604150494728995246}
 --- !u!135 &91820558664734504
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -313,6 +313,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241710605672906882, guid: 159abc4177863b142acfe342bc90eb41, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241710605672906892, guid: 159abc4177863b142acfe342bc90eb41, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3241710605672906893, guid: 159abc4177863b142acfe342bc90eb41, type: 3}
@@ -376,5 +380,10 @@ PrefabInstance:
 --- !u!4 &7604150494728995247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3241710605672906893, guid: 159abc4177863b142acfe342bc90eb41, type: 3}
+  m_PrefabInstance: {fileID: 5006736186814677282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7604150494728995246 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3241710605672906892, guid: 159abc4177863b142acfe342bc90eb41, type: 3}
   m_PrefabInstance: {fileID: 5006736186814677282}
   m_PrefabAsset: {fileID: 0}
