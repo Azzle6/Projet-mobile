@@ -76,6 +76,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Sprite soundOnSprite, soundOffSprite;
     bool onOff = true;
+    [SerializeField]private float touchDuration;
+    private bool isTouching;
 
     private void Awake()
     {
@@ -107,6 +109,9 @@ public class UIManager_LAC : MonoBehaviour
             startDialogue.SetActive(true);
         }
 
+        if (InputsManager.Click()) touchDuration = 0;
+        else if (InputsManager.IsDown()) touchDuration += Time.deltaTime;
+        
         //DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
@@ -121,8 +126,9 @@ public class UIManager_LAC : MonoBehaviour
 
         UpdateRessourcesSlider();
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Click())
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.5f)
         {
+            Debug.Log("detection");
             bool canSwitchSelected = true;
             
             //Pour déterminer si le joueur clique sur l'UI
