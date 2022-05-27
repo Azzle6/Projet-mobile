@@ -23,8 +23,9 @@ public class EnemyBoid : Boid
 
     private void Start()
     {
+        
         AudioManager.instance.PlaySound("MOBS_MobA_Appear");
-        VFXManager.instance.PlayVFX("SpawnEnemies", transform);
+        VFXManager.instance.PlayVFX("SpawnEnemies", transform.parent);
     }
 
     public void Initialize(EnemyGroup enemyGroup)
