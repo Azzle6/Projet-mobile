@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9152747946323592815
+--- !u!114 &-4282598628421500110
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BulletTurret
-  m_Shader: {fileID: -6465566751694194690, guid: cf9427e54d679204d90e49eee2880951, type: 3}
+  m_Name: M_RangeTurretAggro
+  m_Shader: {fileID: -6465566751694194690, guid: e9bd9072d4ff31c49a3016022a734cbf, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,18 +32,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_4cc8d3bc991c47c59ec10241c57101f0:
-        m_Texture: {fileID: 2800000, guid: 2f60eac4076063d45907583e9862e1f9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_9344cdbcd40e4cfdb96c6924d0853bb6:
-        m_Texture: {fileID: 2800000, guid: 96b7472c828c1ca41b7307e403635d87, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_a92ec63da0f842798ad12187fc732da4:
-        m_Texture: {fileID: 2800000, guid: 29751aea79f9e1e4b963d7fc19183d3e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -101,6 +89,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_8c57329b80354a308f3e3f053aab9fb9: -0.14
+    - Vector1_9d84c93eb25642b89c5b08d7289073d5: -0.01
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -128,9 +118,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_fd1f7b1ffc9144dabae896bb6f318e9d: {r: 0.5927376, g: 3.3962264, b: 3.086001, a: 0}
-    - Vector2_4ca04aece0fb4504afa6687746a06937: {r: 1, g: 0, b: 0, a: 0}
-    - Vector2_805f4fdbb532458e9c87db276ce77d2f: {r: 0.5, g: 0, b: 0, a: 0}
+    - Color_ddb0656930494b0f99cd83f39e98e9d9: {r: 0.9882353, g: 0.53944737, b: 0, a: 0}
+    - Color_ddb0656930494b0f99cd83f39e98e9d9_1: {r: 1, g: 0.400387, b: 0, a: 0}
+    - Vector2_1272804ea6bd46bbb295bc50d6efc455: {r: 0, g: 0.36, b: 0, a: 0}
+    - Vector2_7557f0defac249df9a191fafcc3c0050: {r: 0.05, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
