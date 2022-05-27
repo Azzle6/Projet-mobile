@@ -305,7 +305,7 @@ public class UIManager_LAC : MonoBehaviour
         
         Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
         ColorBlock colors = BuildingInfosUpgradeButton.GetComponent<Button>().colors;
-        Debug.Log("Display building " + build.name);
+        //Debug.Log("Display building " + build.name);
         if (build.level < build.BuildingScriptable.unlockedLevel && ressourceM.CanSpendResources(build.statsSO[build.level].UpgradePrice.quantity, build.statsSO[build.level].UpgradePrice.ressource))
         {
             BuildingInfosUpgradeButton.GetComponent<Button>().interactable = true;
@@ -391,7 +391,7 @@ public class UIManager_LAC : MonoBehaviour
                     {
                         Texts[1].text = "Research Boost x" + labo.laboStats[labo.level].researchBoost; 
                         Texts[0].text = "Matter Stock +" + labo.laboStats[labo.level].maxStockMatter; 
-                        Texts[3].text = "Knowledge Stock +" + labo.laboStats[labo.level].maxStockKnowledge; 
+                        Texts[3].text = "Crystals Stock +" + labo.laboStats[labo.level].maxStockKnowledge; 
                         Texts[4].text = labo.BuildingScriptable.name;
                         
                         UpgradeCristalPrice.text = ""+(int)labo.cristalStats[labo.cristalLv].UpgradePrice.quantity;
