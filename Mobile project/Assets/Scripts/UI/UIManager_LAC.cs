@@ -57,7 +57,6 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private Image[] waveZone = new Image[0];
     [SerializeField] private Animator wavePAnimator;
     bool showTrig;
-    [SerializeField] private TMP_Text enemiesCount;
 
     [Header("UI")] 
     [SerializeField] private Slider noiseSlider;
@@ -107,7 +106,7 @@ public class UIManager_LAC : MonoBehaviour
             startDialogue.SetActive(true);
         }
 
-        //DisplayWavePreview();
+        DisplayWavePreview();
         //UpdateWavePreview();
         //UpdateUI();
         //Debug.Log(StateManager.CurrentState);
@@ -541,10 +540,6 @@ public class UIManager_LAC : MonoBehaviour
 
     }
 
-    public void SetEnemiesCount(int enemies)
-    {
-        enemiesCount.text = enemies + " enemies";
-    }
     
     #endregion
     

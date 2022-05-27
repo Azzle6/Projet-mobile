@@ -15,11 +15,6 @@ public class Labo_LAC : Building
 
     public bool maxCristal = false;
     int maxMatter, maxKnowledge;
-    
-    [Header("Upgrade")]
-    public GameObject[] upgradableVisuals;
-    public Material[] upgradesMat;
-    
     private void Start()
     {
         cristalVisual = Instantiate(cristalStats[0].visual, cristalSocket);
@@ -35,15 +30,6 @@ public class Labo_LAC : Building
     {
         base.Upgrade();
         TechnoManager.instance.timeBoost = laboStats[level].researchBoost;
-        
-        foreach (GameObject GO in upgradableVisuals)
-        {
-            MeshRenderer meshRend = GO.GetComponent<MeshRenderer>();
-            if (meshRend)
-            {
-                meshRend.material = upgradesMat[level];
-            }
-        }
 
         // upgrade max stock
         RessourceManager_LAC.instance.maxKnowledge += (laboStats[level].maxStockKnowledge - maxKnowledge);

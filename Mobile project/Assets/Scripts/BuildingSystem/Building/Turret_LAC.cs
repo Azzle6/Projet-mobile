@@ -22,26 +22,9 @@ public class Turret_LAC : Building
     //public MeshRenderer targetRenderer;
     public Material targetAttack, targetAim;
 
-    [Header("Upgrades")] 
-    public GameObject[] upgradableVisuals;
-    public Material[] upgradesMat;
-
     private void Start()
     {
         stats = Array.ConvertAll(statsSO, input => input as TurretSO_LAC);
-    }
-
-    public override void Upgrade()
-    {
-        base.Upgrade();
-        foreach (GameObject GO in upgradableVisuals)
-        {
-            MeshRenderer meshRend = GO.GetComponent<MeshRenderer>();
-            if (meshRend)
-            {
-                meshRend.material = upgradesMat[level];
-            }
-        }
     }
 
     public void Update()

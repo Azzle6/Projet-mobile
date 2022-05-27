@@ -103,10 +103,9 @@ public class WaveManager : MonoBehaviour
                     //Debug.Log("Group " + groups[i].gameObject.name + " enemy " + groups[i].enemies.Count);
                     currentEnnemies += groups[i].enemies.Count;
                 }
-            }
-            totalEnnemies = currentEnnemies;
-            UIManager_LAC.instance.SetEnemiesCount(totalEnnemies);
-            if (totalEnnemies == 0)
+            }*/
+
+            if (totalEnnemies <= 0)
             {
                 underAttack = false;
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
