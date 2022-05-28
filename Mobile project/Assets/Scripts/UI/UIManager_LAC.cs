@@ -126,7 +126,7 @@ public class UIManager_LAC : MonoBehaviour
 
         UpdateRessourcesSlider();
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.5f)
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding && StateManager.CurrentState != StateManager.State.ChooseBuilding && StateManager.CurrentState != StateManager.State.BuildingInfosPannel) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.5f)
         {
             Debug.Log("detection");
             bool canSwitchSelected = true;
@@ -213,9 +213,23 @@ public class UIManager_LAC : MonoBehaviour
             CurrentSelectedBuilding = rayHit.collider.gameObject;
             
             SwitchState(StateManager.State.SelectBuilding);
+
+            // show vfx
+            Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+            GameObject vfx = build.BuildingScriptable.PlacementVFX;
+            if (vfx)
+                build.selectVFX = Instantiate(vfx, build.transform.GetChild(0).transform);
         }
         else
         {
+            // hide sfx
+            if (CurrentSelectedBuilding)
+            {
+                Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+                if (build)
+                    Destroy(build.selectVFX);
+            }
+
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
 
@@ -261,8 +275,8 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingPannel()
     {
-        /*BuildingInfos.SetActive(false);
-        BuildingChoiceMenu.SetActive(false);
+        BuildingInfos.SetActive(false);
+        /*BuildingChoiceMenu.SetActive(false);
         BuildingPannelInfos.SetActive(true);*/
         
     }
