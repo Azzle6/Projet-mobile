@@ -261,8 +261,8 @@ public class UIManager_LAC : MonoBehaviour
 
     private void DisplayBuildingPannel()
     {
-        /*BuildingInfos.SetActive(false);
-        BuildingChoiceMenu.SetActive(false);
+        BuildingInfos.SetActive(false);
+        /*BuildingChoiceMenu.SetActive(false);
         BuildingPannelInfos.SetActive(true);*/
         
     }
