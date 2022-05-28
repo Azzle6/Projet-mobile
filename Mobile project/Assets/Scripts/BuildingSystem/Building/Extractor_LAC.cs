@@ -120,15 +120,20 @@ public class Extractor_LAC : Building
     #region Attack
     public void TakeDamage(int damage)
     {
-        if(damage <= stock)
-            stock -= damage;
-        else if(fonctionnal)
+        if (fonctionnal)
         {
-            RessourceManager_LAC.instance.StockRessource(-attackStock, ressourceType);
-            stock = attackStock = 0;
-            TakeDown();
+            if (damage <= stock)
+            {
+                stock -= damage;
+                RessourceManager_LAC.instance.StockRessource(-damage, ressourceType);
+            }
+            else
+            {
+                RessourceManager_LAC.instance.StockRessource(-stock, ressourceType);
+                stock = attackStock = 0;
+                TakeDown();
+            }
         }
-        
     }
     public void TakeDown()
     {
