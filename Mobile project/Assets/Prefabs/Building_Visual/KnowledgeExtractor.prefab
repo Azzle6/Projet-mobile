@@ -85,6 +85,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 12ac8f2fceabf204282b2002a82f5a9c, type: 2}
   - {fileID: 11400000, guid: 74751c914f90e0744bc8d77c9f005e7e, type: 2}
   - {fileID: 11400000, guid: a73b737b5c5e59c478d8da1bf5f1492d, type: 2}
+  selectVFX: {fileID: 0}
   ressourceType: 1
   stats:
   - {fileID: 11400000, guid: 472910bd94163a846b5e2c6ae4f6b3c9, type: 2}
@@ -96,6 +97,7 @@ MonoBehaviour:
   stock: 0
   attackStock: 0
   smokeFX: {fileID: 7862318042966177521}
+  shakeEffect: {fileID: 3774183544150025429}
   upgradableVisuals:
   - {fileID: 5020909921470926174}
   - {fileID: 2523139498007831240}
@@ -433,6 +435,11 @@ GameObject:
 --- !u!198 &7862318042966177521 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6459319508253779059, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
+  m_PrefabInstance: {fileID: 3798940509944353410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3774183544150025429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 60829020387604055, guid: 068ad4f0b6cf47f4a8f7009e836ba86b, type: 3}
   m_PrefabInstance: {fileID: 3798940509944353410}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &6670648789622458792
