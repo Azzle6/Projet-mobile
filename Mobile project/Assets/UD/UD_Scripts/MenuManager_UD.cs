@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuManager_UD : MonoBehaviour
+public class MenuManager_UD : MonoBehaviour
 {
-    public string gameSceneName;
-
-    public void LaunchGame()
+    public void SceneLoad(string gameSceneName)
     {
         SceneManager.LoadScene(gameSceneName);
     }
@@ -15,5 +13,10 @@ public class MainMenuManager_UD : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void DestroyMainSceneObjects()
+    {
+        Destroy(WaveManager.instance.gameObject);
     }
 }
