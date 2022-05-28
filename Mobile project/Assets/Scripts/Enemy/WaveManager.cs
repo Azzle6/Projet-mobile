@@ -42,6 +42,8 @@ public class WaveManager : MonoBehaviour
 
     void Awake()
     {
+        EndStats_LAC.ResetStat();
+
         if (instance != this && instance)
             Destroy(this);
         else

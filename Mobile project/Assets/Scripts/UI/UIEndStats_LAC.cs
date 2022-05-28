@@ -13,11 +13,7 @@ public class UIEndStats_LAC : MonoBehaviour
     [Header("Stats")]
     public TextMeshProUGUI playTime;
     public TextMeshProUGUI enemyKilled, building, tech;
-    void Start()
-    {
-        EndStats_LAC.ResetStat();
-        DisplayStats(win);
-    }
+
 
     public void DisplayStats( bool win)
     {
