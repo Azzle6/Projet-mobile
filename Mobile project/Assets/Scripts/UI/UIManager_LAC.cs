@@ -284,6 +284,7 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
+        Debug.Log("Upgrade Cristal");
         Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
         lab.UpgradeCristal();
         endTrig = lab.maxCristal;
