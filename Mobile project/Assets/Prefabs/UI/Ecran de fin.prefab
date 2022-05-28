@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 8556690312491387637}
   - component: {fileID: 3303807496094780828}
   - component: {fileID: 1425414381924124526}
+  - component: {fileID: 3127740068297198421}
   m_Layer: 5
   m_Name: Ecran de fin
   m_TagString: Untagged
@@ -569,6 +570,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3127740068297198421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060005918969030321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ef06f3521fdee4fb1972ca7a2f9563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4539108246384939507
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,8 +766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -12.5}
-  m_SizeDelta: {x: 200, y: 75}
+  m_AnchoredPosition: {x: 225.11922, y: -12.5}
+  m_SizeDelta: {x: 250, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5111231452708651038
 CanvasRenderer:
@@ -1431,7 +1444,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5627860544946654524}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3127740068297198421}
+        m_TargetAssemblyTypeName: MenuManager_UD, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7903977632103818751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,8 +1491,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 0}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 225.11922, y: 0}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7403044657443927377
 CanvasRenderer:
@@ -1686,7 +1711,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7275856489157449398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3127740068297198421}
+        m_TargetAssemblyTypeName: MenuManager_UD, Assembly-CSharp
+        m_MethodName: SceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3127740068297198421}
+        m_TargetAssemblyTypeName: MenuManager_UD, Assembly-CSharp
+        m_MethodName: DestroyMainSceneObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &815826961707923012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1911,13 +1960,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 908129d3b0dbe104d98caba9898d0195, type: 3}
---- !u!224 &6898796604038227169 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8903531801121896708, guid: 908129d3b0dbe104d98caba9898d0195, type: 3}
-  m_PrefabInstance: {fileID: 2608360395653324261}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7951917281598037390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5361574213925585003, guid: 908129d3b0dbe104d98caba9898d0195, type: 3}
+  m_PrefabInstance: {fileID: 2608360395653324261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6898796604038227169 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8903531801121896708, guid: 908129d3b0dbe104d98caba9898d0195, type: 3}
   m_PrefabInstance: {fileID: 2608360395653324261}
   m_PrefabAsset: {fileID: 0}
