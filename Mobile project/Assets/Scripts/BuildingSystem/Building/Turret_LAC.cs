@@ -34,6 +34,7 @@ public class Turret_LAC : Building
     private void Start()
     {
         stats = Array.ConvertAll(statsSO, input => input as TurretSO_LAC);
+        rangeOrigin.gameObject.SetActive(false);
     }
 
     public override void Upgrade()
