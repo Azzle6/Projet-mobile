@@ -49,6 +49,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private GameObject BuildingInfosRemoveButton;
     [SerializeField] private GameObject BuildingInfosMoveButton;
     [SerializeField] private GameObject BuildingInfosPop;
+    [SerializeField] private TMP_Text levelDisplayText;
+    [SerializeField] private GameObject BuildingInfosLevelDisplay;
 
 
     [Header("Wave Preview")]
@@ -210,12 +212,40 @@ public class UIManager_LAC : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(InputsManager.GetPosition());
         if (Physics.Raycast(ray, out RaycastHit rayHit, 100, BuildingsLayer))
         {
+            GameObject lastSelectedBuilding = CurrentSelectedBuilding;
             CurrentSelectedBuilding = rayHit.collider.gameObject;
+            ;
+            if (lastSelectedBuilding != CurrentSelectedBuilding)
+            {
+                if (lastSelectedBuilding)
+                {
+                    Building lastBuild = lastSelectedBuilding.GetComponentInParent<Building>();
+                    if (lastBuild)
+                        Destroy(lastBuild.selectVFX);
+                }
+                
+                Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+                GameObject vfx = build.BuildingScriptable.PlacementVFX;
+                if (vfx)
+                    build.selectVFX = Instantiate(vfx, build.transform.GetChild(0).transform);
+            }
+            
             
             SwitchState(StateManager.State.SelectBuilding);
+
+            // show vfx
+            
         }
         else
         {
+            // hide sfx
+            if (CurrentSelectedBuilding)
+            {
+                Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
+                if (build)
+                    Destroy(build.selectVFX);
+            }
+
             CurrentSelectedBuilding = null;
             SwitchState(StateManager.State.Free);
 
@@ -301,6 +331,7 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfosUpgradeCristal.SetActive(false);
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
+        BuildingInfosLevelDisplay.gameObject.SetActive(true);
 
         if (RemovePrice)
         {
@@ -328,6 +359,10 @@ public class UIManager_LAC : MonoBehaviour
         BuildingInfosUpgradeButton.GetComponent<Button>().colors = colors;
         UpgradePrice.text = "Price : " + build.statsSO[build.level].UpgradePrice.quantity;
         UpgradeIcon.sprite = ressourceM.GetResourceLogo(build.statsSO[build.level].UpgradePrice.ressource);
+        
+        //Display lvl
+        int lvl = build.level + 1;
+        levelDisplayText.text = lvl.ToString();
         
         // upgrade cristal
         if(build is Labo_LAC && BuildingInfosUpgradeCristal != null)
@@ -426,6 +461,7 @@ public class UIManager_LAC : MonoBehaviour
                                     build.BuildingScriptable.price.ressource);
                             RemovePrice.gameObject.SetActive(true);
                             RemoveIcon.gameObject.SetActive(true);
+                            BuildingInfosLevelDisplay.gameObject.SetActive(false);
                             if (RemovePrice)
                             {
                                 RemovePrice.text = build.BuildingScriptable.price.quantity.ToString();
