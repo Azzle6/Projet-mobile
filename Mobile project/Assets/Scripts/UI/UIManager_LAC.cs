@@ -158,6 +158,12 @@ public class UIManager_LAC : MonoBehaviour
         StateManager.CurrentState = newState;
         UpdateUI();
     }
+
+    public void PauseGame(bool pause)
+    {
+        if (pause) Time.timeScale = 0;
+        else Time.timeScale = 1;
+    }
     
     public void SwitchState(int newState)
     {
