@@ -158,6 +158,12 @@ public class UIManager_LAC : MonoBehaviour
         StateManager.CurrentState = newState;
         UpdateUI();
     }
+
+    public void PauseGame(bool pause)
+    {
+        if (pause) Time.timeScale = 0;
+        else Time.timeScale = 1;
+    }
     
     public void SwitchState(int newState)
     {
@@ -222,12 +228,20 @@ public class UIManager_LAC : MonoBehaviour
                     Building lastBuild = lastSelectedBuilding.GetComponentInParent<Building>();
                     if (lastBuild)
                         Destroy(lastBuild.selectVFX);
+
+                    Turret_LAC lastTurret = lastBuild as Turret_LAC;
+                    if (lastTurret)
+                        lastTurret.rangeOrigin.gameObject.SetActive(false);
                 }
                 
                 Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
                 GameObject vfx = build.BuildingScriptable.PlacementVFX;
                 if (vfx)
                     build.selectVFX = Instantiate(vfx, build.transform.GetChild(0).transform);
+
+                Turret_LAC turret = build as Turret_LAC;
+                if (turret)
+                    turret.rangeOrigin.gameObject.SetActive(true);
             }
             
             
@@ -244,6 +258,10 @@ public class UIManager_LAC : MonoBehaviour
                 Building build = CurrentSelectedBuilding.GetComponentInParent<Building>();
                 if (build)
                     Destroy(build.selectVFX);
+
+                Turret_LAC turret = build as Turret_LAC;
+                if (turret)
+                    turret.rangeOrigin.gameObject.SetActive(false);
             }
 
             CurrentSelectedBuilding = null;
@@ -272,6 +290,7 @@ public class UIManager_LAC : MonoBehaviour
     }
     public void UpgradeCristal()
     {
+        Debug.Log("Upgrade Cristal");
         Labo_LAC lab = CurrentSelectedBuilding.GetComponentInParent<Labo_LAC>();
         lab.UpgradeCristal();
         endTrig = lab.maxCristal;
