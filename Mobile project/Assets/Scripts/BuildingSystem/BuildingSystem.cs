@@ -89,7 +89,7 @@ public class BuildingSystem : MonoBehaviour
 
         while (!isMovingBuilding)
         {
-            Debug.Log("isNotMoving");
+            //Debug.Log("isNotMoving");
             UIManager_LAC.instance.SwitchState(StateManager.State.HoldBuilding);
             if (InputsManager.Click())
             {
@@ -131,6 +131,10 @@ public class BuildingSystem : MonoBehaviour
         ChangeColor(prevAreaPositions, Color.white);
         
         ChangeColor(currentAreaPositions, color);
+
+        
+        UIManager_LAC.instance.confirmPlacementButton.interactable = canPlaceBuilding;
+        
     }
 
     public void ConfirmBuild(bool result)
@@ -144,8 +148,11 @@ public class BuildingSystem : MonoBehaviour
             if (!displaceBuildingPhase)
             {
                 Building build = currentBuilding.GetComponent<Building>();
+                House_LAC house = currentBuilding.GetComponent<House_LAC>();
+
+                bool consumePop = !house;
                 RessourceManager_LAC.instance.CanPlaceBuilding(build.BuildingScriptable.price.quantity,
-                    build.BuildingScriptable.price.ressource);
+                    build.BuildingScriptable.price.ressource, consumePop);
             }
             EndStats_LAC.buildings++; // stats update
             currentBuilding = null;
