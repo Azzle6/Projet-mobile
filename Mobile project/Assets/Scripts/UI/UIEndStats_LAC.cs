@@ -9,15 +9,10 @@ public class UIEndStats_LAC : MonoBehaviour
     public DiffcultySettings diffRef;
     public GameObject victory, defeat;
     //public Animation anim;
-    [HideInInspector] public bool win;
     [Header("Stats")]
     public TextMeshProUGUI playTime;
     public TextMeshProUGUI enemyKilled, building, tech;
-    void Start()
-    {
-        EndStats_LAC.ResetStat();
-        DisplayStats(win);
-    }
+
 
     public void DisplayStats( bool win)
     {

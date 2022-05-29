@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56e55966e90617c4da35dcc60ee4e5f7, type: 2}
   - {fileID: 11400000, guid: d5c1a6f317e4eb047959b552246813d3, type: 2}
   - {fileID: 11400000, guid: fb0cc85cf99e8084a85271a95ccb9c44, type: 2}
+  selectVFX: {fileID: 0}
   stats:
   - {fileID: 11400000, guid: 56e55966e90617c4da35dcc60ee4e5f7, type: 2}
   enemyTarget: {fileID: 0}
@@ -94,7 +95,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   people: 1
-  shootPoint: {fileID: 5944114485528094850}
+  shootPoint: {fileID: 7397420094607220654}
   bulletPrefab: {fileID: 4549101373848522119, guid: 50884fc31506e464cb5cb147de653549, type: 3}
   targetAttack: {fileID: 2100000, guid: b2fd8e3b1f462004cbba51cf139365c9, type: 2}
   targetAim: {fileID: 2100000, guid: e9745b8df7af7a14480246f38347b928, type: 2}
@@ -385,11 +386,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4188086380888787756, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
   m_PrefabInstance: {fileID: 3793211974386774717}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5944114485528094850 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7411111411431184959, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
-  m_PrefabInstance: {fileID: 3793211974386774717}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1315360807945682011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2802694300948123366, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
@@ -398,6 +394,11 @@ GameObject:
 --- !u!1 &5243196990607853393 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8964311513657570796, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
+  m_PrefabInstance: {fileID: 3793211974386774717}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7397420094607220654 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5912338264013057299, guid: 2dcd9a969d3a842448c688d56bcba6cf, type: 3}
   m_PrefabInstance: {fileID: 3793211974386774717}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1724760219766740228
