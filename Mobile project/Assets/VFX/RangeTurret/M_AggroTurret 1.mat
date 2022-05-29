@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4282598628421500110
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BUILD_Place 1
-  m_Shader: {fileID: -6465566751694194690, guid: e3bb00dc9353e7249961fcbf5f299fa0, type: 3}
+  m_Name: M_AggroTurret 1
+  m_Shader: {fileID: -6465566751694194690, guid: e9bd9072d4ff31c49a3016022a734cbf, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -76,9 +89,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_3c0d7a261c894128af2047dec5aa7d44: 0
-    - Vector1_bfdb1ed5495346768ce51c64658af6c8: 0.6
-    - Vector1_c315fd627a714bfa8c85fc4ce9422dfd: 0
+    - Vector1_8c57329b80354a308f3e3f053aab9fb9: -0.14
+    - Vector1_9d84c93eb25642b89c5b08d7289073d5: -0.01
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -106,24 +118,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_8a974d50e4f9464c87cd4aab7d6c2ceb: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 0}
-    - Color_e343e108d90d45a8a63595afdd9ecff8: {r: 0, g: 0, b: 0, a: 0}
-    - Color_fe1139f5230d412aa908b155c2c96d42: {r: 0.745283, g: 0.6703592, b: 0.63630295, a: 1}
+    - Color_ddb0656930494b0f99cd83f39e98e9d9: {r: 0.9882353, g: 0.7864113, b: 0, a: 0}
+    - Color_ddb0656930494b0f99cd83f39e98e9d9_1: {r: 1, g: 0.449203, b: 0, a: 0}
+    - Vector2_1272804ea6bd46bbb295bc50d6efc455: {r: 0, g: 0.36, b: 0, a: 0}
+    - Vector2_7557f0defac249df9a191fafcc3c0050: {r: 0.05, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7635307086289987313
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4

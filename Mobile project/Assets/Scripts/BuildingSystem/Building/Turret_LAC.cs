@@ -26,9 +26,15 @@ public class Turret_LAC : Building
     public GameObject[] upgradableVisuals;
     public Material[] upgradesMat;
 
+    [Header("Range")]
+    public Transform rangeOrigin;
+    public Material normal, aggro;
+    public MeshRenderer rangeMesh;
+
     private void Start()
     {
         stats = Array.ConvertAll(statsSO, input => input as TurretSO_LAC);
+        rangeOrigin.gameObject.SetActive(false);
     }
 
     public override void Upgrade()
@@ -42,6 +48,7 @@ public class Turret_LAC : Building
                 meshRend.material = upgradesMat[level];
             }
         }
+        SetRange(stats[level].range);
     }
 
     public void Update()
@@ -49,6 +56,7 @@ public class Turret_LAC : Building
         UpdateTarget();
         if (enemyTarget)
         {
+            rangeMesh.material = aggro;
             if(!attacking)
                 attackDelay += Time.deltaTime;
 
@@ -83,6 +91,7 @@ public class Turret_LAC : Building
         }
         else
         {
+            rangeMesh.material = normal;
             if (bullet)
                 Destroy(bullet);
             attacking = false;
@@ -97,6 +106,7 @@ public class Turret_LAC : Building
         base.RegisterTile();
         RessourceManager_LAC.instance.defendTile += GetTile();
     }
+
     #region Defend
     public void UpdateTarget()
     {
@@ -176,6 +186,12 @@ public class Turret_LAC : Building
         return stats[level].attackSpeed + stats[level].peopleGainAttackSpeed * (people - 1);
     }
     #endregion
+    public void SetRange(float range)
+    {
+        rangeOrigin.localScale = new Vector3(range * 0.5f, 1, range * 0.5f);
+    }
+
+
     // debug
     IEnumerator ResetTargetMat(float delay)
     {
