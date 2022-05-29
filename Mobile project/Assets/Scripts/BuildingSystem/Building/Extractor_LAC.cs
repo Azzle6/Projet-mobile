@@ -57,7 +57,7 @@ public class Extractor_LAC : Building
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
             RessourceManager_LAC.instance.StockNoise(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
-            print(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
+            //print(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
             //stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
   
