@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25dd73c5b8341c745bd4bb33dea905cc, type: 2}
   - {fileID: 11400000, guid: 2818b37ead0dbb74e8899e249414cfba, type: 2}
   - {fileID: 11400000, guid: f281bbab930594943b5345010c267ee7, type: 2}
+  selectVFX: {fileID: 0}
   stats:
   - {fileID: 11400000, guid: 9a3622205b95836478645efaad8fa0bd, type: 2}
   - {fileID: 11400000, guid: ee371c2252e928b419c787c51bb84ada, type: 2}
@@ -259,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7964795156717781253, guid: ba8d0c1b1da94be41b4f05756141a88c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7964795156717781253, guid: ba8d0c1b1da94be41b4f05756141a88c, type: 3}
       propertyPath: m_LocalPosition.z

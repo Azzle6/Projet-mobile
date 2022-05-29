@@ -11,6 +11,8 @@ public class Extractor_LAC : Building
     //[HideInInspector]
     public int people;
     public float productCoolDown;
+    public GameObject originalGO;
+    public GameObject destroyedGO;
 
     [Header("Attack")]
     public bool fonctionnal;
@@ -55,7 +57,7 @@ public class Extractor_LAC : Building
             productCoolDown = 1;
             RessourceManager_LAC.instance.StockRessource(ProductCapacity(), ressourceType);
             RessourceManager_LAC.instance.StockNoise(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
-            print(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
+            //print(stats[level].noise * (1 + (people - 1) * stats[level].peopleNoise));
             //stock = attackStock = stats[level].maxStock * ((ressourceType == RessourceManager_LAC.RessourceType.MATTER) ? RessourceManager_LAC.instance.matterRatio : RessourceManager_LAC.instance.knowledgeRatio);
         }
   
@@ -137,6 +139,8 @@ public class Extractor_LAC : Building
     }
     public void TakeDown()
     {
+        originalGO.SetActive(false);
+        destroyedGO.SetActive(true);
         AudioManager.instance.PlaySound("BUILD_Destroyed");
         VFXManager.instance.PlayVFX("BuildingDestruction", transform.GetChild(0).transform);
         currentSmokeDestructVFX = VFXManager.instance.PlayPermanentVFX("SmokeDestruction", transform.GetChild(0).transform);
@@ -148,6 +152,8 @@ public class Extractor_LAC : Building
     public void Repair()
     {
         fonctionnal = true;
+        originalGO.SetActive(true);
+        destroyedGO.SetActive(false);
         if(currentSmokeDestructVFX) Destroy(currentSmokeDestructVFX.gameObject);
         //if(smokeFX) smokeFX?.Stop();
     }

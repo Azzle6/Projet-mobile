@@ -26,6 +26,8 @@ public class UIManager_LAC : MonoBehaviour
     [SerializeField] private TextMeshProUGUI pop, fightPop;
     [SerializeField] private TextMeshProUGUI knowledgeTechTree;
     [SerializeField] private GameObject matterGainLossAnim, knowledgeGainLossAnim;
+
+    public Button confirmPlacementButton;
     //[SerializeField] private GameObject BuildMenu;
     //[SerializeField] private GameObject BuildingConfirmMenu;
     //[SerializeField] private GameObject BuildingChoiceMenu;
@@ -130,7 +132,7 @@ public class UIManager_LAC : MonoBehaviour
 
         if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding && StateManager.CurrentState != StateManager.State.ChooseBuilding && StateManager.CurrentState != StateManager.State.BuildingInfosPannel) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.5f)
         {
-            Debug.Log("detection");
+            //Debug.Log("detection");
             bool canSwitchSelected = true;
             
             //Pour déterminer si le joueur clique sur l'UI
@@ -156,7 +158,14 @@ public class UIManager_LAC : MonoBehaviour
     public void SwitchState(StateManager.State newState)
     {
         StateManager.CurrentState = newState;
+        Debug.Log(StateManager.CurrentState);
         UpdateUI();
+    }
+
+    public void PauseGame(bool pause)
+    {
+        if (pause) Time.timeScale = 0;
+        else Time.timeScale = 1;
     }
     
     public void SwitchState(int newState)
