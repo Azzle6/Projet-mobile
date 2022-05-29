@@ -11,6 +11,8 @@ public class Extractor_LAC : Building
     //[HideInInspector]
     public int people;
     public float productCoolDown;
+    public GameObject originalGO;
+    public GameObject destroyedGO;
 
     [Header("Attack")]
     public bool fonctionnal;
@@ -137,6 +139,8 @@ public class Extractor_LAC : Building
     }
     public void TakeDown()
     {
+        originalGO.SetActive(false);
+        destroyedGO.SetActive(true);
         AudioManager.instance.PlaySound("BUILD_Destroyed");
         VFXManager.instance.PlayVFX("BuildingDestruction", transform.GetChild(0).transform);
         currentSmokeDestructVFX = VFXManager.instance.PlayPermanentVFX("SmokeDestruction", transform.GetChild(0).transform);
@@ -148,6 +152,8 @@ public class Extractor_LAC : Building
     public void Repair()
     {
         fonctionnal = true;
+        originalGO.SetActive(true);
+        destroyedGO.SetActive(false);
         if(currentSmokeDestructVFX) Destroy(currentSmokeDestructVFX.gameObject);
         //if(smokeFX) smokeFX?.Stop();
     }
