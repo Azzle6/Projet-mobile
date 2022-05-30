@@ -46,7 +46,7 @@ public class RessourceManager_LAC : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(currentTech + "Actual tech level");
+        //Debug.Log(currentTech + "Actual tech level");
         productTimer += Time.deltaTime;
         if(productTimer > 1)
         {
@@ -74,7 +74,7 @@ public class RessourceManager_LAC : MonoBehaviour
             
         if (rType == RessourceType.MATTER)
         {
-            if (matter - value > 0)
+            if (matter - value >= 0)
                 matter -= value;
             else
                 canSpend = false;
@@ -92,15 +92,15 @@ public class RessourceManager_LAC : MonoBehaviour
         if (rType == RessourceManager_LAC.RessourceType.MATTER) matterComparison = RessourceManager_LAC.instance.matter;
         else matterComparison = RessourceManager_LAC.instance.knowledge;
         
-        Debug.Log(matterComparison);
-        return value < matterComparison;
+        //Debug.Log(matterComparison);
+        return value <= matterComparison;
     }
 
-    public bool CanPlaceBuilding(float cost, RessourceType rType)
+    public bool CanPlaceBuilding(float cost, RessourceType rType, bool consumePop = true)
     {
         if (population > 0)
         {
-            population--;
+            if(consumePop)population--;
             return SpendRessource(cost, rType);
         }
             

@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
                 AudioS.loop = false;
                 AudioS.outputAudioMixerGroup = sound.audioMixer;
                 AudioS.Play();
-                Debug.Log(sound.clipName + " is playing");
+                //Debug.Log(sound.clipName + " is playing");
                 break;
             }
             else unavailableAudioS++;
