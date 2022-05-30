@@ -43,6 +43,7 @@ public class WaveManager : MonoBehaviour
     void Awake()
     {
         EndStats_LAC.ResetStat();
+        gameOver = false;
 
         if (instance != this && instance)
             Destroy(this);
@@ -111,6 +112,7 @@ public class WaveManager : MonoBehaviour
             if (totalEnnemies == 0)
             {
                 underAttack = false;
+                AudioManager.instance.PlaySound("THREAT_WaveEnd",0.5f);
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             }
         }

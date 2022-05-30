@@ -74,7 +74,7 @@ public class Labo_LAC : Building
 
     public bool CanUpgradeCristal()
     {
-        return (cristalLv + 1 < cristalStats.Length) && (cristalLv + 1 < cristalB_SO.unlockedLevel);
+        return (cristalLv + 1 < cristalStats.Length) && (cristalLv + 1 <= cristalB_SO.unlockedLevel);
     }
 }
 

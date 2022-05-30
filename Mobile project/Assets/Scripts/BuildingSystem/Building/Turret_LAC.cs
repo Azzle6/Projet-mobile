@@ -25,6 +25,7 @@ public class Turret_LAC : Building
     [Header("Upgrades")] 
     public GameObject[] upgradableVisuals;
     public Material[] upgradesMat;
+    public GameObject[] circles;
 
     [Header("Range")]
     public Transform rangeOrigin;
@@ -34,6 +35,8 @@ public class Turret_LAC : Building
     private void Start()
     {
         stats = Array.ConvertAll(statsSO, input => input as TurretSO_LAC);
+        rangeOrigin.gameObject.SetActive(false);
+        circles[0].SetActive(true);
     }
 
     public override void Upgrade()
@@ -48,6 +51,10 @@ public class Turret_LAC : Building
             }
         }
         SetRange(stats[level].range);
+        for (int i = 0; i <= level; i++)
+        {
+            circles[i].SetActive(true);
+        }
     }
 
     public void Update()
