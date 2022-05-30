@@ -83,7 +83,7 @@ public class BuildingInfosPannel : MonoBehaviour
         
         if(!enoughPop) popNeededTxt.color = Color.red;
         else popNeededTxt.color = Color.black;
-        confirmButton.interactable = buildingInf.price.quantity < matterComparison && enoughPop;
+        confirmButton.interactable = buildingInf.price.quantity <= matterComparison && enoughPop;
 
     }
 

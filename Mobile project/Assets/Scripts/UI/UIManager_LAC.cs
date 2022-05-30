@@ -500,7 +500,7 @@ public class UIManager_LAC : MonoBehaviour
             }
             
         }
-
+        if(WaveManager.instance.underAttack) BuildingInfosMoveButton.SetActive(false);
         BuildingInfos.SetActive(true);
     }
     

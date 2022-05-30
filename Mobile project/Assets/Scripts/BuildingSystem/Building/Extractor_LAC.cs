@@ -66,6 +66,7 @@ public class Extractor_LAC : Building
     public override void Upgrade()
     {
         int currentStock = stats[level].maxStock;
+        Debug.Log("Max Knowledge "+RessourceManager_LAC.instance.maxKnowledge);
         base.Upgrade();
         
         foreach (GameObject GO in upgradableVisuals)
@@ -79,10 +80,12 @@ public class Extractor_LAC : Building
 
         // update max Stock
         if (ressourceType == RessourceManager_LAC.RessourceType.MATTER)
-            RessourceManager_LAC.instance.maxMatter += stats[level].maxStock - currentStock;
+            RessourceManager_LAC.instance.maxMatter += (stats[level].maxStock - currentStock);
 
         if (ressourceType == RessourceManager_LAC.RessourceType.KNOWLEDGE)
-            RessourceManager_LAC.instance.maxKnowledge += stats[level].maxStock - currentStock;
+            RessourceManager_LAC.instance.maxKnowledge += (stats[level].maxStock - currentStock);
+        
+        Debug.Log("Max Knowledge "+RessourceManager_LAC.instance.maxKnowledge);
     }
 
     public override void Remove()
