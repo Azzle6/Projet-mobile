@@ -130,7 +130,7 @@ public class UIManager_LAC : MonoBehaviour
 
         UpdateRessourcesSlider();
 
-        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding && StateManager.CurrentState != StateManager.State.ChooseBuilding && StateManager.CurrentState != StateManager.State.BuildingInfosPannel) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.5f)
+        if ((StateManager.CurrentState != StateManager.State.DisplaceBuilding && StateManager.CurrentState != StateManager.State.HoldBuilding && StateManager.CurrentState != StateManager.State.ChooseBuilding && StateManager.CurrentState != StateManager.State.BuildingInfosPannel) && InputsManager.Release() && (Input.touchCount == 1 || Input.GetMouseButtonUp(0) ) && touchDuration < 0.25f)
         {
             //Debug.Log("detection");
             bool canSwitchSelected = true;
@@ -350,6 +350,7 @@ public class UIManager_LAC : MonoBehaviour
         }
         BuildingInfosPop.SetActive(true);
         BuildingInfosRemoveButton.SetActive(true);
+        BuildingInfosRemoveButton.GetComponent<Button>().interactable = true;
         BuildingInfosUpgradeCristal.SetActive(false);
         BuildingInfosMoveButton.SetActive(true);
         BuildingInfosUpgradeButton.SetActive(true);
