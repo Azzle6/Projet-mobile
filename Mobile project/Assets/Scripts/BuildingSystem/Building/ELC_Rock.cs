@@ -10,6 +10,9 @@ public class ELC_Rock : Building
     {
         RessourceManager_LAC.instance.SpendRessource(BuildingScriptable.price.quantity,
             BuildingScriptable.price.ressource);
+
+        AudioManager.instance.PlaySound("BUILD_CleanRock");
         BuildingSystem.instance.RemoveBuilding(this.transform.GetChild(0).gameObject);
+
     }
 }

@@ -112,6 +112,7 @@ public class WaveManager : MonoBehaviour
             if (totalEnnemies == 0)
             {
                 underAttack = false;
+                AudioManager.instance.PlaySound("THREAT_WaveEnd",0.5f);
                 UpdateActiveSpawn(DiffCalculator.SpawnRatio());
             }
         }
