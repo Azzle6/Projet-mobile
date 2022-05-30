@@ -74,7 +74,7 @@ public class RessourceManager_LAC : MonoBehaviour
             
         if (rType == RessourceType.MATTER)
         {
-            if (matter - value > 0)
+            if (matter - value >= 0)
                 matter -= value;
             else
                 canSpend = false;
@@ -93,7 +93,7 @@ public class RessourceManager_LAC : MonoBehaviour
         else matterComparison = RessourceManager_LAC.instance.knowledge;
         
         //Debug.Log(matterComparison);
-        return value < matterComparison;
+        return value <= matterComparison;
     }
 
     public bool CanPlaceBuilding(float cost, RessourceType rType, bool consumePop = true)
