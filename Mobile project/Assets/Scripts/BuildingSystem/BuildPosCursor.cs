@@ -31,10 +31,10 @@ public class BuildPosCursor : MonoBehaviour
                     Vector3Int additionVect = new Vector3Int(i, -j, 0);
                     if (BuildingSystem.instance.globalCellsInfos.ContainsKey(cellPos + additionVect))
                     {
-                        if (BuildingSystem.instance.globalCellsInfos[cellPos + additionVect].isPlaced)
+                        /*if (BuildingSystem.instance.globalCellsInfos[cellPos + additionVect].isPlaced)
                         {
                             canPlace = false;
-                        }
+                        }*/
                     }
                     else canPlace = false;
                 }
