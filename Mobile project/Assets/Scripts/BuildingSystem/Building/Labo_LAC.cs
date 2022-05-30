@@ -60,6 +60,8 @@ public class Labo_LAC : Building
 
         if (CanUpgradeCristal())
         {
+            RessourceManager_LAC.instance.SpendRessource(cristalStats[cristalLv].UpgradePrice.quantity,
+                cristalStats[cristalLv].UpgradePrice.ressource);
             cristalLv = Mathf.Clamp((cristalLv + 1), 0, cristalStats.Length - 1);
             Debug.Log("Upgrade !");
 
@@ -68,8 +70,7 @@ public class Labo_LAC : Building
             cristalVisual = Instantiate(cristalStats[cristalLv].visual, cristalSocket);
 
             maxCristal = (cristalLv >= cristalStats.Length - 1);
-            RessourceManager_LAC.instance.SpendRessource(cristalStats[cristalLv].UpgradePrice.quantity,
-                cristalStats[cristalLv].UpgradePrice.ressource);
+            
         }
         //Debug.Log("Upgrade pas");
     }
