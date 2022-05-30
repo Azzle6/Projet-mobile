@@ -156,6 +156,8 @@ public class Extractor_LAC : Building
         destroyedGO.SetActive(false);
         if(currentSmokeDestructVFX) Destroy(currentSmokeDestructVFX.gameObject);
         //if(smokeFX) smokeFX?.Stop();
+
+        AudioManager.instance.PlaySound("BUILD_Rebuild");
     }
     #endregion
 
