@@ -55,8 +55,8 @@ public class Building : MonoBehaviour
 
     public virtual void Remove()
     {
+        AudioManager.instance.PlaySound("BUILD_TakeBack");
         BuildingSystem.instance.RemoveBuilding();
-        
     }
     
  

@@ -15,7 +15,7 @@ public class MagistraProgression_UD : MonoBehaviour
 
     void Update()
     {
-        image.fillAmount = (float)labScript.cristalLv / labScript.cristalStats.Length;
-        print((float)labScript.cristalLv / labScript.cristalStats.Length);
+        image.fillAmount = (float)labScript.cristalLv / (labScript.cristalStats.Length-1);
+        //print((float)labScript.cristalLv / labScript.cristalStats.Length);
     }
 }
